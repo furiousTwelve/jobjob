@@ -32,7 +32,8 @@ public class Application
 	 */
 	public Application() 
 	{
-		// TODO Auto-generated constructor stub
+		FenetrePrincipale fenetre = new FenetrePrincipale();
+		
 	}
 
 	/**
