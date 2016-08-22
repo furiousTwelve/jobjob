@@ -51,6 +51,9 @@ public class Application
 			
 		}
 		new Application();
+		new EnregistrementDonnee().entreprise();
+		new EnregistrementDonnee().candidat("pirlouette", "Paul", "Pipaul@gmail.com", "06.12.54.12.26", 1, "22/08/2016");
+		new LectureDonnee().lireCandidat(1);
 	}
 
 }
