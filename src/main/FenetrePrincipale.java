@@ -24,11 +24,11 @@ public class FenetrePrincipale extends JFrame
 	public FenetrePrincipale() throws HeadlessException 
 	{
 		this.setTitle("Recrutement"); 
-		this.setSize(400, 100);
+		this.setSize(600, 400);
 		this.setLocationRelativeTo(null);
 		
 		
-		this.setContentPane(new Panneau()); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(new panelAccueil()); // imbrication de notre panel dans notre fenêtre
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
 	}
