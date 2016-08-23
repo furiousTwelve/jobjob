@@ -40,19 +40,23 @@ public class TimerFormulaire
     }
     
     // CONVERTIR LE TIMER : SECONDES => MINUTES/SECONDES
-    public void affichage(int sec)
+    public String affichage(int sec)
     {
-		secondeAff = (sec%60);
+		String res = "";
+    	secondeAff = (sec%60);
 		minuteAff = (sec - secondeAff)/60;
 		if(secondeAff < 10)
 		{
 			secondeAffS = "0" + secondeAff;
-			System.out.println(minuteAff + ":" + secondeAffS);
+			res = minuteAff + ":" + secondeAffS;
+//			System.out.println(minuteAff + ":" + secondeAffS);
 		}
 		else
 		{
-        	System.out.println(minuteAff + ":" + secondeAff);
+			res = minuteAff + ":" + secondeAff;
+//        	System.out.println(minuteAff + ":" + secondeAff);
 		}
+		return res;
     }
      
     public static void main(String[] args) 
