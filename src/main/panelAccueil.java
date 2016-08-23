@@ -63,13 +63,16 @@ public class panelAccueil extends JPanel implements ActionListener{
 		
 		//Un sous-panel qui contiendra le texte et l'image principale
 		JPanel panel1 = new JPanel();
-		panel1.setLayout(new BorderLayout());
+		panel1.setLayout(new FlowLayout());
 	
 		
 			//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
 		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
 			//Notre petit texte
 		JLabel texte = new JLabel("Job-Job : Test de recrutement");
+		Dimension tailleTexte = new Dimension(panel1.getWidth(), 60);
+		System.out.println(tailleTexte);
+		texte.setPreferredSize(tailleTexte);
 		texte.setHorizontalAlignment(JLabel.CENTER);
 		
 		panel1.add(texte, BorderLayout.NORTH);

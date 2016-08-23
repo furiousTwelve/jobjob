@@ -28,7 +28,7 @@ public class FenetrePrincipale extends JFrame
 	{
 		this.setTitle("Job-Job"); 
 		this.setSize(600, 400);
-		this.setResizable(false);;
+		this.setResizable(true);;
 		this.setLocationRelativeTo(null);
 		
 		this.setContentPane(new panelAccueil()); // imbrication de notre panel dans notre fenêtre
