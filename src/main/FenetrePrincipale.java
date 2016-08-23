@@ -30,7 +30,7 @@ public class FenetrePrincipale extends JFrame
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
-		this.setContentPane(new panelAccueil()); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(new panelFormulaire());; // imbrication de notre panel dans notre fenêtre
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
