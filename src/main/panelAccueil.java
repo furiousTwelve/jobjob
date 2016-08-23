@@ -26,6 +26,8 @@ public class panelAccueil extends JPanel implements ActionListener{
 	private JMenuItem item2 = new JMenuItem("Sauvegarder");
 	private JMenuItem item3 = new JMenuItem("Quitter");
 	private JMenuItem item4 = new JMenuItem("Aide");
+	private JLabel statusBar = new JLabel();
+	private JMenuBar menuBar2 = new JMenuBar();
 	
 	public panelAccueil() {
 		
@@ -39,8 +41,12 @@ public class panelAccueil extends JPanel implements ActionListener{
 		item2.setEnabled(false);
 		menu1.addSeparator();
 		menu1.add(item3);
+		item3.addActionListener(this);
 		
 		menu2.add(item4);
+
+		item4.addActionListener(this);
+
 		
 		//Un sous-panel qui contiendra le texte et l'image principale
 		JPanel panel1 = new JPanel();
@@ -51,14 +57,21 @@ public class panelAccueil extends JPanel implements ActionListener{
 		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
 			//Notre petit texte
 		JLabel texte = new JLabel("Job-Job : Test de recrutement");
+
 		Dimension tailleTexte = new Dimension(4000, 60); //Affectation d'une grande largeur pour qu'il soit tjs centré
+
 		texte.setPreferredSize(tailleTexte);
 		texte.setHorizontalAlignment(JLabel.CENTER);
 			//Construction du panel qui ira au centre
 		panel1.add(texte, BorderLayout.NORTH);
 		panel1.add(img, BorderLayout.CENTER);
+	
+
 
 		//Remplissage du panel global avec le panel central et la barre de menu
+
+		//Constitution du panel général
+
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.CENTER);
 		this.add(menuBar, BorderLayout.NORTH);

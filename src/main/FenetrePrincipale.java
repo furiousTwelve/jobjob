@@ -19,7 +19,6 @@ import javax.swing.JPanel;
  */
 public class FenetrePrincipale extends JFrame 
 {
-
 	
 	/**
 	 * @throws HeadlessException
@@ -28,10 +27,12 @@ public class FenetrePrincipale extends JFrame
 	{
 		this.setTitle("Job-Job"); 
 		this.setSize(600, 400);
+
 		this.setResizable(false);
+
 		this.setLocationRelativeTo(null);
 		
-		this.setContentPane(new panelAccueil()); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(new panelFormulaire());; // imbrication de notre panel dans notre fenêtre
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
