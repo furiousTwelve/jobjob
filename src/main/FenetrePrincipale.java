@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 /**
  * Définit la fenêtre principale de l'application
- * @author audric
+ * @author david
  *
  */
 public class FenetrePrincipale extends JFrame implements ActionListener
@@ -74,8 +74,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		if(e.getSource()==valider){
 			System.out.println("Validation");
-			String recupNom = nom.getText();
-			String recupPrenom = prenom.getText();
+			valider.enregistrementCandidat(nom.getText(),prenom.getText());
 		}
 	}
 	
