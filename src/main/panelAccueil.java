@@ -42,25 +42,6 @@ public class panelAccueil extends JPanel implements ActionListener{
 		
 		menu2.add(item4);
 		
-//		//Un sous-panel qui contiendra le texte et l'image principale
-//		JPanel panel1 = new JPanel();
-//		panel1.setLayout(new BorderLayout());
-//	
-//		
-//			//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
-//		JLabel img = new JLabel(new ImageIcon("C:/Users/34011-82-06/git/recrutement/jobjob.png"));
-//			//Notre petit texte
-//		JLabel texte = new JLabel("Job-Job : Test de recrutement");
-//		texte.setHorizontalAlignment(JLabel.CENTER);
-//		
-//		panel1.add(texte, BorderLayout.NORTH);
-//		panel1.add(img, BorderLayout.CENTER);
-//
-//		
-//		this.setLayout(new BorderLayout());
-//		this.add(panel1, BorderLayout.CENTER);
-//		this.add(menuBar, BorderLayout.NORTH);
-		
 		//Un sous-panel qui contiendra le texte et l'image principale
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
@@ -70,15 +51,14 @@ public class panelAccueil extends JPanel implements ActionListener{
 		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
 			//Notre petit texte
 		JLabel texte = new JLabel("Job-Job : Test de recrutement");
-		Dimension tailleTexte = new Dimension(panel1.getWidth(), 60);
-		System.out.println(tailleTexte);
+		Dimension tailleTexte = new Dimension(4000, 60); //Affectation d'une grande largeur pour qu'il soit tjs centré
 		texte.setPreferredSize(tailleTexte);
 		texte.setHorizontalAlignment(JLabel.CENTER);
-		
+			//Construction du panel qui ira au centre
 		panel1.add(texte, BorderLayout.NORTH);
 		panel1.add(img, BorderLayout.CENTER);
 
-		
+		//Remplissage du panel global avec le panel central et la barre de menu
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.CENTER);
 		this.add(menuBar, BorderLayout.NORTH);
@@ -91,6 +71,5 @@ public class panelAccueil extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Action enclenchée depuis le panel");
 	}
 }
