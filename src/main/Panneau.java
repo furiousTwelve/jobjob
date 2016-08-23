@@ -30,7 +30,7 @@ public class Panneau extends JPanel
 		Font font = new Font("Courier", Font.BOLD, 20);
 		g.setFont(font);
 		g.setColor(Color.red);
-		g.drawString("Recrutement! ", 10, 20);
+		g.drawString("Job Job! ", 10, 20);
 		
 	}
 
