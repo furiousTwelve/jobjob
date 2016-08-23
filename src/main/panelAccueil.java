@@ -67,7 +67,7 @@ public class panelAccueil extends JPanel implements ActionListener{
 	
 		
 			//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
-		JLabel img = new JLabel(new ImageIcon("C:/Users/34011-82-06/git/recrutement/jobjob.png"));
+		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
 			//Notre petit texte
 		JLabel texte = new JLabel("Job-Job : Test de recrutement");
 		texte.setHorizontalAlignment(JLabel.CENTER);
