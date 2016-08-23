@@ -21,17 +21,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class panelFormulaire extends JPanel implements ActionListener {
+public class panelFormulaire extends JPanel {
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
 	private JMenu menu2 = new JMenu("Aide");
-	private JMenuItem item1 = new JMenuItem("Nouveau Test");
-	private JMenuItem item2 = new JMenuItem("Sauvegarder");
-	private JMenuItem item3 = new JMenuItem("Quitter");
+	protected JMenuItem item1 = new JMenuItem("Nouveau Test");
+	protected JMenuItem item2 = new JMenuItem("Sauvegarder");
+	protected JMenuItem item3 = new JMenuItem("Quitter");
 	private JMenuItem item4 = new JMenuItem("Aide");
-	
+	protected JButton boutonSave;
 	
 //	private JLabel logo = new JLabel(new ImageIcon("logoAFPA.png"));
 	
@@ -41,17 +41,13 @@ public class panelFormulaire extends JPanel implements ActionListener {
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		
-		item1.addActionListener(this);
-		menu1.add(item1);
-		item1.addActionListener(this);
+		menu1.add(item1);	
 		menu1.add(item2);
-		item2.addActionListener(this);
 		menu1.addSeparator();
 		menu1.add(item3);
-		item3.addActionListener(this);
 		
 		menu2.add(item4);
-		item4.addActionListener(this);
+	
 		
 		//Création du panel central
 		JPanel panelCentral = new JPanel();
@@ -65,8 +61,8 @@ public class panelFormulaire extends JPanel implements ActionListener {
 		JLabel logoFinal = new JLabel(logo);
 		
 			//Création du Bouton Sauvegarder
-		JButton boutonSave = new JButton("Sauvegarder");
-		boutonSave.addActionListener(this);
+		boutonSave = new JButton("Sauvegarder");
+	
 		
 			//Création du Champ de saisie global
 				//création du panel qui le contiendra (en GridLayout, 2 colonnes)
@@ -117,10 +113,6 @@ public class panelFormulaire extends JPanel implements ActionListener {
 		this.add(panelCentral, BorderLayout.CENTER);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 }
