@@ -20,8 +20,10 @@ public class EnregistrementDonnee{
  * @param nom
  */
 	
+	int identifiant=1;
+	
 	public void entreprise(){
-		
+	
 		File f = new File ("entreprise.txt");
 		
 		try {
@@ -40,12 +42,16 @@ public class EnregistrementDonnee{
  * @param telephone
  * @param identifiant
  */
-	public void candidat(String nom,String prenom,String mail,String telephone,int identifiant,String date){
+	
+	public void candidat(String nom,String prenom,String mail,String telephone,String date){
 		
-		File f = new File ("candidat_"+identifiant+".txt");
+
+		File f = new File ("candidat_"+getidentifiant()+".txt");
 		
 		try {
 			FileWriter fw = new FileWriter(f);
+			fw.write("Identifiant :" +getidentifiant());
+			fw.write("\r\n");
 			fw.write("Nom : "+nom);
 			fw.write("\r\n");
 			fw.write("Prenom : "+prenom);
@@ -54,13 +60,20 @@ public class EnregistrementDonnee{
 			fw.write("\r\n");
 			fw.write("Téléphone : "+telephone);
 			fw.write("\r\n");
-			fw.write("Identifiant : "+identifiant);
-			fw.write("\r\n");
-			fw.write("Date : "+date);
+			fw.write("Date de naissance : "+date);
 			fw.close();
+			identifiant=identifiant+1;
+			//System.out.println(identifiant);
 		} catch (IOException e) {
 			// TODO: handle exception
 		}
+		
+	}
+	
+	public int getidentifiant(){
+		return identifiant;
+		
+		
 	}
 	
 	

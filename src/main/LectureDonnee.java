@@ -24,7 +24,7 @@ public class LectureDonnee
 	{
 		try 
 		{
-			File f = new File ("candidat_"+identifiant+".txt");
+			File f = new File ("candidat_"+new EnregistrementDonnee().getidentifiant()+".txt");
 			FileReader fr = new FileReader(f);
 			BufferedReader br = new BufferedReader(fr);
 			
