@@ -6,6 +6,8 @@ package main;
 import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 public class FenetrePrincipale extends JFrame 
 {
 
+	
 	/**
 	 * @throws HeadlessException
 	 */
@@ -28,10 +31,7 @@ public class FenetrePrincipale extends JFrame
 		this.setResizable(false);;
 		this.setLocationRelativeTo(null);
 		
-		JPanel paneTemp=new JPanel();
-		paneTemp = new panelAccueil();
-		this.setContentPane(paneTemp); // imbrication de notre panel dans notre fenêtre
-		
+		this.setContentPane(new panelAccueil()); // imbrication de notre panel dans notre fenêtre
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +63,10 @@ public class FenetrePrincipale extends JFrame
 		super(title, gc);
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+
 
 	
 }
