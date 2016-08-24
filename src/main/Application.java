@@ -44,21 +44,13 @@ public class Application
 	 */
 	public static void main(String[] args) 
 	{
-		/*try 
-		{
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); //le Look and feel peut avoir plusieurs types d'apparence
-		}
-		catch(Exception e) 
-		{
-			
-		}*/
+		
 		new Application();
 	
-		new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
-		new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
+	//new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
+	//	new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
+		new EnregistrementDonnee().chercherQuestion( "CG2");
 		System.out.println("-------------------------------------------------------------");
-
-		new EnregistrementDonnee().rechercheCandidat("candidat_1.txt");
 
 	}
 

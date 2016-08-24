@@ -39,36 +39,28 @@ public class EnregistrementDonnee
 			// TODO: handle exception
 		}
 	}
+
+/**
+ * Methode pour l'enregistrement d'un candidat dans un fichier .txt
+ * @param info
+ */
 	
-	/**
-	 * Methode pour l'enregistrement d'un candidat dans un fichier .txt
-	 * @param nom
-	 * @param prenom
-	 * @param mail
-	 * @param telephone
-	 * @param identifiant
-	 */
-	public void candidat(String nom,
-						 String prenom,
-						 String mail,
-						 String telephone,
-						 String date)
-	{
+	public void candidat(String[] info){
+		
+
+
 		File f = new File ("candidat_"+getidentifiant()+".txt");
 		
 		try {
 			FileWriter fw = new FileWriter(f);
 			fw.write("Identifiant :" +getidentifiant());
 			fw.write("\r\n");
-			fw.write("Nom : "+nom);
-			fw.write("\r\n");
-			fw.write("Prenom : "+prenom);
-			fw.write("\r\n");
-			fw.write("Email : "+mail);
-			fw.write("\r\n");
-			fw.write("Téléphone : "+telephone);
-			fw.write("\r\n");
-			fw.write("Date de naissance : "+date); // date de naissance ou date? 22/08/2016 c'est jeune pour passer le test
+
+			for (int j = 0; j < info.length; j++) {
+				fw.write(info[j]);
+				fw.write("\r\n");
+			}
+
 			fw.close();
 			identifiant=identifiant+1;
 			//System.out.println(identifiant);
@@ -81,6 +73,12 @@ public class EnregistrementDonnee
 	public int getidentifiant(){
 		return identifiant;
 	}
+	
+/**
+* methode qui cherche le candidat donnée avec son identifiant
+* et affiche l'ensemble de ses détails
+* @param str
+*/
 	
 	public void rechercheCandidat(String str){
 		boolean trouver=false;
@@ -131,4 +129,87 @@ public class EnregistrementDonnee
 		System.out.println(" Candidat non trouvé!");
 	}
   }
+	
+	
+	
+
+/**
+ * methode chercherQuestion recupère la question rand placer en argument
+ * avec les reponses associées à la question.
+ * @param rand
+ */
+	
+	public void chercherQuestion( String rand){
+		
+		File dossier = new File("..\\..\\git\\recrutement\\questionReponse\\");
+		String[] contenu = dossier.list();
+		String [] questionReponse= new String[5];
+		
+		int i=0;
+		
+		String reponse=rand+"R"; 
+		
+		boolean questionTrouver=false;
+		   int j=0;
+		   int compteur=4;
+		   
+		   while(i<contenu.length & compteur!=0){
+			
+			     if(contenu[i].equals(rand+".txt")){ 
+		      	 questionTrouver=true;
+			     String pathFichier="..\\..\\git\\recrutement\\questionReponse\\"+rand+".txt";
+			     questionReponse[j]=pathFichier;
+			     compteur--;
+			     }
+			     else if(contenu[i].contains(rand)){
+			    	 for (int k=1; k<questionReponse.length; k++){
+			    		 	String pathFichier="..\\..\\git\\recrutement\\questionReponse\\"+reponse+k+".txt";
+						     questionReponse[k]=pathFichier;
+						     }
+			     }
+			     i++;
+			    
+		   }  
+			     for (j=0; j<questionReponse.length; j++){
+			     System.out.println( "Path fichier" + j + questionReponse[j] + "\n\t");
+			     }
+			    
+			    BufferedReader fluxEntree=null;
+			    
+			    for (j=0; j<questionReponse.length; j++){
+		 	try {
+				//Création du flux vers le fichier texte //
+				fluxEntree = new BufferedReader(new FileReader(questionReponse[j]));
+				String ligneLue = fluxEntree.readLine();
+				while(ligneLue!=null){
+					System.out.println(ligneLue);
+					ligneLue = fluxEntree.readLine();
+				}
+				
+			}
+			catch(IOException exc){
+				exc.printStackTrace();
+			}
+			
+			finally{
+				try{
+					if(fluxEntree!=null){
+						// Fermeture du flux vers le fichier //
+						fluxEntree.close();
+					}
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+				
+			}
+	}
+			     
+			
 }
+		
+}
+
+		
+		
+		

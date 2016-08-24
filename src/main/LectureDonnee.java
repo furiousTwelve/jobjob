@@ -18,8 +18,8 @@ public class LectureDonnee
 {	
 	//TODO détailler le param identifiant @param identifiant id du candidat
 /**
- * Méthode permettant de lire un fichier texte
- * @param identifiant
+ * Méthode permettant de lire le fichier candidat (.txt)
+ * @param identifiant en int
  */
 	public void lireCandidat(int identifiant)
 	{
@@ -42,7 +42,6 @@ public class LectureDonnee
 			} catch (IOException e) {
 				System.out.println("Erreur lors de la lecture: "+e.getMessage());
 			}
-			
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichier non trouvé");
 		}
