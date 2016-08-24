@@ -29,7 +29,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
 	private panelFormulaire panFormulaire;
-
+	private panelCandidat panCandidat;
 	
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	{
 
 		this.setTitle("Job-Job"); 
-		this.setExtendedState(this.MAXIMIZED_BOTH);
+	//	this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setMinimumSize(new Dimension(600, 400));
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
@@ -48,8 +48,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panAccueil=new panelAccueil();
 		panFormulaire = new panelFormulaire();
+		panCandidat = new panelCandidat();
 		
-		this.panAccueil.itemNouveauTest.addActionListener(this);
+		this.panAccueil.itemCandidatExistant.addActionListener(this);
+		this.panAccueil.itemNouveauCandidat.addActionListener(this);
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
@@ -98,7 +100,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	//	panAccueil = new panelAccueil();
 		
 		
-		if(arg0.getSource() == this.panAccueil.itemNouveauTest)
+		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
 			panFormulaire.itemNouveauTest.addActionListener(this);	
 			panFormulaire.itemSauvegarder.addActionListener(this);			
@@ -148,9 +150,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		if(arg0.getSource() == this.panFormulaire.boutonSave)
 		{	
 			
-			JOptionPane.showMessageDialog(null, "Lancement de l'interface start");
+			this.getContentPane().removeAll();
+			this.setContentPane(panCandidat);
+			this.validate();
 	
 		}
+		
+		
 		
 				
 		
