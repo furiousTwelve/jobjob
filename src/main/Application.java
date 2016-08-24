@@ -56,7 +56,12 @@ public class Application
 		new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
 		new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
 		System.out.println("-------------------------------------------------------------");
-
+//<<<<<<< HEAD
+//
+//=======
+		new EnregistrementDonnee().rechercheCandidat("candidat_1.txt");
+	
+//>>>>>>> origin/features/donnees/fichierEntreprise
 	}
 
 }
