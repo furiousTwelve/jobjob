@@ -29,6 +29,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setLocationRelativeTo(null);
 		
 		pan1=new panelAccueil();
+		pan2 = new panelFormulaire();
+		
 		this.pan1.item1.addActionListener(this);
 		this.pan1.item3.addActionListener(this);
 		this.pan1.item4.addActionListener(this);
@@ -64,6 +66,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		super(title, gc);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
@@ -74,8 +77,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		if(arg0.getSource() == this.pan1.item1)
 		{	
-			pan2 = new panelFormulaire();
+			pan2.item1.addActionListener(this);	
 			pan2.item2.addActionListener(this);			
+			pan2.item3.addActionListener(this);	
+			pan2.item4.addActionListener(this);	
+			pan2.boutonSave.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(pan2);
@@ -83,14 +89,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		}
 		
-		if(arg0.getSource() == this.pan1.item3 )
+		if((arg0.getSource() == this.pan1.item3) || (arg0.getSource() == this.pan2.item3))
 		{	
 			// a voir, message erreur dans console
 			this.dispose();
 		
 		}
 		
-		if(arg0.getSource() == this.pan1.item4)
+		if((arg0.getSource() == this.pan1.item4) || (arg0.getSource() == this.pan2.item4))
 		{	
 			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
 			/*try {
@@ -116,19 +122,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Pour la couche métier: mettre votre fonction "ecrire fichier"
 		}
 		
-		if(arg0.getSource() == this.pan2.item2)
+		if(arg0.getSource() == this.pan2.boutonSave)
 		{	
 			
-			pan1.item1.addActionListener(this);
-			pan1.item3.addActionListener(this);
-			pan1.item4.addActionListener(this);
+			JOptionPane.showMessageDialog(null, "Lancement dde l'interface start");
 			
-			this.getContentPane().removeAll();
-			this.setContentPane(new panelAccueil());
-			this.validate();		
 		}
 		
-		
+				
 		
 	}
 	

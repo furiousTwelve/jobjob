@@ -30,7 +30,7 @@ public class panelFormulaire extends JPanel {
 	protected JMenuItem item1 = new JMenuItem("Nouveau Test");
 	protected JMenuItem item2 = new JMenuItem("Sauvegarder");
 	protected JMenuItem item3 = new JMenuItem("Quitter");
-	private JMenuItem item4 = new JMenuItem("Aide");
+	protected JMenuItem item4 = new JMenuItem("Aide");
 	protected JButton boutonSave;
 	
 //	private JLabel logo = new JLabel(new ImageIcon("logoAFPA.png"));
