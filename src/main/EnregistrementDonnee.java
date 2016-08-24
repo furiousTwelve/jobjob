@@ -150,7 +150,7 @@ public class EnregistrementDonnee{
 		boolean questionTrouver=false;
 		   int j=0;
 		   int compteur=4;
-		   
+		   System.out.println(" Voici les chemins vers les fichiers question et les reponses");
 		   while(i<contenu.length & compteur!=0){
 			
 			     if(contenu[i].equals(rand+".txt")){ 
@@ -159,7 +159,9 @@ public class EnregistrementDonnee{
 			     questionReponse[j]=pathFichier;
 			     compteur--;
 			     }
+			     
 			     else if(contenu[i].contains(rand)){
+			    	 
 			    	 for (int k=1; k<questionReponse.length; k++){
 			    		 	String pathFichier="..\\..\\git\\recrutement\\questionReponse\\"+reponse+k+".txt";
 						     questionReponse[k]=pathFichier;
