@@ -18,17 +18,17 @@ import javax.imageio.IIOException;
  *
  */
 
-public class EnregistrementDonnee{
+public class EnregistrementDonnee 
+{
 
-/**
- * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
- * @param nom
- */
+	int identifiant = 1;
 	
-	int identifiant=1;
-	
-	public void entreprise(){
-	
+	/**
+	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
+	 * @param nom
+	 */
+	public void entreprise()
+	{
 		File f = new File ("entreprise.txt");
 		
 		try {
@@ -39,18 +39,21 @@ public class EnregistrementDonnee{
 			// TODO: handle exception
 		}
 	}
-/**
- * Methode pour l'enregistrement d'un candidat dans un fichier .txt
- * @param nom
- * @param prenom
- * @param mail
- * @param telephone
- * @param identifiant
- */
 	
-	public void candidat(String nom,String prenom,String mail,String telephone,String date){
-		
-
+	/**
+	 * Methode pour l'enregistrement d'un candidat dans un fichier .txt
+	 * @param nom
+	 * @param prenom
+	 * @param mail
+	 * @param telephone
+	 * @param identifiant
+	 */
+	public void candidat(String nom,
+						 String prenom,
+						 String mail,
+						 String telephone,
+						 String date)
+	{
 		File f = new File ("candidat_"+getidentifiant()+".txt");
 		
 		try {
@@ -77,8 +80,6 @@ public class EnregistrementDonnee{
 	
 	public int getidentifiant(){
 		return identifiant;
-		
-		
 	}
 	
 	public void rechercheCandidat(String str){
@@ -87,18 +88,18 @@ public class EnregistrementDonnee{
 		File dossier = new File("..\\..\\git\\recrutement");
 		String[] contenu = dossier.list();
 		int i=0;
-		while(trouver==false & i<contenu.length){
+		while(trouver == false & i < contenu.length){
 			if(contenu[i].equals(str)){
 				trouver=true;
 			}
 			i++;
 		}
-	if(trouver==true){
+	if(trouver == true){
 			System.out.println("fichier existe :");
 			String pathFichier="..\\..\\git\\recrutement\\"+str;
 
 
-			BufferedReader fluxEntree=null;
+			BufferedReader fluxEntree = null;
 			try {
 				/* Création du flux vers le fichier texte */
 				fluxEntree = new BufferedReader(new FileReader(pathFichier));
@@ -116,7 +117,7 @@ public class EnregistrementDonnee{
 			}
 			finally{
 				try{
-					if(fluxEntree!=null){
+					if(fluxEntree != null){
 						/* Fermeture du flux vers le fichier */
 						fluxEntree.close();
 					}
