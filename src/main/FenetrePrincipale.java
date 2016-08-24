@@ -4,6 +4,7 @@
 package main;
 
 
+import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -19,8 +20,8 @@ import javax.swing.JOptionPane;
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-	private panelAccueil pan1;
-	private panelFormulaire pan2;
+	private panelAccueil panAccueil;
+	private panelFormulaire panFormulaire;
 
 	/**
 	 * @throws HeadlessException
@@ -30,19 +31,19 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	{
 
 		this.setTitle("Job-Job"); 
-		this.setSize(600, 400);
-
-		this.setResizable(false);
+		this.setExtendedState(this.MAXIMIZED_BOTH);
+		this.setMinimumSize(new Dimension(600, 400));
+		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		
-		pan1=new panelAccueil();
-		pan2 = new panelFormulaire();
+		panAccueil=new panelAccueil();
+		panFormulaire = new panelFormulaire();
 		
-		this.pan1.item1.addActionListener(this);
-		this.pan1.item3.addActionListener(this);
-		this.pan1.item4.addActionListener(this);
+		this.panAccueil.itemNouveauTest.addActionListener(this);
+		this.panAccueil.itemQuitter.addActionListener(this);
+		this.panAccueil.itemAide.addActionListener(this);
 		
-		this.setContentPane(pan1);; // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panAccueil);; // imbrication de notre panel dans notre fenêtre
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,31 +81,31 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent arg0) 
 	{
 		String composant=arg0.getActionCommand();
-	//	pan1 = new panelAccueil();
+	//	panAccueil = new panelAccueil();
 		
 		
-		if(arg0.getSource() == this.pan1.item1)
+		if(arg0.getSource() == this.panAccueil.itemNouveauTest)
 		{	
-			pan2.item1.addActionListener(this);	
-			pan2.item2.addActionListener(this);			
-			pan2.item3.addActionListener(this);	
-			pan2.item4.addActionListener(this);	
-			pan2.boutonSave.addActionListener(this);
+			panFormulaire.itemNouveauTest.addActionListener(this);	
+			panFormulaire.itemSauvegarder.addActionListener(this);			
+			panFormulaire.itemQuitter.addActionListener(this);	
+			panFormulaire.itemAide.addActionListener(this);	
+			panFormulaire.boutonSave.addActionListener(this);
 			
 			this.getContentPane().removeAll();
-			this.setContentPane(pan2);
+			this.setContentPane(panFormulaire);
 			this.validate();
 			
 		}
 		
-		if((arg0.getSource() == this.pan1.item3) || (arg0.getSource() == this.pan2.item3))
+		if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
 		{	
 			// a voir, message erreur dans console
 			this.dispose();
 		
 		}
 		
-		if((arg0.getSource() == this.pan1.item4) || (arg0.getSource() == this.pan2.item4))
+		if((arg0.getSource() == this.panAccueil.itemAide) || (arg0.getSource() == this.panFormulaire.itemAide))
 		{	
 			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
 			/*try {
@@ -118,19 +119,19 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		
 		
-		if(arg0.getSource() == this.pan2.item1)
+		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
 		{	
 			// Ici mettre l'ouverture du panelQuestion
 			
 		}
 		
-		if(arg0.getSource() == this.pan2.item2)
+		if(arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
 			
 		//Pour la couche métier: mettre votre fonction "ecrire fichier"
 		}
 		
-		if(arg0.getSource() == this.pan2.boutonSave)
+		if(arg0.getSource() == this.panFormulaire.boutonSave)
 		{	
 			
 			JOptionPane.showMessageDialog(null, "Lancement de l'interface start");

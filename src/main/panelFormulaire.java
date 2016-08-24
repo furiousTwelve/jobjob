@@ -25,28 +25,35 @@ public class panelFormulaire extends JPanel {
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
-	private JMenu menu1 = new JMenu("Fichier");
-	private JMenu menu2 = new JMenu("Aide");
-	protected JMenuItem item1 = new JMenuItem("Nouveau Test");
-	protected JMenuItem item2 = new JMenuItem("Sauvegarder");
-	protected JMenuItem item3 = new JMenuItem("Quitter");
-	protected JMenuItem item4 = new JMenuItem("Aide");
-	protected JButton boutonSave;
+	private JMenu menuFichier = new JMenu("Fichier");
+	private JMenu menuAide = new JMenu("Aide");
+	protected JMenu itemNouveauTest= new JMenu("Nouveau Test");
+	protected JMenuItem itemCandidatExistant = new JMenuItem("Candidat Existant");
+	protected JMenuItem itemNouveauCandidat = new JMenuItem("Nouveau Candidat");
+	protected JMenuItem itemSauvegarder = new JMenuItem("Sauvegarder");
+	protected JMenuItem itemQuitter = new JMenuItem("Quitter");
+	protected JMenuItem itemAide = new JMenuItem("Aide");
+	private JLabel statusBar = new JLabel();
+	private JMenuBar menuBar2 = new JMenuBar();
+	protected JButton boutonSave = new JButton("Sauvegarder");
 	
 //	private JLabel logo = new JLabel(new ImageIcon("logoAFPA.png"));
 	
 	public panelFormulaire() {
 		
 		//Constitution de la barre de menu
-		menuBar.add(menu1);
-		menuBar.add(menu2);
+		menuBar.add(menuFichier);
+		menuBar.add(menuAide);
 		
-		menu1.add(item1);	
-		menu1.add(item2);
-		menu1.addSeparator();
-		menu1.add(item3);
+		menuFichier.add(itemNouveauTest);
+		itemNouveauTest.add(itemCandidatExistant);
+		itemNouveauTest.add(itemNouveauCandidat);
+		menuFichier.add(itemSauvegarder);
+		itemSauvegarder.setEnabled(false);
+		menuFichier.addSeparator();
+		menuFichier.add(itemQuitter);
 		
-		menu2.add(item4);
+		menuAide.add(itemAide);
 	
 		
 		//Création du panel central
