@@ -33,7 +33,7 @@ public class Application
 	 */
 	public Application() 
 	{
-		FenetrePrincipale fenetre = new FenetrePrincipale();
+		//FenetrePrincipale fenetre = new FenetrePrincipale();
 		
 	}
 
@@ -43,18 +43,22 @@ public class Application
 	 */
 	public static void main(String[] args) 
 	{
-		try 
+		/*try 
 		{
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); //le Look and feel peut avoir plusieurs types d'apparence
 		}
 		catch(Exception e) 
 		{
 			
-		}
+		}*/
 		new Application();
-		new EnregistrementDonnee().entreprise();
-		new EnregistrementDonnee().candidat("pirlouette", "Paul", "Pipaul@gmail.com", "06.12.54.12.26", 1, "22/08/2016");
-		new LectureDonnee().lireCandidat(1);
+		
+	
+		new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
+		new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
+		System.out.println("-------------------------------------------------------------");
+		
+	
 	}
 
 }
