@@ -33,7 +33,7 @@ public class Application
 	 */
 	public Application() 
 	{
-		//FenetrePrincipale fenetre = new FenetrePrincipale();
+		FenetrePrincipale fenetre = new FenetrePrincipale();
 		
 	}
 
@@ -52,13 +52,11 @@ public class Application
 			
 		}*/
 		new Application();
-		
 	
 		new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
 		new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
 		System.out.println("-------------------------------------------------------------");
-		
-	
+
 	}
 
 }

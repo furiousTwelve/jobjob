@@ -16,16 +16,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class panelAccueil extends JPanel implements ActionListener{
+public class panelAccueil extends JPanel{
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
 	private JMenu menu2 = new JMenu("Aide");
-	private JMenuItem item1 = new JMenuItem("Nouveau Test");
+	protected JMenuItem item1 = new JMenuItem("Nouveau Test");
 	private JMenuItem item2 = new JMenuItem("Sauvegarder");
-	private JMenuItem item3 = new JMenuItem("Quitter");
-	private JMenuItem item4 = new JMenuItem("Aide");
+	protected JMenuItem item3 = new JMenuItem("Quitter");
+	protected JMenuItem item4 = new JMenuItem("Aide");
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	
@@ -35,17 +35,15 @@ public class panelAccueil extends JPanel implements ActionListener{
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		
-		item1.addActionListener(this);
 		menu1.add(item1);
 		menu1.add(item2);
 		item2.setEnabled(false);
 		menu1.addSeparator();
 		menu1.add(item3);
-		item3.addActionListener(this);
+	
 		
 		menu2.add(item4);
 
-		item4.addActionListener(this);
 
 		
 		//Un sous-panel qui contiendra le texte et l'image principale
@@ -82,7 +80,5 @@ public class panelAccueil extends JPanel implements ActionListener{
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	}
+	
 }
