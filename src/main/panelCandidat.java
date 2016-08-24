@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 public class panelCandidat extends JPanel  {
 	
-	protected JPanel panel1;
+	protected JPanel panel1=panel1 = new JPanel();
 	
 	protected JLabel iconeEntreprise;
 	private ImageIcon logo;
@@ -27,14 +27,14 @@ public class panelCandidat extends JPanel  {
 	public panelCandidat() 
 	{
 		
-		panel1 = new JPanel(null);
 		
-		iconeEntreprise = new JLabel(new ImageIcon("logoAFPA.png"));		
-		panel1.setLayout(new FlowLayout());
+		
+		iconeEntreprise = new JLabel(new ImageIcon("logoAFPA.png"));	
+		panel1.setLayout(new BorderLayout());
 		
 	
 		
-		panel1.add(iconeEntreprise);	
+		panel1.add(iconeEntreprise,BorderLayout.EAST);	
 		this.add(panel1);
 		
 	}
