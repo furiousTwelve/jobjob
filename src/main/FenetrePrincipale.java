@@ -3,28 +3,32 @@
  */
 package main;
 
-import java.awt.Color;
-import java.awt.GraphicsConfiguration;
+import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Définit la fenêtre principale de l'application
  * @author david
  *
  */
-public class FenetrePrincipale extends JFrame 
+public class FenetrePrincipale extends JFrame
 {
 	
+
 	/**
 	 * @throws HeadlessException
 	 */
 	public FenetrePrincipale() throws HeadlessException 
 	{
+
 		this.setTitle("Job-Job"); 
 		this.setSize(600, 400);
 
@@ -34,39 +38,10 @@ public class FenetrePrincipale extends JFrame
 		
 		this.setContentPane(new panelFormulaire());; // imbrication de notre panel dans notre fenêtre
 		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
 	}
-
-	/**
-	 * @param gc
-	 */
-	public FenetrePrincipale(GraphicsConfiguration gc) {
-		super(gc);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param title
-	 * @throws HeadlessException
-	 */
-	public FenetrePrincipale(String title) throws HeadlessException {
-		super(title);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param title
-	 * @param gc
-	 */
-	public FenetrePrincipale(String title, GraphicsConfiguration gc) {
-		super(title, gc);
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-
 
 	
 }
