@@ -68,7 +68,7 @@ public class EnregistrementDonnee
 			fw.write("\r\n");
 			fw.write("Téléphone : "+telephone);
 			fw.write("\r\n");
-			fw.write("Date de naissance : "+date);
+			fw.write("Date de naissance : "+date); // date de naissance ou date? 22/08/2016 c'est jeune pour passer le test
 			fw.close();
 			identifiant=identifiant+1;
 			//System.out.println(identifiant);
