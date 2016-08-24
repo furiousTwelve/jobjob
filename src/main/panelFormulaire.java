@@ -1,20 +1,12 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 public class panelFormulaire extends JPanel {
 
@@ -102,12 +93,18 @@ public class panelFormulaire extends JPanel {
 
 
 			//Création du contenu
+		Font fontSaisie = new Font("Courier", Font.BOLD, 20);
 		JLabel champ1 = new JLabel("Nom");
+		champ1.setFont(fontSaisie);
 		JLabel champ2 = new JLabel("Prénom");
+		champ2.setFont(fontSaisie);
 		JLabel champ3 = new JLabel("E-mail");
+		champ3.setFont(fontSaisie);
 		JLabel champ4 = new JLabel("Téléphone");
+		champ4.setFont(fontSaisie);
 		JLabel champ5 = new JLabel("N° identifiant");
-
+		champ5.setFont(fontSaisie);
+		
 		JTextField field1 = new JTextField();
 		JTextField field2 = new JTextField();
 		JTextField field3 = new JTextField();
@@ -128,8 +125,9 @@ public class panelFormulaire extends JPanel {
 		
 		//Création du panelCentralHaut
 		JPanel panelCentralHaut = new JPanel();
+		panelCentralHaut.setLayout(new FlowLayout(FlowLayout.CENTER));
 		panelCentralHaut.add(panelSaisie);
-//		panelCentralHaut.setLayout();
+
 		
 		// Création du panelCentral
 		JPanel panelCentral = new JPanel();
@@ -169,83 +167,6 @@ public class panelFormulaire extends JPanel {
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(panelDroite, BorderLayout.EAST);
 		this.add(panelSud, BorderLayout.SOUTH);
-		
-//		//Création du panel central
-//		JPanel panelCentral = new JPanel();
-//		panelCentral.setLayout(null);
-//		
-//			//Création du Bouton Sauvegarder
-//		boutonSave = new JButton("Sauvegarder");
-//	
-//		
-//			//Création du Champ de saisie global
-//				//création du panel qui le contiendra (en GridLayout, 2 colonnes)
-//		JPanel panelSaisie = new JPanel(new GridLayout(0, 2, 30, 30));
-////		Border greyline, greyline2;                                    // A creuser pour faire un petit effet sur le panneau
-////		greyline = BorderFactory.createLineBorder(Color.GRAY);
-////		greyline2 = BorderFactory.createLoweredBevelBorder();
-////		panelSaisie.setBorder(greyline);
-//				
-//				//Création du contenu
-//		JLabel champ1 = new JLabel("Nom");
-//		JLabel champ2 = new JLabel("Prénom");
-//		JLabel champ3 = new JLabel("E-mail");
-//		JLabel champ4 = new JLabel("Téléphone");
-//		JLabel champ5 = new JLabel("N° identifiant");
-//		
-//		JTextField field1 = new JTextField();
-//		JTextField field2 = new JTextField();
-//		JTextField field3 = new JTextField();
-//		JTextField field4 = new JTextField();
-//		JTextField field5 = new JTextField();
-//		
-//				//Assemblage du panel
-//		panelSaisie.add(champ1);
-//		panelSaisie.add(field1);
-//		panelSaisie.add(champ2);
-//		panelSaisie.add(field2);
-//		panelSaisie.add(champ3);
-//		panelSaisie.add(field3);
-//		panelSaisie.add(champ4);
-//		panelSaisie.add(field4);
-//		panelSaisie.add(champ5);
-//		panelSaisie.add(field5);
-//		
-//		
-//			//Constitution du panel central
-////		panelCentral.add(logoFinal);		
-////		logoFinal.setBounds(30, 30, 40, 40);
-//		panelCentral.add(boutonSave);
-//		boutonSave.setBounds(30, 280, 150, 30);
-//		panelCentral.add(panelSaisie);
-//		panelSaisie.setBounds(250, 50, 270, 230);
-//
-//		// Création du panelLogo qui ira dans à l'OUEST de l'écran
-//		JPanel panelLogo = new JPanel();
-//		panelLogo.setLayout(null);
-//		
-//			//Création du logo
-//		ImageIcon logo = new ImageIcon("logoAFPA.png");
-//		Image img = logo.getImage();
-//		Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-//		logo = new ImageIcon(newImg);
-//		JLabel logoFinal = new JLabel(logo);
-//		
-//			//Assemblage du panelLogo
-//		panelLogo.add(logoFinal);
-//		logoFinal.setBounds(30, 30, 80, 80);
-//
-//
-//		//Constitution du panel général
-////		this.setLayout(new BorderLayout());
-////		this.add(menuBar, BorderLayout.NORTH);
-////		this.add(panelCentral, BorderLayout.CENTER);
-////		this.add(panelLogo, BorderLayout.WEST);
-//		this.setLayout(new GridLayout(0, 3));
-//		this.add(panelLogo);
-//		this.add(panelSaisie);
-//		this.add(boutonSave);
-//		this.add(boutonSave2);
 		
 
 	}

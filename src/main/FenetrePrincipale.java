@@ -42,7 +42,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setTitle("Job-Job"); 
 		this.setResizable(true);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setMinimumSize(new Dimension(650, 450));
+		this.setMinimumSize(new Dimension(780, 500));
 		
 		this.setLocationRelativeTo(null);
 		
