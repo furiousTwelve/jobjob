@@ -40,20 +40,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	{
 
 		this.setTitle("Job-Job"); 
-		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setMinimumSize(new Dimension(600, 400));
 		this.setResizable(true);
+		this.setExtendedState(this.MAXIMIZED_BOTH);
+		this.setMinimumSize(new Dimension(650, 450));
+		
 		this.setLocationRelativeTo(null);
 		
 
 		panAccueil=new panelAccueil();
 		panFormulaire = new panelFormulaire();
+		panelTest panTest = new panelTest();
 		
 		this.panAccueil.itemNouveauTest.addActionListener(this);
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
-		this.setContentPane(panAccueil);; // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panFormulaire); // imbrication de notre panel dans notre fenêtre
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
