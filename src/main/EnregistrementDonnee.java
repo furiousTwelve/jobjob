@@ -1,8 +1,13 @@
 package main;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.IIOException;
 /**
@@ -76,6 +81,53 @@ public class EnregistrementDonnee{
 		
 	}
 	
-	
+	public void rechercheCandidat(String str){
+		boolean trouver=false;
+		
+		File dossier = new File("C:\\Users\\34011-82-04\\git\\recrutement");
+		String[] contenu = dossier.list();
+		int i=0;
+		while(trouver==false & i<contenu.length){
+			if(contenu[i].equals(str)){
+				trouver=true;
+			}
+			i++;
+		}
+	if(trouver==true){
+			System.out.println(" fichier existe :");
+			String pathFichier="C:\\Users\\34011-82-04\\git\\recrutement\\"+str;
 
+
+			BufferedReader fluxEntree=null;
+			try {
+				/* Création du flux vers le fichier texte */
+				fluxEntree = new BufferedReader(new FileReader(pathFichier));
+
+				/* Lecture d'une ligne */
+				String ligneLue = fluxEntree.readLine();
+
+				while(ligneLue!=null){
+					System.out.println(ligneLue);
+					ligneLue = fluxEntree.readLine();
+				}
+			}
+			catch(IOException exc){
+				exc.printStackTrace();
+			}
+			finally{
+				try{
+					if(fluxEntree!=null){
+						/* Fermeture du flux vers le fichier */
+						fluxEntree.close();
+					}
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+	}
+	else {
+		System.out.println(" Candidat non trouvé!");
+	}
+  }
 }
