@@ -5,6 +5,7 @@ package main;
 import javax.swing.UIManager;
 
 /**
+ * 
  * Cette classe gère le main et le lancement de l'interface graphique
  * 
  * @author Khadidja Boudjema

@@ -12,9 +12,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * Définit la fenêtre principale de l'application
- * @author david
- *
+ * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
+ * 
+ * 
+ * <ul>
+ * <li>Un panneau sera déclaré pour chaque interface/étape de l'application ...</li>
+ * </ul>
+ * 
+ * 
+ * @author Mathieu et Cyril
+ * @version 1.02
  */
 
 public class FenetrePrincipale extends JFrame implements ActionListener
@@ -22,8 +29,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelAccueil pan1;
 	private panelFormulaire pan2;
 
+	
 	/**
-	 * @throws HeadlessException
+	 * 
+	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
 	 */
 
 	public FenetrePrincipale() throws HeadlessException 
@@ -35,7 +44,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
-		pan1=new panelAccueil();
+		pan1 = new panelAccueil();
 		pan2 = new panelFormulaire();
 		
 		this.pan1.item1.addActionListener(this);
@@ -50,32 +59,36 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	}
 
 	/**
-	 * @param gc
-	 */
+     * Constructeur non utilisé sous la version 1.00 à 1.xx
+     * @deprecated Depuis v1.00, remplacé par FenetrePrincipale() throws HeadlessException 
+     */
 	public FenetrePrincipale(GraphicsConfiguration gc) {
 		super(gc);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param title
-	 * @throws HeadlessException
-	 */
+     * Constructeur non utilisé sous la version 1.00 à 1.xx
+     * @deprecated Depuis v1.00, remplacé par FenetrePrincipale() throws HeadlessException 
+     */
 	public FenetrePrincipale(String title) throws HeadlessException {
 		super(title);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param title
-	 * @param gc
-	 */
+     * Constructeur non utilisé sous la version 1.00 à 1.xx
+     * @deprecated Depuis v1.00, remplacé par FenetrePrincipale() throws HeadlessException 
+     */
 	public FenetrePrincipale(String title, GraphicsConfiguration gc) {
 		super(title, gc);
 		// TODO Auto-generated constructor stub
 	}
 	
-
+	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
+	 * @param arg0
+	 * 		Ce paramètre va permettre d'ouvrir un panneau selon les condition ci-dessous
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
@@ -134,7 +147,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{	
 			
 			JOptionPane.showMessageDialog(null, "Lancement de l'interface start");
-			
+	
 		}
 		
 				
