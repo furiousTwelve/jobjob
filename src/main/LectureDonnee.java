@@ -16,6 +16,7 @@ import java.io.IOException;
 
 public class LectureDonnee 
 {	
+	//TODO détailler le param identifiant @param identifiant id du candidat
 /**
  * Méthode permettant de lire un fichier texte
  * @param identifiant
