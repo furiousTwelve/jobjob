@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 public class panelCandidat extends JPanel  {
 	
-	protected JPanel panel1=panel1 = new JPanel();
+	protected JPanel panel1 = new JPanel();
 	
 	protected JLabel iconeEntreprise;
 	private ImageIcon logo;
