@@ -44,8 +44,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
-		pan1 = new panelAccueil();
-		pan2 = new panelFormulaire();
+		pan1 = new panelAccueil();       //pan1 ?? manque d'inspiration? 
+		pan2 = new panelFormulaire();  //pan2 ?? toujours pas d'inspiration? 
+		// est ce qu'à pan9 on commence à faire des jeux de mots? 
 		
 		this.pan1.item1.addActionListener(this);
 		this.pan1.item3.addActionListener(this);
