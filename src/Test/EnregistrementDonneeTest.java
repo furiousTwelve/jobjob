@@ -1,4 +1,4 @@
-package main;
+package Test;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,8 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import main.EnregistrementDonnee;
+
 public class EnregistrementDonneeTest {
 	int indice;
 	 EnregistrementDonnee mc=new  EnregistrementDonnee();
@@ -20,7 +22,7 @@ public class EnregistrementDonneeTest {
 		boolean trouver=false;
 		String str="entreprise.txt";
 		
-		File dossier = new File("C:\\Users\\34011-82-04\\git\\recrutement");
+		File dossier = new File("..\\..\\git\\recrutement");
 		String[] contenu = dossier.list();
 		int i=0;
 		while(trouver==false & i<contenu.length){
@@ -53,7 +55,7 @@ public class EnregistrementDonneeTest {
 			String resultatAttendu = " Nom : talbi/Prenom : lila/Email : fefeefef@sfr.fr/Téléphone : 0645644884/Date de naissance : 22/08/2016/null/" ;
 			
 			/* Le chemin vers le fichier à lire */
-			String pathFichier="C:\\Users\\34011-82-04\\git\\recrutement\\candidat_1.txt";
+			String pathFichier="..\\..\\git\\recrutement\\candidat_1.txt";
 
 			BufferedReader fluxEntree=null;
 			try {
