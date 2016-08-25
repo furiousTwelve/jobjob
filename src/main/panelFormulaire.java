@@ -142,8 +142,10 @@ public class panelFormulaire extends JPanel {
 								
 
 								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
-								JFormattedTextField fieldNom = new JFormattedTextField();
-								JFormattedTextField fieldPrenom = new JFormattedTextField();
+								MaskFormatter maskNomPrenom = new MaskFormatter("**************************************************");
+								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
+								JFormattedTextField fieldNom = new JFormattedTextField(maskNomPrenom);
+								JFormattedTextField fieldPrenom = new JFormattedTextField(maskNomPrenom);
 								
 								JFormattedTextField fieldMail = new JFormattedTextField();
 								
