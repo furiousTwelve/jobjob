@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
-	private panelFormulaire panFormulaire;
+	private panelFormulaire2 panFormulaire;
 
 	
 	/**
@@ -48,7 +48,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 
 		panAccueil=new panelAccueil();
-		panFormulaire = new panelFormulaire();
+		panFormulaire = new panelFormulaire2();
 		panelTest panTest = new panelTest();
 		
 		this.panAccueil.itemNouveauTest.addActionListener(this);
