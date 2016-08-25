@@ -54,7 +54,7 @@ public class Candidat
 		{
 			if(f instanceof JLabel)
 			{
-				chaine[i] = ((JLabel) f).getText() + ": ";
+				chaine[i] = ((JLabel) f).getText() + " : ";
 			}
 			else if(f instanceof JTextField)
 			{
@@ -66,7 +66,7 @@ public class Candidat
 		
 		// COMMUNIQUE AVEC LA COUCHE DONNEES POUR L'ENREGISTREMENT SUR LE FICHIER
 		EnregistrementDonnee ed = new EnregistrementDonnee();
-		//ed.enregistrementCandidat(chaine); // en attente modification par la couche données
+		ed.candidat(chaine); // en attente modification par la couche données
 	}
 	
 }
