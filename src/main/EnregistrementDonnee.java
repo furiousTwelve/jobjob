@@ -7,7 +7,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.imageio.IIOException;
 /**
@@ -45,8 +48,10 @@ public class EnregistrementDonnee
  * @param info
  */
 	
-	public void candidat(String[] info){
+	public void enregistrerCandidat(String[] info){
 		
+		DateFormat format = new SimpleDateFormat("dd/MM/yy");
+		String s = (format.format(new Date()));
 
 
 		File f = new File ("candidat_"+getidentifiant()+".txt");
@@ -60,6 +65,8 @@ public class EnregistrementDonnee
 				fw.write(info[j]);
 				fw.write("\r\n");
 			}
+			
+			fw.write("date : " + s);
 
 			fw.close();
 			identifiant=identifiant+1;
