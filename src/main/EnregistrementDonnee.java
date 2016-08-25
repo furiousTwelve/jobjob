@@ -45,14 +45,14 @@ public class EnregistrementDonnee
 	
 	public void candidat(String[] info){
 		
-		DateFormat format = new SimpleDateFormat("dd/MM/yy");
+		DateFormat format = new SimpleDateFormat("ddMMyy");
 		String date = format.format(new Date());
 
-		File f = new File ("candidat_"+getidentifiant()+".txt");
+		File f = new File ("../../git/recrutement/candidats/candidat_"+(nombreCandidat()+1)+".txt");
 		
 		try {
 			FileWriter fw = new FileWriter(f);
-			fw.write("Identifiant :" +getidentifiant());
+			fw.write("Identifiant :" +nombreCandidat()+1);
 			fw.write("\r\n");
 
 			for (int j = 0; j < info.length; j++) {
@@ -69,9 +69,7 @@ public class EnregistrementDonnee
 		
 	}
 	
-	public int getidentifiant(){
-		return identifiant;
-	}
+	
 	
 /**
 * methode qui cherche le candidat donnée avec son identifiant
@@ -129,8 +127,7 @@ public class EnregistrementDonnee
 	}
   }
 	
-	
-	
+
 
 /**
  * methode chercherQuestion recupère la question rand placer en argument
@@ -138,7 +135,8 @@ public class EnregistrementDonnee
  * @param rand
  */
 	
-	public void chercherQuestion( String rand){
+	public String[] chercherQuestion( String rand){
+		
 		
 		File dossier = new File("..\\..\\git\\recrutement\\questionReponse\\");
 		String[] contenu = dossier.list();
@@ -147,8 +145,8 @@ public class EnregistrementDonnee
 		int i=0;
 		
 		String reponse=rand+"R"; 
-		
 		boolean questionTrouver=false;
+		
 		   int j=0;
 		   int compteur=4;
 		   System.out.println(" Voici les chemins vers les fichiers question et les reponses");
@@ -185,6 +183,7 @@ public class EnregistrementDonnee
 				while(ligneLue!=null){
 					System.out.println(ligneLue);
 					ligneLue = fluxEntree.readLine();
+					questionReponse[j]=ligneLue;
 				}
 				
 			}
@@ -206,9 +205,15 @@ public class EnregistrementDonnee
 			}
 	}
 			     
-			
-}
+	return questionReponse;		
+}	
+	public int nombreCandidat(){
 		
+		File dossier = new File("..\\..\\git\\recrutement\\candidats\\");
+		String[] contenu = dossier.list();
+		System.out.println(contenu.length);
+		return contenu.length;
+	}
 }
 
 		
