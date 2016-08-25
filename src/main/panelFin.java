@@ -54,17 +54,8 @@ public class panelFin extends JPanel {
 		font2 = new Font("Arial",Font.ITALIC,40);
 		nomEntreprise.setFont(font2);
 		nomEntreprise.setAlignmentX(Component.CENTER_ALIGNMENT);
-		/*		
-//3ème panel pour le recruteur prévue pour la v2	
-		JPanel p3 = new JPanel();
-		GridLayout gl = new GridLayout();
-		gl.setColumns(3);
-		gl.setRows(1);
-		this.add(new JButton ("hello"));
-		p2.setLayout(gl);
-
 	
-	
+		
 		JPanel p4 = new JPanel();
 		id = new JLabel("ID");
 		
@@ -79,6 +70,17 @@ public class panelFin extends JPanel {
 		mdp = new JTextField();		
 		mdp.setColumns(10);
 		p4.add(mdp);
-		*/
+		
+		
+//3ème panel pour le recruteur prévue pour la v2	
+		JPanel p3 = new JPanel(new GridLayout(0,3));
+		p3.add(p4);
+		p3.add(p2);
+		this.add(p3, BorderLayout.SOUTH);
+
+	
+
+
+
 	}
 }
