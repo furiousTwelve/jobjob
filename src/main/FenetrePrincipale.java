@@ -30,10 +30,10 @@ import javax.swing.JOptionPane;
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
-
 	private panelFormulaire panFormulaire;
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
+	private panelFin panFin;
 
 	
 	/**
@@ -62,6 +62,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
+		panFin = new panelFin();
+
 
 		this.panAccueil.itemCandidatExistant.addActionListener(this);
 		this.panAccueil.itemNouveauCandidat.addActionListener(this);
@@ -69,7 +71,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
-		this.setContentPane(panQuestion); // imbrication de notre panel dans notre fenêtre
+
+//		this.setContentPane(panQuestion); // imbrication de notre panel dans notre fenêtre
+
+		this.setContentPane(panFin); // imbrication de notre panel dans notre fenêtre
+
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
