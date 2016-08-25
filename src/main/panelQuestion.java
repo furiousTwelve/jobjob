@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -59,15 +62,7 @@ public class panelQuestion extends JPanel {
  * 		C'est un BorderLayout contenant:
  * 			- Nord: Vide
  * 			- Sud: Vide
- * 			- West: Un panel logo (GridLayout avec 3 colonnes, 3 lignes) qui contient notre logo dans la 2nde case du haut
- * 			- East: Un panel "tampon", panelDroite, en GridLayout à 1 seule colonne, contenant un JLabel. On peut définir la largeur de ce JLabel afin de gérer l'écart du panneau central avec notre bordure notamment
- * 			- Center: Un panel principal, panelCentre, en GridLayout 1 colonne contenant :
- * 						- En haut : un panel panelCentreHaut, en BoxLayout, à l'alignement vertical. Il contient un panneau, panelSaisie
- * 								- panelSaisie : en GridLayout, 2 colonnes, contenant l'ensemble des champs de saisie.
- * 						- En Bas : un panel panelCentreBas, BoxLayout axé vertical qui contient lui-même deux panels:
- * 								- en haut : un panelReponses, en GridLayout, 4 colonnes. Il est vide ici, mais servira pour le panelQuestion entre autres
- * 								- en bas : un panelElementBasCentre, en FlowLayout, centré, permettant d'accueillir un élément quelconque de manière centré. Ici, le bouton "Save". La barre de progression dans le panelQuestion par exemple 
- * 
+
  * 
  * @throws ParseException
  */
@@ -116,65 +111,34 @@ public class panelQuestion extends JPanel {
 									
 					// Création du panel Central supérieur, qui contiendra le panelSaisie
 						JPanel panelCentreHaut = new JPanel();
-						panelCentreHaut.setLayout(new BoxLayout(panelCentreHaut, BoxLayout.PAGE_AXIS));
+						panelCentreHaut.setLayout(new FlowLayout(FlowLayout.CENTER));
 						
-							//création du panel qui contiendra les champs de saisie :
-							panelSaisie = new JPanel(new GridLayout(0, 2, 0, 20));
-			
-								//Création du contenu
-								Font fontChampSaisie = new Font("Courier", Font.BOLD, 20);
-								JLabel champ1 = new JLabel("Nom");
-								champ1.setFont(fontChampSaisie);
-								JLabel champ2 = new JLabel("Prénom");
-								champ2.setFont(fontChampSaisie);
-								JLabel champ3 = new JLabel("E-mail");
-								champ3.setFont(fontChampSaisie);
-								JLabel champ4 = new JLabel("Téléphone");
-								champ4.setFont(fontChampSaisie);
-								JLabel champ5 = new JLabel("N° identifiant");
-								champ5.setFont(fontChampSaisie);
-								
+						//Création des JLabels Questions, soit une Image, soit un Texte
+						ImageIcon iconeQuestion = new ImageIcon("question.jpg");
+						Image imageQuestion = iconeQuestion.getImage();
+						Image newImageQuestion = imageQuestion.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+						iconeQuestion = new ImageIcon(newImageQuestion);
+						JLabel labelQuestionImage = new JLabel(iconeQuestion);
 
-								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
-								JFormattedTextField fieldNom = new JFormattedTextField();
-								JFormattedTextField fieldPrenom = new JFormattedTextField();
-								
-								JFormattedTextField fieldMail = new JFormattedTextField();
-								
-								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
-								maskTelephone.setValidCharacters("0123456789");
-								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
-								
-								JFormattedTextField fieldId = new JFormattedTextField();
+										
+						panelCentreHaut.add(labelQuestionImage);
 						
-								//Assemblage du panelSaisie
-								panelSaisie.add(champ1);
-								panelSaisie.add(fieldNom);
-								panelSaisie.add(champ2);
-								panelSaisie.add(fieldPrenom);
-								panelSaisie.add(champ3);
-								panelSaisie.add(fieldMail);
-								panelSaisie.add(champ4);
-								panelSaisie.add(fieldTelephone);
-								panelSaisie.add(champ5);
-								panelSaisie.add(fieldId);
-								
-								
-						panelSaisie.setMaximumSize(new Dimension(400, 200));			
-						panelCentreHaut.add(panelSaisie, BorderLayout.CENTER);
-						
-					//création du panel CentralCentre inférieur, qui contiendra 2 panels
-						JPanel panelSud = new JPanel();
-						panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.Y_AXIS));
+					//création du panel Central inférieur, qui contiendra 2 panels
+						JPanel panelCentreBas = new JPanel();
+						panelCentreBas.setLayout(new BoxLayout(panelCentreBas, BoxLayout.Y_AXIS));
 						
 							//Un Panel pour les futurs 4 réponses possibles
 							JPanel panelReponses = new JPanel(new GridLayout(0, 4));
 							
 								//Création des JCheckBox
-								reponse1 = new JCheckBox("reponse #1");
+								reponse1 = new JCheckBox("reponse #1hgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmssssssssssshjhgjgjhgjhgjhgjhgjhgjgjhgjhgjgjgjgjhgjhgjgjgh");
+								reponse1.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 								reponse2 = new JCheckBox("reponse #2");
+								reponse2.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 								reponse3 = new JCheckBox("reponse #3");
+								reponse3.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 								reponse4 = new JCheckBox("reponse #4");
+								reponse4.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 								
 								//Assemblage du panelReponses
 								panelReponses.add(reponse1);
@@ -185,17 +149,18 @@ public class panelQuestion extends JPanel {
 							//Un panel pour un élément centré
 							JPanel panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
 							barreProgression = new JProgressBar();
-							barreProgression.setSize(100, 100);
+							barreProgression.setValue(33); //pour le fun
+							barreProgression.setForeground(Color.ORANGE);
 							panelElementBasCentre.add(barreProgression);
 							
-							//Assemblage panelSud
-						panelSud.add(panelReponses);
-						panelSud.add(panelElementBasCentre);
+							//Assemblage panelCentreBas
+							panelCentreBas.add(panelReponses);
+							panelCentreBas.add(panelElementBasCentre);
 					
 			
 			//Assemblage du panelCentralCentre
 			panelCentre.add(panelCentreHaut);
-			panelCentre.add(panelSud);
+			panelCentre.add(panelCentreBas);
 				
 		//Création d'une zone tampon à droite
 		JPanel panelDroite = new JPanel();
@@ -215,24 +180,11 @@ public class panelQuestion extends JPanel {
 		this.add(panelLogo, BorderLayout.WEST);
 		this.add(panelCentre, BorderLayout.CENTER);
 		this.add(panelDroite, BorderLayout.EAST);
-//		this.add(panelSud, BorderLayout.SOUTH);
 	
 
 	}
 
-	/**
-	 * C'est une méthode permettant de vérifier la validité sous format mail d'un JLabel.
-	 * retourne true si c'est un mail valide qui est entré.
-	 * @author mathieu
-	 * @param string
-	 * @return boolean
-	 */
-	public boolean checkFormatMail(String string) {
-		Pattern p = Pattern.compile("^[A-Z0-9._%+_]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
-		Matcher m = p.matcher(string.toUpperCase());
-		
-		return m.matches();
-	}
+
 
 	
 }
