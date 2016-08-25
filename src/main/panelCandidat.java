@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 /**
  * 
  * 
- * @author Cyril
+ * @author Cyril, Audric
  * @version v1.00
  * 
  */
@@ -32,7 +32,22 @@ public class panelCandidat extends JPanel  {
 		
 		this.add(panel1,BorderLayout.WEST);		
 	}
-	
 
+public void startTimer(){
+	TimerFormulaire tp = new TimerFormulaire();
+	tp.start();
+}
+	
+public void randomQuestionsJava(){
+	
+}
+
+public void randomQuestionsCultureG(){
+	
+}
+
+public void randomQuestionsCodeExo(){
+	
+}
 
 }
