@@ -25,10 +25,10 @@ public class EnregistrementDonnee
 	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
 	 * @param nom
 	 */
-	public void entreprise()
+	public void entreprise(String nom)
 	{
-		File f = new File ("entreprise.txt");
-		
+		File f = new File (nom+".txt");
+		System.out.println(" Creation du fichier"+nom);
 		try {
 			FileWriter fw = new FileWriter(f);
 			fw.write("JobJob recrutement");
@@ -48,11 +48,11 @@ public class EnregistrementDonnee
 		DateFormat format = new SimpleDateFormat("ddMMyy");
 		String date = format.format(new Date());
 
-		File f = new File ("../../git/recrutement/candidats/candidat_"+(nombreCandidat()+1)+".txt");
+		File f = new File ("../../git/recrutement/candidats/candidat_"+nombreCandidat()+".txt");
 		
 		try {
 			FileWriter fw = new FileWriter(f);
-			fw.write("Identifiant :" +nombreCandidat()+1);
+			fw.write("Identifiant :" +nombreCandidat());
 			fw.write("\r\n");
 
 			for (int j = 0; j < info.length; j++) {
@@ -61,7 +61,7 @@ public class EnregistrementDonnee
 			}
 			fw.write("Date : "+date);
 			fw.close();
-			identifiant=identifiant+1;
+			//identifiant=identifiant+1;
 			//System.out.println(identifiant);
 		} catch (IOException e) {
 			// TODO: handle exception
@@ -80,7 +80,7 @@ public class EnregistrementDonnee
 	public void rechercheCandidat(String str){
 		boolean trouver=false;
 		
-		File dossier = new File("..\\..\\git\\recrutement");
+		File dossier = new File("..\\..\\git\\recrutement\\candidats");
 		String[] contenu = dossier.list();
 		int i=0;
 		while(trouver == false & i < contenu.length){
@@ -91,7 +91,7 @@ public class EnregistrementDonnee
 		}
 	if(trouver == true){
 			System.out.println("fichier existe :");
-			String pathFichier="..\\..\\git\\recrutement\\"+str;
+			String pathFichier="..\\..\\git\\recrutement\\candidats\\"+str;
 
 
 			BufferedReader fluxEntree = null;
@@ -182,10 +182,10 @@ public class EnregistrementDonnee
 				String ligneLue = fluxEntree.readLine();
 				while(ligneLue!=null){
 					System.out.println(ligneLue);
-					ligneLue = fluxEntree.readLine();
 					questionReponse[j]=ligneLue;
+					ligneLue = fluxEntree.readLine();
+					System.out.println(" contenu de la case "+j+" du tableau questionReponse est : " + questionReponse[j]);
 				}
-				
 			}
 			catch(IOException exc){
 				exc.printStackTrace();
@@ -204,6 +204,7 @@ public class EnregistrementDonnee
 				
 			}
 	}
+			
 			     
 	return questionReponse;		
 }	
