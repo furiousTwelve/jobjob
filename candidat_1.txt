@@ -1,5 +1,6 @@
 Identifiant :1
 <<<<<<< HEAD
+<<<<<<< HEAD
 Nom : a
 Prénom : b
 E-mail : c
@@ -12,4 +13,11 @@ E-mail : s
 Téléphone : 4554
 N° identifiant : 1
 >>>>>>> origin/feature/donnees/#553
+=======
+Nom : 
+Prénom : 
+E-mail : 
+Téléphone : 
+N° identifiant : 
+>>>>>>> origin/features/presentation/541
 Date : 25/08/16
