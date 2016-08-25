@@ -14,6 +14,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -29,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 
 public class panelFormulaire extends JPanel {
 
@@ -49,7 +54,7 @@ public class panelFormulaire extends JPanel {
 	protected JPanel panelSaisie;
 
 	
-	public panelFormulaire() {
+	public panelFormulaire() throws ParseException {
 		
 		//Constitution de la barre de menu : menuBar
 		menuBar.add(menuFichier);
@@ -132,21 +137,31 @@ public class panelFormulaire extends JPanel {
 								JLabel champ5 = new JLabel("N° identifiant");
 								champ5.setFont(fontChampSaisie);
 								
-								JTextField field1 = new JTextField();
-								JTextField field2 = new JTextField();
-								JTextField field3 = new JTextField();
-								JTextField field4 = new JTextField();
-								JTextField field5 = new JTextField();
+
+								MaskFormatter maskNomPrenom = new MaskFormatter("**********************************");
+								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
+								JFormattedTextField fieldNom = new JFormattedTextField(maskNomPrenom);
+								fieldNom.setColumns(35);
+								JFormattedTextField fieldPrenom = new JFormattedTextField(maskNomPrenom);
+								fieldPrenom.setColumns(35);
+								
+								JFormattedTextField fieldMail = new JFormattedTextField();
+								
+								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
+								maskTelephone.setValidCharacters("0123456789");
+								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
+								
+								JFormattedTextField field5 = new JFormattedTextField();
 						
 								//Assemblage du panel
 								panelSaisie.add(champ1);
-								panelSaisie.add(field1);
+								panelSaisie.add(fieldNom);
 								panelSaisie.add(champ2);
-								panelSaisie.add(field2);
+								panelSaisie.add(fieldPrenom);
 								panelSaisie.add(champ3);
-								panelSaisie.add(field3);
+								panelSaisie.add(fieldMail);
 								panelSaisie.add(champ4);
-								panelSaisie.add(field4);
+								panelSaisie.add(fieldTelephone);
 								panelSaisie.add(champ5);
 								panelSaisie.add(field5);
 								
