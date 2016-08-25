@@ -54,11 +54,9 @@ public class Application
 		
 		new Application();
 	
-	//new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
-	//	new LectureDonnee().lireCandidat(new EnregistrementDonnee().getidentifiant());
+	    //new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
 		new EnregistrementDonnee().chercherQuestion( "CG2");
+		new EnregistrementDonnee().nombreCandidat();
 		System.out.println("-------------------------------------------------------------");
-
 	}
-
 }
