@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 /**
  * 
@@ -43,10 +44,11 @@ public class EnregistrementDonnee
  * @param info
  */
 	
-	public void candidat(String[] info){
-		
+	public void enregistrerCandidat(String[] info){
+
 		DateFormat format = new SimpleDateFormat("ddMMyy");
 		String date = format.format(new Date());
+
 
 		File f = new File ("../../git/recrutement/candidats/candidat_"+(nombreCandidat()+1)+".txt");
 		
@@ -59,7 +61,9 @@ public class EnregistrementDonnee
 				fw.write(info[j]);
 				fw.write("\r\n");
 			}
+
 			fw.write("Date : "+date);
+
 			fw.close();
 			identifiant=identifiant+1;
 			//System.out.println(identifiant);

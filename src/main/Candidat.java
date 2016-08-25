@@ -77,7 +77,7 @@ public class Candidat
 		
 		// COMMUNIQUE AVEC LA COUCHE DONNEES POUR L'ENREGISTREMENT SUR LE FICHIER
 		EnregistrementDonnee ed = new EnregistrementDonnee();
-		ed.candidat(chaine); // en attente modification par la couche données
+		ed.enregistrerCandidat(chaine); // en attente modification par la couche données
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
