@@ -7,6 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+/*
+ * TODO : 
+ * renommer panel1 avec un nom explicit
+ * mettre à jour la javadoc
+ * améliorer l'indentation du code (ex startTimer et suivant trop à gauche 
+ * effacer chaque tâche de cette TODOlist une fois que c'est réalisé
+ */
+
 /**
  * 
  * 
@@ -17,7 +25,7 @@ import javax.swing.JPanel;
 
 public class panelCandidat extends JPanel  {
 	
-	protected JPanel panel1;	
+	protected JPanel panel1;	//TODO à renommer d'urgence
 	protected JLabel iconeEntreprise;
 	protected ImageIcon logo;
 
