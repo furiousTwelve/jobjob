@@ -1,45 +1,31 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.MessageFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
-import org.omg.IOP.CodecPackage.FormatMismatch;
-
+/**
+ * Le panelFormulaire est le panel qui sera chargé par la fenêtre Principale après appui sur le bouton "NouveauTest".
+ * Il est destiné à être rempli par le recruteur
+ * @author Mathieu
+ * @throws ParseException
+ */
 public class panelFormulaire extends JPanel {
 
 	//Déclaration des éléments de la barre de Menu
@@ -58,7 +44,24 @@ public class panelFormulaire extends JPanel {
 
 	protected JPanel panelSaisie;
 
-	
+/**
+ * Constructeur du panelFormulaire
+ * 	Schéma de l'imbrication de ses Layouts:
+ * 		C'est un BorderLayout contenant:
+ * 			- Nord: Un barre de Menu menuBar
+ * 			- Sud: Vide
+ * 			- West: Un panel logo (GridLayout avec 3 colonnes, 3 lignes) qui contient notre logo dans la 2nde case du haut
+ * 			- East: Un panel "tampon", panelDroite, en GridLayout à 1 seule colonne, contenant un JLabel. On peut définir la largeur de ce JLabel afin de gérer l'écart du panneau central avec notre bordure notamment
+ * 			- Center: Un panel principal, panelCentre, en GridLayout 1 colonne contenant :
+ * 						- En haut : un panel panelCentreHaut, en BoxLayout, à l'alignement vertical. Il contient un panneau, panelSaisie
+ * 								- panelSaisie : en GridLayout, 2 colonnes, contenant l'ensemble des champs de saisie.
+ * 						- En Bas : un panel panelCentreBas, BoxLayout axé vertical qui contient lui-même deux panels:
+ * 								- en haut : un panelReponses, en GridLayout, 4 colonnes. Il est vide ici, mais servira pour le panelQuestion entre autres
+ * 								- en bas : un panelElementBasCentre, en FlowLayout, centré, permettant d'accueillir un élément quelconque de manière centré. Ici, le bouton "Save". La barre de progression dans le panelQuestion par exemple 
+ * 
+ * 
+ * @throws ParseException
+ */
 	public panelFormulaire() throws ParseException {
 		
 		//Constitution de la barre de menu : menuBar
@@ -109,22 +112,17 @@ public class panelFormulaire extends JPanel {
 			panelLogo.add(labelvide7);
 			panelLogo.add(labelvide8);
 		
+
 			
-			
-//		//Création du panel du milieu, contenant champs de saisie et bouton de sauvegarde : panelCentral
-//			JPanel panelCentral = new JPanel(new BorderLayout());
-			
-			//Création du panel qui ira au centre du panelCentral : panelCentralCentral
-			JPanel panelCentralCentre = new JPanel();
-			panelCentralCentre.setLayout(new GridLayout(0, 1));
+		//Création du panel qui ira au centre du panel principal : panelCentre
+			JPanel panelCentre = new JPanel();
+			panelCentre.setLayout(new GridLayout(0, 1));
 			
 				//Il contiendra lui-même 2 panels : le panel des champs de saisie, le panel en-dessous
 									
-					// Création du panel CentralCentre supérieur, qui contiendra le panelSaisie
-//						JPanel panelCentralCentreHaut = new JPanel(new BorderLayout());
-						JPanel panelCentralCentreHaut = new JPanel();
-						panelCentralCentreHaut.setLayout(new BoxLayout(panelCentralCentreHaut, BoxLayout.PAGE_AXIS));
-//						panelCentralCentreHaut.setLayout(new FlowLayout(FlowLayout.CENTER));
+					// Création du panel Central supérieur, qui contiendra le panelSaisie
+						JPanel panelCentreHaut = new JPanel();
+						panelCentreHaut.setLayout(new BoxLayout(panelCentreHaut, BoxLayout.PAGE_AXIS));
 						
 							//création du panel qui contiendra les champs de saisie :
 							panelSaisie = new JPanel(new GridLayout(0, 2, 0, 20));
@@ -143,9 +141,7 @@ public class panelFormulaire extends JPanel {
 								champ5.setFont(fontChampSaisie);
 								
 
-//								MaskFormatter maskNomPrenom = new MaskFormatter();
-//								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
-					
+								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
 								JFormattedTextField fieldNom = new JFormattedTextField();
 								JFormattedTextField fieldPrenom = new JFormattedTextField();
 								
@@ -157,7 +153,7 @@ public class panelFormulaire extends JPanel {
 								
 								JFormattedTextField fieldId = new JFormattedTextField();
 						
-								//Assemblage du panel
+								//Assemblage du panelSaisie
 								panelSaisie.add(champ1);
 								panelSaisie.add(fieldNom);
 								panelSaisie.add(champ2);
@@ -171,11 +167,11 @@ public class panelFormulaire extends JPanel {
 								
 								
 						panelSaisie.setMaximumSize(new Dimension(400, 200));			
-						panelCentralCentreHaut.add(panelSaisie, BorderLayout.CENTER);
+						panelCentreHaut.add(panelSaisie, BorderLayout.CENTER);
 						
 					//création du panel CentralCentre inférieur, qui contiendra 2 panels
-						JPanel panelCentralCentreBas = new JPanel();
-						panelCentralCentreBas.setLayout(new BoxLayout(panelCentralCentreBas, BoxLayout.Y_AXIS));
+						JPanel panelCentreBas = new JPanel();
+						panelCentreBas.setLayout(new BoxLayout(panelCentreBas, BoxLayout.Y_AXIS));
 						
 							//Un Panel pour les futurs 4 réponses possibles
 							JPanel panelReponses = new JPanel(new GridLayout(0, 4));
@@ -184,16 +180,13 @@ public class panelFormulaire extends JPanel {
 							JPanel panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
 							panelElementBasCentre.add(boutonSave);
 
-						panelCentralCentreBas.add(panelReponses);
-						panelCentralCentreBas.add(panelElementBasCentre);
+						panelCentreBas.add(panelReponses);
+						panelCentreBas.add(panelElementBasCentre);
 					
 			
 			//Assemblage du panelCentralCentre
-			panelCentralCentre.add(panelCentralCentreHaut);
-			panelCentralCentre.add(panelCentralCentreBas);
-			
-//		//Assemblage du panelCentral
-//		panelCentral.add(panelCentralCentre, BorderLayout.CENTER);	
+			panelCentre.add(panelCentreHaut);
+			panelCentre.add(panelCentreBas);
 				
 		//Création d'une zone tampon à droite
 		JPanel panelDroite = new JPanel();
@@ -205,15 +198,13 @@ public class panelFormulaire extends JPanel {
 		
 		panelDroite.add(labelVide9);
 		
-		
 
-			
 	
 		//Assemblage Général du PanelFormulaire
 		this.setLayout(new BorderLayout(30,30));
 		this.add(menuBar, BorderLayout.NORTH);
 		this.add(panelLogo, BorderLayout.WEST);
-		this.add(panelCentralCentre, BorderLayout.CENTER);
+		this.add(panelCentre, BorderLayout.CENTER);
 		this.add(panelDroite, BorderLayout.EAST);
 	
 
