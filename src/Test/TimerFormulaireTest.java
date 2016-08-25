@@ -6,6 +6,12 @@ import org.junit.Test;
 
 import main.TimerFormulaire;
 
+/**
+ * 
+ * @author Audric
+ * @version 1.00
+ */
+
 public class TimerFormulaireTest {
 
 	TimerFormulaire tf = new TimerFormulaire();

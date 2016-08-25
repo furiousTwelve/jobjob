@@ -9,6 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Alban, Audric
+ * @version 1.00
+ */
+
 public class Candidat 
 {
 	/**

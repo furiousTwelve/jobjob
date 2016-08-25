@@ -1,5 +1,11 @@
 package main;
 
+/**
+ * 
+ * @author Alban
+ * @version 1.00
+ */
+
 public class questionReponse 
 {
 	/**
