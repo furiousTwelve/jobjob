@@ -107,7 +107,9 @@ public class panelFormulaire2 extends JPanel {
 				//Il contiendra lui-même 2 panels : le panel des champs de saisie, le panel en-dessous
 									
 					// Création du panel CentralCentre supérieur, qui contiendra le panelSaisie
-						JPanel panelCentralCentreHaut = new JPanel(new BorderLayout());
+//						JPanel panelCentralCentreHaut = new JPanel(new BorderLayout());
+						JPanel panelCentralCentreHaut = new JPanel();
+						panelCentralCentreHaut.setLayout(new BoxLayout(panelCentralCentreHaut, BoxLayout.PAGE_AXIS));
 //						panelCentralCentreHaut.setLayout(new FlowLayout(FlowLayout.CENTER));
 						
 							//création du panel qui contiendra les champs de saisie :

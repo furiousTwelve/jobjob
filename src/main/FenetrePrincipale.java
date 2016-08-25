@@ -29,7 +29,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
 
-	private panelFormulaire panFormulaire;
+	private panelFormulaire2 panFormulaire;
 	private panelCandidat panCandidat;
 
 	
@@ -44,14 +44,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setTitle("Job-Job"); 
 		this.setResizable(true);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setMinimumSize(new Dimension(780, 500));
+		this.setMinimumSize(new Dimension(800, 600));
 		
 		this.setLocationRelativeTo(null);
 		
 
 		panAccueil=new panelAccueil();
 
-		panFormulaire = new panelFormulaire();
+		panFormulaire = new panelFormulaire2();
 
 		panCandidat = new panelCandidat();
 

@@ -32,7 +32,7 @@ public class panelFormulaire extends JPanel {
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
-	protected JButton boutonSave2 = new JButton("Sauvegarder");
+	
 	protected JPanel panelSaisie;
 	
 //	private JLabel logo = new JLabel(new ImageIcon("logoAFPA.png"));
@@ -138,7 +138,7 @@ public class panelFormulaire extends JPanel {
 		panelCentral.add(panelCentralHaut);
 		JLabel test = new JLabel(" ");
 		panelCentral.add(test);
-		panelCentral.add(boutonSave2);
+		panelCentral.add(boutonSave);
 		
 		
 		
