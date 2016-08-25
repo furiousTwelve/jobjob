@@ -4,7 +4,7 @@ import java.util.TimerTask;
  
 /**
  * 
- * @author 34011-82-02
+ * @author Alban
  * CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
  */
 public class TimerFormulaire
