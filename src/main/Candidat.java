@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Component;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
@@ -68,6 +69,24 @@ public class Candidat
 		// COMMUNIQUE AVEC LA COUCHE DONNEES POUR L'ENREGISTREMENT SUR LE FICHIER
 		EnregistrementDonnee ed = new EnregistrementDonnee();
 		ed.candidat(chaine); // en attente modification par la couche données
+	}
+	
+	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
+	public String numeroCandidat(){
+		Date d = new Date();
+		EnregistrementDonnee ed = new EnregistrementDonnee();
+		int numero = ed.nombreCandidat()+1;
+		String numeroconcat = Integer.toString(numero);
+		if (numero<10){
+			numeroconcat="000"+numeroconcat;
+		}
+		else if (numero<100){
+			numeroconcat="00"+numeroconcat;
+		}
+		else if (numero<1000) {
+			numeroconcat="0"+numeroconcat;
+		}
+		return d.getYear()+"_"+d.getMonth()+"_"+d.getDay()+"_"+numeroconcat;
 	}
 	
 }
