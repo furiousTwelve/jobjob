@@ -22,8 +22,7 @@ public class questionReponse
 	
 	byte categorieQuestion;
 	byte numeroQuestion;
-	byte reponseCorrecte;
-	byte reponseCandidat;
+	boolean reponseCorrecteOuIncorrecte;
 	int timerAuMomentDeLaReponse; // En secondes pour le moment
 	
 	
