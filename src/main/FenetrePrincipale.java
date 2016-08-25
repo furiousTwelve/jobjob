@@ -156,10 +156,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
 			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
 			
-			this.getContentPane().removeAll();
+			this.dispose();
+			this.setUndecorated(true);
+			this.setTitle("Job-Job"); 
+			this.setExtendedState(this.MAXIMIZED_BOTH);
+			//this.setMinimumSize(new Dimension(600, 400));
+			this.setResizable(false);
+			this.setLocationRelativeTo(null);
 			this.setContentPane(panCandidat);
-			this.validate();
-	
+			this.setVisible(true);	
 		}
 		
 		
