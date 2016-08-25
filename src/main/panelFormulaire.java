@@ -38,6 +38,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
+import org.omg.IOP.CodecPackage.FormatMismatch;
+
 public class panelFormulaire extends JPanel {
 
 	//Déclaration des éléments de la barre de Menu
@@ -141,15 +143,11 @@ public class panelFormulaire extends JPanel {
 								champ5.setFont(fontChampSaisie);
 								
 
-//								MaskFormatter maskNomPrenom = new MaskFormatter("");
+//								MaskFormatter maskNomPrenom = new MaskFormatter();
 //								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
-								NumberFormat formatChiffre = NumberFormat.getNumberInstance();
-								MessageFormat formatTexte = new MessageFormat("");
-								JFormattedTextField fieldNom = new JFormattedTextField(formatTexte);
-//								fieldNom.setColumns(35);
-								fieldNom.setVisible(true);
-								JFormattedTextField fieldPrenom = new JFormattedTextField(formatChiffre);
-								fieldPrenom.setColumns(35);
+					
+								JFormattedTextField fieldNom = new JFormattedTextField();
+								JFormattedTextField fieldPrenom = new JFormattedTextField();
 								
 								JFormattedTextField fieldMail = new JFormattedTextField();
 								
@@ -157,7 +155,7 @@ public class panelFormulaire extends JPanel {
 								maskTelephone.setValidCharacters("0123456789");
 								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
 								
-								JFormattedTextField field5 = new JFormattedTextField();
+								JFormattedTextField fieldId = new JFormattedTextField();
 						
 								//Assemblage du panel
 								panelSaisie.add(champ1);
@@ -169,7 +167,7 @@ public class panelFormulaire extends JPanel {
 								panelSaisie.add(champ4);
 								panelSaisie.add(fieldTelephone);
 								panelSaisie.add(champ5);
-								panelSaisie.add(field5);
+								panelSaisie.add(fieldId);
 								
 								
 						panelSaisie.setMaximumSize(new Dimension(400, 200));			
