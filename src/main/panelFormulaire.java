@@ -150,8 +150,9 @@ public class panelFormulaire extends JPanel {
 								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
 								maskTelephone.setValidCharacters("0123456789");
 								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
-								
-								JFormattedTextField fieldId = new JFormattedTextField();
+								Candidat c = new Candidat();
+								JFormattedTextField fieldId = new JFormattedTextField(c.numeroCandidat());
+								fieldId.enable(false);
 						
 								//Assemblage du panelSaisie
 								panelSaisie.add(champ1);

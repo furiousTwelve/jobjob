@@ -1,9 +1,10 @@
 package main;
 
 import java.awt.Component;
-import java.util.Arrays;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,6 +35,8 @@ public class Candidat
 	 * @param num : numéro de téléphone du candidat
 	 * @param ident : identifiant du candidat
 	 */
+	public Candidat(){}
+	
 	public Candidat(JPanel p)
 	{
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISI
@@ -44,7 +47,7 @@ public class Candidat
 		this.prenom = ((JTextField) fields[3]).getText();
 		this.mail = ((JTextField) fields[5]).getText();
 		this.numeroTelephone = ((JTextField) fields[7]).getText();
-		this.identifiant = ((JTextField) fields[9]).getText();
+		this.identifiant = this.numeroCandidat();
 	}
 	
 	
@@ -78,8 +81,10 @@ public class Candidat
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
-	public String numeroCandidat(){
-		Date d = new Date();
+	public String numeroCandidat()
+	{
+		DateFormat format = new SimpleDateFormat("yy_MM_dd");
+		String date = format.format(new Date());
 		EnregistrementDonnee ed = new EnregistrementDonnee();
 		int numero = ed.nombreCandidat()+1;
 		String numeroconcat = Integer.toString(numero);
@@ -92,7 +97,8 @@ public class Candidat
 		else if (numero<1000) {
 			numeroconcat="0"+numeroconcat;
 		}
-		return d.getYear()+"_"+d.getMonth()+"_"+d.getDay()+"_"+numeroconcat;
+		
+		return date + "_"+numeroconcat;
 	}
 	
 }
