@@ -152,7 +152,7 @@ public class panelFormulaire extends JPanel {
 								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
 								Candidat c = new Candidat();
 								JFormattedTextField fieldId = new JFormattedTextField(c.numeroCandidat());
-								fieldId.enable(false);
+								fieldId.enable(false); // LE CHAMPS DE L'IDENTIFIANT EST GENERE AUTOMATIQUEMENT DONC DESACTIVE
 						
 								//Assemblage du panelSaisie
 								panelSaisie.add(champ1);
