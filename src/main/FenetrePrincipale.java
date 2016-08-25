@@ -110,7 +110,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		String composant=arg0.getActionCommand();
 	//	panAccueil = new panelAccueil();
 		
-		
 		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
 			panFormulaire.itemNouveauTest.addActionListener(this);	
@@ -122,7 +121,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
-			
 		}
 		
 		if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
@@ -143,22 +141,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}*/
 		}		
 		
-		
 		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
 		{	
 			// Ici mettre l'ouverture du panelQuestion
-			
 		}
 		
 		if(arg0.getSource() == this.panFormulaire.itemSauvegarder)
-		{	
-			
-		//Pour la couche métier: mettre votre fonction "ecrire fichier"
-		}
-		
-		if(arg0.getSource() == this.panFormulaire.boutonSave)
-		{	
-			
+		{		
 			this.dispose();
 			this.setUndecorated(true);
 			this.setTitle("Job-Job"); 
@@ -173,10 +162,21 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
 		}
 		
-		
-		
-				
-		
+		if(arg0.getSource() == this.panFormulaire.boutonSave)
+		{	
+			this.dispose();
+			this.setUndecorated(true);
+			this.setTitle("Job-Job"); 
+			this.setExtendedState(this.MAXIMIZED_BOTH);
+			//this.setMinimumSize(new Dimension(600, 400));
+			this.setResizable(false);
+			this.setLocationRelativeTo(null);
+			this.setContentPane(panCandidat);
+			this.setVisible(true);	
+			
+			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
+			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
+		}
 	}
 
 	
