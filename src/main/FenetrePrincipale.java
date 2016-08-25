@@ -28,8 +28,10 @@ import javax.swing.JOptionPane;
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
+
 	private panelFormulaire panFormulaire;
 	private panelCandidat panCandidat;
+
 	
 	/**
 	 * 
@@ -42,18 +44,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setTitle("Job-Job"); 
 		this.setResizable(true);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setMinimumSize(new Dimension(650, 450));
+		this.setMinimumSize(new Dimension(780, 500));
 		
 		this.setLocationRelativeTo(null);
 		
 
 		panAccueil=new panelAccueil();
+
 		panFormulaire = new panelFormulaire();
 
 		panCandidat = new panelCandidat();
 
 		this.panAccueil.itemCandidatExistant.addActionListener(this);
 		this.panAccueil.itemNouveauCandidat.addActionListener(this);
+		this.panAccueil.itemNouveauTest.addActionListener(this);
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		

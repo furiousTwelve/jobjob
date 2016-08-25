@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -43,32 +46,32 @@ public class panelAccueil extends JPanel{
 		menuAide.add(itemAide);
 
 	
-		//Un sous-panel qui contiendra le texte et l'image principale
-		JPanel panel1 = new JPanel();
-		panel1.setLayout(new FlowLayout());
-	
-			//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
+		
+		JPanel panelCentral = new JPanel();
+		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.PAGE_AXIS));
+		
+		//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
 		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
-
-			//Notre petit texte
+		JPanel panelImg = new JPanel(new BorderLayout(50,50));
+		panelImg.add(img, BorderLayout.NORTH);
+		//Notre petit texte
 		Font fontAccueil = new Font("Courier", Font.BOLD, 30);
 		JLabel texte = new JLabel("Job-Job : Test de recrutement", JLabel.CENTER);
 		texte.setFont(fontAccueil);
-
-		Dimension tailleTexte = new Dimension(4000, 60); //Affectation d'une grande largeur pour qu'il soit tjs centré
-
-		texte.setPreferredSize(tailleTexte);
-//		texte.setHorizontalAlignment(JLabel.CENTER);
+		JPanel panelTexte = new JPanel(new BorderLayout());
+		panelTexte.add(texte, BorderLayout.SOUTH);
 		
-			//Construction du panel qui ira au centre
-		panel1.add(texte);
-		panel1.add(img);	
+		panelCentral.add(panelTexte);
+		JLabel labelVide = new JLabel(" "); //Peut mieux faire , mais çà marche
+		panelCentral.add(labelVide);
+		panelCentral.add(panelImg);
+		
 		
 
 		//Constitution du panel général
 
 		this.setLayout(new BorderLayout());
-		this.add(panel1, BorderLayout.CENTER);
+		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(menuBar, BorderLayout.NORTH);
 		
 	}
