@@ -29,7 +29,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 {
 	private panelAccueil panAccueil;
 
-	private panelFormulaire2 panFormulaire;
+	private panelFormulaire panFormulaire;
 	private panelCandidat panCandidat;
 
 	
@@ -51,7 +51,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panAccueil=new panelAccueil();
 
-		panFormulaire = new panelFormulaire2();
+		panFormulaire = new panelFormulaire();
 
 		panCandidat = new panelCandidat();
 
@@ -61,7 +61,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
-		this.setContentPane(panFormulaire); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panAccueil); // imbrication de notre panel dans notre fenêtre
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
