@@ -9,6 +9,8 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -36,9 +38,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	/**
 	 * 
 	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
+	 * @throws ParseException 
 	 */
 
-	public FenetrePrincipale() throws HeadlessException 
+	public FenetrePrincipale() throws HeadlessException, ParseException 
 	{
 
 		this.setTitle("Job-Job"); 

@@ -2,6 +2,9 @@
 package main;
 
 
+import java.awt.HeadlessException;
+import java.text.ParseException;
+
 import javax.swing.UIManager;
 
 /**
@@ -30,9 +33,11 @@ public class Application
 
 	/**
 	 * Constructeur
+	 * @throws ParseException 
+	 * @throws HeadlessException 
 	 * 
 	 */
-	public Application() 
+	public Application() throws HeadlessException, ParseException 
 	{
 		FenetrePrincipale fenetre = new FenetrePrincipale();
 		
@@ -41,8 +46,10 @@ public class Application
 	/**
 	 * Main de l'application 
 	 * @param args arguments passés en paramères lors du lancement de l'application
+	 * @throws ParseException 
+	 * @throws HeadlessException 
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws HeadlessException, ParseException 
 	{
 		
 		new Application();
