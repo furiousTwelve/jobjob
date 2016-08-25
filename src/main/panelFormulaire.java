@@ -16,8 +16,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.Format;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -138,11 +141,14 @@ public class panelFormulaire extends JPanel {
 								champ5.setFont(fontChampSaisie);
 								
 
-								MaskFormatter maskNomPrenom = new MaskFormatter("**********************************");
-								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
-								JFormattedTextField fieldNom = new JFormattedTextField(maskNomPrenom);
-								fieldNom.setColumns(35);
-								JFormattedTextField fieldPrenom = new JFormattedTextField(maskNomPrenom);
+//								MaskFormatter maskNomPrenom = new MaskFormatter("");
+//								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
+								NumberFormat formatChiffre = NumberFormat.getNumberInstance();
+								MessageFormat formatTexte = new MessageFormat("");
+								JFormattedTextField fieldNom = new JFormattedTextField(formatTexte);
+//								fieldNom.setColumns(35);
+								fieldNom.setVisible(true);
+								JFormattedTextField fieldPrenom = new JFormattedTextField(formatChiffre);
 								fieldPrenom.setColumns(35);
 								
 								JFormattedTextField fieldMail = new JFormattedTextField();
@@ -215,6 +221,19 @@ public class panelFormulaire extends JPanel {
 
 	}
 
+	/**
+	 * C'est une méthode permettant de vérifier la validité sous format mail d'un JLabel.
+	 * retourne true si c'est un mail valide qui est entré.
+	 * @author mathieu
+	 * @param string
+	 * @return boolean
+	 */
+	public boolean checkFormatMail(String string) {
+		Pattern p = Pattern.compile("^[A-Z0-9._%+_]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+		Matcher m = p.matcher(string.toUpperCase());
+		
+		return m.matches();
+	}
 
 	
 }
