@@ -16,8 +16,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.Format;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -34,6 +37,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
+
+import org.omg.IOP.CodecPackage.FormatMismatch;
 
 public class panelFormulaire extends JPanel {
 
@@ -138,12 +143,11 @@ public class panelFormulaire extends JPanel {
 								champ5.setFont(fontChampSaisie);
 								
 
-								MaskFormatter maskNomPrenom = new MaskFormatter("**********************************");
-								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
-								JFormattedTextField fieldNom = new JFormattedTextField(maskNomPrenom);
-								fieldNom.setColumns(35);
-								JFormattedTextField fieldPrenom = new JFormattedTextField(maskNomPrenom);
-								fieldPrenom.setColumns(35);
+//								MaskFormatter maskNomPrenom = new MaskFormatter();
+//								maskNomPrenom.setValidCharacters("azertyuiopqsdfghjklmwxcvbnàéèêiïôùûAZERTYUIOPMLKJHGFDSQWXCVBN");
+					
+								JFormattedTextField fieldNom = new JFormattedTextField();
+								JFormattedTextField fieldPrenom = new JFormattedTextField();
 								
 								JFormattedTextField fieldMail = new JFormattedTextField();
 								
@@ -151,7 +155,7 @@ public class panelFormulaire extends JPanel {
 								maskTelephone.setValidCharacters("0123456789");
 								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
 								
-								JFormattedTextField field5 = new JFormattedTextField();
+								JFormattedTextField fieldId = new JFormattedTextField();
 						
 								//Assemblage du panel
 								panelSaisie.add(champ1);
@@ -163,7 +167,7 @@ public class panelFormulaire extends JPanel {
 								panelSaisie.add(champ4);
 								panelSaisie.add(fieldTelephone);
 								panelSaisie.add(champ5);
-								panelSaisie.add(field5);
+								panelSaisie.add(fieldId);
 								
 								
 						panelSaisie.setMaximumSize(new Dimension(400, 200));			
@@ -215,6 +219,19 @@ public class panelFormulaire extends JPanel {
 
 	}
 
+	/**
+	 * C'est une méthode permettant de vérifier la validité sous format mail d'un JLabel.
+	 * retourne true si c'est un mail valide qui est entré.
+	 * @author mathieu
+	 * @param string
+	 * @return boolean
+	 */
+	public boolean checkFormatMail(String string) {
+		Pattern p = Pattern.compile("^[A-Z0-9._%+_]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+		Matcher m = p.matcher(string.toUpperCase());
+		
+		return m.matches();
+	}
 
 	
 }

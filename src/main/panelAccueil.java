@@ -13,7 +13,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-
+/**
+ * le panelAccueil sera le panel chargé par la fenêtre Principal par défaut
+ * @author Mathieu
+ *
+ */
 public class panelAccueil extends JPanel{
 
 	//Déclaration des éléments de la barre de Menu
@@ -29,9 +33,16 @@ public class panelAccueil extends JPanel{
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	
+	/**
+	 * Constructeur du panelAccueil
+	 * 	Il a un Border Layout contenant:
+	 * 		- au Nord, un Menu
+	 * 		- au Centre, un autre panel : panelCentral, suivant un BoxLayout
+	 * 
+	 */
 	public panelAccueil() {
 		
-		//Constitution de la barre de menu
+		//Constitution de la barre de menu, qui ira au Nord
 		menuBar.add(menuFichier);
 		menuBar.add(menuAide);
 		
@@ -46,30 +57,39 @@ public class panelAccueil extends JPanel{
 		menuAide.add(itemAide);
 
 	
-		
+		//Création du panelCentral
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.PAGE_AXIS));
 		
-		//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
-		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
-		JPanel panelImg = new JPanel(new BorderLayout(50,50));
-		panelImg.add(img, BorderLayout.NORTH);
-		//Notre petit texte
-		Font fontAccueil = new Font("Courier", Font.BOLD, 30);
-		JLabel texte = new JLabel("Job-Job : Test de recrutement", JLabel.CENTER);
-		texte.setFont(fontAccueil);
-		JPanel panelTexte = new JPanel(new BorderLayout());
-		panelTexte.add(texte, BorderLayout.SOUTH);
+			//création d'un panel qui sera placé en haut du panelCentral : panelTexte
+			JPanel panelTexte = new JPanel(new BorderLayout());
 		
-		panelCentral.add(panelTexte);
-		JLabel labelVide = new JLabel(" "); //Peut mieux faire , mais çà marche
-		panelCentral.add(labelVide);
-		panelCentral.add(panelImg);
+				//Notre petit texte
+				Font fontAccueil = new Font("Courier", Font.BOLD, 30);
+				JLabel texte = new JLabel("Job-Job : Test de recrutement", JLabel.CENTER);
+				texte.setFont(fontAccueil);
+				
+			panelTexte.add(texte, BorderLayout.SOUTH);
+			
+			//création d'un panel qui sera placé en bas du panelCentral : panelImg
+			JPanel panelImg = new JPanel(new BorderLayout(50,50));
+			
+				//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
+				JLabel img = new JLabel(new ImageIcon("jobjob.png"));
+				
+			panelImg.add(img, BorderLayout.NORTH);
+			
+			
+			//Constitution du panelCentral
+			panelCentral.add(panelTexte);
+			JLabel labelVide = new JLabel(" "); //Peut mieux faire , mais çà marche
+			panelCentral.add(labelVide);
+			panelCentral.add(panelImg);
 		
 		
 
+		
 		//Constitution du panel général
-
 		this.setLayout(new BorderLayout());
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(menuBar, BorderLayout.NORTH);
