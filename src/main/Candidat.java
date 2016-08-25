@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Component;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
@@ -46,7 +47,7 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{
-		String[] chaine = new String[p.getComponents().length];
+		String[] chaine = new String[p.getComponents().length/2];
 		int i = 0;
 		Component[] fields = p.getComponents();
 		

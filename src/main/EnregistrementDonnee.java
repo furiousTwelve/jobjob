@@ -1,15 +1,13 @@
 package main;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-
-import javax.imageio.IIOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  * 
  * @author Damien El Sabbagh
@@ -47,7 +45,8 @@ public class EnregistrementDonnee
 	
 	public void candidat(String[] info){
 		
-
+		DateFormat format = new SimpleDateFormat("dd/MM/yy");
+		String date = format.format(new Date());
 
 		File f = new File ("candidat_"+getidentifiant()+".txt");
 		
@@ -60,7 +59,7 @@ public class EnregistrementDonnee
 				fw.write(info[j]);
 				fw.write("\r\n");
 			}
-
+			fw.write("Date : "+date);
 			fw.close();
 			identifiant=identifiant+1;
 			//System.out.println(identifiant);

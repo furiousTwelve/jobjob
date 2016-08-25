@@ -42,10 +42,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	{
 
 		this.setTitle("Job-Job"); 
-		this.setResizable(true);
+
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setMinimumSize(new Dimension(780, 500));
-		
+		this.setMinimumSize(new Dimension(600, 400));
+
+		this.setResizable(true);
+				
 		this.setLocationRelativeTo(null);
 		
 
@@ -61,7 +63,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
-		this.setContentPane(panFormulaire); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panAccueil); // imbrication de notre panel dans notre fenêtre
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,8 +155,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		if(arg0.getSource() == this.panFormulaire.boutonSave)
 		{	
-			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
-			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
 			
 			this.dispose();
 			this.setUndecorated(true);
@@ -165,6 +165,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setLocationRelativeTo(null);
 			this.setContentPane(panCandidat);
 			this.setVisible(true);	
+			
+			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
+			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
 		}
 		
 		
