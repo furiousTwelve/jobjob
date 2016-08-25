@@ -42,6 +42,7 @@ public class panelFormulaire extends JPanel {
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
 	protected JButton boutonSave2 = new JButton("Sauvegarder");
+	protected JPanel panelSaisie;
 	
 //	private JLabel logo = new JLabel(new ImageIcon("logoAFPA.png"));
 	
@@ -98,7 +99,7 @@ public class panelFormulaire extends JPanel {
 		
 		//Création du Champ de saisie
 			//création du panel qui le contiendra (en GridLayout, 2 colonnes)
-		JPanel panelSaisie = new JPanel(new GridLayout(0, 2, 30, 30));
+		panelSaisie = new JPanel(new GridLayout(0, 2, 30, 30));
 
 
 			//Création du contenu

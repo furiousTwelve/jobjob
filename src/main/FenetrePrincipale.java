@@ -149,6 +149,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		if(arg0.getSource() == this.panFormulaire.boutonSave)
 		{	
+			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
+			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panCandidat);
