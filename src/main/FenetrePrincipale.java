@@ -148,10 +148,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		if(arg0.getSource() == this.panFormulaire.boutonSave)
 		{	
 			
-			this.getContentPane().removeAll();
+			this.dispose();
+			this.setUndecorated(true);
+			this.setTitle("Job-Job"); 
+			this.setExtendedState(this.MAXIMIZED_BOTH);
+			//this.setMinimumSize(new Dimension(600, 400));
+			this.setResizable(false);
+			this.setLocationRelativeTo(null);
 			this.setContentPane(panCandidat);
-			this.validate();
-	
+			this.setVisible(true);	
 		}
 		
 		
