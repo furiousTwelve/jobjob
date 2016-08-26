@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
@@ -25,7 +28,7 @@ import javax.swing.text.MaskFormatter;
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
  */
-public class panelFormulaire extends JPanel {
+public class panelFormulaire extends JPanel implements ActionListener{
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
@@ -62,6 +65,12 @@ public class panelFormulaire extends JPanel {
  * @throws ParseException
  */
 	public panelFormulaire() throws ParseException {
+		itemNouveauTest.addActionListener(this);	
+		itemSauvegarder.addActionListener(this);			
+		itemQuitter.addActionListener(this);	
+		itemAide.addActionListener(this);	
+		boutonSave.addActionListener(this);
+		
 		
 		//Constitution de la barre de menu : menuBar
 		menuBar.add(menuFichier);
@@ -212,6 +221,7 @@ public class panelFormulaire extends JPanel {
 
 	}
 
+	
 	/**
 	 * C'est une méthode permettant de vérifier la validité sous format mail d'un JLabel.
 	 * retourne true si c'est un mail valide qui est entré.
@@ -224,6 +234,19 @@ public class panelFormulaire extends JPanel {
 		Matcher m = p.matcher(string.toUpperCase());
 		
 		return m.matches();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == itemQuitter)
+		{
+			System.exit(0);
+		}
+		if(e.getSource() == itemAide)
+		{
+			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
+		}
 	}
 
 	

@@ -113,7 +113,7 @@ public class panelQuestion extends JPanel {
 						//Création des JLabels Questions, soit une Image, soit un Texte
 						ImageIcon iconeQuestion = new ImageIcon("question.jpg");
 						Image imageQuestion = iconeQuestion.getImage();
-						Image newImageQuestion = imageQuestion.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+						Image newImageQuestion = imageQuestion.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
 						iconeQuestion = new ImageIcon(newImageQuestion);
 						JLabel labelQuestionImage = new JLabel(iconeQuestion);
 
