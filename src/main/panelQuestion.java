@@ -29,7 +29,6 @@ import javax.swing.text.MaskFormatter;
  * Le panelQuestion est le panel servant à présenter les questions au candidat. On y retrouve 4 réponses ainsi qu'un timer général.
  * Lorsqu'une réponse est cochée, cela passe directement à la suivante
  * @author Mathieu
- * @throws ParseException
  */
 public class panelQuestion extends JPanel {
 
@@ -62,8 +61,6 @@ public class panelQuestion extends JPanel {
  * 		C'est un BorderLayout contenant:
  * 			- Nord: Vide
  * 			- Sud: Vide
-
- * 
  * @throws ParseException
  */
 	public panelQuestion() throws ParseException {

@@ -29,11 +29,6 @@ public class Candidat
 	
 	/**
 	 * CONSTRUCTEUR
-	 * @param n : nom du candidat
-	 * @param p : prénom du candidat
-	 * @param m : adresse mail du candidat
-	 * @param num : numéro de téléphone du candidat
-	 * @param ident : identifiant du candidat
 	 */
 	public Candidat(){}
 	
