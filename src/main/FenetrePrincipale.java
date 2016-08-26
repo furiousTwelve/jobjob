@@ -34,6 +34,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+	
+	private int compteurQuestions = 0;
 
 	
 	/**
@@ -51,7 +53,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setLocationRelativeTo(null);
 		
-		panAccueil=new panelAccueil();
+		panAccueil = new panelAccueil();
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
@@ -79,7 +81,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent arg0) 
 	{
 		String composant=arg0.getActionCommand();
-	//	panAccueil = new panelAccueil();
 		
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
@@ -121,59 +122,56 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Passage du panFormulaire au panCandidat
 			if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 			{	
-
+				panCandidat.buttonStart.addActionListener(this);
+				
 				this.getContentPane().removeAll();
 				this.setContentPane(panCandidat);
 				this.validate();
 			}
 		
 			
+		//Passage du panCandidat au panQuestion
+			if(arg0.getSource() == this.panCandidat.buttonStart)
+			{	
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panQuestion);
+				this.validate();
+			}
 			
 			
-//		if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
-//		{	
-//			// a voir, message erreur dans console
-//			this.dispose();
-//		
-//		}
-//
-//		
-//		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
-//		{	
-//			// Ici mettre l'ouverture du panelQuestion
-//		}
-//		
-//		if(arg0.getSource() == this.panFormulaire.itemSauvegarder)
-//		{		
-//			this.dispose();
-//			this.setUndecorated(true);
-//			this.setTitle("Job-Job"); 
-//			this.setExtendedState(this.MAXIMIZED_BOTH);
-//			//this.setMinimumSize(new Dimension(600, 400));
-//			this.setResizable(false);
-//			this.setLocationRelativeTo(null);
-//			this.setContentPane(panCandidat);
-//			this.setVisible(true);	
-//			
-//			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
-//			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
-//		}
-//		
-//		if(arg0.getSource() == this.panFormulaire.boutonSave)
-//		{	
-//			this.dispose();
-//			this.setUndecorated(true);
-//			this.setTitle("Job-Job"); 
-//			this.setExtendedState(this.MAXIMIZED_BOTH);
-//			//this.setMinimumSize(new Dimension(600, 400));
-//			this.setResizable(false);
-//			this.setLocationRelativeTo(null);
-//			this.setContentPane(panCandidat);
-//			this.setVisible(true);	
-//			
-//			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
-//			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
-//		}
+		//Passage d'une question à une autre ?
+
+		
+			
+		//Passage du panQuestion au panFin
+			if(compteurQuestions == 15)
+			{	
+				this.getContentPane().removeAll();
+				this.setContentPane(panFin);
+				this.validate();
+			}
+		
+			
+//		/**
+//		 * Les actions à mener sur notre panel Accueil, chargé initialement
+//		 */
+//		//Quitter l'appli	
+//			if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
+//			{	
+//				// a voir, message erreur dans console
+//				this.dispose();
+//			}
+//		// Affichage de l'aide
+//			if(arg0.getSource() == this.panAccueil.itemAide)
+//			{	
+//				JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
+//			}
+
+		/**
+		 * Rechargement d'un formulaire depuis un panel Formulaire
+		 */
+
 	}
 
 	
