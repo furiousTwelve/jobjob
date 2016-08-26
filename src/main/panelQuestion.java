@@ -178,7 +178,8 @@ public class panelQuestion extends JPanel {
 		this.add(panelLogo, BorderLayout.WEST);
 		this.add(panelCentre, BorderLayout.CENTER);
 		this.add(panelDroite, BorderLayout.EAST);
-	
+	// comment a effacer
+		
 
 	}
 
