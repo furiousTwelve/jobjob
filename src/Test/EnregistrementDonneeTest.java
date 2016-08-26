@@ -16,10 +16,10 @@ public class EnregistrementDonneeTest {
 	int indice;
 	 EnregistrementDonnee mc=new  EnregistrementDonnee();
 	@Test
-	public void testEntreprise() {
+	public void testCreerFichier() {
 		
 		System.out.println(" TEST DE LA METHODE DE CREATION DES FICHIERS ");
-		mc.entreprise("fichierTest");
+		mc.creerFichier("fichierTest");
 		boolean trouver=false;
 		
 		String str="fichierTest.txt";
@@ -52,7 +52,7 @@ public class EnregistrementDonneeTest {
 		String resultatAttendu = " Nom : talbi/Prenom : lila/Email : fefeefef@sfr.fr/Téléphone : 0645644884/N° identifiant : 12/Date : 22/08/2016/null//Date : 250816/null/" ;
 			
 			/* Le chemin vers le fichier à lire */
-			String pathFichier="..\\..\\git\\recrutement\\candidats\\candidat_13.txt";
+			String pathFichier="..\\..\\git\\recrutement\\candidats\\candidat_7.txt";
 
 			BufferedReader fluxEntree=null;
 			try {
@@ -99,7 +99,7 @@ public class EnregistrementDonneeTest {
 	public void testnombreCandidat() {
 		System.out.println(" Test de la méthode nombreCandidat");
 		System.out.println(" ------------------------------------------------");
-		assertTrue(mc.nombreCandidat()==13);
+		assertTrue(mc.nombreCandidat()==7);
 		//System.out.println(" mon identifiant ets bien 5!");
 	}
 
