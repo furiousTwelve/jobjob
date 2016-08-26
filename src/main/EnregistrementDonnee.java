@@ -26,7 +26,7 @@ public class EnregistrementDonnee
 	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
 	 * @param nom String
 	 */
-	public void entreprise(String nom)
+	public void creerFichier(String nom)
 	{
 		File f = new File (nom+".txt");
 		System.out.println(" Creation du fichier"+nom);
@@ -51,6 +51,8 @@ public class EnregistrementDonnee
 
 
 		File f = new File ("../../git/recrutement/candidats/candidat_"+nombreCandidat()+".txt");
+		File fb = new File("../../git/recrutement/scores/scoreCandidat_"+nombreCandidat()); 
+		fb.mkdirs(); 
 
 		
 		try {
@@ -221,6 +223,30 @@ public class EnregistrementDonnee
 		System.out.println(contenu.length);
 		return contenu.length;
 	}
+	
+	
+	
+	public void enregistrerScore(String idCandidat, int score){
+		
+		
+		
+		File f = new File ("../../git/recrutement/scores/scoreCandidat_"+nombreCandidat()+"/candidat_"+nombreCandidat()+"Score.txt");
+		try {
+			
+			FileWriter fw = new FileWriter(f);
+			fw.write("Score = "+ score);
+			fw.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+	}
+		
+	
+	/*public void RechercherScore(String idCandidat){
+		File dossier = new File("..\\..\\git\\recrutement\\scores\\");
+		String[] contenuScore = dossier.list();
+		String [] questionReponse= new String[5];
+	}*/
 }
 
 		
