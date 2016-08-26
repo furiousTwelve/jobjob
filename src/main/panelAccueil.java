@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -12,13 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /**
  * le panelAccueil sera le panel chargé par la fenêtre Principal par défaut
  * @author Mathieu
  *
  */
-public class panelAccueil extends JPanel{
+public class panelAccueil extends JPanel implements ActionListener{
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
@@ -98,6 +101,22 @@ public class panelAccueil extends JPanel{
 
 	public void creerFichier() {
 		
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// Affichage de l'aide
+		if(arg0.getSource() == this.itemAide)
+		{	
+			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
+		}
+		
+		//Quitter l'appli
+		if(arg0.getSource() == this.itemQuitter)
+		{	
+			System.exit(0);
+		}
 	}
 
 	

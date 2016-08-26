@@ -137,6 +137,7 @@ public class panelQuestion extends JPanel {
 								reponse4 = new JCheckBox("reponse #4");
 								reponse4.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 								
+								
 								//Assemblage du panelReponses
 								panelReponses.add(reponse1);
 								panelReponses.add(reponse2);
