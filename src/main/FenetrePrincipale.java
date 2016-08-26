@@ -46,24 +46,16 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	{
 
 		this.setTitle("Job-Job"); 
-
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-
-
 		this.setResizable(true);
-				
-
 		this.setMinimumSize(new Dimension(800, 600));
-
 		this.setLocationRelativeTo(null);
 		
-
 		panAccueil=new panelAccueil();
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
 		panFin = new panelFin();
-
 
 		this.panAccueil.itemCandidatExistant.addActionListener(this);
 		this.panAccueil.itemNouveauCandidat.addActionListener(this);
@@ -71,12 +63,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 		
-
-//		this.setContentPane(panQuestion); // imbrication de notre panel dans notre fenêtre
-
-		this.setContentPane(panFin); // imbrication de notre panel dans notre fenêtre
-
-		
+		this.setContentPane(panAccueil); // imbrication de notre panel dans notre fenêtre
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
@@ -121,11 +108,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
-			panFormulaire.itemNouveauTest.addActionListener(this);	
-			panFormulaire.itemSauvegarder.addActionListener(this);			
-			panFormulaire.itemQuitter.addActionListener(this);	
-			panFormulaire.itemAide.addActionListener(this);	
-			panFormulaire.boutonSave.addActionListener(this);
+//			panFormulaire.itemNouveauTest.addActionListener(this);	
+//			panFormulaire.itemSauvegarder.addActionListener(this);			
+//			panFormulaire.itemQuitter.addActionListener(this);	
+//			panFormulaire.itemAide.addActionListener(this);	
+//			panFormulaire.boutonSave.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
@@ -139,16 +126,16 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		}
 		
-		if((arg0.getSource() == this.panAccueil.itemAide) || (arg0.getSource() == this.panFormulaire.itemAide))
-		{	
-			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
-			/*try {
-				Runtime.getRuntime().exec("C:/Users/34011-82-07/git/recrutement/help_job-job.docx");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-		}		
+//		if((arg0.getSource() == this.panAccueil.itemAide) || (arg0.getSource() == this.panFormulaire.itemAide))
+//		{	
+//			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
+//			/*try {
+//				Runtime.getRuntime().exec("C:/Users/34011-82-07/git/recrutement/help_job-job.docx");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}*/
+//		}		
 		
 		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
 		{	

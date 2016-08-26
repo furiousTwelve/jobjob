@@ -40,7 +40,6 @@ public class Application
 	public Application() throws HeadlessException, ParseException 
 	{
 		FenetrePrincipale fenetre = new FenetrePrincipale();
-		
 	}
 
 	/**
