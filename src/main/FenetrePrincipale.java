@@ -69,6 +69,116 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setVisible(true);	
 	}
 
+
+	
+	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
+	 * @param arg0
+	 * 		Ce paramètre va permettre d'ouvrir un panneau selon les condition ci-dessous
+	 */
+	@Override
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		String composant=arg0.getActionCommand();
+	//	panAccueil = new panelAccueil();
+		
+		/**
+		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
+		 */
+		// Passage du panAccueil au PanFormulaire
+			//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
+			if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
+			{	
+				panFormulaire.fieldId.setEditable(false);
+				
+				panFormulaire.itemSauvegarder.setEnabled(true);
+
+				panFormulaire.itemSauvegarder.addActionListener(this);	
+				panFormulaire.boutonSave.addActionListener(this);
+				
+				this.getContentPane().removeAll();
+				this.setContentPane(panFormulaire);
+				this.validate();
+			}
+			//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
+			if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
+			{	
+				panFormulaire.fieldNom.setEditable(false);
+				panFormulaire.fieldPrenom.setEditable(false);
+				panFormulaire.fieldMail.setEditable(false);
+				panFormulaire.fieldTelephone.setEditable(false);
+				
+				panFormulaire.itemSauvegarder.setEnabled(true);
+
+				panFormulaire.itemSauvegarder.addActionListener(this);	
+				panFormulaire.boutonSave.addActionListener(this);
+				
+				this.getContentPane().removeAll();
+				this.setContentPane(panFormulaire);
+				this.validate();
+			}
+		
+			
+		//Passage du panFormulaire au panCandidat
+			if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
+			{	
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panCandidat);
+				this.validate();
+			}
+		
+			
+			
+			
+//		if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
+//		{	
+//			// a voir, message erreur dans console
+//			this.dispose();
+//		
+//		}
+//
+//		
+//		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
+//		{	
+//			// Ici mettre l'ouverture du panelQuestion
+//		}
+//		
+//		if(arg0.getSource() == this.panFormulaire.itemSauvegarder)
+//		{		
+//			this.dispose();
+//			this.setUndecorated(true);
+//			this.setTitle("Job-Job"); 
+//			this.setExtendedState(this.MAXIMIZED_BOTH);
+//			//this.setMinimumSize(new Dimension(600, 400));
+//			this.setResizable(false);
+//			this.setLocationRelativeTo(null);
+//			this.setContentPane(panCandidat);
+//			this.setVisible(true);	
+//			
+//			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
+//			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
+//		}
+//		
+//		if(arg0.getSource() == this.panFormulaire.boutonSave)
+//		{	
+//			this.dispose();
+//			this.setUndecorated(true);
+//			this.setTitle("Job-Job"); 
+//			this.setExtendedState(this.MAXIMIZED_BOTH);
+//			//this.setMinimumSize(new Dimension(600, 400));
+//			this.setResizable(false);
+//			this.setLocationRelativeTo(null);
+//			this.setContentPane(panCandidat);
+//			this.setVisible(true);	
+//			
+//			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
+//			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
+//		}
+	}
+
+	
+	
+//=============================================== Fonctions créées initialement par David, non utilisées pour l'instant, mais elles sont peut-être poas là pour rien	=====================================================
 	/**
      * Constructeur non utilisé sous la version 1.00 à 1.xx
      * @deprecated Depuis v1.00, remplacé par FenetrePrincipale() throws HeadlessException 
@@ -95,85 +205,4 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		super(title, gc);
 		// TODO Auto-generated constructor stub
 	}
-	
-	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
-	 * @param arg0
-	 * 		Ce paramètre va permettre d'ouvrir un panneau selon les condition ci-dessous
-	 */
-	@Override
-	public void actionPerformed(ActionEvent arg0) 
-	{
-		String composant=arg0.getActionCommand();
-	//	panAccueil = new panelAccueil();
-		
-		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
-		{	
-//			panFormulaire.itemNouveauTest.addActionListener(this);	
-//			panFormulaire.itemSauvegarder.addActionListener(this);			
-//			panFormulaire.itemQuitter.addActionListener(this);	
-//			panFormulaire.itemAide.addActionListener(this);	
-//			panFormulaire.boutonSave.addActionListener(this);
-			
-			this.getContentPane().removeAll();
-			this.setContentPane(panFormulaire);
-			this.validate();
-		}
-		
-		if((arg0.getSource() == this.panAccueil.itemQuitter) || (arg0.getSource() == this.panFormulaire.itemQuitter))
-		{	
-			// a voir, message erreur dans console
-			this.dispose();
-		
-		}
-		
-//		if((arg0.getSource() == this.panAccueil.itemAide) || (arg0.getSource() == this.panFormulaire.itemAide))
-//		{	
-//			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
-//			/*try {
-//				Runtime.getRuntime().exec("C:/Users/34011-82-07/git/recrutement/help_job-job.docx");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}*/
-//		}		
-		
-		if(arg0.getSource() == this.panFormulaire.itemNouveauTest)
-		{	
-			// Ici mettre l'ouverture du panelQuestion
-		}
-		
-		if(arg0.getSource() == this.panFormulaire.itemSauvegarder)
-		{		
-			this.dispose();
-			this.setUndecorated(true);
-			this.setTitle("Job-Job"); 
-			this.setExtendedState(this.MAXIMIZED_BOTH);
-			//this.setMinimumSize(new Dimension(600, 400));
-			this.setResizable(false);
-			this.setLocationRelativeTo(null);
-			this.setContentPane(panCandidat);
-			this.setVisible(true);	
-			
-			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
-			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
-		}
-		
-		if(arg0.getSource() == this.panFormulaire.boutonSave)
-		{	
-			this.dispose();
-			this.setUndecorated(true);
-			this.setTitle("Job-Job"); 
-			this.setExtendedState(this.MAXIMIZED_BOTH);
-			//this.setMinimumSize(new Dimension(600, 400));
-			this.setResizable(false);
-			this.setLocationRelativeTo(null);
-			this.setContentPane(panCandidat);
-			this.setVisible(true);	
-			
-			Candidat c = new Candidat(this.panFormulaire.panelSaisie);
-			c.enregistrerNouveauCandidat(this.panFormulaire.panelSaisie);
-		}
-	}
-
-	
 }

@@ -43,6 +43,12 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
+	
+	protected JFormattedTextField fieldNom = new JFormattedTextField();
+	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
+	protected JFormattedTextField fieldMail = new JFormattedTextField();
+	protected JFormattedTextField fieldTelephone = new JFormattedTextField();
+	protected JFormattedTextField fieldId = new JFormattedTextField();
 
 	protected JPanel panelSaisie;
 
@@ -65,11 +71,11 @@ public class panelFormulaire extends JPanel implements ActionListener{
  * @throws ParseException
  */
 	public panelFormulaire() throws ParseException {
-		itemNouveauTest.addActionListener(this);	
-		itemSauvegarder.addActionListener(this);			
+		
+		//Ajout de Listener sur tous les boutons nécessaires
+		itemNouveauTest.addActionListener(this);			
 		itemQuitter.addActionListener(this);	
 		itemAide.addActionListener(this);	
-		boutonSave.addActionListener(this);
 		
 		
 		//Constitution de la barre de menu : menuBar
@@ -152,17 +158,14 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
 								MaskFormatter maskNomPrenom = new MaskFormatter("**************************************************");
 								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
-								JFormattedTextField fieldNom = new JFormattedTextField(maskNomPrenom);
-								JFormattedTextField fieldPrenom = new JFormattedTextField(maskNomPrenom);
-								
-								JFormattedTextField fieldMail = new JFormattedTextField();
+								fieldNom = new JFormattedTextField(maskNomPrenom);
+								fieldPrenom = new JFormattedTextField(maskNomPrenom);
+								fieldMail = new JFormattedTextField();
 								
 								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
 								maskTelephone.setValidCharacters("0123456789");
-								JFormattedTextField fieldTelephone = new JFormattedTextField(maskTelephone);
-								Candidat c = new Candidat();
-								JFormattedTextField fieldId = new JFormattedTextField(c.numeroCandidat());
-								fieldId.enable(false); // LE CHAMPS DE L'IDENTIFIANT EST GENERE AUTOMATIQUEMENT DONC DESACTIVE
+								fieldTelephone = new JFormattedTextField(maskTelephone);
+								fieldId = new JFormattedTextField();
 						
 								//Assemblage du panelSaisie
 								panelSaisie.add(champ1);
