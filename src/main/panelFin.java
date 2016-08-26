@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.awt.BorderLayout;
@@ -11,14 +8,17 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-/**
- * @author 34011-82-12
- *@version 1.0
- *Creation du panel de fin de l'application
- */
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+/**
+ * Creation du panel de fin de l'application
+ * @author 34011-82-12
+ * @version 1.0
+ *
+ */
 
 public class panelFin extends JPanel {
 	
