@@ -15,8 +15,8 @@ public class FicheReponse
 	
 	/**
 	 * CONSTRUCTEUR DE LA FICHE REPONSE
-	 * @param ident : identifiant du candidat
-	 * @param session : date de session de passage du candidat
+	 * @param ident identifiant du candidat
+	 * @param session date de session de passage du candidat
 	 */
 	public FicheReponse(String ident, Date session)
 	{

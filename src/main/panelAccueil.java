@@ -35,9 +35,9 @@ public class panelAccueil extends JPanel{
 	
 	/**
 	 * Constructeur du panelAccueil
-	 * 	Il a un Border Layout contenant:
-	 * 		- au Nord, un Menu
-	 * 		- au Centre, un autre panel : panelCentral, suivant un BoxLayout
+	 * 	<br>Il a un Border Layout contenant:
+	 * 	<br>- au Nord, un Menu
+	 * 	<br>- au Centre, un autre panel : panelCentral, suivant un BoxLayout
 	 * 
 	 */
 	public panelAccueil() {

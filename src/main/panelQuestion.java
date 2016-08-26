@@ -27,7 +27,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  * Le panelQuestion est le panel servant à présenter les questions au candidat. On y retrouve 4 réponses ainsi qu'un timer général.
- * Lorsqu'une réponse est cochée, cela passe directement à la suivante
+ * <br>Lorsqu'une réponse est cochée, cela passe directement à la suivante
  * @author Mathieu
  */
 public class panelQuestion extends JPanel {
@@ -57,10 +57,10 @@ public class panelQuestion extends JPanel {
 
 /**
  * Constructeur du panelQuestion
- * 	Schéma de l'imbrication de ses Layouts:
- * 		C'est un BorderLayout contenant:
- * 			- Nord: Vide
- * 			- Sud: Vide
+ * 	<br>Schéma de l'imbrication de ses Layouts:
+ * 	<br>	C'est un BorderLayout contenant:
+ * 	<pre>		- Nord: Vide</pre>
+ * 	<pre>		- Sud: Vide</pre>
  * @throws ParseException
  */
 	public panelQuestion() throws ParseException {
