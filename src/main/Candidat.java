@@ -48,7 +48,7 @@ public class Candidat
 	
 	/**
 	 * METHODE QUI CONCATENE LES LABELS ET LES SAISIES DU RECRUTEUR PUIS COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
-	 * @param p : on passe en paramètre le panel contenant les zones saisient par le recruteur
+	 * @param p : on passe en paramètre le panel contenant les zones saisies par le recruteur
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{

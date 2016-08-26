@@ -24,7 +24,7 @@ public class EnregistrementDonnee
 	
 	/**
 	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
-	 * @param nom
+	 * @param nom String
 	 */
 	public void entreprise(String nom)
 	{
@@ -41,7 +41,7 @@ public class EnregistrementDonnee
 
 /**
  * Methode pour l'enregistrement d'un candidat dans un fichier .txt
- * @param info
+ * @param info String[]
  */
 	
 	public void enregistrerCandidat(String[] info){
@@ -79,7 +79,7 @@ public class EnregistrementDonnee
 /**
 * methode qui cherche le candidat donnée avec son identifiant
 * et affiche l'ensemble de ses détails
-* @param str
+* @param str String
 */
 	
 	public void rechercheCandidat(String str){
@@ -137,7 +137,8 @@ public class EnregistrementDonnee
 /**
  * methode chercherQuestion recupère la question rand placer en argument
  * avec les reponses associées à la question.
- * @param rand
+ * @param rand String
+ * @return liste de question
  */
 	
 	public String[] chercherQuestion( String rand){
