@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
@@ -74,17 +76,34 @@ public class panelQuestion extends JPanel {
 
 	private JLabel logoFinal;
 	private JLabel labelQuestionImage;
+	
+	private questionReponse[] questionsCandidat;
 
-	/**
-	 * Constructeur du panelQuestion Schéma de l'imbrication de ses Layouts:
-	 * C'est un BorderLayout contenant: - Nord: Vide - Sud: Vide
-	 * 
-	 * @throws ParseException
-	 */
+/**
+ * Constructeur du panelQuestion
+ * 	Schéma de l'imbrication de ses Layouts:
+ * 		C'est un BorderLayout contenant:
+ * 			- Nord: Vide
+ * 			- Sud: Vide
+ * 			- West: Un panel logo (GridLayout avec 3 colonnes, 3 lignes) qui contient notre logo dans la 2nde case du haut
+ * 			- East: Un panel "tampon", panelDroite, en GridLayout à 1 seule colonne, contenant un JLabel. On peut définir la largeur de ce JLabel afin de gérer l'écart du panneau central avec notre bordure notamment
+ * 			- Center: Un panel principal, panelCentre, en GridLayout 1 colonne contenant :
+ * 						- En haut : un panel panelCentreHaut, en BoxLayout, à l'alignement vertical. Il contient un panneau, panelSaisie
+ * 								- panelSaisie : en GridLayout, 2 colonnes, contenant l'ensemble des champs de saisie.
+ * 						- En Bas : un panel panelCentreBas, BoxLayout axé vertical qui contient lui-même deux panels:
+ * 								- en haut : un panelReponses, en GridLayout, 4 colonnes. Il est vide ici, mais servira pour le panelQuestion entre autres
+ * 								- en bas : un panelElementBasCentre, en FlowLayout, centré, permettant d'accueillir un élément quelconque de manière centré. Ici, le bouton "Save". La barre de progression dans le panelQuestion par exemple 
+ * 
+ * 
+ * @throws ParseException
+ */
 	public panelQuestion() throws ParseException {
-
-		// Création du panel de gauche, contenant le logo : panelLogo
+		
+		genererQuestionsCandidat();
+		
+		//Création du panel de gauche, contenant le logo : panelLogo
 		panelLogo = new JPanel();
+		
 		panelLogo.setLayout(new GridLayout(0, 3));
 
 		// Création du logo
@@ -192,6 +211,92 @@ public class panelQuestion extends JPanel {
 
 		// comm a effacer
 		
+	}
+	
+	public void genererQuestionsCandidat()
+	{
+		questionsCandidat = new questionReponse[15];
+		byte valeurGeneree;
+		boolean trouve = false;
+		Random r = new Random();
+		questionReponse question;
+		
+		// GENERE LES QUESTIONS 1 A 5
+		int i = 0;
+		while(i < 5)
+		{
+			question = new questionReponse("CG");
+			trouve = false;
+			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			
+			for(int j = 0; j < i; j++)
+			{
+				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				{
+					trouve = true;
+				}
+			}
+			
+			if(trouve == false)
+			{
+				question.numeroQuestion = valeurGeneree;
+				questionsCandidat[i] = question;
+				i++;
+			}
+		}
+		
+		// GENERE LES QUESTIONS 6 A 10
+		int v = 5;
+		while(v < 10)
+		{
+			question = new questionReponse("CJ");
+			trouve = false;
+			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			
+			for(int j = 0; j < i; j++)
+			{
+				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				{
+					trouve = true;
+				}
+			}
+			
+			if(trouve == false)
+			{
+				question.numeroQuestion = valeurGeneree;
+				questionsCandidat[v] = question;
+				v++;
+			}
+		}
+		
+		// VA CHERCHER LA QUESTION STRESS - QUESTION 11
+		question = new questionReponse("S");
+		question.numeroQuestion = 1;
+		questionsCandidat[10] = question;
+		
+		// GENERE LES QUESTIONS 12 A 14
+		int p = 11;
+		valeurGeneree = (byte) (r.nextInt(11));
+		String[] tableauLangagesExotiques = {"DELPHI", "PERL", "FORTRAN", "ADA", "PASCAL", "SMALLTALK", "TCLTK", "LISP", "VISUALBASIC", "SQUIRREL", "COBOL", "EIFFEL"};
+		String langage = tableauLangagesExotiques[valeurGeneree];
+		
+		// A FINIR !!!!!!!!!
+		while(p < 14)
+		{
+			String cat = "LE" + tableauLangagesExotiques[valeurGeneree];
+			question = new questionReponse(cat);
+			questionsCandidat[p] = question;
+			p++;
+		}
+		
+	}
+	
+	public void affichageTableauGenere(questionReponse[] tab, int l)
+	{
+		for(int i = 0; i < l; i++)
+		{
+			System.out.println(tab[i].numeroQuestion);
+		}
 	}
 
 }

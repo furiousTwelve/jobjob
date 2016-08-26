@@ -26,11 +26,14 @@ public class questionReponse
 	 * timerAuMomentDeLaReponse - On récupère le timer au moment où le candidat répond à la question		
 	 */
 	
-	byte categorieQuestion;
+	String categorieQuestion;
 	byte numeroQuestion;
 	boolean reponseCorrecteOuIncorrecte;
 	int timerAuMomentDeLaReponse; // En secondes pour le moment
 	
-	
+	public questionReponse(String cq)
+	{
+		this.categorieQuestion = cq;
+	}
 	
 }
