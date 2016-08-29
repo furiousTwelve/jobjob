@@ -1,5 +1,6 @@
 /**
- * 
+ * Ce panneau à pour but d'indiquer à l'utilisateur que le teste est bien fini.
+ * Il faut penser que dans une futur il y aura une version avec une interface pour le recruteur afin qu'il puisse à la volée selectionner les resultats des candidats.
  */
 package main;
 
@@ -31,7 +32,7 @@ public class panelFin extends JPanel {
 	public panelFin()
 	{
 		this.setLayout(new BorderLayout());		
-		//Label du text
+//Label du text
 		textFin = new JLabel("Fin du test \n Merci", JLabel.CENTER);
 		font = new Font("Arial",Font.BOLD,32);
 		textFin.setFont(font);		
@@ -71,7 +72,7 @@ public class panelFin extends JPanel {
 		mdp.setColumns(10);
 		p4.add(mdp);
 		
-		
+/*		
 //3ème panel pour le recruteur prévue pour la v2	
 		JPanel p3 = new JPanel(new GridLayout(0,3));
 		p3.add(p4);
@@ -81,6 +82,6 @@ public class panelFin extends JPanel {
 	
 
 
-
+*/
 	}
 }
