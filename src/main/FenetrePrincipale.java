@@ -35,6 +35,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+	private EnregistrementDonnee ed;
 
 	private int compteurQuestions = 0;
 
@@ -59,6 +60,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
 		panFin = new panelFin();
+		ed = new EnregistrementDonnee();
 
 		this.panAccueil.itemCandidatExistant.addActionListener(this);
 		this.panAccueil.itemNouveauCandidat.addActionListener(this);
@@ -109,11 +111,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 
-			panFormulaire.itemSauvegarder.setEnabled(true);
-
-			panFormulaire.itemSauvegarder.addActionListener(this);	
-			panFormulaire.boutonSave.addActionListener(this);
-
+			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
+			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
+			panFormulaire.boutonSearch.addActionListener(this);
+			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
@@ -139,28 +140,45 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.setContentPane(panCandidat);
 				this.validate();
 			}
-			else if(!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())&& !panFormulaire.fieldTelephone.getText().substring(13).equals(" ")){
-				JOptionPane.showMessageDialog(this,"Erreur sur le champ : \n -Email","Erreur de saisie",JOptionPane.ERROR_MESSAGE);
-				panFormulaire.fieldMail.setForeground(Color.RED);
-				panFormulaire.champ3.setForeground(Color.RED);
-				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
-				panFormulaire.champ4.setForeground(Color.BLACK);
-			}
-			else if(panFormulaire.fieldTelephone.getText().substring(13).equals(" ") && panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())){
-				JOptionPane.showMessageDialog(this,"Erreur sur le champ : \n -Téléphone","Erreur de saisie",JOptionPane.ERROR_MESSAGE);
-				panFormulaire.fieldTelephone.setForeground(Color.RED);
-				panFormulaire.champ4.setForeground(Color.RED);
+			else{
+				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
-			}
-			else{
-				JOptionPane.showMessageDialog(this,"Erreur sur les champs : \n -Email \n -Téléphone","Erreur de saisie",JOptionPane.ERROR_MESSAGE);
-				panFormulaire.fieldMail.setForeground(Color.RED);
-				panFormulaire.champ3.setForeground(Color.RED);
-				panFormulaire.fieldTelephone.setForeground(Color.RED);
-				panFormulaire.champ4.setForeground(Color.RED);
+				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
+				panFormulaire.champ4.setForeground(Color.BLACK);
+				panFormulaire.fieldNom.setEditable(false);
+				panFormulaire.fieldPrenom.setEditable(false);
+				panFormulaire.fieldMail.setEditable(false);
+				panFormulaire.fieldTelephone.setEditable(false);
+				if(!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())){
+					panFormulaire.fieldMail.setEditable(true);
+					panFormulaire.fieldMail.setForeground(Color.RED);
+					panFormulaire.champ3.setForeground(Color.RED);
+					str = str + "\n - E-mail ";
+				}
+				if(panFormulaire.fieldTelephone.getText().indexOf(" ") >= 0){
+					panFormulaire.fieldTelephone.setEditable(true);
+					panFormulaire.fieldTelephone.setForeground(Color.RED);
+					panFormulaire.champ4.setForeground(Color.RED);
+					str = str + "\n - Téléphone ";
+				}
+				JOptionPane.showMessageDialog(panFormulaire, str, "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 			}
 			
+			
+		}
+		
+		if(arg0.getSource() == this.panFormulaire.boutonSearch){
+			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
+				panCandidat.buttonStart.addActionListener(this);
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panCandidat);
+				this.validate();
+			}
+			else{
+				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 		//Passage du panCandidat au panQuestion
@@ -184,6 +202,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFin);
 			this.validate();
 		}
+	
 	}
 
 
