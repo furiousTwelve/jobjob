@@ -29,6 +29,7 @@ import javax.swing.text.MaskFormatter;
  * Le panelFormulaire est le panel qui sera chargé par la fenêtre Principale après appui sur le bouton "NouveauTest".
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
+ * @author Florent
  */
 public class panelFormulaire extends JPanel implements ActionListener{
 
