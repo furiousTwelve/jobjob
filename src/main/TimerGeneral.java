@@ -68,13 +68,13 @@ public class TimerGeneral
 		return res;
     }
      
-    public static void main(String[] args) 
-    {
-    	//Timer general 30min
-    	TimerGeneral tp = new TimerGeneral(1800);
-    	tp.start();
-    	//Timer stress 2min
-		TimerGeneral Stress = new TimerGeneral(120);
-		Stress.start();
-    }
+//    public static void main(String[] args) 
+//    {
+//    	//Timer general 30min
+//    	TimerGeneral tp = new TimerGeneral(1800);
+//    	tp.start();
+//    	//Timer stress 2min
+//		TimerGeneral Stress = new TimerGeneral(120);
+//		Stress.start();
+//    }
 }
