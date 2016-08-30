@@ -46,6 +46,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
+	protected JButton boutonSearch = new JButton("Rechercher");
 	
 	protected JFormattedTextField fieldNom = new JFormattedTextField();
 	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
@@ -54,6 +55,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	protected JFormattedTextField fieldId = new JFormattedTextField();
 
 	protected JPanel panelSaisie;
+	protected JPanel panelElementBasCentre;
 	
 	protected JLabel champ3;
 	protected JLabel champ4;
@@ -198,7 +200,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 							JPanel panelReponses = new JPanel(new GridLayout(0, 4));
 						
 							//Un panel pour un élément centré
-							JPanel panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
+							panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
 							panelElementBasCentre.add(boutonSave);
 
 						panelCentreBas.add(panelReponses);

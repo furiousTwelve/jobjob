@@ -84,7 +84,7 @@ public class EnregistrementDonnee
 * @param str String
 */
 	
-	public void rechercheCandidat(String str){
+	public boolean rechercheCandidat(String str){
 		boolean trouver=false;
 		
 		File dossier = new File("..\\..\\git\\recrutement\\candidats");
@@ -132,6 +132,7 @@ public class EnregistrementDonnee
 	else {
 		System.out.println(" Candidat non trouvé!");
 	}
+	return trouver;
   }
 	
 
