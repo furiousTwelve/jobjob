@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,12 +22,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 /**
  * Le panelFormulaire est le panel qui sera chargé par la fenêtre Principale après appui sur le bouton "NouveauTest".
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
+ * @author Florent
  */
 public class panelFormulaire extends JPanel implements ActionListener{
 
@@ -46,12 +49,14 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	
 	protected JFormattedTextField fieldNom = new JFormattedTextField();
 	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
-	protected JFormattedTextField fieldMail = new JFormattedTextField();
+	protected JTextField fieldMail = new JTextField();
 	protected JFormattedTextField fieldTelephone = new JFormattedTextField();
 	protected JFormattedTextField fieldId = new JFormattedTextField();
 
 	protected JPanel panelSaisie;
-
+	
+	protected JLabel champ3;
+	protected JLabel champ4;
 /**
  * Constructeur du panelFormulaire
  * 	<br>Schéma de l'imbrication de ses Layouts:
@@ -147,9 +152,9 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								champ1.setFont(fontChampSaisie);
 								JLabel champ2 = new JLabel("Prénom");
 								champ2.setFont(fontChampSaisie);
-								JLabel champ3 = new JLabel("E-mail");
+								champ3 = new JLabel("E-mail");
 								champ3.setFont(fontChampSaisie);
-								JLabel champ4 = new JLabel("Téléphone");
+								champ4 = new JLabel("Téléphone");
 								champ4.setFont(fontChampSaisie);
 								JLabel champ5 = new JLabel("N° identifiant");
 								champ5.setFont(fontChampSaisie);
@@ -160,7 +165,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
 								fieldNom = new JFormattedTextField(maskNomPrenom);
 								fieldPrenom = new JFormattedTextField(maskNomPrenom);
-								fieldMail = new JFormattedTextField();
+								
 								
 								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
 								maskTelephone.setValidCharacters("0123456789");
@@ -237,6 +242,13 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		Matcher m = p.matcher(string.toUpperCase());
 		
 		return m.matches();
+	}
+	
+	public void sauvegarderFichier(){
+		// a voir avec la couche métier ou donnee
+		if(checkFormatMail(fieldMail.getText())){
+			System.out.println("true");
+		}
 	}
 
 	@Override

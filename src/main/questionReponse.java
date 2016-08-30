@@ -14,7 +14,7 @@ public class questionReponse
 	 * categorieQuestion - La catégorie de la question qui peut être :
 	 * 							"CJ" pour Culture Java 
 	 * 							"CG" pour Culture Générale Informatique
-	 * 							"E" pour Langage Exotique
+	 * 							"LE" pour Langage Exotique
 	 * 							"S" pour Stress
 	 * 					
 	 * numeroQuestion - Le numéro que la question a dans le panel de questions
