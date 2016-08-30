@@ -36,7 +36,8 @@ public class panelCandidat extends JPanel  {
 	protected JLabel iconeEntreprise;
 	protected ImageIcon logo;
 	protected JButton buttonStart;
-	// code a optimisé
+	
+	// TODO  (urgent) : code à optimiser (loop is your friend)
 	protected JLabel labelnull1 = new JLabel(" ");
 	protected JLabel labelnull2 = new JLabel(" ");
 	protected JLabel labelnull3 = new JLabel(" ");
@@ -57,8 +58,8 @@ public class panelCandidat extends JPanel  {
 	
 	public panelCandidat() 
 	{		
-		panel1= new JPanel();
-		panel2= new JPanel();
+		panel1= new JPanel(); //TODO : remplacer panel1 par un nom de panel explicite
+		panel2= new JPanel(); //TODO : remplacer panel2 par un nom de panl explicite aussi
 		
 		
 		buttonStart = new JButton("start", new ImageIcon("play_button.png"));
@@ -72,7 +73,7 @@ public class panelCandidat extends JPanel  {
 		this.setLayout(new BorderLayout());
 		panel1.setLayout(new GridLayout(0,3));
 		
-		// code a optimisé
+		// TODO (urgent) : code à optimiser
 		panel1.add(labelnull1);
 		panel1.add(iconeEntreprise);
 		panel1.add(labelnull2);
@@ -83,6 +84,7 @@ public class panelCandidat extends JPanel  {
 		panel1.add(labelnull7);
 		panel1.add(labelnull8);
 		
+		// TODO (urgent) : code à optimiser
 		panel2.setLayout(new GridLayout(0,3));
 		panel2.add(labelnull10);
 		panel2.add(labelnull11);
