@@ -24,7 +24,10 @@ import javax.swing.JOptionPane;
  * </ul>
  * 
  * 
- * @author Mathieu et Cyril
+ * @author Mathieu
+ * @author Cyril
+ * @author Damien
+ * 
  * @version 1.02
  */
 
@@ -44,6 +47,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * 
 	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
 	 * @throws ParseException 
+	 * @author Damien
 	 */
 
 	public FenetrePrincipale() throws HeadlessException, ParseException 
