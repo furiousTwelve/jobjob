@@ -122,6 +122,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Passage du panFormulaire au panCandidat
 			if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 			{	
+				
+				// Pour couche métier--> Mettre fonction qui vérifie si Candidat existant avant de l'enregistrer 
+				Candidat leCandidat = new Candidat();
+				leCandidat.enregistrerNouveauCandidat(panFormulaire);				
+				
 				panCandidat.buttonStart.addActionListener(this);
 				
 				this.getContentPane().removeAll();
