@@ -5,10 +5,10 @@ import java.util.Random;
 /**
  * 
  * @author Alban
+ * @author Cyril
  * @version 1.00
  * 
- * @author Cyril
- * @version 1.01
+
  * 
  */
 
