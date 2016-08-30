@@ -130,14 +130,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 */
 		if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
-			panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee
+			//TODO pour  @cyril : à vérifier
+			//panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee 
 			System.out.println(panFormulaire.fieldTelephone.getText());
-			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) && !panFormulaire.fieldTelephone.getText().substring(13).equals(" ")){
+			
+			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) && !panFormulaire.fieldTelephone.getText().substring(13).equals(" "))
+			{
 				panCandidat.buttonStart.addActionListener(this);
-
 				this.getContentPane().removeAll();
 				this.setContentPane(panCandidat);
 				this.validate();
+				Candidat leCandidat = new Candidat();
+				leCandidat.enregistrerNouveauCandidat(panFormulaire);	
 			}
 			else if(!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())&& !panFormulaire.fieldTelephone.getText().substring(13).equals(" ")){
 				JOptionPane.showMessageDialog(this,"Erreur sur le champ : \n -Email","Erreur de saisie",JOptionPane.ERROR_MESSAGE);

@@ -53,17 +53,15 @@ public class Application
 		
 		//String[] info = {"talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016"};
 		String[] donnee = {"nom : paul" , "prenome jojo" , "mail : affreuxjojo@mail.com" , "tel : 05060311"};
-		new Application();
-	//	new EnregistrementDonnee().creerFichier("candidat_1Score");
-	//    new EnregistrementDonnee().enregistrerCandidat(info);
-	//	new EnregistrementDonnee().chercherQuestion( "CG2");
-	//	new EnregistrementDonnee().nombreCandidat();
 		
-		//new EnregistrementDonnee().rechercheCandidat("candidat_7.txt");
-		new EnregistrementDonnee().enregistrerScore("candidat_7", 18);                           
-		System.out.println("-------------------------------------------------------------");
-
-		new EnregistrementDonnee().enregistrerCandidat(donnee);
+		System.out.println("Test METIER");
+		questionReponse test = new questionReponse("CG");
+		test.genererQuestionsCandidat();
+	
+		
+		new Application();
+	
+		
 
 	}
 }

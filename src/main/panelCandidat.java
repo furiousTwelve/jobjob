@@ -102,7 +102,7 @@ public class panelCandidat extends JPanel  {
 	}
 
 public void startTimer(){
-	TimerFormulaire tp = new TimerFormulaire();
+	TimerGeneral tp = new TimerGeneral();
 	tp.start();
 }
 	

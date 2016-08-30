@@ -7,7 +7,7 @@ import java.util.TimerTask;
  * @author Alban
  * CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
  */
-public class TimerFormulaire
+public class TimerGeneral
 {
 	// ATTRIBUTS DE LA CLASSE
 	int secondPassed = 1800;
@@ -59,9 +59,9 @@ public class TimerFormulaire
 		return res;
     }
      
-    public static void main(String[] args) 
-    {
-    	TimerFormulaire tp = new TimerFormulaire();
-    	tp.start();
-    }
+//    public static void main(String[] args) 
+//    {
+//    	Timer tp = new Timer();
+//    	tp.start();
+//    }
 }
