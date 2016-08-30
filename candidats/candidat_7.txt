@@ -1,7 +1,6 @@
-Identifiant :71
-Nom : c
-Prénom : c
-E-mail : c
-Téléphone : c
-N° identifiant : 12
-Date : 250816
+Identifiant :7
+nom : paul
+prenome jojo
+mail : affreuxjojo@mail.com
+tel : 05060311
+Date : 300816

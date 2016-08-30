@@ -24,6 +24,7 @@ import javax.swing.JPanel;
  * 
  * 
  * @author Cyril, Audric
+ * @author damien
  * @version v1.00
  * 
  */
@@ -66,37 +67,50 @@ public class panelCandidat extends JPanel  {
 	    Font newFont = myFont.deriveFont(50F);
 
 	    buttonStart.setFont(newFont);
+	    
 		
-		iconeEntreprise = new JLabel(new ImageIcon("logoAFPA.png"));	
+		iconeEntreprise = new JLabel(new ImageIcon("Logo_Afpa.png"));	
 		
-		this.setLayout(new BorderLayout());
-		panel1.setLayout(new GridLayout(0,3));
+		this.setLayout(null);
+//		panel1.setLayout(new GridLayout(3,3));
 		
 		// code a optimisé
-		panel1.add(labelnull1);
+//		panel1.add(labelnull1);
+//		
+//		panel1.add(labelnull2);
+//		panel1.add(labelnull3);
+//		panel1.add(labelnull4);
+//		panel1.add(labelnull5);
+//		panel1.add(labelnull6);
+//		panel1.add(labelnull7);
+//		panel1.add(labelnull8);
+//		
+//		panel2.setLayout(new GridLayout(0,3));
+//		panel2.add(labelnull10);
+//		panel2.add(labelnull11);
+//		panel2.add(labelnull13);
+//		panel2.add(labelnull14);
+//		
+//		panel2.add(labelnull15);
+//		panel2.add(labelnull16);
+//		panel2.add(labelnull17);
+//		panel2.add(labelnull18);
+		
+//		panel1.add(labelnull1);
+//		panel1.add(iconeEntreprise);
+//		panel1.add(labelnull2);
+		
+		//je place manuellement les boutons dans le panel mais je ne sais pas comment faire en sorte que les boutons reste tout le temps au milieu
+		
 		panel1.add(iconeEntreprise);
-		panel1.add(labelnull2);
-		panel1.add(labelnull3);
-		panel1.add(labelnull4);
-		panel1.add(labelnull5);
-		panel1.add(labelnull6);
-		panel1.add(labelnull7);
-		panel1.add(labelnull8);
-		
-		panel2.setLayout(new GridLayout(0,3));
-		panel2.add(labelnull10);
-		panel2.add(labelnull11);
-		panel2.add(labelnull13);
-		panel2.add(labelnull14);
-		panel2.add(buttonStart);
-		panel2.add(labelnull15);
-		panel2.add(labelnull16);
-		panel2.add(labelnull17);
-		panel2.add(labelnull18);
+		panel1.add(buttonStart);
+		panel1.setBounds(700,300, 400, 500);
+		buttonStart.setPreferredSize(new Dimension(150,100));
+
 		
 		
-		this.add(panel2, BorderLayout.CENTER);
-		this.add(panel1, BorderLayout.WEST);
+//		this.add(panel2, BorderLayout.CENTER);
+		this.add(panel1);
 	
 				
 	}
