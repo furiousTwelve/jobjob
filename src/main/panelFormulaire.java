@@ -110,6 +110,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 			logo = new ImageIcon(newImg);
 			JLabel logoFinal = new JLabel(logo);
 			
+			//TODO : faire une jolie boucle pour renplacer cette déclaration longue et brutale
 			//Création des "cases vides"
 			JLabel labelvide = new JLabel("");
 			JLabel labelvide2 = new JLabel(" ");
@@ -120,6 +121,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 			JLabel labelvide7 = new JLabel(" ");
 			JLabel labelvide8 = new JLabel(" ");
 	
+			//TODO : faire une boucle ( à voir avec celle d'au dessus)
 			//Assemblage du panelLogo
 			panelLogo.add(labelvide);
 			panelLogo.add(logoFinal);
