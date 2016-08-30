@@ -55,7 +55,7 @@ public class Application
 		String[] donnee = {"nom : paul" , "prenome jojo" , "mail : affreuxjojo@mail.com" , "tel : 05060311"};
 		
 		System.out.println("Test METIER");
-		questionReponse test = new questionReponse("CG");
+		questionReponse test = new questionReponse();
 		test.genererQuestionsCandidat();
 	
 		
