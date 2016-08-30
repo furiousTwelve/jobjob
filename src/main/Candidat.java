@@ -55,6 +55,8 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{
+		
+		
 		String[] chaine = new String[p.getComponents().length/2];
 		int i = 0;
 		Component[] fields = p.getComponents();
