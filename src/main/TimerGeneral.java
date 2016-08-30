@@ -18,9 +18,9 @@ public class TimerGeneral
 	
 	
 	//Constructeur pour mon héritage Stress
-	TimerGeneral(int secondPassed){
+	TimerGeneral(int secondPassed)
+	{
 		this.secondPassed = secondPassed;
-
 	}
 	
 	
