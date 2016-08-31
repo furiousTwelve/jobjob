@@ -6,14 +6,23 @@ import java.util.TimerTask;
  * 
  * @author Alban
  * CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
+ * @author Benjamin
  */
-public class TimerFormulaire
+public class TimerGeneral
 {
 	// ATTRIBUTS DE LA CLASSE
-	int secondPassed = 1800;
+	int secondPassed = 0;
 	int minuteAff = 0;
 	int secondeAff = 0;
 	String secondeAffS = "";
+	
+	
+	//Constructeur pour mon héritage Stress
+	TimerGeneral(int secondPassed)
+	{
+		this.secondPassed = secondPassed;
+	}
+	
 	
     Timer timer = new Timer();
     TimerTask tache = new TimerTask() 
@@ -49,19 +58,23 @@ public class TimerFormulaire
 		{
 			secondeAffS = "0" + secondeAff;
 			res = minuteAff + ":" + secondeAffS;
-//			System.out.println(minuteAff + ":" + secondeAffS);
+			System.out.println(minuteAff + ":" + secondeAffS);
 		}
 		else
 		{
 			res = minuteAff + ":" + secondeAff;
-//        	System.out.println(minuteAff + ":" + secondeAff);
+        	System.out.println(minuteAff + ":" + secondeAff);
 		}
 		return res;
     }
      
     public static void main(String[] args) 
     {
-    	TimerFormulaire tp = new TimerFormulaire();
+    	//Timer general 30min
+    	TimerGeneral tp = new TimerGeneral(1800);
     	tp.start();
+    	//Timer stress 2min
+		TimerGeneral Stress = new TimerGeneral(120);
+		Stress.start();
     }
 }

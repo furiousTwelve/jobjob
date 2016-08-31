@@ -24,12 +24,12 @@ public class EnregistrementDonnee
 	
 	/**
 	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
-	 * @param nom
+	 * @param nom String
 	 */
-	public void entreprise()
+	public void creerFichier(String nom)
 	{
-		File f = new File ("entreprise.txt");
-		
+		File f = new File (nom+".txt");
+		System.out.println(" Creation du fichier"+nom);
 		try {
 			FileWriter fw = new FileWriter(f);
 			fw.write("JobJob recrutement");
@@ -41,7 +41,7 @@ public class EnregistrementDonnee
 
 /**
  * Methode pour l'enregistrement d'un candidat dans un fichier .txt
- * @param info
+ * @param info String[]
  */
 	
 	public void enregistrerCandidat(String[] info){
@@ -50,11 +50,14 @@ public class EnregistrementDonnee
 		String date = format.format(new Date());
 
 
-		File f = new File ("../../git/recrutement/candidats/candidat_"+(nombreCandidat()+1)+".txt");
+		File f = new File ("../../git/recrutement/candidats/candidat_"+nombreCandidat()+".txt");
+		File fb = new File("../../git/recrutement/scores/scoreCandidat_"+nombreCandidat()); 
+		fb.mkdirs(); 
+
 		
 		try {
 			FileWriter fw = new FileWriter(f);
-			fw.write("Identifiant :" +nombreCandidat()+1);
+			fw.write("Identifiant :" +nombreCandidat());
 			fw.write("\r\n");
 
 			for (int j = 0; j < info.length; j++) {
@@ -65,7 +68,7 @@ public class EnregistrementDonnee
 			fw.write("Date : "+date);
 
 			fw.close();
-			identifiant=identifiant+1;
+			//identifiant=identifiant+1;
 			//System.out.println(identifiant);
 		} catch (IOException e) {
 			// TODO: handle exception
@@ -78,13 +81,13 @@ public class EnregistrementDonnee
 /**
 * methode qui cherche le candidat donnée avec son identifiant
 * et affiche l'ensemble de ses détails
-* @param str
+* @param str String
 */
 	
-	public void rechercheCandidat(String str){
+	public boolean rechercheCandidat(String str){
 		boolean trouver=false;
 		
-		File dossier = new File("..\\..\\git\\recrutement");
+		File dossier = new File("..\\..\\git\\recrutement\\candidats");
 		String[] contenu = dossier.list();
 		int i=0;
 		while(trouver == false & i < contenu.length){
@@ -95,7 +98,7 @@ public class EnregistrementDonnee
 		}
 	if(trouver == true){
 			System.out.println("fichier existe :");
-			String pathFichier="..\\..\\git\\recrutement\\"+str;
+			String pathFichier="..\\..\\git\\recrutement\\candidats\\"+str;
 
 
 			BufferedReader fluxEntree = null;
@@ -129,6 +132,7 @@ public class EnregistrementDonnee
 	else {
 		System.out.println(" Candidat non trouvé!");
 	}
+	return trouver;
   }
 	
 
@@ -136,7 +140,8 @@ public class EnregistrementDonnee
 /**
  * methode chercherQuestion recupère la question rand placer en argument
  * avec les reponses associées à la question.
- * @param rand
+ * @param rand String
+ * @return liste de question
  */
 	
 	public String[] chercherQuestion( String rand){
@@ -186,10 +191,10 @@ public class EnregistrementDonnee
 				String ligneLue = fluxEntree.readLine();
 				while(ligneLue!=null){
 					System.out.println(ligneLue);
-					ligneLue = fluxEntree.readLine();
 					questionReponse[j]=ligneLue;
+					ligneLue = fluxEntree.readLine();
+					System.out.println(" contenu de la case "+j+" du tableau questionReponse est : " + questionReponse[j]);
 				}
-				
 			}
 			catch(IOException exc){
 				exc.printStackTrace();
@@ -208,6 +213,7 @@ public class EnregistrementDonnee
 				
 			}
 	}
+			
 			     
 	return questionReponse;		
 }	
@@ -218,6 +224,30 @@ public class EnregistrementDonnee
 		System.out.println(contenu.length);
 		return contenu.length;
 	}
+	
+	
+	
+	public void enregistrerScore(String idCandidat, int score){
+		
+		
+		
+		File f = new File ("../../git/recrutement/scores/scoreCandidat_"+nombreCandidat()+"/candidat_"+nombreCandidat()+"Score.txt");
+		try {
+			
+			FileWriter fw = new FileWriter(f);
+			fw.write("Score = "+ score);
+			fw.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+	}
+		
+	
+	/*public void RechercherScore(String idCandidat){
+		File dossier = new File("..\\..\\git\\recrutement\\scores\\");
+		String[] contenuScore = dossier.list();
+		String [] questionReponse= new String[5];
+	}*/
 }
 
 		

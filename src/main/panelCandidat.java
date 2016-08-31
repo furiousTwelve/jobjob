@@ -24,6 +24,7 @@ import javax.swing.JPanel;
  * 
  * 
  * @author Cyril, Audric
+ * @author damien
  * @version v1.00
  * 
  */
@@ -36,7 +37,8 @@ public class panelCandidat extends JPanel  {
 	protected JLabel iconeEntreprise;
 	protected ImageIcon logo;
 	protected JButton buttonStart;
-	// code a optimisé
+	
+	// TODO  (urgent) : code à optimiser (loop is your friend)
 	protected JLabel labelnull1 = new JLabel(" ");
 	protected JLabel labelnull2 = new JLabel(" ");
 	protected JLabel labelnull3 = new JLabel(" ");
@@ -55,10 +57,15 @@ public class panelCandidat extends JPanel  {
 	protected JLabel labelnull17 = new JLabel(" ");
 	protected JLabel labelnull18 = new JLabel(" ");
 	
+	
+	/**
+	 * constructeur de la classe
+	 * @author Damien
+	 */
 	public panelCandidat() 
 	{		
-		panel1= new JPanel();
-		panel2= new JPanel();
+		panel1= new JPanel(); //TODO : remplacer panel1 par un nom de panel explicite
+		panel2= new JPanel(); //TODO : remplacer panel2 par un nom de panl explicite aussi
 		
 		
 		buttonStart = new JButton("start", new ImageIcon("play_button.png"));
@@ -66,43 +73,56 @@ public class panelCandidat extends JPanel  {
 	    Font newFont = myFont.deriveFont(50F);
 
 	    buttonStart.setFont(newFont);
+	    
 		
-		iconeEntreprise = new JLabel(new ImageIcon("logoAFPA.png"));	
+		iconeEntreprise = new JLabel(new ImageIcon("Logo_Afpa.png"));	
 		
-		this.setLayout(new BorderLayout());
-		panel1.setLayout(new GridLayout(0,3));
+		this.setLayout(null);
+//		panel1.setLayout(new GridLayout(3,3));
 		
+
 		// code a optimisé
-		panel1.add(labelnull1);
+//		panel1.add(labelnull1);
+//		
+//		panel1.add(labelnull2);
+//		panel1.add(labelnull3);
+//		panel1.add(labelnull4);
+//		panel1.add(labelnull5);
+//		panel1.add(labelnull6);
+//		panel1.add(labelnull7);
+//		panel1.add(labelnull8);
+//		
+//		panel2.setLayout(new GridLayout(0,3));
+//		panel2.add(labelnull10);
+//		panel2.add(labelnull11);
+//		panel2.add(labelnull13);
+//		panel2.add(labelnull14);
+//		
+//		panel2.add(labelnull15);
+//		panel2.add(labelnull16);
+//		panel2.add(labelnull17);
+//		panel2.add(labelnull18);
+		
+//		panel1.add(labelnull1);
+//		panel1.add(iconeEntreprise);
+//		panel1.add(labelnull2);
+		
+		//je place manuellement les boutons dans le panel mais je ne sais pas comment faire en sorte que les boutons reste tout le temps au milieu
+		
 		panel1.add(iconeEntreprise);
-		panel1.add(labelnull2);
-		panel1.add(labelnull3);
-		panel1.add(labelnull4);
-		panel1.add(labelnull5);
-		panel1.add(labelnull6);
-		panel1.add(labelnull7);
-		panel1.add(labelnull8);
-		
-		panel2.setLayout(new GridLayout(0,3));
-		panel2.add(labelnull10);
-		panel2.add(labelnull11);
-		panel2.add(labelnull13);
-		panel2.add(labelnull14);
-		panel2.add(buttonStart);
-		panel2.add(labelnull15);
-		panel2.add(labelnull16);
-		panel2.add(labelnull17);
-		panel2.add(labelnull18);
+		panel1.add(buttonStart);
+		panel1.setBounds(700,300, 400, 500);
+		buttonStart.setPreferredSize(new Dimension(150,100));
 		
 		
-		this.add(panel2, BorderLayout.CENTER);
-		this.add(panel1, BorderLayout.WEST);
+//		this.add(panel2, BorderLayout.CENTER);
+		this.add(panel1);
 	
 				
 	}
 
 public void startTimer(){
-	TimerFormulaire tp = new TimerFormulaire();
+	TimerGeneral tp = new TimerGeneral(1800);
 	tp.start();
 }
 	

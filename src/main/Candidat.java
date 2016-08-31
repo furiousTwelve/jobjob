@@ -11,9 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * 
+ * Couche METIER
  * @author Alban, Audric
  * @version 1.00
+ * 
+ * @author Cyril, Benjamin
+ * @version 1.01
  */
 
 public class Candidat 
@@ -29,17 +32,12 @@ public class Candidat
 	
 	/**
 	 * CONSTRUCTEUR
-	 * @param n : nom du candidat
-	 * @param p : prénom du candidat
-	 * @param m : adresse mail du candidat
-	 * @param num : numéro de téléphone du candidat
-	 * @param ident : identifiant du candidat
 	 */
 	public Candidat(){}
 	
 	public Candidat(JPanel p)
 	{
-		// RECUPERATION DES CONTROLES DU PANEL DE SAISI
+		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
 		Component[] fields = p.getComponents();
 		
 		// CONSTRUCTION DU CANDIDAT AVEC LES DONNEES SAISIES
@@ -47,16 +45,18 @@ public class Candidat
 		this.prenom = ((JTextField) fields[3]).getText();
 		this.mail = ((JTextField) fields[5]).getText();
 		this.numeroTelephone = ((JTextField) fields[7]).getText();
-		this.identifiant = this.numeroCandidat();
+		this.identifiant = this.definirNumeroCandidat();
 	}
 	
 	
 	/**
 	 * METHODE QUI CONCATENE LES LABELS ET LES SAISIES DU RECRUTEUR PUIS COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
-	 * @param p : on passe en paramètre le panel contenant les zones saisient par le recruteur
+	 * @param p : on passe en paramètre le panel contenant les zones saisies par le recruteur
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{
+		
+		
 		String[] chaine = new String[p.getComponents().length/2];
 		int i = 0;
 		Component[] fields = p.getComponents();
@@ -81,7 +81,7 @@ public class Candidat
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
-	public String numeroCandidat()
+	public String definirNumeroCandidat()
 	{
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
 		String date = format.format(new Date());

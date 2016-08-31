@@ -40,7 +40,6 @@ public class Application
 	public Application() throws HeadlessException, ParseException 
 	{
 		FenetrePrincipale fenetre = new FenetrePrincipale();
-		
 	}
 
 	/**
@@ -52,16 +51,17 @@ public class Application
 	public static void main(String[] args) throws HeadlessException, ParseException 
 	{
 		
-		
+		//String[] info = {"talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016"};
 		String[] donnee = {"nom : paul" , "prenome jojo" , "mail : affreuxjojo@mail.com" , "tel : 05060311"};
+		
+		System.out.println("Test METIER");
+		questionReponse test = new questionReponse();
+		test.genererQuestionsCandidat();
+	
+		
 		new Application();
 	
-	    //new EnregistrementDonnee().candidat("talbi", "lila", "fefeefef@sfr.fr", "0645644884", "22/08/2016");
-		new EnregistrementDonnee().chercherQuestion( "CG2");
-		new EnregistrementDonnee().nombreCandidat();
-		System.out.println("-------------------------------------------------------------");
-
-		new EnregistrementDonnee().enregistrerCandidat(donnee);
+		
 
 	}
 }
