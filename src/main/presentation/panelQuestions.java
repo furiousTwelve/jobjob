@@ -5,28 +5,21 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JRadioButton;
 
 import main.metier.questionReponse;
 
@@ -37,7 +30,7 @@ import main.metier.questionReponse;
  * 
  * @author Mathieu
  */
-public class panelQuestion extends JPanel {
+public class panelQuestions extends JPanel {
 
 	// Déclaration des éléments
 	private JMenuBar menuBar = new JMenuBar();
@@ -53,10 +46,10 @@ public class panelQuestion extends JPanel {
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
 
-	protected JCheckBox reponse1;
-	protected JCheckBox reponse2;
-	protected JCheckBox reponse3;
-	protected JCheckBox reponse4;
+	protected JRadioButton reponse1;
+	protected JRadioButton reponse2;
+	protected JRadioButton reponse3;
+	protected JRadioButton reponse4;
 
 	protected JProgressBar barreProgression;
 
@@ -101,7 +94,7 @@ public class panelQuestion extends JPanel {
  * 
  * @throws ParseException
  */
-	public panelQuestion() throws ParseException {
+	public panelQuestions() throws ParseException {
 		
 		// POUR LA COUCHE METIER -- NE PAS TOUCHER ces 2 lignes en commentaires (cyril) - mettre la fonction  
 		// laQuestionReponse = new questionReponse(""); 
@@ -168,15 +161,18 @@ public class panelQuestion extends JPanel {
 		// Un Panel pour les futurs 4 réponses possibles
 		panelReponses = new JPanel(new GridLayout(0, 4));
 
+		/*
+		 * L'utilisation des balise <html> et </html> sont nécessaires pour pouvoir mettre à la ligne
+		 */
 		// Création des JCheckBox
-		reponse1 = new JCheckBox("reponse #1hgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmssssssssssshjhgjgjhgjhgjhgjhgjhgjgjhgjhgjgjgjgjhgjhgjgjgh");
+		reponse1 = new JRadioButton("<html>reponse #1hgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj<br>jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjmmmmmmmmmmmmmmm<br>mmmmmmmmmmmmmmmmmmmssssssssssshjhgjgjhgjhgjhgjhgjhgjgjhgjhgjgjgjgjhgjhgjgjgh</html>");
 		reponse1.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 
-		reponse2 = new JCheckBox("reponse #2");
+		reponse2 = new JRadioButton("reponse #2");
 		reponse2.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
-		reponse3 = new JCheckBox("reponse #3");
+		reponse3 = new JRadioButton("reponse #3");
 		reponse3.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
-		reponse4 = new JCheckBox("reponse #4");
+		reponse4 = new JRadioButton("reponse #4");
 		reponse4.setHorizontalAlignment((int) Container.CENTER_ALIGNMENT);
 
 		// Assemblage du panelReponses
