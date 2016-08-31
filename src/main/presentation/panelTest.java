@@ -1,4 +1,4 @@
-package main;
+package main.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Button;

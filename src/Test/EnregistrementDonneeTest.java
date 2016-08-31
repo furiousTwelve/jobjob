@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.junit.Test;
 
-import main.EnregistrementDonnee;
+import main.donnees.EnregistrementDonnee;
 
 public class EnregistrementDonneeTest {
 	int indice;

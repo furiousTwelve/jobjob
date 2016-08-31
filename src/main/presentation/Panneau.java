@@ -1,7 +1,5 @@
-/**
- * 
- */
-package main;
+
+package main.presentation;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +10,7 @@ import javax.swing.JPanel;
 
 /**
  * Définit un panel qui ser imbriqué dans la fenêtre principale
+ * @deprecated
  * @author david
  *
  */

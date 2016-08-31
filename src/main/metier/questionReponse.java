@@ -1,4 +1,4 @@
-package main;
+package main.metier;
 
 import java.util.Random;
 
