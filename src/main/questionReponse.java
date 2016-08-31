@@ -6,6 +6,7 @@ import java.util.Random;
  * 
  * @author Alban
  * @author Cyril
+ * @author Benjamin
  * @version 1.00
  * 
 
@@ -189,4 +190,24 @@ public class questionReponse
 		}
 	}
 	
+	//recupération de la réponse du candidat
+	void recupereReponse(){
+		
+		int reponseCandidat;
+
+		int i = 0;
+		while (i < 15);
+		
+		for (int j = 0; j < questionsCandidat.length; j++) { 
+			reponseCandidat = i+1;
+			
+		//rajouter un if sir réponse candidat = reponse vrai = 1, sinon reponse = 0;
+			
+			System.out.println(reponseCandidat);
+		}
+	}
+	//recuperation du temps lors de la réponse du candidat
+	void recupereTimerCandidat(){
+		
+	}
 }
