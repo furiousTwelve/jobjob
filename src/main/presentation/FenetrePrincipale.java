@@ -30,6 +30,7 @@ import main.metier.Candidat;
  * @author Mathieu
  * @author Cyril
  * @author Damien
+ * @author Florent
  * 
  * @version 1.02
  */
@@ -43,7 +44,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelFin panFin;
 	private EnregistrementDonnee ed;
 
-	private int compteurQuestions = 0;
+	private int compteurQuestions = 1;
 
 
 	/**
@@ -90,7 +91,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		String composant=arg0.getActionCommand();
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
@@ -198,22 +198,41 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 			this.getContentPane().removeAll();
 			this.setContentPane(panQuestion);
+			panQuestion.boutonValider.addActionListener(this);
 			this.validate();
 		}
 
 
-		//Passage d'une question à une autre ?
-
-
-
+		//Passage d'une question à une autre 
+		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16){
+			
+			compteurQuestions++;
+			
+			panQuestion.labelQuestion.setText("texte question correpondante"+compteurQuestions);//voir avec couche métier
+			panQuestion.reponse1.setText("texte question correpondante");
+			panQuestion.reponse2.setText("texte question correpondante");
+			panQuestion.reponse3.setText("texte question correpondante");
+			panQuestion.reponse4.setText("texte question correpondante");
+			
+			panQuestion.labelTimer.setText("");
+			if(compteurQuestions == 11){
+				panQuestion.labelTimer.setText("Timer");
+			}
+		}
+		
 		//Passage du panQuestion au panFin
-		if(compteurQuestions == 15)
+		if(compteurQuestions == 16)
 		{	
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
+			panFin.boutonConnection.addActionListener(this);
 			this.validate();
 		}
 	
+		if(arg0.getSource() == this.panFin.boutonConnection ){
+			//Message d'erreur uniquement si erreurs sur les identifiants
+			JOptionPane.showMessageDialog(panFin, "Connection impossible", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 
