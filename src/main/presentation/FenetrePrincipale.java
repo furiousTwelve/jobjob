@@ -76,7 +76,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 
-		this.setContentPane(panFin); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panAccueil); // imbrication de notre panel dans notre fenêtre
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
@@ -219,17 +219,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.labelTimer.setText("Timer");
 			}
 		}
-
-
 		
 		//Passage du panQuestion au panFin
 		if(compteurQuestions == 16)
 		{	
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
+			panFin.boutonConnection.addActionListener(this);
 			this.validate();
 		}
 	
+		if(arg0.getSource() == this.panFin.boutonConnection ){
+			//Message d'erreur uniquement si erreurs sur les identifiants
+			JOptionPane.showMessageDialog(panFin, "Connection impossible", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 

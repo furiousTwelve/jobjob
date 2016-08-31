@@ -7,6 +7,7 @@ package main.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -30,7 +31,8 @@ public class panelFin extends JPanel {
 	private JLabel textFin, nomEntreprise, iconeEntreprise, id, motDePasse;
 	private ImageIcon logo;
 	private Font font, font2;
-	private JTextField recruteur, mdp;
+	protected JTextField recruteur, mdp;
+	protected JButton boutonConnection;
 	
 //panel Principal
 	public panelFin()
@@ -62,29 +64,35 @@ public class panelFin extends JPanel {
 	
 		
 		JPanel panelRecruteur = new JPanel();
-		panelRecruteur.setLayout(new BoxLayout(panelRecruteur, BoxLayout.PAGE_AXIS));
+		panelRecruteur.setLayout(new FlowLayout());
 		
-		JPanel panelID = new JPanel();
+		JPanel panelLabel = new JPanel();
+		panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.Y_AXIS));
 		
-		id = new JLabel("ID");
-		
-		panelID.add(id);
+		id = new JLabel("Identifiant :");
+		panelLabel.add(id);
 
+		motDePasse = new JLabel("Mot de passe :");
+		panelLabel.add(motDePasse);
+		
+		panelRecruteur.add(panelLabel);
+		
+		JPanel panelConnection = new JPanel();
+		panelConnection.setLayout(new BoxLayout(panelConnection, BoxLayout.Y_AXIS));
+		
 		recruteur = new JTextField();
 		recruteur.setColumns(10);		
-		panelID.add(recruteur);
-		panelRecruteur.add(panelID);
-		
-		JPanel panelMdp = new JPanel();
-		
-		motDePasse = new JLabel("Mot de passe");
-		panelMdp.add(motDePasse);
+		panelConnection.add(recruteur);
 		
 		mdp = new JTextField();		
 		mdp.setColumns(10);
-		panelMdp.add(mdp);
+		panelConnection.add(mdp);		
 		
-		panelRecruteur.add(panelMdp);
+		panelRecruteur.add(panelConnection);
+		
+		boutonConnection = new JButton("Se connecter");
+		
+		panelRecruteur.add(boutonConnection);//à repositionner
 
 //3ème panel pour le recruteur prévue pour la v2	
 		JPanel p3 = new JPanel(new GridLayout(0,3));
@@ -92,7 +100,7 @@ public class panelFin extends JPanel {
 		p3.add(panelEntreprise);
 		this.add(p3, BorderLayout.SOUTH);
 
-	
+		
 
 
 

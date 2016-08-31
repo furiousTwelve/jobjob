@@ -13,6 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * Révision du panelQuestion dû au changement prévu par Khadidja
+ * @author Florent
+ *
+ */
 public class panelQuestion extends JPanel {
 	
 	private JPanel panelNord;
@@ -96,7 +101,7 @@ public class panelQuestion extends JPanel {
 		
 		panelImage = new JPanel();
 		panelImage.setLayout(new BorderLayout());
-		iconeEntreprise = new JLabel(new ImageIcon("JobJob.png"));
+		iconeEntreprise = new JLabel(new ImageIcon("JobJob.png"));//a changer
 		panelImage.add(iconeEntreprise);
 //		this.add(panelImage, BorderLayout.SOUTH);
 		iconeEntreprise.setAlignmentX(Component.CENTER_ALIGNMENT);
