@@ -1,4 +1,4 @@
-package main;
+package main.metier;
 
 import java.awt.Component;
 import java.text.DateFormat;
@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import main.donnees.EnregistrementDonnee;
 
 /**
  * Couche METIER

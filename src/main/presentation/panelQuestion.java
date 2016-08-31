@@ -1,4 +1,4 @@
-package main;
+package main.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import main.metier.questionReponse;
 
 /**
  * Le panelQuestion est le panel servant à présenter les questions au candidat.

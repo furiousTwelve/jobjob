@@ -8,7 +8,7 @@
 
 Le résultat de ces données seront utilisées par la couche données afin de les enregistrer dans le fichier final.
  */
-package main;
+package main.metier;
 
 /**
  * @author Audric

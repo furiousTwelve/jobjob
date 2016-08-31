@@ -1,4 +1,4 @@
-package main;
+package main.metier;
 import java.util.Timer;
 import java.util.TimerTask;
  
@@ -18,7 +18,7 @@ public class TimerGeneral
 	
 	
 	//Constructeur pour mon héritage Stress
-	TimerGeneral(int secondPassed)
+	public TimerGeneral(int secondPassed)
 	{
 		this.secondPassed = secondPassed;
 	}

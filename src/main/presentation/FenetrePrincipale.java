@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main;
+package main.presentation;
 
 
 import java.awt.Color;
@@ -14,6 +14,9 @@ import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import main.donnees.EnregistrementDonnee;
+import main.metier.Candidat;
 
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>

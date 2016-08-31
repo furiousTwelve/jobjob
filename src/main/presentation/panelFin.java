@@ -3,7 +3,7 @@
  * Ce panneau à pour but d'indiquer à l'utilisateur que le teste est bien fini.
  * Il faut penser que dans une futur il y aura une version avec une interface pour le recruteur afin qu'il puisse à la volée selectionner les resultats des candidats.
  */
-package main;
+package main.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

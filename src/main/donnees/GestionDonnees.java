@@ -1,4 +1,4 @@
-package main;
+package main.donnees;
 
 import java.awt.Component;
 
