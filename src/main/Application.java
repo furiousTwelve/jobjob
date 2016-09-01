@@ -5,8 +5,7 @@ package main;
 import java.awt.HeadlessException;
 import java.text.ParseException;
 
-import javax.swing.UIManager;
-
+import main.donnees.ConnectionDB;
 import main.metier.questionReponse;
 import main.presentation.FenetrePrincipale;
 
@@ -61,6 +60,25 @@ public class Application
 		questionReponse test = new questionReponse();
 		test.genererQuestionsCandidat();
 	
+		
+		//connection DB
+		ConnectionDB cdb = new ConnectionDB();
+		try {
+			cdb.connectionBase();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// test ajout candidat en base
+		try {
+			cdb.enregistrerNouveauCandidatEnBase(15, "chial", "lionel", "0612458796", "lione@gmail.com");
+			System.out.println("Requete exécutée");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		new Application();
 	

@@ -51,9 +51,7 @@ public class questionReponse
 	
 	public void genererQuestionsCandidat()
 	{
-		
-		// le Random actuelle fonctionne sur 15 questions aléatoires. A modifier lorsqu'il y a aura BDD présentes en faisant une focntion qui questionne la BDD pour
-		// lui demander combien de question sont présentes pour ce type recherché
+	
 		
 		questionsCandidat = new questionReponse[15];
 		byte valeurGeneree;
@@ -62,6 +60,11 @@ public class questionReponse
 		questionReponse question;
 		
 		
+		// ====>       ici appel de la fonction (DONNEES) pourqu'il me retourne le nombre d'éléments d'une catégorie
+		// ====>  exemple int nbreQuestion=demanderNbreQuestion(catégorie);
+		
+		// ligne qui suit POUR TEST - à effacer quand la fonction données sera terminée
+		int nbreQuestion=15;
 		
 		// GENERE LES QUESTIONS 1 A 5
 		int i = 0;
@@ -70,7 +73,7 @@ public class questionReponse
 			question = new questionReponse("CG");
 			trouve = false;
 			// ici il y a peut etre 30 questions au lieu de 15
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
@@ -93,7 +96,7 @@ public class questionReponse
 		{
 			question = new questionReponse("CJ");
 			trouve = false;
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
@@ -139,7 +142,7 @@ public class questionReponse
 		{
 			question = new questionReponse("CG");
 			trouve = false;
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
@@ -176,7 +179,7 @@ public class questionReponse
 		System.out.println("code:" +codeQuestion );
 		
 		
-		// ici mettre la fonction qui demande à la couche données les questions générés aléatoirement
+		// ici mettre la fonction qui demande à la couche DONNEES les questions générées aléatoirement avec quetion,4 reponse et index_table de la question
 		// exemple: String <structure> = chercherQuestionBDD(codeQuestion);	
 	}
 	
@@ -191,21 +194,19 @@ public class questionReponse
 	}
 	
 	//recupération de la réponse du candidat
-	void recupereReponse(){
+	public void recupereReponse(byte reponse,int compteur)
+	{
 		
-		int reponseCandidat;
+		System.out.println("Reponse :"+reponse);
+		
+		// comparer réponse avec réponse correcte
+		
+		// envoyer résultat à la DONNEE avec comme paramétre: index_table de la question,numero question, et réponse correcte ou pas.
 
-		int i = 0;
-		while (i < 15);
-		
-		for (int j = 0; j < questionsCandidat.length; j++) { 
-			reponseCandidat = i+1;
-			
-		//rajouter un if sir réponse candidat = reponse vrai = 1, sinon reponse = 0;
-			
-			System.out.println(reponseCandidat);
-		}
 	}
+	
+	
+	
 	//recuperation du temps lors de la réponse du candidat
 	void recupereTimerCandidat(){
 		
