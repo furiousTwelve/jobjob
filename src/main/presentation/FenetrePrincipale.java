@@ -222,43 +222,60 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16){
 			// COUCHE METIER
 			byte tempReponse=0;
-			
+			boolean reponseChoisie=false;
 			
 			if(panQuestion.reponse1.isSelected())
 			{
 				tempReponse=1;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse2.isSelected())
 			{
 				tempReponse=2;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse3.isSelected())
 			{
 				tempReponse=3;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse4.isSelected())
 			{
 				tempReponse=4;
+				reponseChoisie=true;
 			}			
 			
-			laQuestionReponse.recupereReponse(tempReponse,compteurQuestions);
-			// FIN DE COUCHE METIER
+			if(reponseChoisie==true)
+			{
+				laQuestionReponse.recupereReponse(tempReponse,compteurQuestions);			
 			
-			compteurQuestions++;
-			
-			
-			
-			panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
-			panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
-			panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
-			panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
-			panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				compteurQuestions++;
+				
+				panQuestion.reponse1.setSelected(false);
+				panQuestion.reponse2.setSelected(false);
+				panQuestion.reponse3.setSelected(false);
+				panQuestion.reponse4.setSelected(false);
+				
+				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
+				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
+				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
+				panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
+				panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				
+				
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé", JOptionPane.ERROR_MESSAGE);
+			}
 			
 			panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11){
 				panQuestion.labelTimer.setText("Timer");
 			}
-		}
+			
+			// FIN COUCHE METIER
+		
 		
 		//Passage du panQuestion au panFin
 		if(compteurQuestions == 16)
@@ -268,11 +285,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFin.boutonConnection.addActionListener(this);
 			this.validate();
 		}
-	
+		}
 		if(arg0.getSource() == this.panFin.boutonConnection ){
 			//Message d'erreur uniquement si erreurs sur les identifiants
 			JOptionPane.showMessageDialog(panFin, "Connection impossible", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
 
 

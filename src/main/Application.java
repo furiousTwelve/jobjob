@@ -62,22 +62,22 @@ public class Application
 //	
 		
 	//	connection DB
-		ConnectionDB cdb = new ConnectionDB();
-		try {
-			cdb.connectionBase();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// test ajout candidat en base
-		try {
-			cdb.enregistrerNouveauCandidatEnBase(15, "chial", "lionel", "0612458796", "lione@gmail.com");
-			System.out.println("Requete exécutée");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		ConnectionDB cdb = new ConnectionDB();
+//		try {
+//			cdb.connectionBase();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		// test ajout candidat en base
+//		try {
+//			cdb.enregistrerNouveauCandidatEnBase(15, "chial", "lionel", "0612458796", "lione@gmail.com");
+//			System.out.println("Requete exécutée");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 		new Application();
