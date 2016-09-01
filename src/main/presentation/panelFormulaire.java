@@ -57,6 +57,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	protected JPanel panelSaisie;
 	protected JPanel panelElementBasCentre;
 	
+	protected JLabel champ1;
+	protected JLabel champ2;
 	protected JLabel champ3;
 	protected JLabel champ4;
 /**
@@ -152,9 +154,9 @@ public class panelFormulaire extends JPanel implements ActionListener{
 			
 								//Création du contenu
 								Font fontChampSaisie = new Font("Courier", Font.BOLD, 20);
-								JLabel champ1 = new JLabel("Nom");
+								champ1 = new JLabel("Nom");
 								champ1.setFont(fontChampSaisie);
-								JLabel champ2 = new JLabel("Prénom");
+								champ2 = new JLabel("Prénom");
 								champ2.setFont(fontChampSaisie);
 								champ3 = new JLabel("E-mail");
 								champ3.setFont(fontChampSaisie);
@@ -246,6 +248,14 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		Matcher m = p.matcher(string.toUpperCase());
 		
 		return m.matches();
+	}
+	
+	public boolean checkNom(String nom){
+		return fieldNom.getText().indexOf(" ") > 0;
+	}
+	
+	public boolean checkPrenom(String prenom){
+		return fieldPrenom.getText().indexOf(" ") > 0;
 	}
 	
 	public void sauvegarderFichier(){
