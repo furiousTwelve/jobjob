@@ -1,6 +1,6 @@
 /*
  * @auteur 	: Lionel Chialvo
- * @AUTEUR  / Marc Naouache
+ * @auteur  / Marc Naouache
  * @date	: 31/08/2016
  * @version : 1.0
  * 
@@ -25,6 +25,7 @@ package main.donnees;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
 public class ConnectionDB 
@@ -69,6 +70,11 @@ public class ConnectionDB
 	
 	}
 	
+	/*
+	 * Méthode pour ajouter un nouveau candidat dans l abase de donnée.
+	 * 
+	 *    
+	 */
 	public static void enregistrerNouveauCandidatEnBase(int id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException
 	{
 		
@@ -82,10 +88,54 @@ public class ConnectionDB
 		}
 	}
 	
-	public static void recupererCandidatEnBase() throws ClassNotFoundException
+	
+	
+	/*
+	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
+	 * affiche dans la console les champs associés à l'élément id dans la table
+	 *    
+	 */
+	public static void recupererCandidatEnBase(int id) throws ClassNotFoundException
 	{
+		ResultSet rs=null;
+		int id2=0;
+		String nom="";
+		String prenom="";
+		String telephone="";
+		String mail="";
 		
-		
+		String sql2 = "SELECT * FROM candidat WHERE identifiant='"+id+"'; ";
+		try {
+			rs = (ResultSet) st.executeQuery(sql2);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while (rs.next()) {
+				try {
+					id2 = rs.getInt("identifiant");
+					nom = rs.getString("nom");
+					prenom= rs.getString("prenom");
+					telephone= rs.getString("telephone");
+					mail= rs.getString("mail");
+					
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(id2);
+				System.out.println(nom);
+				System.out.println(prenom);
+				System.out.println(telephone);
+				System.out.println(mail);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
