@@ -229,7 +229,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			{
 				tempReponse=4;
 			}			
-			laQuestionReponse.recupereReponse(tempReponse);
+			//laQuestionReponse.recupereReponse(tempReponse);
 			// FIN DE COUCHE METIER
 			
 			compteurQuestions++;
