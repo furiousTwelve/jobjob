@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
+import main.metier.questionReponse;
 
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
@@ -45,7 +46,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private EnregistrementDonnee ed;
 
 	private int compteurQuestions = 1;
-
+	
+	// Pour la couche métier
+	private questionReponse laQuestionReponse;
 
 	/**
 	 * 
@@ -206,6 +209,28 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		//Passage d'une question à une autre 
 		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16){
+			// COUCHE METIER
+			byte tempReponse=0;
+			questionReponse laQuestionReponse= new questionReponse();
+			
+			if(panQuestion.reponse1.isSelected())
+			{
+				tempReponse=1;
+			}
+			if(panQuestion.reponse2.isSelected())
+			{
+				tempReponse=2;
+			}
+			if(panQuestion.reponse3.isSelected())
+			{
+				tempReponse=3;
+			}
+			if(panQuestion.reponse4.isSelected())
+			{
+				tempReponse=4;
+			}			
+			laQuestionReponse.recupereReponse(tempReponse);
+			// FIN DE COUCHE METIER
 			
 			compteurQuestions++;
 			
