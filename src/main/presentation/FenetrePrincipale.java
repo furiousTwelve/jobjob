@@ -76,7 +76,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.panAccueil.itemQuitter.addActionListener(this);
 		this.panAccueil.itemAide.addActionListener(this);
 
-		this.setContentPane(panCandidat); // imbrication de notre panel dans notre fenêtre
+		//this.setContentPane(panCandidat); // imbrication de notre panel dans notre fenêtre
+		this.setContentPane(panAccueil); 
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
