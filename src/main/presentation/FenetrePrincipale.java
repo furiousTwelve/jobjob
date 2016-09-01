@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
+import main.metier.TimerGeneral;
 import main.metier.questionReponse;
 
 /**
@@ -229,7 +230,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			{
 				tempReponse=4;
 			}			
-			laQuestionReponse.recupereReponse(tempReponse);
+			//laQuestionReponse.recupereReponse(tempReponse);
 			// FIN DE COUCHE METIER
 			
 			compteurQuestions++;
@@ -247,8 +248,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		}
 		
 		//Passage du panQuestion au panFin
-		if(compteurQuestions == 16)
-		{	
+		if(compteurQuestions == 16){
+			
+			//Couche metier Timer
+//			TimerGeneral tp = new TimerGeneral();
+//			tp.stop();
+//			return;
+
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
 			panFin.boutonConnection.addActionListener(this);
