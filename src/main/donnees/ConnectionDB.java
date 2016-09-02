@@ -190,10 +190,11 @@ public class ConnectionDB
 			try {
 				while (res.next()) {
 					try{
-					Rep1 = res.getString("reponse1");
-					Rep2 = res.getString("reponse2");
-					Rep3 = res.getString("reponse3");
-					Rep4 = res.getString("reponse4");
+					Rep1		= res.getString("reponse1");
+					Rep2		= res.getString("reponse2");
+					Rep3		= res.getString("reponse3");
+					Rep4		= res.getString("reponse4");
+					question	= res.getString("qtexte");
 					
 		} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -209,7 +210,13 @@ public class ConnectionDB
 		System.out.println(Rep3);
 		System.out.println(Rep4);
 
-
+		questrep.libelleQuestion=question;
+		
+		questrep.libelleReponse1=Rep1;
+		questrep.libelleReponse2=Rep2;
+		questrep.libelleReponse3=Rep3;
+		questrep.libelleReponse4=Rep4;
+		
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
