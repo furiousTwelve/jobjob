@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -50,15 +53,15 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	
 	protected JFormattedTextField fieldNom = new JFormattedTextField();
 	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
-	protected JTextField fieldMail = new JTextField();
+	protected JFormattedTextField fieldMail = new JFormattedTextField();
 	protected JFormattedTextField fieldTelephone = new JFormattedTextField();
 	protected JFormattedTextField fieldId = new JFormattedTextField();
 
 	protected JPanel panelSaisie;
 	protected JPanel panelElementBasCentre;
 	
-	protected JLabel champ1;
-	protected JLabel champ2;
+	protected JLabel champNom;
+	protected JLabel champPrenom;
 	protected JLabel champ3;
 	protected JLabel champ4;
 /**
@@ -103,69 +106,72 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		
 		
 		
-		//Création du panel de gauche, contenant le logo : panelLogo
-		JPanel panelLogo = new JPanel();
-		panelLogo.setLayout(new GridLayout(0, 3));
-		
+//		//Création du panel de gauche, contenant le logo : panelLogo
+//		JPanel panelLogo = new JPanel();
+//		panelLogo.setLayout(new GridLayout(0, 3));
+//		
 			//Création du logo
-			ImageIcon logo = new ImageIcon("logoAFPA.png");
+			ImageIcon logo = new ImageIcon("Logo_Afpa.png");
 			Image img = logo.getImage();
 			Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 			logo = new ImageIcon(newImg);
 			JLabel logoFinal = new JLabel(logo);
-			
-			//TODO : faire une jolie boucle pour renplacer cette déclaration longue et brutale
-			//Création des "cases vides"
-			JLabel labelvide = new JLabel("");
-			JLabel labelvide2 = new JLabel(" ");
-			JLabel labelvide3 = new JLabel(" ");
-			JLabel labelvide4 = new JLabel(" ");
-			JLabel labelvide5 = new JLabel(" ");
-			JLabel labelvide6 = new JLabel(" ");
-			JLabel labelvide7 = new JLabel(" ");
-			JLabel labelvide8 = new JLabel(" ");
-	
-			//TODO : faire une boucle ( à voir avec celle d'au dessus)
-			//Assemblage du panelLogo
-			panelLogo.add(labelvide);
-			panelLogo.add(logoFinal);
-			panelLogo.add(labelvide2);
-			panelLogo.add(labelvide3);
-			panelLogo.add(labelvide4);
-			panelLogo.add(labelvide5);
-			panelLogo.add(labelvide6);
-			panelLogo.add(labelvide7);
-			panelLogo.add(labelvide8);
-		
-
-			
-		//Création du panel qui ira au centre du panel principal : panelCentre
-			JPanel panelCentre = new JPanel();
-			panelCentre.setLayout(new GridLayout(0, 1));
-			
-				//Il contiendra lui-même 2 panels : le panel des champs de saisie, le panel en-dessous
-									
-					// Création du panel Central supérieur, qui contiendra le panelSaisie
-						JPanel panelCentreHaut = new JPanel();
-						panelCentreHaut.setLayout(new BoxLayout(panelCentreHaut, BoxLayout.PAGE_AXIS));
-						
-							//création du panel qui contiendra les champs de saisie :
-							panelSaisie = new JPanel(new GridLayout(0, 2, 0, 20));
-			
-								//Création du contenu
+//			
+//			//TODO : faire une jolie boucle pour renplacer cette déclaration longue et brutale
+//			//Création des "cases vides"
+//			JLabel labelvide = new JLabel("");
+//			JLabel labelvide2 = new JLabel(" ");
+//			JLabel labelvide3 = new JLabel(" ");
+//			JLabel labelvide4 = new JLabel(" ");
+//			JLabel labelvide5 = new JLabel(" ");
+//			JLabel labelvide6 = new JLabel(" ");
+//			JLabel labelvide7 = new JLabel(" ");
+//			JLabel labelvide8 = new JLabel(" ");
+//	
+//			//TODO : faire une boucle ( à voir avec celle d'au dessus)
+//			//Assemblage du panelLogo
+//			panelLogo.add(labelvide);
+//			panelLogo.add(logoFinal);
+//			panelLogo.add(labelvide2);
+//			panelLogo.add(labelvide3);
+//			panelLogo.add(labelvide4);
+//			panelLogo.add(labelvide5);
+//			panelLogo.add(labelvide6);
+//			panelLogo.add(labelvide7);
+//			panelLogo.add(labelvide8);
+//		
+//
+//			
+//		//Création du panel qui ira au centre du panel principal : panelCentre
+//			JPanel panelCentre = new JPanel();
+//			panelCentre.setLayout(new GridLayout(0, 1));
+//			
+//				//Il contiendra lui-même 2 panels : le panel des champs de saisie, le panel en-dessous
+//									
+//					// Création du panel Central supérieur, qui contiendra le panelSaisie
+//						JPanel panelCentreHaut = new JPanel();
+//						panelCentreHaut.setLayout(new BoxLayout(panelCentreHaut, BoxLayout.PAGE_AXIS));
+//						
+//							//création du panel qui contiendra les champs de saisie :
+//							panelSaisie = new JPanel(new GridLayout(0, 2, 0, 20));
+//			
+//								//Création du contenu
 								Font fontChampSaisie = new Font("Courier", Font.BOLD, 20);
-								champ1 = new JLabel("Nom");
-								champ1.setFont(fontChampSaisie);
-								champ2 = new JLabel("Prénom");
-								champ2.setFont(fontChampSaisie);
+
+
+								JLabel champNom = new JLabel("Nom");
+								champNom.setFont(fontChampSaisie);
+								JLabel champPrenom = new JLabel("Prénom");
+								champPrenom.setFont(fontChampSaisie);
+
 								champ3 = new JLabel("E-mail");
 								champ3.setFont(fontChampSaisie);
 								champ4 = new JLabel("Téléphone");
 								champ4.setFont(fontChampSaisie);
-								JLabel champ5 = new JLabel("N° identifiant");
-								champ5.setFont(fontChampSaisie);
-								
-
+								JLabel champid = new JLabel("N° identifiant");
+								champid.setFont(fontChampSaisie);
+//								
+//
 								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
 								MaskFormatter maskNomPrenom = new MaskFormatter("**************************************************");
 								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
@@ -173,65 +179,207 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								fieldPrenom = new JFormattedTextField(maskNomPrenom);
 								
 								
-								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
-								maskTelephone.setValidCharacters("0123456789");
+								MaskFormatter maskTelephone = new MaskFormatter("***************");
+								maskTelephone.setValidCharacters("+()0123456789 ");
 								fieldTelephone = new JFormattedTextField(maskTelephone);
 								fieldId = new JFormattedTextField();
-						
-								//Assemblage du panelSaisie
-								panelSaisie.add(champ1);
-								panelSaisie.add(fieldNom);
-								panelSaisie.add(champ2);
-								panelSaisie.add(fieldPrenom);
-								panelSaisie.add(champ3);
-								panelSaisie.add(fieldMail);
-								panelSaisie.add(champ4);
-								panelSaisie.add(fieldTelephone);
-								panelSaisie.add(champ5);
-								panelSaisie.add(fieldId);
-								
-								
-						panelSaisie.setMaximumSize(new Dimension(400, 200));			
-						panelCentreHaut.add(panelSaisie, BorderLayout.CENTER);
-						
-					//création du panel CentralCentre inférieur, qui contiendra 2 panels
-						JPanel panelCentreBas = new JPanel();
-						panelCentreBas.setLayout(new BoxLayout(panelCentreBas, BoxLayout.Y_AXIS));
-						
-							//Un Panel pour les futurs 4 réponses possibles
-							JPanel panelReponses = new JPanel(new GridLayout(0, 4));
-						
-							//Un panel pour un élément centré
-							panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
-							panelElementBasCentre.add(boutonSave);
-
-						panelCentreBas.add(panelReponses);
-						panelCentreBas.add(panelElementBasCentre);
-					
-			
-			//Assemblage du panelCentralCentre
-			panelCentre.add(panelCentreHaut);
-			panelCentre.add(panelCentreBas);
-				
-		//Création d'une zone tampon à droite
-		JPanel panelDroite = new JPanel();
-		panelDroite.setLayout(new GridLayout(0, 1));
-		
-		JLabel labelVide9 = new JLabel();
-		Dimension dim = new Dimension(80, 80);
-		labelVide9.setPreferredSize(dim);
-		
-		panelDroite.add(labelVide9);
-		
-
+//						
+//								//Assemblage du panelSaisie
+//								panelSaisie.add(champ1);
+//								panelSaisie.add(fieldNom);
+//								panelSaisie.add(champ2);
+//								panelSaisie.add(fieldPrenom);
+//								panelSaisie.add(champ3);
+//								panelSaisie.add(fieldMail);
+//								panelSaisie.add(champ4);
+//								panelSaisie.add(fieldTelephone);
+//								panelSaisie.add(champ5);
+//								panelSaisie.add(fieldId);
+//								
+//								
+//						panelSaisie.setMaximumSize(new Dimension(400, 200));			
+//						panelCentreHaut.add(panelSaisie, BorderLayout.CENTER);
+//						
+//					//création du panel CentralCentre inférieur, qui contiendra 2 panels
+//						JPanel panelCentreBas = new JPanel();
+//						panelCentreBas.setLayout(new BoxLayout(panelCentreBas, BoxLayout.Y_AXIS));
+//						
+//							//Un Panel pour les futurs 4 réponses possibles
+//							JPanel panelReponses = new JPanel(new GridLayout(0, 4));
+//						
+//							//Un panel pour un élément centré
+//							panelElementBasCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
+//							panelElementBasCentre.add(boutonSave);
+//
+//						panelCentreBas.add(panelReponses);
+//						panelCentreBas.add(panelElementBasCentre);
+//					
+//			
+//			//Assemblage du panelCentralCentre
+//			panelCentre.add(panelCentreHaut);
+//			panelCentre.add(panelCentreBas);
+//				
+//		//Création d'une zone tampon à droite
+//		JPanel panelDroite = new JPanel();
+//		panelDroite.setLayout(new GridLayout(0, 1));
+//		
+//		JLabel labelVide9 = new JLabel();
+//		Dimension dim = new Dimension(80, 80);
+//		labelVide9.setPreferredSize(dim);
+//		
+//		panelDroite.add(labelVide9);
+//		
+//
+//	
+//		//Assemblage Général du PanelFormulaire
+//		this.setLayout(new BorderLayout(30,30));
+//		this.add(menuBar, BorderLayout.NORTH);
+//		this.add(panelLogo, BorderLayout.WEST);
+//		this.add(panelCentre, BorderLayout.CENTER);
+//		this.add(panelDroite, BorderLayout.EAST);
 	
-		//Assemblage Général du PanelFormulaire
-		this.setLayout(new BorderLayout(30,30));
-		this.add(menuBar, BorderLayout.NORTH);
-		this.add(panelLogo, BorderLayout.WEST);
-		this.add(panelCentre, BorderLayout.CENTER);
-		this.add(panelDroite, BorderLayout.EAST);
+		
+		//tentative de mettre en place le panel formulaire grâce à un gridbaglayout
+		GridBagLayout gb = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		setLayout(gb);
+		fieldMail.setPreferredSize(fieldNom.getPreferredSize());
+		fieldTelephone.setPreferredSize(fieldNom.getPreferredSize());
+		fieldId.setPreferredSize(fieldNom.getPreferredSize());
+		
+		//Placement de la barre de menu en haut à gauche
+		gbc.weightx=1;
+		gbc.weighty=0;
+		gbc.gridx=0;
+		gbc.gridy=0;
+		//gbc.gridwidth = GridBagConstraints.REMAINDER;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.gridwidth=GridBagConstraints.REMAINDER;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.add(menuBar, gbc);
+		
+		
+		//Placement du label nom, ainsi que son champ de texte
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champNom,gbc);
+		
+		gbc.gridx =2;
+		gbc.gridy =2;
+		gbc.gridwidth =GridBagConstraints.NONE;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldNom,gbc);
+		
+		
+		//placement du Label prénom ainsi que son champ de texte 
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champPrenom,gbc);
+		
+		gbc.gridx =2;
+		gbc.gridy =3;
+		gbc.gridwidth =GridBagConstraints.REMAINDER;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldPrenom,gbc);
+		
+		//placement du Label Mail ainsi que son champ de texte 
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champ3,gbc);
+		
+		gbc.gridx =2;
+		gbc.gridy =4;
+		gbc.gridwidth =GridBagConstraints.REMAINDER;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
+		this.add(fieldMail,gbc);
+		
+		
+		//placement du Label Télephone ainsi que son champ de texte 
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champ4,gbc);
+		
+		gbc.gridx =2;
+		gbc.gridy =5;
+		gbc.gridwidth =GridBagConstraints.REMAINDER;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldTelephone,gbc);
+		
+		
+		//placement du Label ID ainsi que son champ de texte 
+		gbc.gridx = 1;
+		gbc.gridy =6;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champid,gbc);
 	
+		gbc.gridx =2;
+		gbc.gridy =6;
+		gbc.gridwidth =GridBagConstraints.REMAINDER;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldId,gbc);
+		
+		//Placement du bouton sauvegarder
+		gbc.gridx=2;
+		gbc.gridy=7;
+		gbc.weightx=0;
+		gbc.weighty=1;
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		gbc.anchor=GridBagConstraints.BASELINE_LEADING;
+		this.add(boutonSave,gbc);
+		
+		//placement du logo
+		gbc.gridx=2;
+		gbc.gridy=1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		//gbc.anchor=GridBagConstraints.ABOVE_BASELINE;
+		this.add(logoFinal,gbc);
+		
 
 	}
 

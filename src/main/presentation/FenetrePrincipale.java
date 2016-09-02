@@ -208,9 +208,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			else{
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
-				panFormulaire.champ1.setForeground(Color.BLACK);
+				panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-				panFormulaire.champ2.setForeground(Color.BLACK);
+				panFormulaire.champPrenom.setForeground(Color.BLACK);
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
 				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
@@ -218,12 +218,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 				if(!panFormulaire.checkNom(panFormulaire.fieldNom.getText())){
 					panFormulaire.fieldNom.setForeground(Color.RED);
-					panFormulaire.champ1.setForeground(Color.RED);
+					panFormulaire.champNom.setForeground(Color.RED);
 					str = str + "\n - Nom ";
 				}
 				if(!panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())){
 					panFormulaire.fieldPrenom.setForeground(Color.RED);
-					panFormulaire.champ2.setForeground(Color.RED);
+					panFormulaire.champPrenom.setForeground(Color.RED);
 					str = str + "\n - Prenom ";
 				}
 				if(!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())){

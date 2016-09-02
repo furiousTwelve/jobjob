@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import main.metier.TimerGeneral;
 
@@ -56,10 +57,10 @@ public class panelCandidat extends JPanel  {
 			
 		buttonStart = new JButton("start", new ImageIcon("play_button.png"));
 		Font myFont = new Font("Serif", Font.ITALIC | Font.BOLD, 12);
-	    Font newFont = myFont.deriveFont(50F);
+	    Font newFont = myFont.deriveFont(40F);
 	    buttonStart.setFont(newFont);
 	    iconeEntreprise = new JLabel(new ImageIcon("Logo_Afpa.png"));
-	    info = new JLabel("<html> Vous avez 30 min pour répondre aux questions <br>cliquez sur \"start\" pour commencer le test </html> ");
+	    info = new JLabel("<html> Vous avez 30 min pour répondre aux questions cliquez sur \"start\" pour commencer le test </html> ");
 		info.setFont(newFont);
 	    
 	    //il est beaucoup plus simple de créer la fenêtre à l'aide du gridbaglayout car il me parait plus malléable pour la redimension des boutons
@@ -69,10 +70,14 @@ public class panelCandidat extends JPanel  {
 		gbc.gridx=gbc.gridy = 0;
 		gbc.gridwidth = GridBagConstraints.REMAINDER; // seul composant de sa colonne, il est donc le dernier.
 		gbc.gridheight = 1; // valeur par défaut - peut s'étendre sur une seule ligne.
-		gbc.anchor = GridBagConstraints.LINE_START; // ou BASELINE_LEADING mais pas WEST.	
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.anchor = GridBagConstraints.CENTER; // ou BASELINE_LEADING mais pas WEST.	
+		gbc.ipadx=250;
 		this.add(info, gbc);
+		gbc.gridx =3;
 		gbc.gridy =3;
-		gbc.gridy =3;
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		this.add(iconeEntreprise,gbc);
 		
 		
