@@ -15,6 +15,7 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.TimerStress;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
@@ -50,6 +51,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	
 	// Pour la couche métier
 	private questionReponse laQuestionReponse;
+	private TimerGeneral tp;
+	private TimerStress TimerS;
 
 	/**
 	 * 
@@ -200,7 +203,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
 		{	
-
+			tp = new TimerGeneral(1800);
+			tp.start();
+			
+	
 			this.getContentPane().removeAll();
 			this.setContentPane(panQuestion);
 			panQuestion.boutonValider.addActionListener(this);
@@ -244,21 +250,30 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11){
 				panQuestion.labelTimer.setText("Timer");
+				
+				TimerS = new TimerStress (120);
+				//Lancer le TimerStress
+				TimerS.start();
 			}
-		}
+				
+				//Arrêt à la question 12
+				if(compteurQuestions == 12){
+					TimerS.tache.cancel();
+				}
 		
 		//Passage du panQuestion au panFin
 		if(compteurQuestions == 16){
 			
 			//Couche metier Timer
-//			TimerGeneral tp = new TimerGeneral();
-//			tp.stop();
-//			return;
-
+			//arrêter le timer après la 15ème question
+			tp.tache.cancel();
+			System.out.println(tp.secondPassed);
+			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
 			panFin.boutonConnection.addActionListener(this);
 			this.validate();
+		}
 		}
 	
 		if(arg0.getSource() == this.panFin.boutonConnection ){

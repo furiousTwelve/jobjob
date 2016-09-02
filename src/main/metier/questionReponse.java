@@ -210,5 +210,6 @@ public class questionReponse
 	//recuperation du temps lors de la réponse du candidat
 	public void recupereTimerCandidat(int Timer){
 		
+		
 	}
 }
