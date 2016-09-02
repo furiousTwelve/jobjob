@@ -42,6 +42,12 @@ public class panelQuestion extends JPanel {
 	private Font font2;
 
 	public panelQuestion() {
+
+		// POUR LA COUCHE METIER -- NE PAS TOUCHER ces 2 lignes en commentaires (cyril) - mettre la fonction  
+		//laQuestionReponse = new questionReponse(""); 
+		//laQuestionReponse.genererQuestionsCandidat();
+		// Appel de cette fonction  chercherQuestionRéponse(numQuestion) à chaque fois que le candidat valide un réponse.
+		
 		// TODO Auto-generated constructor stub
 		this.setLayout(new BorderLayout(200,200));
 		

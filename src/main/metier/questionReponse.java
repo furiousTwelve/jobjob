@@ -34,10 +34,17 @@ public class questionReponse
 	 */
 	
 	String categorieQuestion;
-	byte numeroQuestion;
-	boolean reponseCorrecteOuIncorrecte;
-	int timerAuMomentDeLaReponse; // En secondes pour le moment
-	private questionReponse[] questionsCandidat;
+	public byte numQuestion;
+	public byte numQuestionBDD;
+	public String libelleQuestion;
+	public String libelleReponse1; 
+	public String libelleReponse2; 
+	public String libelleReponse3; 
+	public String libelleReponse4; 
+	
+	public questionReponse[] questionsCandidat;
+	
+	
 	
 	public questionReponse(String cq)
 	{
@@ -50,11 +57,7 @@ public class questionReponse
 	}
 	
 	public void genererQuestionsCandidat()
-	{
-		
-		// le Random actuelle fonctionne sur 15 questions aléatoires. A modifier lorsqu'il y a aura BDD présentes en faisant une focntion qui questionne la BDD pour
-		// lui demander combien de question sont présentes pour ce type recherché
-		
+	{		
 		questionsCandidat = new questionReponse[15];
 		byte valeurGeneree;
 		boolean trouve = false;
@@ -62,6 +65,11 @@ public class questionReponse
 		questionReponse question;
 		
 		
+		// ====>       ici ecrire une fonction (DONNEES) pourqu'ils retournent le nombre d'éléments d'une catégorie
+		// ====>  exemple int nbreQuestion=demanderNbreQuestion(catégorie);
+		
+		// ligne qui suit POUR TEST - à effacer quand la fonction données sera terminée
+		int nbreQuestion=15;
 		
 		// GENERE LES QUESTIONS 1 A 5
 		int i = 0;
@@ -70,11 +78,11 @@ public class questionReponse
 			question = new questionReponse("CG");
 			trouve = false;
 			// ici il y a peut etre 30 questions au lieu de 15
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -82,7 +90,7 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
@@ -93,11 +101,11 @@ public class questionReponse
 		{
 			question = new questionReponse("CJ");
 			trouve = false;
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -105,7 +113,7 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
@@ -113,7 +121,7 @@ public class questionReponse
 		
 		// VA CHERCHER LA QUESTION STRESS - QUESTION 11
 		question = new questionReponse("S");
-		question.numeroQuestion = 1;
+		question.numQuestion = 1;
 		questionsCandidat[i] = question;
 		i++;
 		
@@ -129,7 +137,7 @@ public class questionReponse
 			String cat = "LE" + tableauLangagesExotiques[valeurGeneree];
 			question = new questionReponse(cat);
 			questionsCandidat[i] = question;
-			questionsCandidat[i].numeroQuestion=(byte)compteurTemp;
+			questionsCandidat[i].numQuestion=(byte)compteurTemp;
 			compteurTemp++;
 			i++;
 		}
@@ -139,11 +147,11 @@ public class questionReponse
 		{
 			question = new questionReponse("CG");
 			trouve = false;
-			valeurGeneree = (byte) (r.nextInt(14) + 1);
+			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -151,61 +159,68 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
 		}
 		
+		chercherQuestionRéponse(questionsCandidat);				
+		
 		// Fonctions test -- à effacer par la suite
 		affichageTableauGenere(questionsCandidat,15);		
-		chercherQuestionRéponse(0);		
+		
 	}
 	
 	/**
-	 *  Cette fonction est appelé à partir de panelQuestion.java
-	 * @param numQuestion paramètre initialiser lors de l'appel de la fonction
+	 *  Cette fonction est la suite de la fonction genererQuestionsCandidat()
+	 *  Elle a pour but d'envoyer le tableau généré à la couche Données pour qu'il puisse y rajouter les libéllés des questions et réponses associés
+	 * @param //questionsCandidat paramètre initialiser lors de la fonction précédente et envoyé en parmètre à la fonction chercherQuestionsBDD()
 	 */
-	public void chercherQuestionRéponse(int numQuestion)
-	{
-		numQuestion=0;   // Pour test
+	public void chercherQuestionRéponse(questionReponse[] questionsCandidat)
+	{		
+		// Pour test à effacer quand la couche DONNEES aura créé sa fonction
+		questionsCandidat[0].libelleQuestion="Qui est charli?";
+		questionsCandidat[0].libelleReponse1="un clown";
+		questionsCandidat[0].libelleReponse2="un PITRE";
+		questionsCandidat[0].libelleReponse3="un bdd";
+		questionsCandidat[0].libelleReponse4="un tartuffe";
 		
-		String codeQuestion;	
-			
-		codeQuestion=questionsCandidat[numQuestion].categorieQuestion+questionsCandidat[numQuestion].numeroQuestion;		
-		System.out.println("code:" +codeQuestion );
+		questionsCandidat[1].libelleQuestion="Capitale de la France?";
+		questionsCandidat[1].libelleReponse1="Marseille";
+		questionsCandidat[1].libelleReponse2="Marseille";
+		questionsCandidat[1].libelleReponse3="Paris";
+		questionsCandidat[1].libelleReponse4="Marseille";
 		
-		
-		// ici mettre la fonction qui demande à la couche données les questions générés aléatoirement
-		// exemple: String <structure> = chercherQuestionBDD(codeQuestion);	
+		// ici mettre la fonction qui demande à la couche DONNEES les questions générées aléatoirement avec quetion,4 reponse et index_table de la question
+		// la couche DONNEES doit directement remplir le tableau passé en paramètre- Cyril
+		// exemple:  chercherQuestionBDD(questionsCandidat);	
 	}
 	
-	//fonction tests sur console
+	//fonction tests sur console - A effacer par la suite
 	public void affichageTableauGenere(questionReponse[] tab, int l)
 	{
 		for(int i = 0; i < l; i++)
 		{
-			System.out.println("Categorie "+tab[i].categorieQuestion+" n° question:"+tab[i].numeroQuestion);
+			System.out.println("Categorie "+tab[i].categorieQuestion+" n° question:"+tab[i].numQuestion);
 		
 		}
 	}
 	
 	//recupération de la réponse du candidat
-	void recupereReponse(){
+	public void recupereReponse(byte reponse,int compteur)
+	{
 		
-		int reponseCandidat;
+		System.out.println("Reponse :"+reponse);
+		
+		// comparer réponse avec réponse correcte
+		
+		// envoyer résultat à la DONNEE avec comme paramétre: index_table de la question,numero question, et réponse correcte ou pas.
 
-		int i = 0;
-		while (i < 15);
-		
-		for (int j = 0; j < questionsCandidat.length; j++) { 
-			reponseCandidat = i+1;
-			
-		//rajouter un if sir réponse candidat = reponse vrai = 1, sinon reponse = 0;
-			
-			System.out.println(reponseCandidat);
-		}
 	}
+	
+	
+	
 	//recuperation du temps lors de la réponse du candidat
 	void recupereTimerCandidat(){
 		
