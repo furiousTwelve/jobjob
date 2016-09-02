@@ -10,6 +10,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
 import main.metier.questionReponse;
-import main.metier.recruteur;
+import main.metier.Recruteur;
 
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
@@ -109,10 +110,16 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			String recruteur=panConnection.recruteur.getText();
 			String motDePasse=panConnection.mdp.getText();
 			
-			recruteur leRecruteur = new recruteur(recruteur,motDePasse);
-			acces=leRecruteur.verifierAcces();
-			
-			if(acces=true)
+			Recruteur leRecruteur = new Recruteur(recruteur,motDePasse);
+			try 
+			{
+				acces=leRecruteur.verifierAcces(recruteur,motDePasse);
+			} catch (ClassNotFoundException | SQLException e) {
+				
+				JOptionPane.showMessageDialog(panFormulaire, "Erreur interne au programme -- Defaut de la connexion au serveur SQL", "Erreur programme", JOptionPane.ERROR_MESSAGE);
+			}
+			System.out.println("acces: "+acces);
+			if(acces==true)
 			{
 				panAccueil = new panelAccueil();
 			
@@ -128,7 +135,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(panFormulaire, "Voutre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(panFormulaire, "Votre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}

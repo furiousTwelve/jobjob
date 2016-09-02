@@ -36,14 +36,14 @@ public class ConnectionDB
 	/*
 	 * Méthode qui se connecte à la base 	   
 	 */
-	public static void connectionBase() throws ClassNotFoundException
+	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
 	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjobdb";
-	String 	 	 login 		= "cdi";
-	String 		 passwd 	= "cdi";
+	String 	 	 login 		= recruteur;
+	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;
 	st	= null;
 	
@@ -56,8 +56,10 @@ public class ConnectionDB
 		// chargement du driver
 		Class.forName("com.mysql.jdbc.Driver");
 		// recuperation de la connexion
+		System.out.println("cn :"+cn);
 		cn = (Connection) DriverManager.getConnection(url, login, passwd);
-		// creation d'un statement pour pouvoir mancer des requêtes
+		System.out.println("cn :"+cn);
+		// creation d'un statement pour pouvoir lancer des requêtes
 		st = (Statement) cn.createStatement();
 		// affiche dans la console si la connecion est ok.
 		System.out.println("connection dataBase OK");
@@ -66,7 +68,10 @@ public class ConnectionDB
 	catch ( SQLException e)
 	{
 		e.printStackTrace();
+		acces=false;
 	}finally{}
+	
+	return(acces);
 	
 	}
 	

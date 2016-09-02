@@ -64,13 +64,13 @@ public class Application
 
 		
 		//connection DB
-				ConnectionDB cdb = new ConnectionDB();
-				try {
-					cdb.connectionBase();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				ConnectionDB cdb = new ConnectionDB();
+//				try {
+//					cdb.connectionBase(true);
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 				/*
 				 *  test ajout candidat en base
@@ -91,13 +91,13 @@ public class Application
 				 * recupération d'un candidat dans la base
 				 * @auteur : Lionel Chialvo
 				 */
-				try {
-					cdb.recupererCandidatEnBase(15);
-					} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					}
-				
+//				try {
+//					cdb.recupererCandidatEnBase(15);
+//					} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//					}
+//				
 				
 				new Application();
 	
