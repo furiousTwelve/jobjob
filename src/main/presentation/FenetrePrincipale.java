@@ -19,6 +19,7 @@ import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
 import main.metier.questionReponse;
+import main.metier.recruteur;
 
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
@@ -103,18 +104,32 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		//Passage du panConnection au panAccueil, si id et mdp valides
 		if(arg0.getSource() == this.panConnection.boutonConnection){
-			//Verification identifiant et mot de passe
-			panAccueil = new panelAccueil();
+			//Couche METIER
+			boolean acces=false;
+			String recruteur=panConnection.recruteur.getText();
+			String motDePasse=panConnection.mdp.getText();
 			
-			this.panAccueil.itemCandidatExistant.addActionListener(this);
-			this.panAccueil.itemNouveauCandidat.addActionListener(this);
-			this.panAccueil.itemNouveauTest.addActionListener(this);
-			this.panAccueil.itemQuitter.addActionListener(panAccueil);
-			this.panAccueil.itemAide.addActionListener(panAccueil);
+			recruteur leRecruteur = new recruteur(recruteur,motDePasse);
+			acces=leRecruteur.verifierAcces();
 			
-			this.getContentPane().removeAll();
-			this.setContentPane(panAccueil);
-			this.validate();
+			if(acces=true)
+			{
+				panAccueil = new panelAccueil();
+			
+				this.panAccueil.itemCandidatExistant.addActionListener(this);
+				this.panAccueil.itemNouveauCandidat.addActionListener(this);
+				this.panAccueil.itemNouveauTest.addActionListener(this);
+				this.panAccueil.itemQuitter.addActionListener(panAccueil);
+				this.panAccueil.itemAide.addActionListener(panAccueil);
+			
+				this.getContentPane().removeAll();
+				this.setContentPane(panAccueil);
+				this.validate();
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(panFormulaire, "Voutre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
+			}
 			
 		}
 		
