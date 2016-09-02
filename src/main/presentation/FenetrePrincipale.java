@@ -52,7 +52,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	
 	// Pour la couche métier
 	private questionReponse laQuestionReponse;
-
+	public questionReponse[] questionsCandidat;
 	/**
 	 * 
 	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
@@ -62,7 +62,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 	public FenetrePrincipale() throws HeadlessException, ParseException 
 	{
-
+		
+	    questionsCandidat = new questionReponse[15]; // Couche METIER
+	    laQuestionReponse= new questionReponse(); // Couche METIER
+		
 		this.setTitle("Job-Job"); 
 //		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setResizable(true);
@@ -236,9 +239,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
-		{				
-			
+		{	
+			laQuestionReponse.genererQuestionsCandidat();
+
 			this.getContentPane().removeAll();
+			
+			// Couche METIER ==>  Affichage de la première question
+			panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[0].libelleQuestion);
+			panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[0].libelleReponse1);
+			panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[0].libelleReponse2);
+			panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[0].libelleReponse3);
+			panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[0].libelleReponse4);
+			
 			this.setContentPane(panQuestion);
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			panQuestion.boutonValider.addActionListener(this);
@@ -251,34 +263,53 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16){
 			// COUCHE METIER
 			byte tempReponse=0;
-			questionReponse laQuestionReponse= new questionReponse();
+			boolean reponseChoisie=false;
 			
 			if(panQuestion.reponse1.isSelected())
 			{
 				tempReponse=1;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse2.isSelected())
 			{
 				tempReponse=2;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse3.isSelected())
 			{
 				tempReponse=3;
+				reponseChoisie=true;
 			}
 			if(panQuestion.reponse4.isSelected())
 			{
 				tempReponse=4;
+				reponseChoisie=true;
 			}			
-			//laQuestionReponse.recupereReponse(tempReponse);
-			// FIN DE COUCHE METIER
+
 			
-			compteurQuestions++;
+			if(reponseChoisie==true)
+			{
+				laQuestionReponse.recupereReponse(tempReponse,compteurQuestions);			
 			
-			panQuestion.labelQuestion.setText("texte question correpondante"+compteurQuestions);//voir avec couche métier
-			panQuestion.reponse1.setText("texte question correpondante");
-			panQuestion.reponse2.setText("texte question correpondante");
-			panQuestion.reponse3.setText("texte question correpondante");
-			panQuestion.reponse4.setText("texte question correpondante");
+				compteurQuestions++;
+				
+				panQuestion.reponse1.setSelected(false);
+				panQuestion.reponse2.setSelected(false);
+				panQuestion.reponse3.setSelected(false);
+				panQuestion.reponse4.setSelected(false);
+				
+				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
+				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
+				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
+				panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
+				panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				
+				
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé", JOptionPane.ERROR_MESSAGE);
+			}
 			
 			panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11){
@@ -287,7 +318,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 			}
 			
-		}
 		
 		//Passage du panQuestion au panFin
 
@@ -306,7 +336,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 			
 		}
-	
+		}
 		if(arg0.getSource() == this.panFin.boutonConnection ){
 			
 			//Message d'erreur uniquement si erreurs sur les identifiants

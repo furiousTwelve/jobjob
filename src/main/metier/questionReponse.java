@@ -34,10 +34,17 @@ public class questionReponse
 	 */
 	
 	String categorieQuestion;
-	byte numeroQuestion;
-	boolean reponseCorrecteOuIncorrecte;
-	int timerAuMomentDeLaReponse; // En secondes pour le moment
-	private questionReponse[] questionsCandidat;
+	public byte numQuestion;
+	public byte numQuestionBDD;
+	public String libelleQuestion;
+	public String libelleReponse1; 
+	public String libelleReponse2; 
+	public String libelleReponse3; 
+	public String libelleReponse4; 
+	
+	public questionReponse[] questionsCandidat;
+	
+	
 	
 	public questionReponse(String cq)
 	{
@@ -50,9 +57,7 @@ public class questionReponse
 	}
 	
 	public void genererQuestionsCandidat()
-	{
-	
-		
+	{		
 		questionsCandidat = new questionReponse[15];
 		byte valeurGeneree;
 		boolean trouve = false;
@@ -60,7 +65,7 @@ public class questionReponse
 		questionReponse question;
 		
 		
-		// ====>       ici appel de la fonction (DONNEES) pourqu'il me retourne le nombre d'éléments d'une catégorie
+		// ====>       ici ecrire une fonction (DONNEES) pourqu'ils retournent le nombre d'éléments d'une catégorie
 		// ====>  exemple int nbreQuestion=demanderNbreQuestion(catégorie);
 		
 		// ligne qui suit POUR TEST - à effacer quand la fonction données sera terminée
@@ -77,7 +82,7 @@ public class questionReponse
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -85,7 +90,7 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
@@ -100,7 +105,7 @@ public class questionReponse
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -108,7 +113,7 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
@@ -116,7 +121,7 @@ public class questionReponse
 		
 		// VA CHERCHER LA QUESTION STRESS - QUESTION 11
 		question = new questionReponse("S");
-		question.numeroQuestion = 1;
+		question.numQuestion = 1;
 		questionsCandidat[i] = question;
 		i++;
 		
@@ -132,7 +137,7 @@ public class questionReponse
 			String cat = "LE" + tableauLangagesExotiques[valeurGeneree];
 			question = new questionReponse(cat);
 			questionsCandidat[i] = question;
-			questionsCandidat[i].numeroQuestion=(byte)compteurTemp;
+			questionsCandidat[i].numQuestion=(byte)compteurTemp;
 			compteurTemp++;
 			i++;
 		}
@@ -146,7 +151,7 @@ public class questionReponse
 			
 			for(int j = 0; j < i; j++)
 			{
-				if(valeurGeneree == questionsCandidat[j].numeroQuestion)
+				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
 					trouve = true;
 				}
@@ -154,41 +159,50 @@ public class questionReponse
 			
 			if(trouve == false)
 			{
-				question.numeroQuestion = valeurGeneree;
+				question.numQuestion = valeurGeneree;
 				questionsCandidat[i] = question;
 				i++;
 			}
 		}
 		
+		chercherQuestionRéponse(questionsCandidat);				
+		
 		// Fonctions test -- à effacer par la suite
 		affichageTableauGenere(questionsCandidat,15);		
-		chercherQuestionRéponse(0);		
+		
 	}
 	
 	/**
-	 *  Cette fonction est appelé à partir de panelQuestion.java
-	 * @param numQuestion paramètre initialiser lors de l'appel de la fonction
+	 *  Cette fonction est la suite de la fonction genererQuestionsCandidat()
+	 *  Elle a pour but d'envoyer le tableau généré à la couche Données pour qu'il puisse y rajouter les libéllés des questions et réponses associés
+	 * @param //questionsCandidat paramètre initialiser lors de la fonction précédente et envoyé en parmètre à la fonction chercherQuestionsBDD()
 	 */
-	public void chercherQuestionRéponse(int numQuestion)
-	{
-		numQuestion=0;   // Pour test
+	public void chercherQuestionRéponse(questionReponse[] questionsCandidat)
+	{		
+		// Pour test à effacer quand la couche DONNEES aura créé sa fonction
+		questionsCandidat[0].libelleQuestion="Qui est charli?";
+		questionsCandidat[0].libelleReponse1="un clown";
+		questionsCandidat[0].libelleReponse2="un PITRE";
+		questionsCandidat[0].libelleReponse3="un bdd";
+		questionsCandidat[0].libelleReponse4="un tartuffe";
 		
-		String codeQuestion;	
-			
-		codeQuestion=questionsCandidat[numQuestion].categorieQuestion+questionsCandidat[numQuestion].numeroQuestion;		
-		System.out.println("code:" +codeQuestion );
-		
+		questionsCandidat[1].libelleQuestion="Capitale de la France?";
+		questionsCandidat[1].libelleReponse1="Marseille";
+		questionsCandidat[1].libelleReponse2="Marseille";
+		questionsCandidat[1].libelleReponse3="Paris";
+		questionsCandidat[1].libelleReponse4="Marseille";
 		
 		// ici mettre la fonction qui demande à la couche DONNEES les questions générées aléatoirement avec quetion,4 reponse et index_table de la question
-		// exemple: String <structure> = chercherQuestionBDD(codeQuestion);	
+		// la couche DONNEES doit directement remplir le tableau passé en paramètre- Cyril
+		// exemple:  chercherQuestionBDD(questionsCandidat);	
 	}
 	
-	//fonction tests sur console
+	//fonction tests sur console - A effacer par la suite
 	public void affichageTableauGenere(questionReponse[] tab, int l)
 	{
 		for(int i = 0; i < l; i++)
 		{
-			System.out.println("Categorie "+tab[i].categorieQuestion+" n° question:"+tab[i].numeroQuestion);
+			System.out.println("Categorie "+tab[i].categorieQuestion+" n° question:"+tab[i].numQuestion);
 		
 		}
 	}
