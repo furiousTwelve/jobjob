@@ -173,7 +173,7 @@ public class ConnectionDB
 		 * 
 		 */
 		String sql3 = "SELECT * FROM reponse WHERE idReponse ='"+numq+"'; ";
-		
+		String sql4 = "SELECT * FROM question WHERE numero ='"+numq+"'; ";
 		/*
 		 * la methode executeQuery me permet de lancer la requete 
 		 * avec la chaine qui la contient sql3
@@ -200,7 +200,7 @@ public class ConnectionDB
 					Rep2		= res.getString("reponse2");
 					Rep3		= res.getString("reponse3");
 					Rep4		= res.getString("reponse4");
-					question	= res.getString("qtexte");
+					
 					
 		} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -208,15 +208,9 @@ public class ConnectionDB
 		}
 
 		/*
-		 * J'affiche le contenu dans la console pour vérifier que les 4 propositions correspondent
-		 * bien
+		 *remplit les 4 propositions de reponses dans l'objet de type questionReponse
 		 */
-		System.out.println(Rep1);
-		System.out.println(Rep2);
-		System.out.println(Rep3);
-		System.out.println(Rep4);
-
-		questrep.libelleQuestion=question;
+		
 		
 		questrep.libelleReponse1=Rep1;
 		questrep.libelleReponse2=Rep2;
@@ -230,6 +224,43 @@ public class ConnectionDB
 			}
 		
 	}finally{}
+		try {
+
+			res = (ResultSet) st.executeQuery(sql4);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("impossible d effectuer la requete");
+			e.printStackTrace();
+
+		}
+		try {
+			try {
+				while (res.next()) {
+					try {
+
+						question = res.getString("qtexte");
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					/*
+					 * J'affiche le contenu dans la console pour vérifier que
+					 * les 4 propositions correspondent bien
+					 */
+
+
+					questrep.libelleQuestion = question;
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} finally {
+		}
 	}
 
 	
