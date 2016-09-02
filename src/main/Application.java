@@ -97,6 +97,21 @@ public class Application
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					}
+				/*
+				 * recupération des réponses après avoir passé en paramètre le numero de la question
+				 * on va temporairement instancier un objet questionReponse pour tester
+				 * il faudra l'enlever par la suite
+				 */
+				try {
+					questionReponse qr  = new questionReponse();
+					qr.numQuestion=2;
+					
+					cdb.chercherQestionEnBase(qr);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				
 				
 				new Application();

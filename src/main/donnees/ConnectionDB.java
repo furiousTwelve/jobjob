@@ -28,6 +28,8 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
+import main.metier.questionReponse;
+
 public class ConnectionDB 
 
 {
@@ -136,6 +138,85 @@ public class ConnectionDB
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * Méthode pour récupérer les réponses liées à la question passée en paramètres
+	 * 
+	 */
+	public static void chercherQestionEnBase(questionReponse questrep) throws ClassNotFoundException
+	{
+		ResultSet	res				=null;
+		String		Rep1 			= "";
+		String		Rep2			= "";
+		String		Rep3			= "";
+		String		Rep4			= "";
+		String		question		= "";
+		byte		numq			=0;
+		
+		/*
+		 * je recupère le numero de question de mon objet questrep
+		 * je le stocke dans une variable numq
+		 * 
+		 */
+		 numq 		= questrep.numQuestion;
+		
+		/*
+		 * je met dans une chaine de caractères nommée sql3 la requête SQL
+		 * en prenant soin de mettre mon paramètre numq.
+		 * 
+		 */
+		String sql3 = "SELECT * FROM reponse WHERE idReponse ='"+numq+"'; ";
+		
+		/*
+		 * la methode executeQuery me permet de lancer la requete 
+		 * avec la chaine qui la contient sql3
+		 */
+		try {
+			
+			res = (ResultSet) st.executeQuery(sql3);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("impossible d effectuer la requete");
+			e.printStackTrace();
+			
+		}
+		/*
+		 * Puis pour l'instant je stocke les éléments contenus 
+		 * dans chaque cellule correspondant aux 4 propositions de réponses
+		 * 
+		 */
+		try {
+			try {
+				while (res.next()) {
+					try{
+					Rep1 = res.getString("reponse1");
+					Rep2 = res.getString("reponse2");
+					Rep3 = res.getString("reponse3");
+					Rep4 = res.getString("reponse4");
+					
+		} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+		}
+
+		/*
+		 * J'affiche le contenu dans la console pour vérifier que les 4 propositions correspondent
+		 * bien
+		 */
+		System.out.println(Rep1);
+		System.out.println(Rep2);
+		System.out.println(Rep3);
+		System.out.println(Rep4);
+
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}finally{}
 	}
 	
 }
