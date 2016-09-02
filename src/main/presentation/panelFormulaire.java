@@ -53,7 +53,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	
 	protected JFormattedTextField fieldNom = new JFormattedTextField();
 	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
-	protected JTextField fieldMail = new JTextField();
+	protected JFormattedTextField fieldMail = new JFormattedTextField();
 	protected JFormattedTextField fieldTelephone = new JFormattedTextField();
 	protected JFormattedTextField fieldId = new JFormattedTextField();
 
@@ -108,12 +108,12 @@ public class panelFormulaire extends JPanel implements ActionListener{
 //		JPanel panelLogo = new JPanel();
 //		panelLogo.setLayout(new GridLayout(0, 3));
 //		
-//			//Création du logo
-//			ImageIcon logo = new ImageIcon("Logo_Afpa.png");
-//			Image img = logo.getImage();
-//			Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-//			logo = new ImageIcon(newImg);
-//			JLabel logoFinal = new JLabel(logo);
+			//Création du logo
+			ImageIcon logo = new ImageIcon("Logo_Afpa.png");
+			Image img = logo.getImage();
+			Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+			logo = new ImageIcon(newImg);
+			JLabel logoFinal = new JLabel(logo);
 //			
 //			//TODO : faire une jolie boucle pour renplacer cette déclaration longue et brutale
 //			//Création des "cases vides"
@@ -174,8 +174,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								fieldPrenom = new JFormattedTextField(maskNomPrenom);
 								
 								
-								MaskFormatter maskTelephone = new MaskFormatter("**.**.**.**.**");
-								maskTelephone.setValidCharacters("0123456789");
+								MaskFormatter maskTelephone = new MaskFormatter("***************");
+								maskTelephone.setValidCharacters("+()0123456789 ");
 								fieldTelephone = new JFormattedTextField(maskTelephone);
 								fieldId = new JFormattedTextField();
 //						
@@ -238,110 +238,142 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		setLayout(gb);
+		fieldMail.setPreferredSize(fieldNom.getPreferredSize());
+		fieldTelephone.setPreferredSize(fieldNom.getPreferredSize());
+		fieldId.setPreferredSize(fieldNom.getPreferredSize());
+		
+		//Placement de la barre de menu en haut à gauche
 		gbc.weightx=1;
-		gbc.weighty=1;
+		gbc.weighty=0;
+		gbc.gridx=0;
+		gbc.gridy=0;
 		//gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(menuBar, gbc);
 		
+		
+		//Placement du label nom, ainsi que son champ de texte
 		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		gbc.gridwidth= 1;
 		gbc.gridheight= 1;
-//		gbc.weightx=0;
-//		gbc.weighty=0;
+		gbc.weightx=0;
+		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champNom,gbc);
 		
 		gbc.gridx =2;
-		gbc.gridy =1;
+		gbc.gridy =2;
 		gbc.gridwidth =GridBagConstraints.NONE;
 		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldNom,gbc);
 		
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.gridwidth= GridBagConstraints.NONE;
-		gbc.gridheight= 1;
-//		gbc.weightx=0;
-//		gbc.weighty=0;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
-		gbc.insets = new Insets(10, 15, 0, 0);
-		this.add(champPrenom,gbc);
 		
-		gbc.gridx =2;
-		gbc.gridy =2;
-		gbc.gridwidth =GridBagConstraints.REMAINDER;
-		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE;
-		this.add(fieldPrenom,gbc);
-		
+		//placement du Label prénom ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		gbc.gridwidth= 1;
 		gbc.gridheight= 1;
-//		gbc.weightx=0;
-//		gbc.weighty=0;
+		gbc.weightx=0;
+		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
-		this.add(champ3,gbc);
+		this.add(champPrenom,gbc);
 		
 		gbc.gridx =2;
 		gbc.gridy =3;
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE;
-		this.add(fieldMail,gbc);
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldPrenom,gbc);
 		
+		//placement du Label Mail ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 4;
 		gbc.gridwidth= 1;
 		gbc.gridheight= 1;
-//		gbc.weightx=0;
-//		gbc.weighty=0;
+		gbc.weightx=0;
+		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
-		this.add(champ4,gbc);
+		this.add(champ3,gbc);
 		
 		gbc.gridx =2;
 		gbc.gridy =4;
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE;
-		this.add(fieldTelephone,gbc);
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
+		this.add(fieldMail,gbc);
 		
+		
+		//placement du Label Télephone ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		gbc.gridwidth= 1;
 		gbc.gridheight= 1;
-//		gbc.weightx=0;
-//		gbc.weighty=0;
+		gbc.weightx=0;
+		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10, 15, 0, 0);
+		this.add(champ4,gbc);
+		
+		gbc.gridx =2;
+		gbc.gridy =5;
+		gbc.gridwidth =GridBagConstraints.REMAINDER;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.RELATIVE;
 		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+		this.add(fieldTelephone,gbc);
+		
+		
+		//placement du Label ID ainsi que son champ de texte 
+		gbc.gridx = 1;
+		gbc.gridy =6;
+		gbc.gridwidth= 1;
+		gbc.gridheight= 1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champid,gbc);
 	
 		gbc.gridx =2;
-		gbc.gridy =4;
+		gbc.gridy =6;
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE;
+		gbc.fill = GridBagConstraints.RELATIVE;
+		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldId,gbc);
 		
+		//Placement du bouton sauvegarder
+		gbc.gridx=2;
+		gbc.gridy=7;
+		gbc.weightx=0;
+		gbc.weighty=1;
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		gbc.anchor=GridBagConstraints.BASELINE_LEADING;
+		this.add(boutonSave,gbc);
 		
+		//placement du logo
+		gbc.gridx=2;
+		gbc.gridy=1;
+		gbc.weightx=0;
+		gbc.weighty=0;
+		//gbc.anchor=GridBagConstraints.ABOVE_BASELINE;
+		this.add(logoFinal,gbc);
 		
 
 	}
