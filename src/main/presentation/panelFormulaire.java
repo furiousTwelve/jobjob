@@ -180,7 +180,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								
 								
 								MaskFormatter maskTelephone = new MaskFormatter("***************");
-								maskTelephone.setValidCharacters("+()0123456789 ");
+								maskTelephone.setValidCharacters("+()0123456789");
 								fieldTelephone = new JFormattedTextField(maskTelephone);
 								fieldId = new JFormattedTextField();
 //						
@@ -249,7 +249,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		
 		//Placement de la barre de menu en haut à gauche
 		gbc.weightx=1;
-		gbc.weighty=0;
+		gbc.weighty=1;
 		gbc.gridx=0;
 		gbc.gridy=0;
 		//gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -264,10 +264,10 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridy = 2;
 		gbc.gridwidth= 1;
 		gbc.gridheight= 1;
-		gbc.weightx=0;
+		gbc.weightx=1;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champNom,gbc);
 		
