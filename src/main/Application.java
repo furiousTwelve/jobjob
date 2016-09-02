@@ -61,52 +61,45 @@ public class Application
 //		test.genererQuestionsCandidat();
 //	
 		
-<<<<<<< HEAD
-		/*
-		 *  test ajout candidat en base
-		 *  L'appel de la méthode est en paramètre car en attente de la suite à donner
-		 *   @auteur : Lionel Chialvo
-		 *   
-		 */
-//		try {
-//			cdb.enregistrerNouveauCandidatEnBase(16, "chial", "lionel", "0612458796", "lioe@gmail.com");
-//			System.out.println("Requete exécutée");
-=======
-	//	connection DB
-//		ConnectionDB cdb = new ConnectionDB();
-//		try {
-//			cdb.connectionBase();
->>>>>>> origin/features/metier/#574-2
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-<<<<<<< HEAD
+
 		
-		/*
-		 * recupération d'un candidat dans la base
-		 * @auteur : Lionel Chialvo
-		 */
-		try {
-			cdb.recupererCandidatEnBase(15);
-			} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
-=======
-//		// test ajout candidat en base
-//		try {
-//			cdb.enregistrerNouveauCandidatEnBase(15, "chial", "lionel", "0612458796", "lione@gmail.com");
-//			System.out.println("Requete exécutée");
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
->>>>>>> origin/features/metier/#574-2
-		
-		
-		new Application();
+		//connection DB
+				ConnectionDB cdb = new ConnectionDB();
+				try {
+					cdb.connectionBase();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				/*
+				 *  test ajout candidat en base
+				 *  L'appel de la méthode est en paramètre car en attente de la suite à donner
+				 *   @auteur : Lionel Chialvo
+				 *   
+				 */
+//				try {
+//					cdb.enregistrerNouveauCandidatEnBase(16, "chial", "lionel", "0612458796", "lioe@gmail.com");
+//					System.out.println("Requete exécutée");
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+				
+				/*
+				 * recupération d'un candidat dans la base
+				 * @auteur : Lionel Chialvo
+				 */
+				try {
+					cdb.recupererCandidatEnBase(15);
+					} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+				
+				
+				new Application();
 	
 		
 
