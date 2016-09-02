@@ -320,6 +320,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);
 				
+				
+				laQuestionReponse.chercherQuestionRéponse(questionsCandidat, compteurQuestions-1);
 				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
 				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);

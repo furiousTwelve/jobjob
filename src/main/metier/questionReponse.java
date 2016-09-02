@@ -2,6 +2,8 @@ package main.metier;
 
 import java.util.Random;
 
+import main.donnees.ConnectionDB;
+
 /**
  * 
  * @author Alban
@@ -165,7 +167,7 @@ public class questionReponse
 			}
 		}
 		
-		chercherQuestionRéponse(questionsCandidat);				
+		chercherQuestionRéponse(questionsCandidat,0);				
 		
 		// Fonctions test -- à effacer par la suite
 		affichageTableauGenere(questionsCandidat,15);		
@@ -177,7 +179,7 @@ public class questionReponse
 	 *  Elle a pour but d'envoyer le tableau généré à la couche Données pour qu'il puisse y rajouter les libéllés des questions et réponses associés
 	 * @param //questionsCandidat paramètre initialiser lors de la fonction précédente et envoyé en parmètre à la fonction chercherQuestionsBDD()
 	 */
-	public void chercherQuestionRéponse(questionReponse[] questionsCandidat)
+	public void chercherQuestionRéponse(questionReponse[] questionsCandidat,int compteur)
 	{		
 		// Pour test à effacer quand la couche DONNEES aura créé sa fonction
 		questionsCandidat[0].libelleQuestion="Qui est charli?";
@@ -195,6 +197,17 @@ public class questionReponse
 		// ici mettre la fonction qui demande à la couche DONNEES les questions générées aléatoirement avec quetion,4 reponse et index_table de la question
 		// la couche DONNEES doit directement remplir le tableau passé en paramètre- Cyril
 		// exemple:  chercherQuestionBDD(questionsCandidat);	
+		ConnectionDB laConnection = new ConnectionDB();
+		questionReponse tempQR = new questionReponse();
+		
+		tempQR=questionsCandidat[compteur]; 
+		try {
+			laConnection.chercherQestionEnBase(tempQR);
+			questionsCandidat[compteur]=tempQR;
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	//fonction tests sur console - A effacer par la suite
