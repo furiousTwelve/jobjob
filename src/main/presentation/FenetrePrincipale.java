@@ -55,13 +55,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	
 	// Pour la couche métier
 	private questionReponse laQuestionReponse;
-<<<<<<< HEAD
+
 	public questionReponse[] questionsCandidat;
-=======
 	private TimerGeneral tp;
 	private TimerStress TimerS;
 
->>>>>>> origin/features/metier/#551
 	/**
 	 * 
 	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
@@ -293,7 +291,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 
 		//Passage d'une question à une autre 
-		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16){
+		if(arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16)
+		{
 			// COUCHE METIER
 			byte tempReponse=0;
 			boolean reponseChoisie=false;
@@ -347,24 +346,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			
 			panQuestion.labelTimer.setText("");
-			if(compteurQuestions == 11){
-				
+			if(compteurQuestions == 11)
+			{
 				panQuestion.labelTimer.setText("Timer");
-				
-<<<<<<< HEAD
 			}
-			
-=======
-				TimerS = new TimerStress (120);
-				//Lancer le TimerStress
-				TimerS.start();
-			}
+		
+			TimerS = new TimerStress (120);
+			//Lancer le TimerStress
+			TimerS.start();
+		}
 				
-				//Arrêt à la question 12
-				if(compteurQuestions == 12){
-					TimerS.tache.cancel();
-				}
->>>>>>> origin/features/metier/#551
+		//Arrêt à la question 12
+		if(compteurQuestions == 12){
+			TimerS.tache.cancel();
+		}
 		
 		//Passage du panQuestion au panFin
 
@@ -383,13 +378,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 			
 		}
-		}
-<<<<<<< HEAD
-=======
-		}
-	
->>>>>>> origin/features/metier/#551
-		if(arg0.getSource() == this.panFin.boutonConnection ){
+		
+
+		if(arg0.getSource() == this.panFin.boutonConnection )
+		{
 			
 			//Message d'erreur uniquement si erreurs sur les identifiants
 			
