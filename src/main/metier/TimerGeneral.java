@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class TimerGeneral
 {
 	// ATTRIBUTS DE LA CLASSE
-	int secondPassed = 0;
+	public int secondPassed = 0;
 	int minuteAff = 0;
 	int secondeAff = 0;
 	String secondeAffS = "";
@@ -25,7 +25,7 @@ public class TimerGeneral
 	
 	
     Timer timer = new Timer();
-    TimerTask tache = new TimerTask() 
+    public TimerTask tache = new TimerTask() 
     {     
         @Override
         public void run() 
@@ -67,6 +67,7 @@ public class TimerGeneral
 		}
 		return res;
     }
+
      
 //    public static void main(String[] args) 
 //    {

@@ -16,6 +16,7 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.TimerStress;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
@@ -54,7 +55,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	
 	// Pour la couche métier
 	private questionReponse laQuestionReponse;
+<<<<<<< HEAD
 	public questionReponse[] questionsCandidat;
+=======
+	private TimerGeneral tp;
+	private TimerStress TimerS;
+
+>>>>>>> origin/features/metier/#551
 	/**
 	 * 
 	 * @throws HeadlessException Si jamais il y a un problème d'environnement avec le clavier et/ou souris
@@ -264,6 +271,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{	
 			laQuestionReponse.genererQuestionsCandidat();
 
+			tp = new TimerGeneral(1800);
+			tp.start();
+			
+	
 			this.getContentPane().removeAll();
 			
 			// Couche METIER ==>  Affichage de la première question
@@ -340,8 +351,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 				panQuestion.labelTimer.setText("Timer");
 				
+<<<<<<< HEAD
 			}
 			
+=======
+				TimerS = new TimerStress (120);
+				//Lancer le TimerStress
+				TimerS.start();
+			}
+				
+				//Arrêt à la question 12
+				if(compteurQuestions == 12){
+					TimerS.tache.cancel();
+				}
+>>>>>>> origin/features/metier/#551
 		
 		//Passage du panQuestion au panFin
 
@@ -349,10 +372,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{
 			
 			//Couche metier Timer
-//			TimerGeneral tp = new TimerGeneral();
-//			tp.stop();
-//			return;
-
+			//arrêter le timer après la 15ème question
+			tp.tache.cancel();
+			System.out.println(tp.secondPassed);
+			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -361,6 +384,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		}
 		}
+<<<<<<< HEAD
+=======
+		}
+	
+>>>>>>> origin/features/metier/#551
 		if(arg0.getSource() == this.panFin.boutonConnection ){
 			
 			//Message d'erreur uniquement si erreurs sur les identifiants
