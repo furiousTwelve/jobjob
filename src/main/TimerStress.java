@@ -19,5 +19,8 @@ public class TimerStress extends TimerGeneral {
 		//Timer stress 2min
 		TimerGeneral TimerS = new TimerGeneral(120);
 		System.out.println(TimerS);
+		
+		
+		// commentaire à effacer benji
 	}
 }
