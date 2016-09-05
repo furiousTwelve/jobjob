@@ -18,6 +18,7 @@ import main.donnees.EnregistrementDonnee;
  * @version 1.00
  * 
  * @author Cyril, Benjamin
+ * @khadidja, Damien, Florent
  * @version 1.01
  */
 
