@@ -16,7 +16,6 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import main.TimerStress;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
@@ -58,7 +57,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 	public questionReponse[] questionsCandidat;
 	private TimerGeneral tp;
-	private TimerStress TimerS;
+	private TimerGeneral TimerS;
 
 	/**
 	 * 
@@ -269,7 +268,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{	
 			laQuestionReponse.genererQuestionsCandidat();
 
-			tp = new TimerGeneral(1800);
+			tp = new TimerGeneral(10);
 			tp.start();
 			
 	
@@ -287,6 +286,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panQuestion.boutonValider.addActionListener(this);
 			this.validate();
 			
+			
+			
 		}
 
 
@@ -296,6 +297,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// COUCHE METIER
 			byte tempReponse=0;
 			boolean reponseChoisie=false;
+			
 			
 			if(panQuestion.reponse1.isSelected())
 			{
@@ -345,19 +347,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé", JOptionPane.ERROR_MESSAGE);
 			}
 			
+			
 			panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
 				panQuestion.labelTimer.setText("Timer");
 			}
 		
-			TimerS = new TimerStress (120);
-			//Lancer le TimerStress
-			TimerS.start();
 		}
 				
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
+			TimerS = new TimerGeneral(120);
+			//Lancer le TimerStress
+			TimerS.start();
 			TimerS.tache.cancel();
 		}
 		
@@ -375,9 +378,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFin);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			panFin.boutonConnection.addActionListener(this);
-			this.validate();
-			
+			this.validate();	
 		}
+		
+		
 		
 
 		if(arg0.getSource() == this.panFin.boutonConnection )
@@ -397,6 +401,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panAccueil);
+			this.validate();
+		}
+		
+		if (tp.secondPassed==0) {
+			this.getContentPane().removeAll();
+			this.setContentPane(panFin);
+			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			panFin.boutonConnection.addActionListener(this);
 			this.validate();
 		}
 		
