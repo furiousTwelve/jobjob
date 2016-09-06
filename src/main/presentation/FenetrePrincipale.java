@@ -35,6 +35,7 @@ import main.metier.Recruteur;
  * @author Cyril
  * @author Damien
  * @author Florent
+ * @author Audric
  * 
  * @version 1.02
  */
@@ -47,6 +48,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+	private panelAjouterQuestion panAjouterQuestion;
+	private panelModifierQuestion panModifierQuestion;
+	private panelSupprimerQuestion panSupprimerQuestion;
 	private EnregistrementDonnee ed;
 	
 
@@ -404,11 +408,30 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 		}
 		
-		if (tp.secondPassed==0) {
+
+		//Passage du panFormulaire aux panels ajout modif et supprimer question
+		
+		panAjouterQuestion = new panelAjouterQuestion();
+		panModifierQuestion = new panelModifierQuestion();
+		panSupprimerQuestion = new panelSupprimerQuestion();
+		
+		if(arg0.getSource() == this.panFormulaire.itemAjoutQuestion)
+		{
 			this.getContentPane().removeAll();
-			this.setContentPane(panFin);
-			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			panFin.boutonConnection.addActionListener(this);
+			this.setContentPane(panAjouterQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemModifierQuestion)
+		{
+			this.getContentPane().removeAll();
+			this.setContentPane(panModifierQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemSupprimerQuestion)
+		{
+			this.getContentPane().removeAll();
+			this.setContentPane(panSupprimerQuestion);
+
 			this.validate();
 		}
 		
