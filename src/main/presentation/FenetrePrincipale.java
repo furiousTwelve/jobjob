@@ -42,6 +42,7 @@ import main.metier.Recruteur;
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
+	private panelCategorie panCategorie;
 	private panelConnection panConnection;
 	private panelAccueil panAccueil;
 	private panelFormulaire panFormulaire;
@@ -103,6 +104,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
+		if (arg0.getSource() == this.panCategorie) {
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panCategorie);
+			this.validate();
+			
+		}
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
