@@ -35,18 +35,23 @@ import main.metier.Recruteur;
  * @author Cyril
  * @author Damien
  * @author Florent
+ * @author Audric
  * 
  * @version 1.02
  */
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
+	//private panelCategorie panCategorie;
 	private panelConnection panConnection;
 	private panelAccueil panAccueil;
 	private panelFormulaire panFormulaire;
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+	private panelAjouterQuestion panAjouterQuestion;
+	private panelModifierQuestion panModifierQuestion;
+	private panelSupprimerQuestion panSupprimerQuestion;
 	private EnregistrementDonnee ed;
 	
 
@@ -66,7 +71,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * @author Damien
 	 */
 
-	public FenetrePrincipale() throws HeadlessException, ParseException 
+	public FenetrePrincipale() 
 	{
 		
 	    questionsCandidat = new questionReponse[15]; // Couche METIER
@@ -77,23 +82,28 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setResizable(true);
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setLocationRelativeTo(null);
+		
 
 		panConnection = new panelConnection();
-		
+
+
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
 		panFin = new panelFin();
+		panAjouterQuestion = new panelAjouterQuestion();
+		panModifierQuestion = new panelModifierQuestion();
+		panSupprimerQuestion = new panelSupprimerQuestion();
+
 		ed = new EnregistrementDonnee();
 
-		this.panConnection.boutonConnection.addActionListener(this);
-		
-		//this.setContentPane(panCandidat); // imbrication de notre panel dans notre fenêtre
+		panConnection.boutonConnection.addActionListener(this);
+	
 		this.setContentPane(panConnection); 
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
-	}
+	} 
 
 	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
 	 * @param arg0
@@ -102,6 +112,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
+//		if (arg0.getSource() == this.panCategorie) {
+//			
+//			this.getContentPane().removeAll();
+//			this.setContentPane(panCategorie);
+//			this.validate();
+//			
+//		}
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
@@ -109,6 +126,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		//Passage du panConnection au panAccueil, si id et mdp valides
 		if(arg0.getSource() == this.panConnection.boutonConnection){
+			
 			//Couche METIER
 			boolean acces=false;
 			String recruteur=panConnection.recruteur.getText();
@@ -122,24 +140,34 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 				JOptionPane.showMessageDialog(panFormulaire, "Erreur interne au programme -- Defaut de la connexion au serveur SQL", "Erreur programme", JOptionPane.ERROR_MESSAGE);
 			}
-			System.out.println("acces: "+acces);
+			
 			if(acces==true)
 			{
+				
 				panAccueil = new panelAccueil();
 			
 				this.panAccueil.itemCandidatExistant.addActionListener(this);
 				this.panAccueil.itemNouveauCandidat.addActionListener(this);
 				this.panAccueil.itemNouveauTest.addActionListener(this);
-				this.panAccueil.itemQuitter.addActionListener(panAccueil);
-				this.panAccueil.itemAide.addActionListener(panAccueil);
-			
+				this.panAccueil.itemAjoutQuestion.addActionListener(this);
+				this.panAccueil.itemModifierQuestion.addActionListener(this);
+				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+				
+
+				this.panAccueil.itemAjoutQuestion.addActionListener(this);
+				this.panAccueil.itemModifierQuestion.addActionListener(this);
+				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+				
 				this.getContentPane().removeAll();
 				this.setContentPane(panAccueil);
+
 				this.validate();
+				
+				
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(panFormulaire, "Votre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(panConnection, "Votre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}
@@ -148,7 +176,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
-						
+			System.out.println("ici fin");
+			//panFormulaire = new panelFormulaire();			
+			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -159,8 +189,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 			panFormulaire.itemSauvegarder.addActionListener(this);	
 			panFormulaire.boutonSave.addActionListener(this);
+			
 
+
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
 			this.getContentPane().removeAll();
+
 			this.setContentPane(panFormulaire);
 			this.validate();
 			
@@ -168,16 +205,25 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
 		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
 		{	
+			//panFormulaire = new panelFormulaire();
 			
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
-
+		//  ============================================> Ce bout de code fait planter le programme, à debugger - voir Cyril
 			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
 			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
-			panFormulaire.boutonSearch.addActionListener(this);
+	//		panFormulaire.boutonSearch.addActionListener(this);
+			
+			panFormulaire.itemAjoutQuestion.addActionListener(this);
+			panFormulaire.itemModifierQuestion.addActionListener(this);
+			panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
@@ -195,11 +241,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 */
 		if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
-			//TODO pour  @cyril : à vérifier
+			System.out.println("ici");
+			//panCandidat= new panelCandidat();
+			System.out.println("ici 2");
 			//panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee 
 			System.out.println(panFormulaire.fieldTelephone.getText());
-			
-			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
+
+			// sorti de la condition ==> && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
+			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) 
+
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText()) && panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText()))
 			{
 				panCandidat.buttonStart.addActionListener(this);
@@ -212,9 +262,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			else{
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
-				panFormulaire.champNom.setForeground(Color.BLACK);
+
+		//		panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-				panFormulaire.champPrenom.setForeground(Color.BLACK);
+		//		panFormulaire.champPrenom.setForeground(Color.BLACK);
+
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
 				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
@@ -235,38 +287,41 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					panFormulaire.champ3.setForeground(Color.RED);
 					str = str + "\n - E-mail ";
 				}
-				if(panFormulaire.fieldTelephone.getText().indexOf(" ") >= 0){
-					panFormulaire.fieldTelephone.setForeground(Color.RED);
-					panFormulaire.champ4.setForeground(Color.RED);
-					str = str + "\n - Téléphone ";
-				}
+
 				
 				JOptionPane.showMessageDialog(panFormulaire, str, "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}
 		
-		if(arg0.getSource() == this.panFormulaire.boutonSearch){
-			
-			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
-				panCandidat.buttonStart.addActionListener(this);
-
-				this.getContentPane().removeAll();
-				this.setContentPane(panCandidat);
-				this.validate();
-			}
-			else{
-				
-				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			
-		}
+//		if(arg0.getSource() == this.panFormulaire.boutonSearch){
+//			
+//			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
+//				panCandidat.buttonStart.addActionListener(this);
+//
+//				this.getContentPane().removeAll();
+//				this.setContentPane(panCandidat);
+//				this.validate();
+//			}
+//			else{
+//				
+//				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+//				
+//			}
+//			
+//		}
 
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
 		{	
-			laQuestionReponse.genererQuestionsCandidat();
+			panQuestion= new panelQuestion();
+			try 
+			{
+				laQuestionReponse.genererQuestionsCandidat();
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
 
 			tp = new TimerGeneral(10);
 			tp.start();
@@ -332,8 +387,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);
 				
-				
-				laQuestionReponse.chercherQuestionRéponse(questionsCandidat, compteurQuestions-1);
+
+				try {
+					laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat,compteurQuestions-1);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
 				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
@@ -368,7 +429,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if(compteurQuestions == 16)
 		{
-			
+			panFin = new panelFin();
 			//Couche metier Timer
 			//arrêter le timer après la 15ème question
 			tp.tache.cancel();
@@ -396,19 +457,41 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.panAccueil.itemCandidatExistant.addActionListener(this);
 			this.panAccueil.itemNouveauCandidat.addActionListener(this);
 			this.panAccueil.itemNouveauTest.addActionListener(this);
-			this.panAccueil.itemQuitter.addActionListener(panAccueil);
-			this.panAccueil.itemAide.addActionListener(panAccueil);
+//			this.panAccueil.itemQuitter.addActionListener(panAccueil);
+//			this.panAccueil.itemAide.addActionListener(panAccueil);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panAccueil);
 			this.validate();
 		}
 		
-		if (tp.secondPassed==0) {
+
+		
+		//Passage du panFormulaire aux panels ajout modif et supprimer question
+		
+		if(arg0.getSource() == this.panFormulaire.itemAjoutQuestion || arg0.getSource() == this.panAccueil.itemAjoutQuestion)
+
+		{
+			System.out.println("panel ajout question");
+			panAjouterQuestion = new panelAjouterQuestion();
+			
 			this.getContentPane().removeAll();
-			this.setContentPane(panFin);
-			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			panFin.boutonConnection.addActionListener(this);
+			this.setContentPane(panAjouterQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemModifierQuestion || arg0.getSource() == this.panAccueil.itemModifierQuestion)
+		{
+			panModifierQuestion = new panelModifierQuestion();
+			this.getContentPane().removeAll();
+			this.setContentPane(panModifierQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemSupprimerQuestion || arg0.getSource() == this.panAccueil.itemSupprimerQuestion)
+		{
+			panSupprimerQuestion = new panelSupprimerQuestion();
+			this.getContentPane().removeAll();
+			this.setContentPane(panSupprimerQuestion);
+
 			this.validate();
 		}
 		
