@@ -92,6 +92,7 @@ public class panelConnection extends JPanel {
 		this.add(labelVide6);
 		this.add(panelboutonConnection);
 		this.add(labelVide8);
+		
 	}
 		
 }

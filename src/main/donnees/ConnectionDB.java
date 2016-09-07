@@ -58,9 +58,9 @@ public class ConnectionDB
 		// chargement du driver
 		Class.forName("com.mysql.jdbc.Driver");
 		// recuperation de la connexion
-		System.out.println("cn :"+cn);
+	
 		cn = (Connection) DriverManager.getConnection(url, login, passwd);
-	//	System.out.println("cn :"+cn);
+	
 		// creation d'un statement pour pouvoir lancer des requêtes
 		st = (Statement) cn.createStatement();
 		// affiche dans la console si la connecion est ok.

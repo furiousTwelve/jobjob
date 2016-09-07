@@ -54,6 +54,9 @@ public class panelAccueil extends JPanel implements ActionListener{
 //		itemModifierQuestion.addActionListener(this);
 //		itemSupprimerQuestion.addActionListener(this);
 		
+		itemQuitter.addActionListener(this);
+		itemAide.addActionListener(this);
+		
 		//Constitution de la barre de menu, qui ira au Nord
 		menuBar.add(menuFichier);
 		menuBar.add(menuQuiz);
@@ -105,9 +108,8 @@ public class panelAccueil extends JPanel implements ActionListener{
 		// Constitution du panel général
 		this.setLayout(new BorderLayout());
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(menuBar, BorderLayout.NORTH);
+		this.add(menuBar, BorderLayout.NORTH);	
 		
-		System.out.println("ici1");
 	}
 
 	
@@ -115,6 +117,7 @@ public class panelAccueil extends JPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent arg0) {
 		// Affichage de l'aide
+		
 		if(arg0.getSource() == this.itemAide)
 		{	
 			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");

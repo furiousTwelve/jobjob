@@ -204,7 +204,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								MaskFormatter maskTelephone;
 								try {
 									maskTelephone = new MaskFormatter("***************");
-									maskTelephone.setValidCharacters("+()0123456789");
+									maskTelephone.setValidCharacters("+()0123456789 ");
 									fieldTelephone = new JFormattedTextField(maskTelephone);
 									fieldId = new JFormattedTextField();
 								} catch (ParseException e) {
