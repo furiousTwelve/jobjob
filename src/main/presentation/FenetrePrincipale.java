@@ -42,7 +42,7 @@ import main.metier.Recruteur;
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-//	private panelCategorie panCategorie;
+	private panelCategorie panCategorie;
 	private panelConnection panConnection;
 	private panelAccueil panAccueil;
 	private panelFormulaire panFormulaire;
@@ -84,11 +84,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setLocationRelativeTo(null);
 
 		panConnection = new panelConnection();
-//		
-//		panFormulaire = new panelFormulaire();
-//		panCandidat = new panelCandidat();
-//		panQuestion = new panelQuestion();
-//		panFin = new panelFin();
+		
+		panFormulaire = new panelFormulaire();
+		panCandidat = new panelCandidat();
+		panQuestion = new panelQuestion();
+		panFin = new panelFin();
 		ed = new EnregistrementDonnee();
 
 		this.panConnection.boutonConnection.addActionListener(this);
@@ -107,13 +107,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-//		if (arg0.getSource() == this.panCategorie) {
-//			
-//			this.getContentPane().removeAll();
-//			this.setContentPane(panCategorie);
-//			this.validate();
-//			
-//		}
+		if (arg0.getSource() == this.panCategorie) {
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panCategorie);
+			this.validate();
+			
+		}
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
@@ -160,12 +160,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
-			try {
-				panFormulaire = new panelFormulaire();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
+						
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -185,12 +180,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
 		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
 		{	
-			try {
-				panFormulaire = new panelFormulaire();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
