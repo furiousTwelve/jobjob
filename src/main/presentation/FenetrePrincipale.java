@@ -35,6 +35,7 @@ import main.metier.Recruteur;
  * @author Cyril
  * @author Damien
  * @author Florent
+ * @author Audric
  * 
  * @version 1.02
  */
@@ -47,6 +48,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+	private panelAjouterQuestion panAjouterQuestion;
+	private panelModifierQuestion panModifierQuestion;
+	private panelSupprimerQuestion panSupprimerQuestion;
 	private EnregistrementDonnee ed;
 	
 
@@ -84,6 +88,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
 		panFin = new panelFin();
+		panAjouterQuestion = new panelAjouterQuestion();
+		panModifierQuestion = new panelModifierQuestion();
+		panSupprimerQuestion = new panelSupprimerQuestion();
 		ed = new EnregistrementDonnee();
 
 		this.panConnection.boutonConnection.addActionListener(this);
@@ -132,7 +139,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.panAccueil.itemNouveauTest.addActionListener(this);
 				this.panAccueil.itemQuitter.addActionListener(panAccueil);
 				this.panAccueil.itemAide.addActionListener(panAccueil);
+				this.panAccueil.itemAjoutQuestion.addActionListener(this);
 			
+				this.panAccueil.itemAjoutQuestion.addActionListener(this);
+				this.panAccueil.itemModifierQuestion.addActionListener(this);
+				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+				
 				this.getContentPane().removeAll();
 				this.setContentPane(panAccueil);
 				this.validate();
@@ -160,6 +172,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.itemSauvegarder.addActionListener(this);	
 			panFormulaire.boutonSave.addActionListener(this);
 
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
@@ -178,6 +194,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
 			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
 			panFormulaire.boutonSearch.addActionListener(this);
+			
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
@@ -404,11 +424,26 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 		}
 		
-		if (tp.secondPassed==0) {
+
+		
+		//Passage du panFormulaire aux panels ajout modif et supprimer question
+		
+		if(arg0.getSource() == this.panFormulaire.itemAjoutQuestion || arg0.getSource() == this.panAccueil.itemAjoutQuestion)
+		{
 			this.getContentPane().removeAll();
-			this.setContentPane(panFin);
-			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			panFin.boutonConnection.addActionListener(this);
+			this.setContentPane(panAjouterQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemModifierQuestion || arg0.getSource() == this.panAccueil.itemModifierQuestion)
+		{
+			this.getContentPane().removeAll();
+			this.setContentPane(panModifierQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panFormulaire.itemSupprimerQuestion || arg0.getSource() == this.panAccueil.itemSupprimerQuestion)
+		{
+			this.getContentPane().removeAll();
+			this.setContentPane(panSupprimerQuestion);
 			this.validate();
 		}
 		

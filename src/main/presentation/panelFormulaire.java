@@ -33,18 +33,23 @@ import javax.swing.text.MaskFormatter;
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
  * @author Florent
+ * @author Audric
  */
 public class panelFormulaire extends JPanel implements ActionListener{
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuFichier = new JMenu("Fichier");
+	private JMenu menuQuiz = new JMenu("Quiz");
 	private JMenu menuAide = new JMenu("Aide");
 	protected JMenu itemNouveauTest= new JMenu("Nouveau Test");
 	protected JMenuItem itemCandidatExistant = new JMenuItem("Candidat Existant");
 	protected JMenuItem itemNouveauCandidat = new JMenuItem("Nouveau Candidat");
 	protected JMenuItem itemSauvegarder = new JMenuItem("Sauvegarder");
 	protected JMenuItem itemQuitter = new JMenuItem("Quitter");
+	protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
+	protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
+	protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
 	protected JMenuItem itemAide = new JMenuItem("Aide");
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
@@ -88,10 +93,14 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		itemNouveauTest.addActionListener(this);			
 		itemQuitter.addActionListener(this);	
 		itemAide.addActionListener(this);	
+		itemAjoutQuestion.addActionListener(this);
+		itemModifierQuestion.addActionListener(this);
+		itemSupprimerQuestion.addActionListener(this);
 		
 		
 		//Constitution de la barre de menu : menuBar
 		menuBar.add(menuFichier);
+		menuBar.add(menuQuiz);
 		menuBar.add(menuAide);
 		
 		menuFichier.add(itemNouveauTest);
@@ -101,6 +110,10 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		itemSauvegarder.setEnabled(false);
 		menuFichier.addSeparator();
 		menuFichier.add(itemQuitter);
+		
+		menuQuiz.add(itemAjoutQuestion);
+		menuQuiz.add(itemModifierQuestion);
+		menuQuiz.add(itemSupprimerQuestion);
 		
 		menuAide.add(itemAide);
 		
