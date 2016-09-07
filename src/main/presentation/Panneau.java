@@ -9,7 +9,7 @@ import java.awt.LayoutManager;
 import javax.swing.JPanel;
 
 /**
- * Définit un panel qui ser imbriqué dans la fenêtre principale
+ * Définit un panel qui sera imbriqué dans la fenêtre principale
  * @deprecated
  * @author david
  *

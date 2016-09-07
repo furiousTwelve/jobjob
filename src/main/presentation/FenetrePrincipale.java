@@ -31,7 +31,6 @@ import main.metier.Statistiques;
  * <li>Un panneau sera déclaré pour chaque interface/étape de l'application ...</li>
  * </ul>
  * 
- * 
  * @author Mathieu
  * @author Cyril
  * @author Damien
@@ -73,7 +72,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * @throws ParseException 
 	 * @author Damien
 	 */
-
 	public FenetrePrincipale() 
 	{
 		// test graphe khadidja

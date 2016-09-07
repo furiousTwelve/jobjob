@@ -165,7 +165,7 @@ public class ConnectionDB
 		 * je le stocke dans une variable numq
 		 * 
 		 */
-		 numq 		= questrep.numQuestion;
+		 numq = questrep.numQuestion;
 		
 		/*
 		 * je met dans une chaine de caractères nommée sql3 la requête SQL
@@ -194,7 +194,8 @@ public class ConnectionDB
 		 */
 		try {
 			try {
-				while (res.next()) {
+				while (res.next()) 
+				{
 					try{
 					Rep1		= res.getString("reponse1");
 					Rep2		= res.getString("reponse2");
@@ -210,15 +211,14 @@ public class ConnectionDB
 		/*
 		 *remplit les 4 propositions de reponses dans l'objet de type questionReponse
 		 */
-		
-		
-		questrep.libelleReponse1=Rep1;
-		questrep.libelleReponse2=Rep2;
-		questrep.libelleReponse3=Rep3;
-		questrep.libelleReponse4=Rep4;
+		questrep.libelleReponse1 = Rep1;
+		questrep.libelleReponse2 = Rep2;
+		questrep.libelleReponse3 = Rep3;
+		questrep.libelleReponse4 = Rep4;
 		
 				}
-			} catch (SQLException e) {
+			} catch (SQLException e) 
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

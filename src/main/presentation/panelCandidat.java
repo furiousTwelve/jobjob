@@ -52,9 +52,6 @@ public class panelCandidat extends JPanel  {
 	 */
 	public panelCandidat() 
 	{	
-		
-
-			
 		buttonStart = new JButton("start", new ImageIcon("play_button.png"));
 		Font myFont = new Font("Serif", Font.ITALIC | Font.BOLD, 12);
 	    Font newFont = myFont.deriveFont(40F);
@@ -80,7 +77,6 @@ public class panelCandidat extends JPanel  {
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		this.add(iconeEntreprise,gbc);
 		
-		
 		gbc.gridy =4;
 		gbc.gridx =0;
 	//	gbc.weightx=5;
@@ -88,32 +84,25 @@ public class panelCandidat extends JPanel  {
 		gbc.fill=GridBagConstraints.NONE;
 		
 		this.add(buttonStart, gbc);
-
 		
-		
-		buttonStart.setPreferredSize(new Dimension(150,100));
-		
-		
-
-	
-				
+		buttonStart.setPreferredSize(new Dimension(150,100));		
 	}
 
-public void startTimer(){
-	TimerGeneral tp = new TimerGeneral(1800);
-	tp.start();
-}
+	public void startTimer(){
+		TimerGeneral tp = new TimerGeneral(1800);
+		tp.start();
+	}
+		
+	public void randomQuestionsJava(){
+		
+	}
 	
-public void randomQuestionsJava(){
+	public void randomQuestionsCultureG(){
+		
+	}
 	
-}
-
-public void randomQuestionsCultureG(){
-	
-}
-
-public void randomQuestionsCodeExo(){
-	
-}
+	public void randomQuestionsCodeExo(){
+		
+	}
 
 }
