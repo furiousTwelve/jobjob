@@ -85,7 +85,23 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	public panelFormulaire() throws ParseException {
 		
 		//Ajout de Listener sur tous les boutons nécessaires
-		itemNouveauTest.addActionListener(this);			
+		//itemNouveauTest.addActionListener(this);			
+		
+		itemCandidatExistant.addActionListener(this);
+		itemNouveauCandidat.addActionListener(this);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		itemQuitter.addActionListener(this);	
 		itemAide.addActionListener(this);	
 		
@@ -177,6 +193,13 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
 								fieldNom = new JFormattedTextField(maskNomPrenom);
 								fieldPrenom = new JFormattedTextField(maskNomPrenom);
+								fieldNom.setPreferredSize(new Dimension(200,20));
+								fieldPrenom.setPreferredSize(new Dimension(200,20));
+								
+								
+								
+								
+								
 								
 								
 								MaskFormatter maskTelephone = new MaskFormatter("***************");
@@ -423,6 +446,50 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		if(e.getSource() == itemAide)
 		{
 			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
+		}
+		
+				
+		if(e.getSource() == itemCandidatExistant)
+		{
+			
+			this.fieldNom.setText(null);
+			this.fieldPrenom.setText(null);
+			this.fieldMail.setText(null);
+			this.fieldTelephone.setText(null);
+			this.fieldId.setText(null);
+			
+			this.fieldNom.setEditable(false);
+			this.fieldPrenom.setEditable(false);
+			this.fieldMail.setEditable(false);
+			this.fieldTelephone.setEditable(false);
+			this.fieldId.setEditable(true);
+
+			this.remove(this.boutonSave);
+			this.add(this.boutonSearch);
+			this.boutonSearch.addActionListener(this);
+			
+			
+			this.validate();
+		}
+		
+		
+		
+		if(e.getSource() == itemNouveauCandidat)
+		{
+			
+			
+			this.fieldNom.setEditable(true);
+			this.fieldPrenom.setEditable(true);
+			this.fieldMail.setEditable(true);
+			this.fieldTelephone.setEditable(true);
+			this.fieldId.setEditable(false);
+
+			this.remove(this.boutonSearch);
+			this.add(this.boutonSave);
+			this.boutonSave.addActionListener(this);
+			
+			
+			this.validate();
 		}
 	}
 

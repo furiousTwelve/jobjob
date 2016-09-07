@@ -45,6 +45,7 @@ public class panelAccueil extends JPanel implements ActionListener{
 	 */
 	public panelAccueil() {
 		
+		
 		//Constitution de la barre de menu, qui ira au Nord
 		menuBar.add(menuFichier);
 		menuBar.add(menuAide);

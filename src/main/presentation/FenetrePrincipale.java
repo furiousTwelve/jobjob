@@ -36,6 +36,8 @@ import main.metier.Recruteur;
  * @author Cyril
  * @author Damien
  * @author Florent
+ * @author Lionel 
+ * @author Marc
  * 
  * @version 1.02
  */
@@ -133,6 +135,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.panAccueil.itemNouveauTest.addActionListener(this);
 				this.panAccueil.itemQuitter.addActionListener(panAccueil);
 				this.panAccueil.itemAide.addActionListener(panAccueil);
+				
+				
+				
 			
 				this.getContentPane().removeAll();
 				this.setContentPane(panAccueil);
@@ -147,9 +152,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
-		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
+		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
+			if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
 		{	
-						
+			
+			
+			
+			
+			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -165,10 +175,51 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 			
+			
+			
 		}
+			
+			
+			if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
+			{	
+				
+				
+				
+				
+				
+				panFormulaire.fieldNom.setEditable(true);
+				panFormulaire.fieldPrenom.setEditable(true);
+				panFormulaire.fieldMail.setEditable(true);
+				panFormulaire.fieldTelephone.setEditable(true);
+				panFormulaire.fieldId.setEditable(false);
+
+				panFormulaire.itemSauvegarder.setEnabled(true);
+
+				panFormulaire.itemSauvegarder.addActionListener(this);	
+				panFormulaire.boutonSave.addActionListener(this);
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panFormulaire);
+				this.validate();
+				
+				
+				
+			}	
+			
+		
+			
+			
+			
+			
+			
+			
+			
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
-		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
+		if(arg0.getSource() == panAccueil.itemCandidatExistant || arg0.getSource() == panFormulaire.itemCandidatExistant)
 		{	
+			
+			
+			
 			
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
@@ -176,8 +227,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
 
-			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
-			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
+			panFormulaire.remove(panFormulaire.boutonSave);
+			panFormulaire.add(panFormulaire.boutonSearch);
 			panFormulaire.boutonSearch.addActionListener(this);
 			
 			this.getContentPane().removeAll();
