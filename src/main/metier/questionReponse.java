@@ -3,6 +3,7 @@ package main.metier;
 import java.util.Random;
 
 import main.donnees.ConnectionDB;
+import main.donnees.EnregistrementDonnee;
 
 /**
  * Structure utilisée pour générer le tableau contenant les questions auquelles le candidat devra répondre
@@ -103,6 +104,7 @@ public class questionReponse
 			{
 				if(valeurGeneree == questionsCandidat[j].numQuestion)
 				{
+					
 					trouve = true;
 				}
 			}
@@ -124,7 +126,7 @@ public class questionReponse
 		// GENERE LES QUESTIONS 12 A 14
 		valeurGeneree = (byte) (r.nextInt(11));
 		String[] tableauLangagesExotiques = {"DELPHI", "PERL", "FORTRAN", "ADA", "PASCAL", "SMALLTALK", "TCLTK", "LISP", "VISUALBASIC", "SQUIRREL", "COBOL", "EIFFEL"};
-		String langage = tableauLangagesExotiques[valeurGeneree];
+//		String langage = tableauLangagesExotiques[valeurGeneree];
 		
 		int compteurTemp=1;
 		while(i < 14)
@@ -222,8 +224,12 @@ public class questionReponse
 	//recupération de la réponse du candidat
 	public void recupereReponse(byte reponse,int compteur)
 	{
+		System.out.println("Question : "+compteur);
+		System.out.println("Reponse : "+reponse);
 		
-		System.out.println("Reponse :"+reponse);
+		
+//		EnregistrementDonnee ed = new EnregistrementDonnee();
+//		ed.enregistrerReponse(reponse,compteur); // enregistrement de la reponse donneepar l'utilisateur correspondant à la question n° compteur
 		
 		// comparer réponse avec réponse correcte
 		

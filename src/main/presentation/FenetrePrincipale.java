@@ -250,12 +250,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText()) && panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText()))
 			{
+				Candidat leCandidat = new Candidat(panFormulaire);
+				leCandidat.enregistrerNouveauCandidat();
 				panCandidat.buttonStart.addActionListener(this);
 				this.getContentPane().removeAll();
 				this.setContentPane(panCandidat);
 				this.validate();
-				Candidat leCandidat = new Candidat();
-				leCandidat.enregistrerNouveauCandidat(panFormulaire);	
+					
 			}
 			else{
 				String str = "Erreur(s) sur le(s) champ(s) : ";
@@ -412,8 +413,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			{
 				panQuestion.labelTimer.setText("Timer");
 			}
+			
+			
 		
 		}
+		
 				
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
@@ -439,6 +443,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFin.boutonConnection.addActionListener(this);
 			this.validate();	
 		}
+		
 		
 		
 		
