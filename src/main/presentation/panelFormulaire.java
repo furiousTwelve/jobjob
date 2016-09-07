@@ -90,7 +90,6 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	public panelFormulaire() {
 		
 		
-		System.out.println("ici 2");
 		//Ajout de Listener sur tous les boutons nécessaires
 		itemNouveauTest.addActionListener(this);			
 		itemQuitter.addActionListener(this);	
