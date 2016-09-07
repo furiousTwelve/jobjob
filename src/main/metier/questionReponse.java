@@ -5,36 +5,32 @@ import java.util.Random;
 import main.donnees.ConnectionDB;
 
 /**
+ * Structure utilisée pour générer le tableau contenant les questions auquelles le candidat devra répondre
  * 
+ * categorieQuestion - La catégorie de la question qui peut être :
+ * 							"CJ" pour Culture Java 
+ * 							"CG" pour Culture Générale Informatique
+ * 							"LE" pour Langage Exotique
+ * 							"S" pour Stress
+ * 					
+ * numeroQuestion - Le numéro que la question a dans le panel de questions
+ * 
+ * reponseCorrecte - La réponse correcte à la question
+ * 
+ * reponseCandidat - La réponse du candidat
+ * 
+ * timerAuMomentDeLaReponse - On récupère le timer au moment où le candidat répond à la question	
+ * 	
  * @author Alban
  * @author Cyril
  * @author Benjamin
  * @version 1.00
  * 
-
  * 
  */
 
 public class questionReponse 
 {
-	/**
-	 * Structure utilisée pour générer le tableau contenant les questions auquelles le candidat devra répondre
-	 * 
-	 * categorieQuestion - La catégorie de la question qui peut être :
-	 * 							"CJ" pour Culture Java 
-	 * 							"CG" pour Culture Générale Informatique
-	 * 							"LE" pour Langage Exotique
-	 * 							"S" pour Stress
-	 * 					
-	 * numeroQuestion - Le numéro que la question a dans le panel de questions
-	 * 
-	 * reponseCorrecte - La réponse correcte à la question
-	 * 
-	 * reponseCandidat - La réponse du candidat
-	 * 
-	 * timerAuMomentDeLaReponse - On récupère le timer au moment où le candidat répond à la question		
-	 */
-	
 	String categorieQuestion;
 	public byte numQuestion;
 	public byte numQuestionBDD;
@@ -45,8 +41,6 @@ public class questionReponse
 	public String libelleReponse4; 
 	
 	public questionReponse[] questionsCandidat;
-	
-	
 	
 	public questionReponse(String cq)
 	{
