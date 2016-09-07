@@ -23,7 +23,7 @@ public class Recruteur {
 		boolean retourAcces=true;
 		
 		ConnectionDB laConnection = new ConnectionDB();
-		
+		System.out.println("variable:"+MDP);
 		retourAcces=laConnection.connectionBase(demandeAcces,recruteur,MDP);
 		return (retourAcces);
 		

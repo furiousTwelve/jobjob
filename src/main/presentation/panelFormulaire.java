@@ -87,8 +87,10 @@ public class panelFormulaire extends JPanel implements ActionListener{
  * 
  * @throws ParseException
  */
-	public panelFormulaire() throws ParseException {
+	public panelFormulaire() {
 		
+		
+		System.out.println("ici 2");
 		//Ajout de Listener sur tous les boutons nécessaires
 		itemNouveauTest.addActionListener(this);			
 		itemQuitter.addActionListener(this);	
@@ -186,16 +188,30 @@ public class panelFormulaire extends JPanel implements ActionListener{
 //								
 //
 								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
-								MaskFormatter maskNomPrenom = new MaskFormatter("**************************************************");
-								maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
-								fieldNom = new JFormattedTextField(maskNomPrenom);
-								fieldPrenom = new JFormattedTextField(maskNomPrenom);
+								MaskFormatter maskNomPrenom;
+								try {
+									maskNomPrenom = new MaskFormatter("**************************************************");
+									maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
+									fieldNom = new JFormattedTextField(maskNomPrenom);
+									fieldPrenom = new JFormattedTextField(maskNomPrenom);
+								} catch (ParseException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								
 								
-								MaskFormatter maskTelephone = new MaskFormatter("***************");
-								maskTelephone.setValidCharacters("+()0123456789");
-								fieldTelephone = new JFormattedTextField(maskTelephone);
-								fieldId = new JFormattedTextField();
+								
+								MaskFormatter maskTelephone;
+								try {
+									maskTelephone = new MaskFormatter("***************");
+									maskTelephone.setValidCharacters("+()0123456789");
+									fieldTelephone = new JFormattedTextField(maskTelephone);
+									fieldId = new JFormattedTextField();
+								} catch (ParseException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
 //						
 //								//Assemblage du panelSaisie
 //								panelSaisie.add(champ1);
@@ -280,7 +296,9 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=1;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
+		//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+		gbc.anchor = gbc.CENTER;
+	//	gbc.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champNom,gbc);
 		
@@ -289,7 +307,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.NONE;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldNom,gbc);
 		
 		
@@ -301,7 +320,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champPrenom,gbc);
 		
@@ -310,7 +330,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldPrenom,gbc);
 		
 		//placement du Label Mail ainsi que son champ de texte 
@@ -321,7 +342,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+//		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champ3,gbc);
 		
@@ -330,7 +352,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
 		this.add(fieldMail,gbc);
 		
 		
@@ -342,7 +365,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+//		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champ4,gbc);
 		
@@ -351,7 +375,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+//		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldTelephone,gbc);
 		
 		
@@ -363,7 +388,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champid,gbc);
 	
@@ -372,7 +398,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+//		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldId,gbc);
 		
 		//Placement du bouton sauvegarder
@@ -382,7 +409,8 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weighty=1;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		gbc.anchor=GridBagConstraints.BASELINE_LEADING;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
+	//	gbc.anchor=GridBagConstraints.BASELINE_LEADING;
 		this.add(boutonSave,gbc);
 		
 		//placement du logo
@@ -390,6 +418,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridy=1;
 		gbc.weightx=0;
 		gbc.weighty=0;
+	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
 		//gbc.anchor=GridBagConstraints.ABOVE_BASELINE;
 		this.add(logoFinal,gbc);
 		

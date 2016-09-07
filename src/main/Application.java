@@ -64,7 +64,7 @@ public class Application
 
 		
 		//connection DB
-				ConnectionDB cdb = new ConnectionDB();
+			//	ConnectionDB cdb = new ConnectionDB();
 //				try {
 //					cdb.connectionBase(true);
 //				} catch (ClassNotFoundException e) {
@@ -92,17 +92,19 @@ public class Application
 				 * @auteur : Lionel Chialvo
 				 */
 
+
 //				try {
 //					cdb.recupererCandidatEnBase(15);
 //					} catch (ClassNotFoundException e) {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //					}
-//				/*
-//				 * recupération des réponses après avoir passé en paramètre le numero de la question
-//				 * on va temporairement instancier un objet questionReponse pour tester
-//				 * il faudra l'enlever par la suite
-//				 */
+				/*
+				 * recupération des réponses après avoir passé en paramètre le numero de la question
+				 * on va temporairement instancier un objet questionReponse pour tester
+				 * il faudra l'enlever par la suite
+				 */
+
 //				try {
 //					questionReponse qr  = new questionReponse();
 //					qr.numQuestion=2;
@@ -116,8 +118,7 @@ public class Application
 
 				
 				new Application();
-	
-		
+						
 
 	}
 }
