@@ -193,7 +193,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 								
 								
 								MaskFormatter maskTelephone = new MaskFormatter("***************");
-								maskTelephone.setValidCharacters("+()0123456789");
+								maskTelephone.setValidCharacters("+()0123456789 ");
 								fieldTelephone = new JFormattedTextField(maskTelephone);
 								fieldId = new JFormattedTextField();
 //						
@@ -266,7 +266,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridx=0;
 		gbc.gridy=0;
 		//gbc.gridwidth = GridBagConstraints.REMAINDER;
-		gbc.anchor = GridBagConstraints.NORTHWEST;
+	//	gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(menuBar, gbc);
@@ -280,7 +280,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=1;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
+	//	gbc.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champNom,gbc);
 		
@@ -289,7 +289,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.NONE;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+//		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldNom,gbc);
 		
 		
@@ -301,7 +301,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champPrenom,gbc);
 		
@@ -310,7 +310,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldPrenom,gbc);
 		
 		//placement du Label Mail ainsi que son champ de texte 
@@ -321,7 +321,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champ3,gbc);
 		
@@ -330,7 +330,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
 		this.add(fieldMail,gbc);
 		
 		
@@ -342,7 +342,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champ4,gbc);
 		
@@ -351,7 +351,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldTelephone,gbc);
 		
 		
@@ -363,7 +363,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+//		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champid,gbc);
 	
@@ -372,7 +372,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
+	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldId,gbc);
 		
 		//Placement du bouton sauvegarder
@@ -382,7 +382,7 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		gbc.weighty=1;
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
-		gbc.anchor=GridBagConstraints.BASELINE_LEADING;
+	//	gbc.anchor=GridBagConstraints.BASELINE_LEADING;
 		this.add(boutonSave,gbc);
 		
 		//placement du logo

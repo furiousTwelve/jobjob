@@ -203,7 +203,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			//panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee 
 			System.out.println(panFormulaire.fieldTelephone.getText());
 			
-			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
+			// supprimer de la condition -->  && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
+			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText()) && panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText()))
 			{
 				panCandidat.buttonStart.addActionListener(this);
@@ -216,9 +217,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			else{
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
-				panFormulaire.champNom.setForeground(Color.BLACK);
+				
+			//	this.panFormulaire.champNom.setForeground(Color.BLACK);
+				
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-				panFormulaire.champPrenom.setForeground(Color.BLACK);
+			//	panFormulaire.champPrenom.setForeground(Color.BLACK);
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
 				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
@@ -239,11 +242,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					panFormulaire.champ3.setForeground(Color.RED);
 					str = str + "\n - E-mail ";
 				}
-				if(panFormulaire.fieldTelephone.getText().indexOf(" ") >= 0){
-					panFormulaire.fieldTelephone.setForeground(Color.RED);
-					panFormulaire.champ4.setForeground(Color.RED);
-					str = str + "\n - Téléphone ";
-				}
+//				if(panFormulaire.fieldTelephone.getText().indexOf(" ") >= 0){
+//					panFormulaire.fieldTelephone.setForeground(Color.RED);
+//					panFormulaire.champ4.setForeground(Color.RED);
+//					str = str + "\n - Téléphone ";
+//				}
 				
 				JOptionPane.showMessageDialog(panFormulaire, str, "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 			}
