@@ -100,9 +100,5 @@ public class panelFin extends JPanel {
 		p3.add(panelEntreprise);
 		this.add(p3, BorderLayout.SOUTH);
 
-		
-
-
-
 	}
 }
