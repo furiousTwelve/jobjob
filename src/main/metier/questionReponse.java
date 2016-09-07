@@ -58,7 +58,7 @@ public class questionReponse
 		
 	}
 	
-	public void genererQuestionsCandidat()
+	public void genererQuestionsCandidat() throws ClassNotFoundException
 	{		
 		questionsCandidat = new questionReponse[15];
 		byte valeurGeneree;
@@ -178,8 +178,11 @@ public class questionReponse
 	 *  Cette fonction est la suite de la fonction genererQuestionsCandidat()
 	 *  Elle a pour but d'envoyer le tableau généré à la couche Données pour qu'il puisse y rajouter les libéllés des questions et réponses associés
 	 * @param //questionsCandidat paramètre initialiser lors de la fonction précédente et envoyé en parmètre à la fonction chercherQuestionsBDD()
+	 * @throws ClassNotFoundException 
 	 */
-	public void chercherQuestionRéponse(questionReponse[] questionsCandidat,int compteur)
+
+	public void chercherQuestionRéponse(questionReponse[] questionsCandidat,int compteur) throws ClassNotFoundException
+
 	{		
 		// Pour test à effacer quand la couche DONNEES aura créé sa fonction
 		questionsCandidat[0].libelleQuestion="Qui est charli?";
@@ -197,6 +200,7 @@ public class questionReponse
 		// ici mettre la fonction qui demande à la couche DONNEES les questions générées aléatoirement avec quetion,4 reponse et index_table de la question
 		// la couche DONNEES doit directement remplir le tableau passé en paramètre- Cyril
 		// exemple:  chercherQuestionBDD(questionsCandidat);	
+
 		ConnectionDB laConnection = new ConnectionDB();
 		questionReponse tempQR = new questionReponse();
 		
@@ -208,6 +212,7 @@ public class questionReponse
 			
 			e.printStackTrace();
 		}
+
 	}
 	
 	//fonction tests sur console - A effacer par la suite
