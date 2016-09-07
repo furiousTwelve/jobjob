@@ -82,23 +82,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		this.setResizable(true);
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setLocationRelativeTo(null);
-
-		panConnection = new panelConnection();
 		
-//		panFormulaire = new panelFormulaire();
-//		panCandidat = new panelCandidat();
-//		panQuestion = new panelQuestion();
-//		panFin = new panelFin();
+		panConnection = new panelConnection();
+
 		ed = new EnregistrementDonnee();
 
-		this.panConnection.boutonConnection.addActionListener(this);
-		
-		//this.setContentPane(panCandidat); // imbrication de notre panel dans notre fenêtre
+		panConnection.boutonConnection.addActionListener(this);
+	
 		this.setContentPane(panConnection); 
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
-	}
+	} 
 
 	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
 	 * @param arg0
@@ -121,6 +116,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		//Passage du panConnection au panAccueil, si id et mdp valides
 		if(arg0.getSource() == this.panConnection.boutonConnection){
+			
 			//Couche METIER
 			boolean acces=false;
 			String recruteur=panConnection.recruteur.getText();
@@ -134,24 +130,29 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 				JOptionPane.showMessageDialog(panFormulaire, "Erreur interne au programme -- Defaut de la connexion au serveur SQL", "Erreur programme", JOptionPane.ERROR_MESSAGE);
 			}
-			System.out.println("acces: "+acces);
+			
 			if(acces==true)
 			{
+				
 				panAccueil = new panelAccueil();
 			
-				this.panAccueil.itemCandidatExistant.addActionListener(this);
-				this.panAccueil.itemNouveauCandidat.addActionListener(this);
-				this.panAccueil.itemNouveauTest.addActionListener(this);
-				this.panAccueil.itemQuitter.addActionListener(panAccueil);
-				this.panAccueil.itemAide.addActionListener(panAccueil);
+				panAccueil.itemCandidatExistant.addActionListener(this);
+				panAccueil.itemNouveauCandidat.addActionListener(this);
+				panAccueil.itemNouveauTest.addActionListener(this);
+				
+//				this.panAccueil.itemQuitter.addActionListener(panAccueil);
+//				this.panAccueil.itemAide.addActionListener(panAccueil);
 			
-				this.getContentPane().removeAll();
-				this.setContentPane(panAccueil);
+				this.getContentPane().removeAll();				
+				this.setContentPane(panAccueil);	
+				
 				this.validate();
+				
+				
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(panFormulaire, "Votre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(panConnection, "Votre identifiant et/ou mot de passe est incorrect", "Accès non autorisé", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}
@@ -160,7 +161,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
-						
+			System.out.println("ici fin");
+			panFormulaire = new panelFormulaire();			
+			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -172,7 +175,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.itemSauvegarder.addActionListener(this);	
 			panFormulaire.boutonSave.addActionListener(this);
 
-			this.getContentPane().removeAll();
+			this.getContentPane().removeAll();			
 			this.setContentPane(panFormulaire);
 			this.validate();
 			
@@ -180,13 +183,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
 		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
 		{	
-			
+			panFormulaire = new panelFormulaire();
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
-
+		//  ============================================> Ce bout de code fait planter le programme, à debugger - voir Cyril
 			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
 			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
 			panFormulaire.boutonSearch.addActionListener(this);
@@ -207,12 +210,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 */
 		if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
-			//TODO pour  @cyril : à vérifier
+			System.out.println("ici");
+			panCandidat= new panelCandidat();
+			System.out.println("ici 2");
 			//panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee 
 			System.out.println(panFormulaire.fieldTelephone.getText());
-			
-			// supprimer de la condition -->  && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
-			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())
+
+			// sorti de la condition ==> && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
+			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) 
+
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText()) && panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText()))
 			{
 				panCandidat.buttonStart.addActionListener(this);
@@ -225,11 +231,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			else{
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
-				
-			//	this.panFormulaire.champNom.setForeground(Color.BLACK);
-				
+
+		//		panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-			//	panFormulaire.champPrenom.setForeground(Color.BLACK);
+		//		panFormulaire.champPrenom.setForeground(Color.BLACK);
+
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
 				panFormulaire.fieldTelephone.setForeground(Color.BLACK);
@@ -250,11 +256,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					panFormulaire.champ3.setForeground(Color.RED);
 					str = str + "\n - E-mail ";
 				}
-//				if(panFormulaire.fieldTelephone.getText().indexOf(" ") >= 0){
-//					panFormulaire.fieldTelephone.setForeground(Color.RED);
-//					panFormulaire.champ4.setForeground(Color.RED);
-//					str = str + "\n - Téléphone ";
-//				}
+
 				
 				JOptionPane.showMessageDialog(panFormulaire, str, "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 			}
@@ -281,7 +283,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
 		{	
-			laQuestionReponse.genererQuestionsCandidat();
+			panQuestion= new panelQuestion();
+			try 
+			{
+				laQuestionReponse.genererQuestionsCandidat();
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
 
 			tp = new TimerGeneral(10);
 			tp.start();
@@ -347,8 +356,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);
 				
-				
-				laQuestionReponse.chercherQuestionRéponse(questionsCandidat, compteurQuestions-1);
+
+				try {
+					laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat,compteurQuestions-1);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
 				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
@@ -383,7 +398,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if(compteurQuestions == 16)
 		{
-			
+			panFin = new panelFin();
 			//Couche metier Timer
 			//arrêter le timer après la 15ème question
 			tp.tache.cancel();
@@ -411,8 +426,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.panAccueil.itemCandidatExistant.addActionListener(this);
 			this.panAccueil.itemNouveauCandidat.addActionListener(this);
 			this.panAccueil.itemNouveauTest.addActionListener(this);
-			this.panAccueil.itemQuitter.addActionListener(panAccueil);
-			this.panAccueil.itemAide.addActionListener(panAccueil);
+//			this.panAccueil.itemQuitter.addActionListener(panAccueil);
+//			this.panAccueil.itemAide.addActionListener(panAccueil);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panAccueil);
