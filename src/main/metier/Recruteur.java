@@ -11,7 +11,8 @@ public class Recruteur {
 	
 	
 
-	public Recruteur(String identifiant, String motDePasse) {
+	public Recruteur(String identifiant, String motDePasse) 
+	{
 		
 		this.identifiant = identifiant;
 		this.motDePasse = motDePasse;

@@ -125,7 +125,6 @@ public class panelQuestion extends JPanel {
 		
 		this.add(panelValider, BorderLayout.SOUTH);
 		
-		
 	}
 
 	

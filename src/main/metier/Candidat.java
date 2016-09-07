@@ -33,10 +33,14 @@ public class Candidat
 	protected String identifiant;
 	
 	/**
-	 * CONSTRUCTEUR
+	 * CONSTRUCTEUR Générique
 	 */
 	public Candidat(){}
 	
+	/**
+	 * Constructeur prenant en argument un JPanel 
+	 * @param p JPanel 
+	 */
 	public Candidat(JPanel p)
 	{
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
@@ -57,8 +61,6 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{
-		
-		
 		String[] chaine = new String[p.getComponents().length/2];
 		int i = 0;
 		Component[] fields = p.getComponents();
