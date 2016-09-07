@@ -28,65 +28,53 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author khadidja
  *
  */
-public class DessinerGraphe extends JFrame  implements ActionListener{
-	protected JFrame frame;
-	protected JPanel panel= new JPanel();
-	protected JPanel panel2=new JPanel();
-	protected JButton dessiner=new JButton("Dessiner graphe");
-	
-	public DessinerGraphe() {
-		init();
-	}
-	
-	private void init() {
-		
-		frame.setBounds(100, 100, 450, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		frame.setSize(350,450);
-		panel.setBackground(SystemColor.inactiveCaption);
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		//panel.setLayout(null);
-		
-		dessiner.setBounds(147, 373, 127, 25);
-		dessiner.addActionListener(this);
-		panel.add(dessiner);
-		
-		
-		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel2.setBounds(12, 13, 408, 331);
-		panel.add(panel2);
-	}
 
+
+
+/*Pour exécuter cette méthode, vous devez télécharger la bibliotheque JFREECHART (aller sur le site Jfreechart/download/ décompressez le/aller sur eclips/window/
+ *preference/user librairies/ouvrez lz fichier décompressé jfreechart/lib/selectionner le tous/apply/ok!
+ *la fenetre rechercher candidats, n'est pas encore faite par la couche présentation, cette méthode va etre appelée une fois que le recruteur choisisse un candidat pour analyser ses résultats.
+ *on peut procéder comme suit : une fois que le recruteur choisisse n candidat, une fenetre s'ouvre avec les coordonnées de ce dernier, ses scores pour les 4 catégories/ on peut ajouter un boutton
+ *afficher/dessiner graphe, une fois que le recruteur clique, on appelle la methode DessinerGraphe*/
+
+
+public class DessinerGraphe extends JFrame {
 	
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	    {
-		if(e.getSource()==dessiner ){
-		
+	private void DessinerBar() {
 		DefaultCategoryDataset dataset=new DefaultCategoryDataset();
-		dataset.addValue(2, "score", "CG");
-		dataset.addValue(5, "score", "TJ");
-		dataset.addValue(2, "score", "LE");
-		dataset.addValue(2, "score", "QS");
-		 JFreeChart chart=ChartFactory.createBarChart(null, null, null, dataset,PlotOrientation.VERTICAL, false, true, false);
-		
+		dataset.addValue(100, "score", "CULTURE GENERALE");
+		dataset.addValue(45, "score", "TECHNIQUE JAVA");
+		dataset.addValue(75, "score", "LANGAGE EXOTIQUE");
+		dataset.addValue(18, "score", "QUESTION STRESS");
+		JFreeChart chart=ChartFactory.createBarChart3D(null, null, null, dataset,PlotOrientation.VERTICAL, false, true, false);
+				
 		 CategoryPlot p= chart.getCategoryPlot();
 		 p.setRangeGridlinePaint(Color.BLACK);
 		 ChartFrame frame=new ChartFrame("statistique test", chart);
-		
+		 frame.setSize(800,500);
 		 frame.setVisible(true);
-		 frame.setSize(300,250);
-	    }
-	    }
-	/**
-	 * Launch the application.
-	 */
+	}
+	
+	private void DessinerCam() {
+		 DefaultPieDataset data=new DefaultPieDataset();
+	     data.setValue("Culture Générale 100%",100);
+	     data.setValue("Technique Java 27% ",27.9);
+	     data.setValue("Langage exotique 45%",45);
+	     data.setValue("Question stress 100%",100);
+	
+	  
+		JFreeChart chart=ChartFactory.createPieChart3D(null, data);
+		ChartFrame frame=new ChartFrame("statistique test", chart);
+		frame.setSize(600,450);
+		frame.setVisible(true);
+	}
+	
 	public static void main(String[] args) {
 		 DessinerGraphe fenetre =new  DessinerGraphe();
-		 fenetre.setVisible(true);
+		 fenetre.DessinerBar();
+		 fenetre.DessinerCam();
+		
 	}
 
-	
-	
 }
+	
