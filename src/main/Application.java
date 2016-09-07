@@ -5,8 +5,6 @@ package main;
 import java.awt.HeadlessException;
 import java.text.ParseException;
 
-import main.donnees.ConnectionDB;
-import main.metier.questionReponse;
 import main.presentation.FenetrePrincipale;
 
 /**
