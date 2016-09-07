@@ -41,6 +41,7 @@ import javax.swing.border.LineBorder;
 public class DessinerGraphe extends JFrame {
 	
 	private void DessinerBar() {
+		
 		DefaultCategoryDataset dataset=new DefaultCategoryDataset();
 		dataset.addValue(100, "score", "CULTURE GENERALE");
 		dataset.addValue(45, "score", "TECHNIQUE JAVA");
