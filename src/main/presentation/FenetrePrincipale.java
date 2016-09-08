@@ -35,7 +35,12 @@ import main.metier.Recruteur;
  * @author Cyril
  * @author Damien
  * @author Florent
+<<<<<<< HEAD
  * @author Audric
+=======
+ * @author Lionel 
+ * @author Marc
+>>>>>>> features/presentation/573
  * 
  * @version 1.02
  */
@@ -149,15 +154,16 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.panAccueil.itemCandidatExistant.addActionListener(this);
 				this.panAccueil.itemNouveauCandidat.addActionListener(this);
 				this.panAccueil.itemNouveauTest.addActionListener(this);
-				this.panAccueil.itemAjoutQuestion.addActionListener(this);
-				this.panAccueil.itemModifierQuestion.addActionListener(this);
-				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
-				
 
 				this.panAccueil.itemAjoutQuestion.addActionListener(this);
 				this.panAccueil.itemModifierQuestion.addActionListener(this);
 				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
 				
+
+
+				this.panAccueil.itemQuitter.addActionListener(panAccueil);
+				this.panAccueil.itemAide.addActionListener(panAccueil);
+
 				this.getContentPane().removeAll();
 				this.setContentPane(panAccueil);
 
@@ -174,10 +180,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
-		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
+		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
+			if(arg0.getSource() == panAccueil.itemNouveauCandidat )
 		{	
-			System.out.println("ici fin");
-			//panFormulaire = new panelFormulaire();			
+
+
 			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
@@ -201,29 +208,68 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 			
+			
+			
 		}
+			
+			
+			if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
+			{	
+				
+				
+				
+				
+				
+				panFormulaire.fieldNom.setEditable(true);
+				panFormulaire.fieldPrenom.setEditable(true);
+				panFormulaire.fieldMail.setEditable(true);
+				panFormulaire.fieldTelephone.setEditable(true);
+				panFormulaire.fieldId.setEditable(false);
+
+				panFormulaire.itemSauvegarder.setEnabled(true);
+
+				panFormulaire.itemSauvegarder.addActionListener(this);	
+				panFormulaire.boutonSave.addActionListener(this);
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panFormulaire);
+				this.validate();
+				
+				
+				
+			}	
+			
+		
+			
+			
+			
+			
+			
+			
+			
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
-		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
+		if(arg0.getSource() == panAccueil.itemCandidatExistant || arg0.getSource() == panFormulaire.itemCandidatExistant)
 		{	
 			//panFormulaire = new panelFormulaire();
+			
+			
+			
 			
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
+
 		//  ============================================> Ce bout de code fait planter le programme, à debugger - voir Cyril
-			panFormulaire.panelElementBasCentre.remove(panFormulaire.boutonSave);
-			panFormulaire.panelElementBasCentre.add(panFormulaire.boutonSearch);
-	//		panFormulaire.boutonSearch.addActionListener(this);
+			panFormulaire.remove(panFormulaire.boutonSave);
+			panFormulaire.add(panFormulaire.boutonSearch);
+			panFormulaire.boutonSearch.addActionListener(this);
 			
 			panFormulaire.itemAjoutQuestion.addActionListener(this);
 			panFormulaire.itemModifierQuestion.addActionListener(this);
-			panFormulaire.itemSupprimerQuestion.addActionListener(this);
-			
-			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
-			this.panFormulaire.itemModifierQuestion.addActionListener(this);
-			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			panFormulaire.itemSupprimerQuestion.addActionListener(this);	
+
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);

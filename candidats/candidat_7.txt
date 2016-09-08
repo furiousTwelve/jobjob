@@ -1,5 +1,6 @@
 Identifiant :7
 <<<<<<< HEAD
+<<<<<<< HEAD
 Date : 050916
 =======
 
@@ -10,3 +11,6 @@ tel : 05060311
 
 Date : 020916
 >>>>>>> origin/features/presentation/ajoutQuestion
+=======
+Date : 070916
+>>>>>>> features/presentation/573
