@@ -106,6 +106,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
+	
 	} 
 
 	/** Fonction qui récupère tous les ActionListener de tous les panneaux, issues des différents fichiers
@@ -169,13 +170,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		}
 		
+		
+		
+		
+		
 		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
-			if(arg0.getSource() == panAccueil.itemNouveauCandidat )
+			if(arg0.getSource() == panAccueil.itemNouveauCandidat  )
 		{	
 
-
+	
+					
 			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
@@ -198,7 +204,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 			
-			
+				
 			
 		}
 			
@@ -206,8 +212,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
 			{	
 				
-				
-				
+			
 				
 				
 				panFormulaire.fieldNom.setEditable(true);
@@ -242,12 +247,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
-		if(arg0.getSource() == panAccueil.itemCandidatExistant || arg0.getSource() == panFormulaire.itemCandidatExistant)
+		//if(arg0.getSource() == panAccueil.itemCandidatExistant || arg0.getSource() == panFormulaire.itemCandidatExistant)
+			if(arg0.getSource() == panFormulaire.itemCandidatExistant || arg0.getSource() == panAccueil.itemCandidatExistant)
 		{	
 			//panFormulaire = new panelFormulaire();
 			
-			
-			
+
+				
 			
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
@@ -269,7 +275,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
-			
+				
 		}
 
 		//Passage du panFormulaire au panCandidat
