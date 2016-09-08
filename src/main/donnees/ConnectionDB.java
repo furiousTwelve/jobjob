@@ -43,7 +43,7 @@ public class ConnectionDB
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
-	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjobdb";
+	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_1_2";
 	String 	 	 login 		= recruteur;
 	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;

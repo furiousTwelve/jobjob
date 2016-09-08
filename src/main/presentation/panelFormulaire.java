@@ -101,8 +101,7 @@ public class panelFormulaire extends JPanel implements ActionListener
 		//Ajout de Listener sur tous les boutons nécessaires
 		//itemNouveauTest.addActionListener(this);			
 		
-		itemCandidatExistant.addActionListener(this);
-		itemNouveauCandidat.addActionListener(this);
+		
 		
 		
 
@@ -131,7 +130,8 @@ public class panelFormulaire extends JPanel implements ActionListener
 		
 		menuAide.add(itemAide);
 		
-		
+		itemCandidatExistant.addActionListener(this);
+		itemNouveauCandidat.addActionListener(this);
 		
 //		//Création du panel de gauche, contenant le logo : panelLogo
 //		JPanel panelLogo = new JPanel();
@@ -510,31 +510,50 @@ public class panelFormulaire extends JPanel implements ActionListener
 		if(e.getSource() == itemCandidatExistant)
 		{
 			
-			this.fieldNom.setText(null);
-			this.fieldPrenom.setText(null);
-			this.fieldMail.setText(null);
-			this.fieldTelephone.setText(null);
-			this.fieldId.setText(null);
+			int option = JOptionPane.showConfirmDialog(null,
+					"Etes vous sur de vouloir quitter le formulaire ?",
+					"Confirmation !",
+			JOptionPane.YES_NO_OPTION,
+			JOptionPane.QUESTION_MESSAGE);
 			
-			this.fieldNom.setEditable(false);
-			this.fieldPrenom.setEditable(false);
-			this.fieldMail.setEditable(false);
-			this.fieldTelephone.setEditable(false);
-			this.fieldId.setEditable(true);
-
-			this.remove(this.boutonSave);
-			this.add(this.boutonSearch);
-			this.boutonSearch.addActionListener(this);
+			if(option == JOptionPane.OK_OPTION)
+			{
+						
+				this.fieldNom.setText(null);
+				this.fieldPrenom.setText(null);
+				this.fieldMail.setText(null);
+				this.fieldTelephone.setText(null);
+				this.fieldId.setText(null);
+				
+				this.fieldNom.setEditable(false);
+				this.fieldPrenom.setEditable(false);
+				this.fieldMail.setEditable(false);
+				this.fieldTelephone.setEditable(false);
+				this.fieldId.setEditable(true);
+	
+				this.remove(this.boutonSave);
+				this.add(this.boutonSearch);
+				this.boutonSearch.addActionListener(this);
+				
+				
+				this.validate();
 			
-			
-			this.validate();
+			}
 		}
 		
 		
 		
 		if(e.getSource() == itemNouveauCandidat)
 		{
+			int option = JOptionPane.showConfirmDialog(null,
+					"Etes vous sur de vouloir quitter le formulaire ?",
+					"Confirmation !",
+			JOptionPane.YES_NO_OPTION,
+			JOptionPane.QUESTION_MESSAGE);
 			
+			if(option == JOptionPane.OK_OPTION)
+			{
+				
 			
 			this.fieldNom.setEditable(true);
 			this.fieldPrenom.setEditable(true);
@@ -548,6 +567,7 @@ public class panelFormulaire extends JPanel implements ActionListener
 			
 			
 			this.validate();
+			}
 		}
 	}
 
