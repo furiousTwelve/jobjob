@@ -1,6 +1,3 @@
-/**
- * Ce panel à pour but de pouvoir modifier les questions/reponses
- */
 package main.presentation;
 
 import java.awt.BorderLayout;
