@@ -68,6 +68,7 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			
 			//Création du panelCentral
 			JPanel panelCentral = new JPanel();
+			panelCentral.setLayout(new BorderLayout());
 			
 			JPanel panelLabel = new JPanel();
 			panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.PAGE_AXIS));
@@ -84,7 +85,7 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			JLabel propo4 = new JLabel("Proposition 4");
 			JLabel reponse = new JLabel("Réponse Correcte");
 			
-			panelLabel.add(intitule, BorderLayout.WEST);
+			panelLabel.add(intitule);
 			panelLabel.add(lien);
 			panelLabel.add(propo1);
 			panelLabel.add(propo2);
@@ -108,12 +109,12 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			panelText.add(propo4bis);
 			panelText.add(reponsebis);
 			
-			panelCentral.add(panelLabel);
+			panelCentral.add(panelLabel, BorderLayout.WEST);
 			panelCentral.add(panelText);
 			
 			//Constitution du panel général
 			this.setLayout(new BorderLayout());
-			this.add(panelCentral);
+			this.add(panelCentral,BorderLayout.CENTER);
 			this.add(menuBar, BorderLayout.NORTH);
 		}
 			
