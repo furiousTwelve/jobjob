@@ -33,6 +33,8 @@ import javax.swing.text.MaskFormatter;
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
  * @author Florent
+ * @author Lionel
+ * @author Marc
  */
 public class panelFormulaire extends JPanel implements ActionListener{
 
