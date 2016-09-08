@@ -35,7 +35,8 @@ import javax.swing.text.MaskFormatter;
  * @author Florent
  * @author Audric
  */
-public class panelFormulaire extends JPanel implements ActionListener{
+public class panelFormulaire extends JPanel implements ActionListener
+{
 
 	//Déclaration des éléments de la barre de Menu
 	private JMenuBar menuBar = new JMenuBar();
@@ -69,24 +70,26 @@ public class panelFormulaire extends JPanel implements ActionListener{
 	protected JLabel champPrenom;
 	protected JLabel champ3;
 	protected JLabel champ4;
-/**
- * Constructeur du panelFormulaire
- * 	<br>Schéma de l'imbrication de ses Layouts:
- * 	<br>	C'est un BorderLayout contenant:
- * 	<br> 		- Nord: Un barre de Menu menuBar
- * 	<br>		- Sud: Vide
- * 	<br>		- West: Un panel logo (GridLayout avec 3 colonnes, 3 lignes) qui contient notre logo dans la 2nde case du haut
- * 	<br>		- East: Un panel "tampon", panelDroite, en GridLayout à 1 seule colonne, contenant un JLabel. On peut définir la largeur de ce JLabel afin de gérer l'écart du panneau central avec notre bordure notamment
- * 	<br>		- Center: Un panel principal, panelCentre, en GridLayout 1 colonne contenant :
- * 	<br>					- En haut : un panel panelCentreHaut, en BoxLayout, à l'alignement vertical. Il contient un panneau, panelSaisie
- * 	<br>							  - panelSaisie : en GridLayout, 2 colonnes, contenant l'ensemble des champs de saisie.
- * 	<br>					- En Bas : un panel panelCentreBas, BoxLayout axé vertical qui contient lui-même deux panels:
- * 	<br>							 - en haut : un panelReponses, en GridLayout, 4 colonnes. Il est vide ici, mais servira pour le panelQuestion entre autres
- * 	<br>							 - en bas : un panelElementBasCentre, en FlowLayout, centré, permettant d'accueillir un élément quelconque de manière centré. Ici, le bouton "Save". La barre de progression dans le panelQuestion par exemple 
- * 
- * 
- * @throws ParseException
- */
+	
+	
+	/**
+	 * Constructeur du panelFormulaire
+	 * 	<br>Schéma de l'imbrication de ses Layouts:
+	 * 	<br>	C'est un BorderLayout contenant:
+	 * 	<br> 		- Nord: Un barre de Menu menuBar
+	 * 	<br>		- Sud: Vide
+	 * 	<br>		- West: Un panel logo (GridLayout avec 3 colonnes, 3 lignes) qui contient notre logo dans la 2nde case du haut
+	 * 	<br>		- East: Un panel "tampon", panelDroite, en GridLayout à 1 seule colonne, contenant un JLabel. On peut définir la largeur de ce JLabel afin de gérer l'écart du panneau central avec notre bordure notamment
+	 * 	<br>		- Center: Un panel principal, panelCentre, en GridLayout 1 colonne contenant :
+	 * 	<br>					- En haut : un panel panelCentreHaut, en BoxLayout, à l'alignement vertical. Il contient un panneau, panelSaisie
+	 * 	<br>							  - panelSaisie : en GridLayout, 2 colonnes, contenant l'ensemble des champs de saisie.
+	 * 	<br>					- En Bas : un panel panelCentreBas, BoxLayout axé vertical qui contient lui-même deux panels:
+	 * 	<br>							 - en haut : un panelReponses, en GridLayout, 4 colonnes. Il est vide ici, mais servira pour le panelQuestion entre autres
+	 * 	<br>							 - en bas : un panelElementBasCentre, en FlowLayout, centré, permettant d'accueillir un élément quelconque de manière centré. Ici, le bouton "Save". La barre de progression dans le panelQuestion par exemple 
+	 * 
+	 * 
+	 * @throws ParseException
+	 */
 	public panelFormulaire() {
 		
 		
@@ -97,7 +100,6 @@ public class panelFormulaire extends JPanel implements ActionListener{
 		itemAjoutQuestion.addActionListener(this);
 		itemModifierQuestion.addActionListener(this);
 		itemSupprimerQuestion.addActionListener(this);
-		
 		
 		//Constitution de la barre de menu : menuBar
 		menuBar.add(menuFichier);
