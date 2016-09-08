@@ -50,10 +50,7 @@ public class panelAccueil extends JPanel implements ActionListener{
 	 */
 	public panelAccueil() {
 		
-//		itemAjoutQuestion.addActionListener(this);
-//		itemModifierQuestion.addActionListener(this);
-//		itemSupprimerQuestion.addActionListener(this);
-	
+
 		
 		//Constitution de la barre de menu, qui ira au Nord
 		menuBar.add(menuFichier);

@@ -41,6 +41,9 @@ public class panelQuestion extends JPanel {
 	protected JLabel iconeEntreprise;
 	private Font font2;
 
+	Chrono c = new Chrono();
+	
+	
 	public panelQuestion() {
 
 		// POUR LA COUCHE METIER -- NE PAS TOUCHER ces 2 lignes en commentaires (cyril) - mettre la fonction  
@@ -68,9 +71,11 @@ public class panelQuestion extends JPanel {
 		
 		panelTimer = new JPanel();
 		
-		labelTimer = new JLabel("");//Si pas question stress, label vide. Sinon voir ce qu'il faut mettre.
-		labelTimer.setFont(font);
-		panelTimer.add(labelTimer);
+		//labelTimer = new JLabel(c);//Si pas question stress, label vide. Sinon voir ce qu'il faut mettre.
+		//labelTimer.setFont(font);
+		
+		panelTimer.add(c);
+		c.horloge();
 		
 		panelNord.add(panelTimer, BorderLayout.EAST);
 		
