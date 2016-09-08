@@ -153,7 +153,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
-			if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
+			if(arg0.getSource() == panAccueil.itemNouveauCandidat )
 		{	
 			
 			
