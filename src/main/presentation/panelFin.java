@@ -26,15 +26,15 @@ import javax.swing.JTextField;
  *
  */
 
-public class panelFin extends JPanel {
-	
+public class panelFin extends JPanel 
+{
 	private JLabel textFin, nomEntreprise, iconeEntreprise, id, motDePasse;
 	private ImageIcon logo;
 	private Font font, font2;
 	protected JTextField recruteur, mdp;
 	protected JButton boutonConnection;
 	
-//panel Principal
+	//panel Principal
 	public panelFin()
 	{
 		this.setLayout(new BorderLayout());		
@@ -99,10 +99,5 @@ public class panelFin extends JPanel {
 		p3.add(panelRecruteur);
 		p3.add(panelEntreprise);
 		this.add(p3, BorderLayout.SOUTH);
-
-		
-
-
-
 	}
 }

@@ -3,9 +3,8 @@ import java.util.Timer;
 import java.util.TimerTask;
  
 /**
- * 
+ *  CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
  * @author Alban
- * CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
  * @author Benjamin
  */
 public class TimerGeneral
