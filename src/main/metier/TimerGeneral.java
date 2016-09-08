@@ -11,8 +11,8 @@ public class TimerGeneral
 {
 	// ATTRIBUTS DE LA CLASSE
 	public int secondPassed = 0;
-	int minuteAff = 0;
-	int secondeAff = 0;
+	public int minuteAff = 0;
+	public int secondeAff = 0;
 	String secondeAffS = "";
 	
 	
@@ -67,6 +67,7 @@ public class TimerGeneral
 		return res;
     }
 
+    
      
 //    public static void main(String[] args) 
 //    {

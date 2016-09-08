@@ -20,7 +20,7 @@ import java.util.Date;
 public class EnregistrementDonnee 
 {
 
-	int identifiant = 1;
+//	int identifiant = 1;
 	
 	/**
 	 * Méthode pour l'enregistrement du nom de l'entreprise dans un fichier .txt
@@ -48,20 +48,22 @@ public class EnregistrementDonnee
 
 		DateFormat format = new SimpleDateFormat("ddMMyy");
 		String date = format.format(new Date());
-
-		File f = new File ("../../git/recrutement/candidats/candidat_"+nombreCandidat()+".txt");
-		File fb = new File("../../git/recrutement/scores/scoreCandidat_"+nombreCandidat()); 
+		String[] champ = {"Nom : ", "Prenom : ", "E-mail : ", "Telephone : "};
+		int numero = nombreCandidat()+1;
+		File f = new File ("../../git/recrutement/candidats/candidat_"+numero+".txt");
+		File fb = new File("../../git/recrutement/scores/scoreCandidat_"+numero); 
 		fb.mkdirs(); 
 
 		
 		try 
 		{
 			FileWriter fw = new FileWriter(f);
-			fw.write("Identifiant :" +nombreCandidat());
+			fw.write("Identifiant :" +info[info.length-1]);
 			fw.write("\r\n");
 
-			for (int j = 0; j < info.length; j++) 
+			for (int j = 0; j < info.length-1; j++) 
 			{
+				fw.write(champ[j]);
 				fw.write(info[j]);
 				fw.write("\r\n");
 			}
@@ -69,8 +71,6 @@ public class EnregistrementDonnee
 			fw.write("Date : "+date);
 
 			fw.close();
-			//identifiant=identifiant+1;
-			//System.out.println(identifiant);
 		} 
 		catch (IOException e) 
 		{
