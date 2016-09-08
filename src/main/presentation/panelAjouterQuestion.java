@@ -1,9 +1,12 @@
 package main.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -13,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
  * 
@@ -66,56 +70,70 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			this.itemQuitter.addActionListener(this);	
 			this.itemAide.addActionListener(this);	
 			
-			//Création du panelCentral
-			JPanel panelCentral = new JPanel();
-			panelCentral.setLayout(new BorderLayout());
+			JPanel jp = new JPanel();
+			jp.setLayout(new BorderLayout());
+			JPanel jp2 = new JPanel();
+			JPanel jp3 = new JPanel();
 			
-			JPanel panelLabel = new JPanel();
-			panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.PAGE_AXIS));
+			BoxLayout bl = new BoxLayout(jp2, BoxLayout.PAGE_AXIS);
+			BoxLayout bl1 = new BoxLayout(jp3, BoxLayout.PAGE_AXIS);
 			
-			JPanel panelText = new JPanel();
-			panelText.setLayout(new BoxLayout(panelText, BoxLayout.PAGE_AXIS));
+			JPanel jp4 = new JPanel();
+			JComboBox jcb1 = new JComboBox();
+			jp4.add(jcb1);
 			
+			JLabel jl = new JLabel("Intitulé");
+			JLabel jl2 = new JLabel("Lien Image");
+			JLabel jl3 = new JLabel("Proposition 1");
+			JLabel jl4 = new JLabel("Proposition 2");
+			JLabel jl5 = new JLabel("Proposition 3");
+			JLabel jl6 = new JLabel("Proposition 4");
+			JLabel jl7 = new JLabel("Réponse Correcte");
 			
-			JLabel intitule = new JLabel("Intitulé");
-			JLabel lien = new JLabel("Lien Image");
-			JLabel propo1 = new JLabel("Proposition 1");
-			JLabel propo2 = new JLabel("Proposition 2");
-			JLabel propo3 = new JLabel("Proposition 3");
-			JLabel propo4 = new JLabel("Proposition 4");
-			JLabel reponse = new JLabel("Réponse Correcte");
+			Dimension minSize = new Dimension(5, 50);
+			Dimension prefSize = new Dimension(5, 50);
+			Dimension maxSize = new Dimension(Short.MAX_VALUE, 50);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl2);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl3);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl4);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl5);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl6);
+			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
+			jp2.add(jl7);
 			
-			panelLabel.add(intitule);
-			panelLabel.add(lien);
-			panelLabel.add(propo1);
-			panelLabel.add(propo2);
-			panelLabel.add(propo3);
-			panelLabel.add(propo4);
-			panelLabel.add(reponse);
+			JTextField jtf = new JTextField ();
+			JTextField jtf2 = new JTextField ();
+			JTextField jtf3 = new JTextField ();
+			JTextField jtf4 = new JTextField ();
+			JTextField jtf5 = new JTextField ();
+			JTextField jtf6 = new JTextField ();
+			JComboBox jcb = new JComboBox();
+			jp3.add(jtf);
+			jp3.add(jtf2);
+			jp3.add(jtf3);
+			jp3.add(jtf4);
+			jp3.add(jtf5);
+			jp3.add(jtf6);
+			jp3.add(jcb);
 			
-			JTextField intitulebis = new JTextField();
-			JTextField lienbis = new JTextField();
-			JTextField propo1bis = new JTextField();
-			JTextField propo2bis = new JTextField();
-			JTextField propo3bis = new JTextField();
-			JTextField propo4bis = new JTextField();
-			JComboBox reponsebis = new JComboBox();
+			jp2.setLayout(bl);
+			jp3.setLayout(bl1);
 			
-			panelText.add(intitulebis);
-			panelText.add(lienbis);
-			panelText.add(propo1bis);
-			panelText.add(propo2bis);
-			panelText.add(propo3bis);
-			panelText.add(propo4bis);
-			panelText.add(reponsebis);
+			jp.add(jp4);
+			jp.add(jp2, BorderLayout.WEST);
+			jp.add(jp3);
 			
-			panelCentral.add(panelLabel, BorderLayout.WEST);
-			panelCentral.add(panelText);
-			
-			//Constitution du panel général
 			this.setLayout(new BorderLayout());
-			this.add(panelCentral,BorderLayout.CENTER);
+			this.add(jp);
 			this.add(menuBar, BorderLayout.NORTH);
+			
 		}
 			
 		@Override
