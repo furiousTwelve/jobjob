@@ -3,10 +3,11 @@ package main.metier;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
+import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,7 +20,6 @@ import main.donnees.EnregistrementDonnee;
  * @version 1.00
  * 
  * @author Cyril, Benjamin
- * @khadidja, Damien, Florent
  * @version 1.01
  * 
  * @author Florent
@@ -39,14 +39,10 @@ public class Candidat
 	
 	String[] chaine;
 	/**
-	 * CONSTRUCTEUR Générique
+	 * CONSTRUCTEUR
 	 */
 	public Candidat(){}
 	
-	/**
-	 * Constructeur prenant en argument un JPanel 
-	 * @param p JPanel 
-	 */
 	public Candidat(JPanel p)
 	{
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
@@ -73,7 +69,6 @@ public class Candidat
 	public void enregistrerNouveauCandidat()
 	{
 
-		// COMMUNIQUE AVEC LA COUCHE DONNEES POUR L'ENREGISTREMENT SUR LE FICHIER
 		EnregistrementDonnee ed = new EnregistrementDonnee();
 		ed.enregistrerCandidat(chaine); 
 		
@@ -96,7 +91,6 @@ public class Candidat
 		else if (numero<1000) {
 			numeroconcat="0"+numeroconcat;
 		}
-		
 		return date + "_"+numeroconcat;
 	}
 	

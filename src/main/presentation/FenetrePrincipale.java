@@ -21,8 +21,6 @@ import main.metier.Candidat;
 import main.metier.TimerGeneral;
 import main.metier.questionReponse;
 import main.metier.Recruteur;
-import main.metier.Statistiques;
-
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
  * 
@@ -43,7 +41,7 @@ import main.metier.Statistiques;
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-	Statistiques dg = new Statistiques();
+	
 	
  
 	private panelConnection panConnection;
