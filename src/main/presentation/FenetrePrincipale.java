@@ -35,17 +35,9 @@ import main.metier.Statistiques;
  * @author Cyril
  * @author Damien
  * @author Florent
-<<<<<<< HEAD
  * @author Audric
-<<<<<<< HEAD
  * @author Benjamin
-=======
-=======
  * @author Lionel 
- * @author Marc
->>>>>>> features/presentation/573
->>>>>>> origin/features/presentation/573-2
- * 
  * @version 1.02
  */
 
