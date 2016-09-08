@@ -161,9 +161,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
 				
 
-
 				this.panAccueil.itemQuitter.addActionListener(panAccueil);
 				this.panAccueil.itemAide.addActionListener(panAccueil);
+
 
 				this.getContentPane().removeAll();
 				this.setContentPane(panAccueil);
@@ -197,8 +197,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 			panFormulaire.itemSauvegarder.addActionListener(this);	
 			panFormulaire.boutonSave.addActionListener(this);
-			
-
+	
 
 			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
 			this.panFormulaire.itemModifierQuestion.addActionListener(this);
@@ -231,6 +230,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 				panFormulaire.itemSauvegarder.addActionListener(this);	
 				panFormulaire.boutonSave.addActionListener(this);
+				
+				this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+				this.panFormulaire.itemModifierQuestion.addActionListener(this);
+				this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
 
 				this.getContentPane().removeAll();
 				this.setContentPane(panFormulaire);
@@ -267,11 +270,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.add(panFormulaire.boutonSearch);
 			panFormulaire.boutonSearch.addActionListener(this);
 			
+
 			panFormulaire.itemAjoutQuestion.addActionListener(this);
 			panFormulaire.itemModifierQuestion.addActionListener(this);
 			panFormulaire.itemSupprimerQuestion.addActionListener(this);	
 
-			
+
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
@@ -519,13 +523,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 
 		
-		//Passage du panFormulaire aux panels ajout modif et supprimer question
+		//Passage du panFormulaire ou panAccueil aux panels ajout modif et supprimer question
 		
 		if(arg0.getSource() == this.panFormulaire.itemAjoutQuestion || arg0.getSource() == this.panAccueil.itemAjoutQuestion)
 
 		{
-			System.out.println("panel ajout question");
 			panAjouterQuestion = new panelAjouterQuestion();
+			
+			this.panAjouterQuestion.itemAjoutQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemModifierQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemNouveauCandidat.addActionListener(this);
+			this.panAjouterQuestion.itemCandidatExistant.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panAjouterQuestion);
@@ -543,7 +552,76 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panSupprimerQuestion = new panelSupprimerQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panSupprimerQuestion);
+			this.validate();
+		}
+		
+		
+		//Passage du panAjouterQuestion aux autres panels
+		
+		if(arg0.getSource() == this.panAjouterQuestion.itemAjoutQuestion)
 
+		{
+			panAjouterQuestion = new panelAjouterQuestion();
+			this.getContentPane().removeAll();
+			this.setContentPane(panAjouterQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panAjouterQuestion.itemModifierQuestion)
+
+		{	
+			panModifierQuestion = new panelModifierQuestion();
+			this.getContentPane().removeAll();
+			this.setContentPane(panModifierQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panAjouterQuestion.itemSupprimerQuestion)
+		{
+			panSupprimerQuestion = new panelSupprimerQuestion();
+			this.getContentPane().removeAll();
+			this.setContentPane(panSupprimerQuestion);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panAjouterQuestion.itemNouveauCandidat)
+		{	
+			panFormulaire = new panelFormulaire();
+			
+			panFormulaire.fieldNom.setEditable(true);
+			panFormulaire.fieldPrenom.setEditable(true);
+			panFormulaire.fieldMail.setEditable(true);
+			panFormulaire.fieldTelephone.setEditable(true);
+			panFormulaire.fieldId.setEditable(false);
+
+			panFormulaire.itemSauvegarder.setEnabled(true);
+
+			panFormulaire.itemSauvegarder.addActionListener(this);	
+			panFormulaire.boutonSave.addActionListener(this);
+	
+			
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panFormulaire);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panAjouterQuestion.itemCandidatExistant)
+		{	
+			panFormulaire = new panelFormulaire();
+			
+			panFormulaire.fieldNom.setEditable(false);
+			panFormulaire.fieldPrenom.setEditable(false);
+			panFormulaire.fieldMail.setEditable(false);
+			panFormulaire.fieldTelephone.setEditable(false);
+			panFormulaire.fieldId.setEditable(true);
+			
+			
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panFormulaire);
 			this.validate();
 		}
 		

@@ -50,8 +50,6 @@ public class panelAccueil extends JPanel implements ActionListener{
 	 */
 	public panelAccueil() {
 		
-
-		
 		//Constitution de la barre de menu, qui ira au Nord
 		menuBar.add(menuFichier);
 		menuBar.add(menuQuiz);
@@ -71,48 +69,54 @@ public class panelAccueil extends JPanel implements ActionListener{
 		
 		menuAide.add(itemAide);
 
-		// Création du panelCentral
+	
+		//Création du panelCentral
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.PAGE_AXIS));
+		
+			//création d'un panel qui sera placé en haut du panelCentral : panelTexte
+			JPanel panelTexte = new JPanel(new BorderLayout());
+		
+				//Notre petit texte
+				Font fontAccueil = new Font("Courier", Font.BOLD, 30);
+				JLabel texte = new JLabel("Job-Job : Test de recrutement", JLabel.CENTER);
+				texte.setFont(fontAccueil);
+				
+			panelTexte.add(texte, BorderLayout.SOUTH);
+			
+			//création d'un panel qui sera placé en bas du panelCentral : panelImg
+			JPanel panelImg = new JPanel(new BorderLayout(50,50));
+			
+				//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
+				JLabel img = new JLabel(new ImageIcon("jobjob.png"));
+				
+			panelImg.add(img, BorderLayout.NORTH);
+			
+			
+			//Constitution du panelCentral
+			panelCentral.add(panelTexte);
+			JLabel labelVide = new JLabel(" "); //Peut mieux faire , mais çà marche
+			panelCentral.add(labelVide);
+			panelCentral.add(panelImg);
+		
+		
 
-		// création d'un panel qui sera placé en haut du panelCentral :
-		// panelTexte
-		JPanel panelTexte = new JPanel(new BorderLayout());
-
-		// Notre petit texte
-		Font fontAccueil = new Font("Courier", Font.BOLD, 30);
-		JLabel texte = new JLabel("Job-Job : Test de recrutement", JLabel.CENTER);
-		texte.setFont(fontAccueil);
-
-		panelTexte.add(texte, BorderLayout.SOUTH);
-
-		// création d'un panel qui sera placé en bas du panelCentral : panelImg
-		JPanel panelImg = new JPanel(new BorderLayout(50, 50));
-
-		// Importe l'image principale de l'écran d'accueil, sous forme de JLabel
-		JLabel img = new JLabel(new ImageIcon("jobjob.png"));
-
-		panelImg.add(img, BorderLayout.NORTH);
-
-		// Constitution du panelCentral
-		panelCentral.add(panelTexte);
-		JLabel labelVide = new JLabel(" "); // Peut mieux faire , mais çà marche
-		panelCentral.add(labelVide);
-		panelCentral.add(panelImg);
-
-		// Constitution du panel général
+		
+		//Constitution du panel général
 		this.setLayout(new BorderLayout());
 		this.add(panelCentral, BorderLayout.CENTER);
-		this.add(menuBar, BorderLayout.NORTH);	
+		this.add(menuBar, BorderLayout.NORTH);
 		
 	}
 
-	
+	public void creerFichier() {
+		
+	}
 	
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// Affichage de l'aide
-		
 		if(arg0.getSource() == this.itemAide)
 		{	
 			JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
