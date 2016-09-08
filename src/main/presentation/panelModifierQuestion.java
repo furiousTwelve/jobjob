@@ -6,9 +6,11 @@ package main.presentation;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,10 +21,11 @@ import javax.swing.JPanel;
  */
 public class panelModifierQuestion extends JPanel {
 	
-	private JPanel monpanel;
+	private JPanel monpanel, middle, bottom;
 	private JComboBox combo, combo2;
 	private JLabel categorie = new JLabel("La Catégorie");
 	private JLabel question = new JLabel("Les Questions");
+	private JButton validerModif;
 	
 	public panelModifierQuestion()
 	{			
@@ -49,10 +52,22 @@ public class panelModifierQuestion extends JPanel {
 		combo2.setPreferredSize(new Dimension(150, 20));
 		this.add(combo2, BorderLayout.CENTER);
 		
-		JPanel middle = new JPanel();
+		middle = new JPanel();
 	    middle.add(question);
 	    middle.add(combo2);
 	    this.add(middle, BorderLayout.CENTER);
+	    
+	    //Bouton Valider en bas du panel
+	    validerModif = new JButton("Valider");
+	    validerModif.setPreferredSize(new Dimension(150, 20));
+	    setFont(new Font("Arial",Font.BOLD,28));
+	    validerModif.setFont(getFont());
+	    this.add(validerModif, BorderLayout.SOUTH);
+	    
+	    bottom = new JPanel();
+	    bottom.add(validerModif);
+	    this.add(validerModif, BorderLayout.SOUTH);
+	    
 	    
 	    //Affichage de l'image en rapport avec notre question pour modification
 //	    JLabel imageQuestion = new JLabel();
