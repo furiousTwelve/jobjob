@@ -3,6 +3,10 @@ package main.metier;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import java.util.Arrays;
+import java.util.Calendar;
+
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +21,9 @@ import main.donnees.EnregistrementDonnee;
  * 
  * @author Cyril, Benjamin
  * @version 1.01
+ * 
+ * @author Florent
+ * @version 1.02
  */
 
 public class Candidat 
@@ -30,6 +37,7 @@ public class Candidat
 	protected String numeroTelephone;
 	protected String identifiant;
 	
+	String[] chaine;
 	/**
 	 * CONSTRUCTEUR
 	 */
@@ -38,46 +46,32 @@ public class Candidat
 	public Candidat(JPanel p)
 	{
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
-		Component[] fields = p.getComponents();
-		
 		// CONSTRUCTION DU CANDIDAT AVEC LES DONNEES SAISIES
-		this.nom = ((JTextField) fields[1]).getText();
-		this.prenom = ((JTextField) fields[3]).getText();
-		this.mail = ((JTextField) fields[5]).getText();
-		this.numeroTelephone = ((JTextField) fields[7]).getText();
-		this.identifiant = this.definirNumeroCandidat();
+		Component[] fields = p.getComponents();
+		chaine = new String[5];
+		int i = 0;
+		for(Component f : fields){
+			 if(f instanceof JTextField && i < chaine.length-1 )
+				{
+					chaine[i] = ((JTextField) f).getText();
+					System.out.println(chaine[i]);
+					i++;
+				}
+		}
+
+		chaine[chaine.length-1] = this.definirNumeroCandidat();
 	}
 	
 	
 	/**
-	 * METHODE QUI CONCATENE LES LABELS ET LES SAISIES DU RECRUTEUR PUIS COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
-	 * @param p : on passe en paramètre le panel contenant les zones saisies par le recruteur
+	 * METHODE QUI COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
 	 */
-	public void enregistrerNouveauCandidat(JPanel p)
+	public void enregistrerNouveauCandidat()
 	{
-		
-		
-		String[] chaine = new String[p.getComponents().length/2];
-		int i = 0;
-		Component[] fields = p.getComponents();
-		
-		for(Component f : fields)
-		{
-			if(f instanceof JLabel)
-			{
-				chaine[i] = ((JLabel) f).getText() + " : ";
-			}
-			else if(f instanceof JTextField)
-			{
-				chaine[i] = chaine[i] + ((JTextField) f).getText();
-				System.out.println(chaine[i]);
-				i++;
-			}
-		}
-		
-		// COMMUNIQUE AVEC LA COUCHE DONNEES POUR L'ENREGISTREMENT SUR LE FICHIER
+
 		EnregistrementDonnee ed = new EnregistrementDonnee();
-		ed.enregistrerCandidat(chaine); // en attente modification par la couche données
+		ed.enregistrerCandidat(chaine); 
+		
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
@@ -86,7 +80,7 @@ public class Candidat
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
 		String date = format.format(new Date());
 		EnregistrementDonnee ed = new EnregistrementDonnee();
-		int numero = ed.nombreCandidat()+1;
+		int numero = ed.nombreCandidat();
 		String numeroconcat = Integer.toString(numero);
 		if (numero<10){
 			numeroconcat="000"+numeroconcat;
