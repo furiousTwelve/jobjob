@@ -89,7 +89,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panConnection = new panelConnection();
 
-
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
@@ -175,7 +174,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			if(arg0.getSource() == panAccueil.itemNouveauCandidat )
 		{	
 
-
+			Candidat cd = new Candidat();
 			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
@@ -197,6 +196,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 			this.setContentPane(panFormulaire);
 			this.validate();
+			
+			//on fait appraitre le numéro du nouveau candidat
+			panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
 			
 			
 			

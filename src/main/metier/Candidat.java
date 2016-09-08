@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 
 /**
@@ -79,7 +80,7 @@ public class Candidat
 	{
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
 		String date = format.format(new Date());
-		EnregistrementDonnee ed = new EnregistrementDonnee();
+		ConnectionDB ed = new ConnectionDB();
 		int numero = ed.nombreCandidat();
 		String numeroconcat = Integer.toString(numero);
 		if (numero<10){

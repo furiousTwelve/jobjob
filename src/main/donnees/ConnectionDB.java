@@ -43,7 +43,7 @@ public class ConnectionDB
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
-	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjobdb";
+	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_1_2";
 	String 	 	 login 		= recruteur;
 	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;
@@ -261,6 +261,31 @@ public class ConnectionDB
 
 		} finally {
 		}
+	}
+	
+	public int nombreCandidat(){
+		
+		ResultSet res = null;
+		int nbCand=0;
+		String requete = "SELECT candidat.idPersonne FROM candidat";
+		try {
+			res = (ResultSet) st.executeQuery(requete);
+		} catch (SQLException e) {
+			System.out.println("impossible d effectuer la requete");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			nbCand = res.getInt("candidat.ipPersonne");
+		} catch (SQLException e) {
+			System.out.println("fauxe");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return nbCand;
+		
 	}
 	
 
