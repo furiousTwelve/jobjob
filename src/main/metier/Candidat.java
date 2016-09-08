@@ -3,9 +3,7 @@ package main.metier;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,7 +16,6 @@ import main.donnees.EnregistrementDonnee;
  * @version 1.00
  * 
  * @author Cyril, Benjamin
- * @khadidja, Damien, Florent
  * @version 1.01
  */
 
@@ -34,14 +31,10 @@ public class Candidat
 	protected String identifiant;
 	
 	/**
-	 * CONSTRUCTEUR Générique
+	 * CONSTRUCTEUR
 	 */
 	public Candidat(){}
 	
-	/**
-	 * Constructeur prenant en argument un JPanel 
-	 * @param p JPanel 
-	 */
 	public Candidat(JPanel p)
 	{
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
@@ -62,6 +55,8 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat(JPanel p)
 	{
+		
+		
 		String[] chaine = new String[p.getComponents().length/2];
 		int i = 0;
 		Component[] fields = p.getComponents();
@@ -102,7 +97,6 @@ public class Candidat
 		else if (numero<1000) {
 			numeroconcat="0"+numeroconcat;
 		}
-		
 		return date + "_"+numeroconcat;
 	}
 	
