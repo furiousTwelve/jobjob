@@ -1,17 +1,14 @@
 package main.presentation;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * @author Benjamin
@@ -20,59 +17,79 @@ import javax.swing.JPanel;
 public class panelModifierQuestion extends JPanel {
 	
 	private JPanel panelgeneral,top, middle, bottom;
-	private JComboBox combo, combo2;
+	private JComboBox combo, combo2, combo3;
 	private JLabel categorie = new JLabel("La Catégorie");
 	private JLabel question = new JLabel("Les Questions");
 	private JLabel imageQuestion;
-	private JButton validerModif;
+	private JButton validerModif, supprimer ;
 	
 	public panelModifierQuestion()
 	{			
-		//On définit le layout à utiliser pour avoir 5 parties
+		//On définit le layout à utiliser pour avoir 9 parties
 		panelgeneral = new JPanel();
-		this.setLayout(new BorderLayout());
-		//Panel du haut
-		this.add(categorie, BorderLayout.NORTH);
+		this.setLayout(new GridLayout(3,3));
+//1		
+		//Label vide
+		this.add(new JLabel());
 
-		//On va ajouter la checkbox catégorie
+//2		
+		//On va ajouter la 1ere comboBox  catégorie
+		top = new JPanel();
+		JLabel categorie = new JLabel("La Catégorie");
 		String[]tab = {"Culture Java", "Culture Informatique", "Nouvelle catégorie", "Nouvelle catégorie"};
 		combo = new JComboBox(tab);
-		this.combo.setPreferredSize(new Dimension(150, 20));
-		this.add(combo, BorderLayout.NORTH);
+		top.add(categorie);
+		top.add(combo);
 		
-		top = new JPanel();
-	    top.add(categorie);
-	    top.add(combo);
-	    this.add(top, BorderLayout.NORTH);
-
-	    //2ème checkbox selection de la question
-	    String[] tab2 = {"Question 1", "Question 2", "Nouvelle question 3", "Nouvelle question 4"};
-		combo2 = new JComboBox(tab2);
-		combo2.setPreferredSize(new Dimension(150, 20));
-		this.add(combo2, BorderLayout.CENTER);
+		//Textebox
+		JTextField modifCategorie = new JTextField(20);
+		top.add(modifCategorie );
+		this.add(top);
 		
+//3 et 4		
+		this.add(new JLabel());
+		this.add(new JLabel());
+//5		
+		//2ème ComboBox la selection de la question
 		middle = new JPanel();
+		JLabel question = new JLabel("Les Questions");
+	    String[] tab2 = {"Question 1", "Question 2", "Question 3", "Question 4"};
+	    combo2 = new JComboBox(tab2);
 	    middle.add(question);
 	    middle.add(combo2);
-	    this.add(middle, BorderLayout.CENTER);
 	    
-	    //Affichage de l'image en rapport avec notre question pour modification
-//	    imageQuestion = new JLabel(new ImageIcon ("JobJob.png")); //Ne fonctionne pas !
-//	    imageQuestion.add(imageQuestion);
-//	    this.add(imageQuestion, BorderLayout.CENTER);
-//	    imageQuestion.setAlignmentX(Component.CENTER_ALIGNMENT);
-//	     
+	    //Textebox
+	    JTextField modifQuestion = new JTextField(20);
+	    middle.add(modifQuestion );
+	    
+	    //Les réponses
+	    JLabel reponses = new JLabel("Les Réponses");
+	    String[] tab3 = {"Reponses 1", "Reponses 2", "Reponses 3", "Reponses 4"};
+	    combo3 = new JComboBox(tab3);
+	    middle.add(reponses);
+	    middle.add(combo3);
+	    
+	    //Textebox
+	    JTextField modifReponse = new JTextField(20);
+	    middle.add(modifReponse);
+	    
+		this.add(middle);
+		
+//6 et 7
+		this.add(new JLabel());
+		this.add(new JLabel());
+////8		
 	    //Bouton Valider en bas du panel
 	    bottom = new JPanel();
 	    validerModif = new JButton("Valider");
 	    bottom.add(validerModif);
-	    this.add(validerModif, BorderLayout.SOUTH); 
-	    validerModif.setPreferredSize(new Dimension(150, 20));
 	    
-	    bottom.setLayout(new BoxLayout(bottom, BoxLayout.PAGE_AXIS));
-	    //Changer police et taille
-//	    setFont(new Font("Arial",Font.BOLD,28));
-//	    validerModif.setFont(getFont());  
+	    supprimer = new JButton("Supprimer");
+	    bottom.add(supprimer);
+	    this.add(bottom);
+	    
+//9		
+	    this.add(new JLabel()); 
 	    
 	}	
 }
