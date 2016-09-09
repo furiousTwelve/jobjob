@@ -537,7 +537,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
 			this.panAjouterQuestion.itemNouveauCandidat.addActionListener(this);
 			this.panAjouterQuestion.itemCandidatExistant.addActionListener(this);
-			
+			System.out.println("ici");
 			this.getContentPane().removeAll();
 			this.setContentPane(panAjouterQuestion);
 			this.validate();

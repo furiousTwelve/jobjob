@@ -41,7 +41,9 @@ public class panelQuestion extends JPanel {
 	protected JLabel iconeEntreprise;
 	private Font font2;
 
+
 //	Chrono c = new Chrono();
+
 	
 	public panelQuestion() {
 
@@ -74,8 +76,10 @@ public class panelQuestion extends JPanel {
 		//labelTimer.setFont(font);
 
 
+
 	//	panelTimer.add(c);
 	//	c.horloge();
+
 
 
 		
