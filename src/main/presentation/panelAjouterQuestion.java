@@ -1,13 +1,13 @@
 package main.presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -16,7 +16,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 /**
  * 
@@ -41,6 +40,7 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 		protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
 		protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
 		protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
+		private Font font;
 		
 		/**
 		 * Constructeur du panelAjouterQuestion
@@ -70,68 +70,97 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			this.itemQuitter.addActionListener(this);	
 			this.itemAide.addActionListener(this);	
 			
+			font = new Font("Arial",Font.ITALIC,17);
+			
+			JPanel pan = new JPanel();
+			pan.setLayout(new FlowLayout());
+			
 			JPanel jp = new JPanel();
-			jp.setLayout(new BorderLayout());
-			JPanel jp2 = new JPanel();
-			JPanel jp3 = new JPanel();
+			JLabel titre = new JLabel("Ajouter Question");
+			titre.setFont(font);
+			jp.add(titre);
 			
-			BoxLayout bl = new BoxLayout(jp2, BoxLayout.PAGE_AXIS);
-			BoxLayout bl1 = new BoxLayout(jp3, BoxLayout.PAGE_AXIS);
+			JPanel panelLabel = new JPanel();
+			panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.Y_AXIS));
 			
-			JPanel jp4 = new JPanel();
-			JComboBox jcb1 = new JComboBox();
-			jp4.add(jcb1);
 			
 			JLabel jl = new JLabel("Intitulé");
+			jl.setFont(font);
+			JLabel jl1 = new JLabel("Catégorie");
+			jl1.setFont(font);
 			JLabel jl2 = new JLabel("Lien Image");
+			jl2.setFont(font);
 			JLabel jl3 = new JLabel("Proposition 1");
+			jl3.setFont(font);
 			JLabel jl4 = new JLabel("Proposition 2");
+			jl4.setFont(font);
 			JLabel jl5 = new JLabel("Proposition 3");
+			jl5.setFont(font);
 			JLabel jl6 = new JLabel("Proposition 4");
+			jl6.setFont(font);
 			JLabel jl7 = new JLabel("Réponse Correcte");
+			jl7.setFont(font);
+			panelLabel.add(jl);
+			panelLabel.add(jl1);
+			panelLabel.add(jl2);
+			panelLabel.add(jl3);
+			panelLabel.add(jl4);
+			panelLabel.add(jl5);
+			panelLabel.add(jl6);
+			panelLabel.add(jl7);
 			
-			Dimension minSize = new Dimension(5, 50);
-			Dimension prefSize = new Dimension(5, 50);
-			Dimension maxSize = new Dimension(Short.MAX_VALUE, 50);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl2);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl3);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl4);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl5);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl6);
-			jp2.add(new Box.Filler(minSize, prefSize, maxSize));
-			jp2.add(jl7);
+			pan.add(panelLabel);
+			
+			JPanel panelText = new JPanel();
+			panelText.setLayout(new BoxLayout(panelText, BoxLayout.Y_AXIS));
 			
 			JTextField jtf = new JTextField ();
-			JTextField jtf2 = new JTextField ();
-			JTextField jtf3 = new JTextField ();
-			JTextField jtf4 = new JTextField ();
-			JTextField jtf5 = new JTextField ();
-			JTextField jtf6 = new JTextField ();
+			jtf.setColumns(50);
 			JComboBox jcb = new JComboBox();
-			jp3.add(jtf);
-			jp3.add(jtf2);
-			jp3.add(jtf3);
-			jp3.add(jtf4);
-			jp3.add(jtf5);
-			jp3.add(jtf6);
-			jp3.add(jcb);
+			jcb.addItem("Catégorie");
+			JTextField jtf2 = new JTextField ();
+			jtf2.setColumns(50);
+			JTextField jtf3 = new JTextField ();
+			jtf3.setColumns(50);
+			JTextField jtf4 = new JTextField ();
+			jtf4.setColumns(50);
+			JTextField jtf5 = new JTextField ();
+			jtf5.setColumns(50);
+			JTextField jtf6 = new JTextField ();
+			jtf6.setColumns(50);
+			JComboBox jcb1 = new JComboBox();
+			jcb1.addItem("Proposition 1");
+			jcb1.addItem("Proposition 2");
+			jcb1.addItem("Proposition 3");
+			jcb1.addItem("Proposition 4");
+			panelText.add(jtf);
+			panelText.add(jcb);
+			panelText.add(jtf2);
+			panelText.add(jtf3);
+			panelText.add(jtf4);
+			panelText.add(jtf5);
+			panelText.add(jtf6);
+			panelText.add(jcb1);
 			
-			jp2.setLayout(bl);
-			jp3.setLayout(bl1);
+			pan.add(panelText);
 			
-			jp.add(jp4);
-			jp.add(jp2, BorderLayout.WEST);
-			jp.add(jp3);
+			JPanel panBouton = new JPanel();
+			JButton creer = new JButton("Créer");
+			panBouton.add(creer);
+			
+			JPanel panelCentral = new JPanel();
+			panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
+			panelCentral.add(jp);
+			panelCentral.add(pan);
+			JLabel espace = new JLabel(" ");
+			panelCentral.add(espace);
+			panelCentral.add(panBouton);
+			
+			JPanel panel = new JPanel();
+			panel.add(panelCentral);
 			
 			this.setLayout(new BorderLayout());
-			this.add(jp);
+			this.add(panel);
 			this.add(menuBar, BorderLayout.NORTH);
 			
 		}
