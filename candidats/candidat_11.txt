@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Identifiant :16_09_09_0010
 <<<<<<< HEAD
 Nom : dsq                                               
@@ -20,3 +21,11 @@ E-mail : ezaea@az.fr
 Telephone : 000000000000000
 Date : 080916
 >>>>>>> origin/features/presentation/573-3
+=======
+Identifiant :16_09_08_0010
+Nom : xzax                                              
+Prenom : zaxz                                              
+E-mail : xzaxzx@mmm.com
+Telephone : 846484964848752
+Date : 080916
+>>>>>>> origin/features/metier/561-2

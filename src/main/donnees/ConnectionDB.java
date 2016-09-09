@@ -194,10 +194,44 @@ public class ConnectionDB
 			
 	}
 			
-	
+	}
+
+	public int nombreCandidat(){
+		
+		ResultSet res = null;
+		int nbCand=0;
+		String requete = "SELECT candidat.idPersonne FROM candidat";
+		try {
+			res = (ResultSet) st.executeQuery(requete);
+		} catch (SQLException e) {
+			System.out.println("impossible d effectuer la requete");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while (res.next()) {
+				try {
+				nbCand = res.getInt("idPersonne");
+			} catch (SQLException e) {
+				System.out.println("fauxe");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+				
+		return nbCand+1;
+		
+	}
+
 	
 }
-}
+
 
 
 
