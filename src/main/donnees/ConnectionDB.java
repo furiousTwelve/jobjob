@@ -163,12 +163,14 @@ public class ConnectionDB
 	
 		int numeroQuestion[] = new int[15];
 		
+
 		// On récupère 5 Questions de catégorie CultureGénéral (1), ainsi que leur numéro associé.
 		String request = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 6";
 		res = (ResultSet) st.executeQuery(request);
 			//On remplit le libellé des 5 premières questions dans les objets questionReponse de notre tableau questrep, ainsi que notre tableau contenant l'ensemble des numéros de question
 			int i = 0;
 			while (res.next()) 
+
 			{
 				questrep[i].libelleQuestion = res.getString("textesQuestion");	
 				numeroQuestion[i] = res.getInt("numero");

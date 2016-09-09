@@ -103,7 +103,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		panConnection.boutonConnection.addActionListener(this);
 	
 		this.setContentPane(panConnection); 
-
+		
+		
+		
+		
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
 	
@@ -171,15 +175,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		}
 		
 		
+		/**
+		 * @author Lionel
+		 * @author autres personnes precedentes.
+		 * Description : ci dessous on gère le formulaire en fonction de l'item du menu sélectionné
+		 * Passage du panAccueil au PanFormulaire
+		 * 
+		 */
 		
 		
 		
-		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
-	
+
+		
 		if(arg0.getSource() == panAccueil.itemNouveauCandidat  )
 		{	
-
+			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -200,62 +211,103 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 			this.setContentPane(panFormulaire);
 			this.validate();
-			
-				
-			
+									
 		}
 			
 			
-			if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
-			{			
-				panFormulaire.fieldNom.setEditable(true);
-				panFormulaire.fieldPrenom.setEditable(true);
-				panFormulaire.fieldMail.setEditable(true);
-				panFormulaire.fieldTelephone.setEditable(true);
-				panFormulaire.fieldId.setEditable(false);
 
-				panFormulaire.itemSauvegarder.setEnabled(true);
+		if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
+		{			
+			panFormulaire.fieldNom.setEditable(true);
+			panFormulaire.fieldPrenom.setEditable(true);
+			panFormulaire.fieldMail.setEditable(true);
+			panFormulaire.fieldTelephone.setEditable(true);
+			panFormulaire.fieldId.setEditable(false);
 
-				panFormulaire.itemSauvegarder.addActionListener(this);	
-				panFormulaire.boutonSave.addActionListener(this);
-				
-				this.panFormulaire.itemAjoutQuestion.addActionListener(this);
-				this.panFormulaire.itemModifierQuestion.addActionListener(this);
-				this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			panFormulaire.itemSauvegarder.setEnabled(true);
 
-				this.getContentPane().removeAll();
-				this.setContentPane(panFormulaire);
-				this.validate();
+
+			panFormulaire.itemSauvegarder.addActionListener(this);	
+			panFormulaire.boutonSave.addActionListener(this);
+			
+			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
+			this.panFormulaire.itemModifierQuestion.addActionListener(this);
+			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
+
+			this.getContentPane().removeAll();
+			this.setContentPane(panFormulaire);
+			this.validate();
+			
+			
+			
+		}	
+
+			
 		
-			}	
-			
-
-			
 			
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
-			if(arg0.getSource() == panFormulaire.itemCandidatExistant || arg0.getSource() == panAccueil.itemCandidatExistant)
+		
+		if(arg0.getSource() == panFormulaire.itemCandidatExistant)
 		{	
-	
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
 
-			panFormulaire.remove(panFormulaire.boutonSave);
-			panFormulaire.add(panFormulaire.boutonSearch);
-			panFormulaire.boutonSearch.addActionListener(this);
-			
-
 			panFormulaire.itemAjoutQuestion.addActionListener(this);
 			panFormulaire.itemModifierQuestion.addActionListener(this);
 			panFormulaire.itemSupprimerQuestion.addActionListener(this);	
 
-
+			panFormulaire.boutonSave.addActionListener(this);
+			
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
 				
+		}
+			
+		if(arg0.getSource() == panAccueil.itemCandidatExistant)
+		{
+			
+			panFormulaire.fieldNom.setEditable(false);
+			panFormulaire.fieldPrenom.setEditable(false);
+			panFormulaire.fieldMail.setEditable(false);
+			panFormulaire.fieldTelephone.setEditable(false);
+			panFormulaire.fieldId.setEditable(true);
+			
+			panFormulaire.itemAjoutQuestion.addActionListener(this);
+			panFormulaire.itemModifierQuestion.addActionListener(this);
+			panFormulaire.itemSupprimerQuestion.addActionListener(this);	
+			
+			panFormulaire.boutonSave.setText("Rechercher");
+			panFormulaire.boutonSave.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panFormulaire);
+			this.validate();
+			
+			
+			
+			
+		}
+			
+		/**
+		 * @author Florent
+		 * @detail : Implementation du bouton rechercher
+		 * <br>ici on vérifie si le bouton s'apelle "Rechercher"
+		 * <br>si oui, execute le contenu 
+		 */
+		
+		if(arg0.getActionCommand().equals("Rechercher")){
+			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
+				panCandidat.buttonStart.addActionListener(this);
+				
+				this.getContentPane().removeAll();
+				this.setContentPane(panCandidat);
+				this.validate();
+			}
+			
 		}
 
 		//Passage du panFormulaire au panCandidat
@@ -318,23 +370,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		}
 		
-		if(arg0.getSource() == this.panFormulaire.boutonSearch){
-			
-			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
-				panCandidat.buttonStart.addActionListener(this);
-
-				this.getContentPane().removeAll();
-				this.setContentPane(panCandidat);
-				this.validate();
-			}
-			else{
-				
-				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-				
-			}
-			
-		}
-
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
 		{	

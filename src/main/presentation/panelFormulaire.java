@@ -40,7 +40,7 @@ import javax.swing.text.MaskFormatter;
  * @author Marc
 >>>>>>> features/presentation/573
  */
-public class panelFormulaire extends JPanel implements ActionListener
+public class panelFormulaire extends JPanel  implements ActionListener
 {
 
 	//Déclaration des éléments de la barre de Menu
@@ -60,7 +60,7 @@ public class panelFormulaire extends JPanel implements ActionListener
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	protected JButton boutonSave = new JButton("Sauvegarder");
-	protected JButton boutonSearch = new JButton("Rechercher");
+	
 	
 	protected JFormattedTextField fieldNom = new JFormattedTextField();
 	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
@@ -293,17 +293,19 @@ public class panelFormulaire extends JPanel implements ActionListener
 		fieldTelephone.setPreferredSize(fieldNom.getPreferredSize());
 		fieldId.setPreferredSize(fieldNom.getPreferredSize());
 		
+		
+		
 		//Placement de la barre de menu en haut à gauche
-		gbc.weightx=1;
-		gbc.weighty=1;
+		gbc.weightx=0;
+		gbc.weighty=0;
 		gbc.gridx=0;
 		gbc.gridy=0;
-		//gbc.gridwidth = GridBagConstraints.REMAINDER;
-	//	gbc.anchor = GridBagConstraints.NORTHWEST;
-		gbc.gridwidth=GridBagConstraints.REMAINDER;
+		gbc.gridwidth = GridBagConstraints.REMAINDER;
+		gbc.anchor = GridBagConstraints.NORTH;
+		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(menuBar, gbc);
-		
+	
 		
 		//Placement du label nom, ainsi que son champ de texte
 		gbc.gridx = 1;
@@ -444,6 +446,7 @@ public class panelFormulaire extends JPanel implements ActionListener
 		gbc.gridy=7;
 		gbc.weightx=0;
 		gbc.weighty=1;
+		
 		gbc.gridwidth=1;
 		gbc.gridheight=1;
 
@@ -494,6 +497,15 @@ public class panelFormulaire extends JPanel implements ActionListener
 		}
 	}
 
+	
+	/**
+	 * @author Lionel
+	 * @author Florent
+	 * Detail : Implementation du passage d'ancien candidat à nouveau
+	 * <br> et vice versa.
+	 * <br> Implementation des modification des champs et boutons
+	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -518,12 +530,6 @@ public class panelFormulaire extends JPanel implements ActionListener
 			
 			if(option == JOptionPane.OK_OPTION)
 			{
-						
-				this.fieldNom.setText(null);
-				this.fieldPrenom.setText(null);
-				this.fieldMail.setText(null);
-				this.fieldTelephone.setText(null);
-				this.fieldId.setText(null);
 				
 				this.fieldNom.setEditable(false);
 				this.fieldPrenom.setEditable(false);
@@ -531,12 +537,14 @@ public class panelFormulaire extends JPanel implements ActionListener
 				this.fieldTelephone.setEditable(false);
 				this.fieldId.setEditable(true);
 	
-				this.remove(this.boutonSave);
-				this.add(this.boutonSearch);
-				this.boutonSearch.addActionListener(this);
+				this.fieldNom.setText(null);
+				this.fieldPrenom.setText(null);
+				this.fieldMail.setText(null);
+				this.fieldTelephone.setText(null);
+				this.fieldId.setText(null);
 				
+				this.boutonSave.setText("Rechercher");
 				
-				this.validate();
 			
 			}
 		}
@@ -553,20 +561,24 @@ public class panelFormulaire extends JPanel implements ActionListener
 			
 			if(option == JOptionPane.OK_OPTION)
 			{
-				
+					
 			
 			this.fieldNom.setEditable(true);
 			this.fieldPrenom.setEditable(true);
 			this.fieldMail.setEditable(true);
 			this.fieldTelephone.setEditable(true);
 			this.fieldId.setEditable(false);
-
-			this.remove(this.boutonSearch);
-			this.add(this.boutonSave);
-			this.boutonSave.addActionListener(this);
 			
 			
-			this.validate();
+			this.fieldNom.setText(null);
+			this.fieldPrenom.setText(null);
+			this.fieldMail.setText(null);
+			this.fieldTelephone.setText(null);
+			this.fieldId.setText(null);
+			
+			this.boutonSave.setText("Sauvegarder");
+			
+		
 			}
 		}
 	}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Identifiant :16_09_09_0010
 <<<<<<< HEAD
 Nom : dsq                                               
@@ -11,3 +12,11 @@ E-mail : fdgfgdfd@fdgfd.fr
 Telephone : 546546545646   
 >>>>>>> origin/features/metier/602
 Date : 090916
+=======
+Identifiant :16_09_08_0010
+Nom : zaea                                              
+Prenom : eazea                                             
+E-mail : ezaea@az.fr
+Telephone : 000000000000000
+Date : 080916
+>>>>>>> origin/features/presentation/573-3
