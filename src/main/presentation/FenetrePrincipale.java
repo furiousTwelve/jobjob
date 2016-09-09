@@ -342,7 +342,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui elle m^meme va appeler une fonction de la coche donnée pour remplir le tableau de questions
 			
-			laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+			try {
+				laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 			tp = new TimerGeneral(10);

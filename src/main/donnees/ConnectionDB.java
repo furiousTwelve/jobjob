@@ -150,121 +150,51 @@ public class ConnectionDB
 	 * Méthode pour récupérer les réponses liées à la question passée en paramètres
 	 * 
 	 */
-	public static void chercherQuestionEnBase(questionReponse[] questrep)
+
+	public void chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
 	{
-		ResultSet	res				=null;
+		ResultSet	res				= null;
 		String		Rep1 			= "";
 		String		Rep2			= "";
 		String		Rep3			= "";
 		String		Rep4			= "";
 		String		question		= "";
 		byte		numq			=0;
+	
+		int numeroQuestion[] = new int[15];
 		
-		/*
-		 * je recupère le numero de question de mon objet questrep
-		 * je le stocke dans une variable numq
-		 * 
-		 */
-		// numq = questrep.numQuestion;
-		
-		/*
-		 * je met dans une chaine de caractères nommée sql3 la requête SQL
-		 * en prenant soin de mettre mon paramètre numq.
-		 * 
-		 */
-		String sql3 = "SELECT * FROM reponse WHERE idReponse ='"+numq+"'; ";
-		String sql4 = "SELECT * FROM question WHERE numero ='"+numq+"'; ";
-		/*
-		 * la methode executeQuery me permet de lancer la requete 
-		 * avec la chaine qui la contient sql3
-		 */
-		try {
-			
-			res = (ResultSet) st.executeQuery(sql3);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("impossible d effectuer la requete");
-			e.printStackTrace();
-			
-		}
-		/*
-		 * Puis pour l'instant je stocke les éléments contenus 
-		 * dans chaque cellule correspondant aux 4 propositions de réponses
-		 * 
-		 */
-		try {
-			try {
-				while (res.next()) 
-				{
-					try{
-					Rep1		= res.getString("reponse1");
-					Rep2		= res.getString("reponse2");
-					Rep3		= res.getString("reponse3");
-					Rep4		= res.getString("reponse4");
-					
-					
-		} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-		}
-
-		/*
-		 *remplit les 4 propositions de reponses dans l'objet de type questionReponse
-//		 */
-//		questrep.libelleReponse1 = Rep1;
-//		questrep.libelleReponse2 = Rep2;
-//		questrep.libelleReponse3 = Rep3;
-//		questrep.libelleReponse4 = Rep4;
-		
-				}
-			} catch (SQLException e) 
+		// On récupère 5 Questions de catégorie CultureGénéral (1), ainsi que leur numéro associé.
+		String request = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 6";
+		res = (ResultSet) st.executeQuery(request);
+			//On remplit le libellé des 5 premières questions dans les objets questionReponse de notre tableau questrep, ainsi que notre tableau contenant l'ensemble des numéros de question
+			int i = 0;
+			while (res.next()) 
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				questrep[i].libelleQuestion = res.getString("textesQuestion");	
+				numeroQuestion[i] = res.getInt("numero");
+				i++;
+				if (i == 5) {
+					i = 14;
+
 			}
-		
-	}finally{}
-		try {
-
-			res = (ResultSet) st.executeQuery(sql4);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("impossible d effectuer la requete");
-			e.printStackTrace();
-
+			
+		//Même chose pour les 5 questions suivantes :
+		String request2 = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 5";
+		res = (ResultSet) st.executeQuery(request);
+		//On remplit le libellé des 5 premières questions dans les objets questionReponse de notre tableau questrep, ainsi que notre tableau contenant l'ensemble des numéros de question
+		int j = 0;
+		while (res.next()) 
+		{
+			questrep[i].libelleQuestion = res.getString("textesQuestion");	
+			numeroQuestion[i] = res.getInt("numero");
+			i++;
 		}
-		try {
-			try {
-				while (res.next()) {
-					try {
-
-						question = res.getString("qtexte");
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					/*
-					 * J'affiche le contenu dans la console pour vérifier que
-					 * les 4 propositions correspondent bien
-					 */
-
-
-//					questrep.libelleQuestion = question;
-
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} finally {
-		}
+			
 	}
+			
 	
-
 	
+}
 }
 
 

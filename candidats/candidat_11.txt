@@ -1,6 +1,13 @@
 Identifiant :16_09_09_0010
+<<<<<<< HEAD
 Nom : dsq                                               
 Prenom : dsq                                               
 E-mail : dsq@dqs.fr
 Telephone : 0145963263     
+=======
+Nom : gfgfd                                             
+Prenom : fdgfdg                                            
+E-mail : fdgfgdfd@fdgfd.fr
+Telephone : 546546545646   
+>>>>>>> origin/features/metier/602
 Date : 090916

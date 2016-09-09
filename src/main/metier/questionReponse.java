@@ -1,5 +1,6 @@
 package main.metier;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 import main.donnees.ConnectionDB;
@@ -32,7 +33,7 @@ import main.donnees.EnregistrementDonnee;
 
 public class questionReponse 
 {
-	String categorieQuestion;
+	public byte categorieQuestion;
 	public byte numQuestion;
 	public byte numQuestionBDD;
 	public String libelleQuestion;
@@ -49,140 +50,29 @@ public class questionReponse
 	{
 		
 	}
-	
-//	public void genererQuestionsCandidat() throws ClassNotFoundException
-//	{		
-//		questionsCandidat = new questionReponse[15];
-//		byte valeurGeneree;
-//		boolean trouve = false;
-//		Random r = new Random();
-//		questionReponse question;
-//		
-//		
-//		// ====>       ici ecrire une fonction (DONNEES) pourqu'ils retournent le nombre d'éléments d'une catégorie
-//		// ====>  exemple int nbreQuestion=demanderNbreQuestion(catégorie);
-//		
-//		// ligne qui suit POUR TEST - à effacer quand la fonction données sera terminée
-//		int nbreQuestion=15;
-//		
-//		// GENERE LES QUESTIONS 1 A 5
-//		int i = 0;
-//		while(i < 5)
-//		{
-//			question = new questionReponse("CG");
-//			trouve = false;
-//			// ici il y a peut etre 30 questions au lieu de 15
-//			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
-//			
-//			for(int j = 0; j < i; j++)
-//			{
-//				if(valeurGeneree == questionsCandidat[j].numQuestion)
-//				{
-//					trouve = true;
-//				}
-//			}
-//			
-//			if(trouve == false)
-//			{
-//				question.numQuestion = valeurGeneree;
-//				questionsCandidat[i] = question;
-//				i++;
-//			}
-//		}
-//		
-//		// GENERE LES QUESTIONS 6 A 10
-//		while(i < 10)
-//		{
-//			question = new questionReponse("CJ");
-//			trouve = false;
-//			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
-//			
-//			for(int j = 0; j < i; j++)
-//			{
-//				if(valeurGeneree == questionsCandidat[j].numQuestion)
-//				{
-//					
-//					trouve = true;
-//				}
-//			}
-//			
-//			if(trouve == false)
-//			{
-//				question.numQuestion = valeurGeneree;
-//				questionsCandidat[i] = question;
-//				i++;
-//			}
-//		}
-//		
-//		// VA CHERCHER LA QUESTION STRESS - QUESTION 11
-//		question = new questionReponse("S");
-//		question.numQuestion = 1;
-//		questionsCandidat[i] = question;
-//		i++;
-//		
-//		// GENERE LES QUESTIONS 12 A 14
-//		valeurGeneree = (byte) (r.nextInt(11));
-//		String[] tableauLangagesExotiques = {"DELPHI", "PERL", "FORTRAN", "ADA", "PASCAL", "SMALLTALK", "TCLTK", "LISP", "VISUALBASIC", "SQUIRREL", "COBOL", "EIFFEL"};
-////		String langage = tableauLangagesExotiques[valeurGeneree];
-//		
-//		int compteurTemp=1;
-//		while(i < 14)
-//		{
-//			
-//			String cat = "LE" + tableauLangagesExotiques[valeurGeneree];
-//			question = new questionReponse(cat);
-//			questionsCandidat[i] = question;
-//			questionsCandidat[i].numQuestion=(byte)compteurTemp;
-//			compteurTemp++;
-//			i++;
-//		}
-//		
-//		// GENERE LA QUESTION 15	
-//		while(i < 15)
-//		{
-//			question = new questionReponse("CG");
-//			trouve = false;
-//			valeurGeneree = (byte) (r.nextInt(nbreQuestion-1) + 1);
-//			
-//			for(int j = 0; j < i; j++)
-//			{
-//				if(valeurGeneree == questionsCandidat[j].numQuestion)
-//				{
-//					trouve = true;
-//				}
-//			}
-//			
-//			if(trouve == false)
-//			{
-//				question.numQuestion = valeurGeneree;
-//				questionsCandidat[i] = question;
-//				i++;
-//			}
-//		}
-//		
-//		chercherQuestionRéponse(questionsCandidat,0);				
-//		
-//		// Fonctions test -- à effacer par la suite
-//		affichageTableauGenere(questionsCandidat,15);		
-//		
-//	}
-	
+
+
+
 	/**
 	 * @author Cyril
 	 *  Cette fonction est appelé lorsque le candidat appuie sur "START" sur le "panelCandidat"
 	 *  Elle a pour but d'envoyer un tableau de 15 instances de QuestionRéponse à la couche Données pour qu'il puisse la remplir les libéllés des questions et réponses associés
 	 * @param questionsCandidat est un tableau de 15 instances de QuestionRéponse
+	 * @throws SQLException 
 	 * 
 	 */
 
-	public void chercherQuestionRéponse(questionReponse[] questionsCandidat)
+
+	public void chercherQuestionRéponse(questionReponse[] questionsCandidat) throws SQLException
 
 	{			
 		ConnectionDB laConnection = new ConnectionDB();	
-	//	ConnectionDB.chercherQuestionEnBase(questionsCandidat);		
+		laConnection.chercherQuestionEnBase(questionsCandidat);		
 	}
 	
 	
+
+
 	
 	//recupération de la réponse du candidat
 	public void recupereReponse(byte reponse,int compteur)
