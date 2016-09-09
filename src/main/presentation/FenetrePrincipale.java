@@ -82,9 +82,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		this.setTitle("Job-Job"); 
 //		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setLocationRelativeTo(null);
+		this.setUndecorated(true);
 		
 
 		panConnection = new panelConnection();
@@ -100,6 +101,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		ed = new EnregistrementDonnee();
 
 		panConnection.boutonConnection.addActionListener(this);
+		panConnection.boutonQuitter.addActionListener(this);
 	
 		this.setContentPane(panConnection); 
 		
@@ -172,16 +174,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			
 		}
-		
-		
+		// fermer l'application depuis panel connection
+		if(arg0.getSource() == panConnection.boutonQuitter  )
+		{	
+			System.exit(0);	
+		}
+
 		/**
 		 * @author Lionel
 		 * @author autres personnes precedentes.
 		 * Description : ci dessous on gère le formulaire en fonction de l'item du menu sélectionné
 		 * Passage du panAccueil au PanFormulaire
 		 * 
-		 */
+		 */			
 		
+		// Passage du panAccueil au PanFormulaire
+
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
 
 		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)

@@ -20,6 +20,7 @@ public class panelConnection extends JPanel {
 	protected JTextField recruteur;
 	protected JTextField mdp;
 	protected JButton boutonConnection;
+	protected JButton boutonQuitter;
 	private JLabel labelVide1;
 	private JLabel labelVide2;
 	private JLabel labelVide3;
@@ -66,10 +67,13 @@ public class panelConnection extends JPanel {
 		panelRecruteur.add(panelConnection);
 		
 		boutonConnection = new JButton("Se connecter");
-		
+		boutonQuitter = new JButton("Quitter");
 //		panelRecruteur.add(boutonConnection);//à repositionner
 		JPanel panelboutonConnection = new JPanel();
 		panelboutonConnection.add(boutonConnection);
+		
+		JPanel panelboutonQuitter = new JPanel();
+		panelboutonQuitter.add(boutonQuitter);
 		
 		logoConnection = new JLabel(new ImageIcon("logo-connection.jpg"));
 		
@@ -91,7 +95,8 @@ public class panelConnection extends JPanel {
 		this.add(labelVide5);
 		this.add(labelVide6);
 		this.add(panelboutonConnection);
-		this.add(labelVide8);
+		this.add(panelboutonQuitter);
+		
 		
 	}
 		
