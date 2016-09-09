@@ -176,13 +176,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		// Passage du panAccueil au PanFormulaire
 		//Première possibilité, c'est un nouveau candidat, le champ N° identifiant sera grisé
-		//if(arg0.getSource() == panAccueil.itemNouveauCandidat || arg0.getSource() == panFormulaire.itemNouveauCandidat)
-			if(arg0.getSource() == panAccueil.itemNouveauCandidat  )
+	
+		if(arg0.getSource() == panAccueil.itemNouveauCandidat  )
 		{	
 
-	
-					
-			
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -210,11 +207,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			
 			if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
-			{	
-				
-			
-				
-				
+			{			
 				panFormulaire.fieldNom.setEditable(true);
 				panFormulaire.fieldPrenom.setEditable(true);
 				panFormulaire.fieldMail.setEditable(true);
@@ -233,35 +226,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.getContentPane().removeAll();
 				this.setContentPane(panFormulaire);
 				this.validate();
-				
-				
-				
+		
 			}	
 			
-		
-			
-			
-			
-			
-			
+
 			
 			
 		//Seconde possibilité, c'est un candidat existant, seul le champ N° identifiant sera accessible
-		//if(arg0.getSource() == panAccueil.itemCandidatExistant || arg0.getSource() == panFormulaire.itemCandidatExistant)
 			if(arg0.getSource() == panFormulaire.itemCandidatExistant || arg0.getSource() == panAccueil.itemCandidatExistant)
 		{	
-			//panFormulaire = new panelFormulaire();
-			
-
-				
-			
+	
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
 			panFormulaire.fieldTelephone.setEditable(false);
 			panFormulaire.fieldId.setEditable(true);
 
-		//  ============================================> Ce bout de code fait planter le programme, à debugger - voir Cyril
 			panFormulaire.remove(panFormulaire.boutonSave);
 			panFormulaire.add(panFormulaire.boutonSearch);
 			panFormulaire.boutonSearch.addActionListener(this);
@@ -288,13 +268,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 */
 		if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
-			System.out.println("ici");
-			//panCandidat= new panelCandidat();
-			System.out.println("ici 2");
-			//panFormulaire.sauvegarderFichier();// voir avec la couche métier ou donnee 
+
 			System.out.println(panFormulaire.fieldTelephone.getText());
 
-			// sorti de la condition ==> && panFormulaire.fieldTelephone.getText().indexOf(" ") < 0 
 			if(panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText()) 
 
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText()) && panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText()))
@@ -311,9 +287,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
 
-		//		panFormulaire.champNom.setForeground(Color.BLACK);
+				panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-		//		panFormulaire.champPrenom.setForeground(Color.BLACK);
+				panFormulaire.champPrenom.setForeground(Color.BLACK);
 
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
@@ -342,39 +318,36 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		}
 		
-//		if(arg0.getSource() == this.panFormulaire.boutonSearch){
-//			
-//			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
-//				panCandidat.buttonStart.addActionListener(this);
-//
-//				this.getContentPane().removeAll();
-//				this.setContentPane(panCandidat);
-//				this.validate();
-//			}
-//			else{
-//				
-//				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-//				
-//			}
-//			
-//		}
+		if(arg0.getSource() == this.panFormulaire.boutonSearch){
+			
+			if(ed.rechercheCandidat(panFormulaire.fieldId.getText())){
+				panCandidat.buttonStart.addActionListener(this);
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panCandidat);
+				this.validate();
+			}
+			else{
+				
+				JOptionPane.showMessageDialog(panFormulaire, "Candidat introuvable", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			
+		}
 
 		//Passage du panCandidat au panQuestion
 		if(arg0.getSource() == this.panCandidat.buttonStart)
 		{	
 			panQuestion= new panelQuestion();
-			try 
-			{
-				laQuestionReponse.genererQuestionsCandidat();
-			} catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
-			}
+			
+			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui elle m^meme va appeler une fonction de la coche donnée pour remplir le tableau de questions
+			
+			laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+			
 
 			tp = new TimerGeneral(10);
 			tp.start();
-			
-	
+
 			this.getContentPane().removeAll();
 			
 			// Couche METIER ==>  Affichage de la première question
@@ -388,9 +361,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			panQuestion.boutonValider.addActionListener(this);
 			this.validate();
-			
-			
-			
 		}
 
 
@@ -433,15 +403,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse1.setSelected(false);
 				panQuestion.reponse2.setSelected(false);
 				panQuestion.reponse3.setSelected(false);
-				panQuestion.reponse4.setSelected(false);
-				
-
-				try {
-					laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat,compteurQuestions-1);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				panQuestion.reponse4.setSelected(false);				
 
 				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);

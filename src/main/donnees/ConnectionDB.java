@@ -150,7 +150,7 @@ public class ConnectionDB
 	 * Méthode pour récupérer les réponses liées à la question passée en paramètres
 	 * 
 	 */
-	public static void chercherQestionEnBase(questionReponse questrep) throws ClassNotFoundException
+	public static void chercherQuestionEnBase(questionReponse[] questrep)
 	{
 		ResultSet	res				=null;
 		String		Rep1 			= "";
@@ -165,7 +165,7 @@ public class ConnectionDB
 		 * je le stocke dans une variable numq
 		 * 
 		 */
-		 numq = questrep.numQuestion;
+		// numq = questrep.numQuestion;
 		
 		/*
 		 * je met dans une chaine de caractères nommée sql3 la requête SQL
@@ -210,11 +210,11 @@ public class ConnectionDB
 
 		/*
 		 *remplit les 4 propositions de reponses dans l'objet de type questionReponse
-		 */
-		questrep.libelleReponse1 = Rep1;
-		questrep.libelleReponse2 = Rep2;
-		questrep.libelleReponse3 = Rep3;
-		questrep.libelleReponse4 = Rep4;
+//		 */
+//		questrep.libelleReponse1 = Rep1;
+//		questrep.libelleReponse2 = Rep2;
+//		questrep.libelleReponse3 = Rep3;
+//		questrep.libelleReponse4 = Rep4;
 		
 				}
 			} catch (SQLException e) 
@@ -251,7 +251,7 @@ public class ConnectionDB
 					 */
 
 
-					questrep.libelleQuestion = question;
+//					questrep.libelleQuestion = question;
 
 				}
 			} catch (SQLException e) {
