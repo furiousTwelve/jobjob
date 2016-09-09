@@ -82,9 +82,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		this.setTitle("Job-Job"); 
 //		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setLocationRelativeTo(null);
+		this.setUndecorated(true);
 		
 
 		panConnection = new panelConnection();
@@ -101,6 +102,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		ed = new EnregistrementDonnee();
 
 		panConnection.boutonConnection.addActionListener(this);
+		panConnection.boutonQuitter.addActionListener(this);
 	
 		this.setContentPane(panConnection); 
 
@@ -169,9 +171,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			
 		}
+		// fermer l'application depuis panel connection
 		
-		
-		
+		if(arg0.getSource() == panConnection.boutonQuitter  )
+		{	
+
+			System.exit(0);
+					
+	
+		}
 		
 		
 		// Passage du panAccueil au PanFormulaire
