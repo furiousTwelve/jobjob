@@ -1,24 +1,18 @@
-/*
- * @auteur 	: Lionel Chialvo
- * @auteur  / Marc Naouache
- * @date	: 31/08/2016
- * @version : 1.0
+/**
  * 
- * 
- * Description : 
  * Cette classe permet la connection à une base de donnée de type SQL.
  * Cette base est sur la machine de Marc à l'ip : 10.111.61.52:3306
  * et la base s'appelle  "jobjobdb".
- * 
- * Dans cette classe il y a une methode qui permet la connection.
- * 
- * 
- * 
- * !!! RESTE A FAIRE !!!
+ *  !!! RESTE A FAIRE !!!
  * 
  * IL FAUT GERER LE PASSAGE DE LOGIN ET PASSWORD DU RECRUTEUR 
  * PAR UNE FENETRE DE LOGIN AU DEMARRAGE DE L APPLI
  * 
+ * Dans cette classe il y a une methode qui permet la connection.
+ * @author Lionel Chialvo
+ * @author Marc Naouache
+ * @date	 31/08/2016
+ * @version  1.0
  */
 
 package main.donnees;
@@ -31,9 +25,7 @@ import com.mysql.jdbc.Statement;
 import main.metier.questionReponse;
 
 public class ConnectionDB 
-
 {
-	
 	static Statement 	 st;
 	/*
 	 * Méthode qui se connecte à la base 	   
