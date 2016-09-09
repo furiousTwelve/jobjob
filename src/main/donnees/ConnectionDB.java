@@ -172,7 +172,7 @@ public class ConnectionDB
 		 * en prenant soin de mettre mon paramètre numq.
 		 * 
 		 */
-		String sql3 = "SELECT * FROM reponse WHERE idReponse ='"+numq+"'; ";
+		String sql3 = "SELECT * FROM propositions WHERE idPropositions ='"+numq+"'; ";
 		String sql4 = "SELECT * FROM question WHERE numero ='"+numq+"'; ";
 		/*
 		 * la methode executeQuery me permet de lancer la requete 
