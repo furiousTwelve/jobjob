@@ -7,19 +7,11 @@ import java.lang.*;
 
 
 
-public class Chrono extends JFrame implements Runnable{ 
+public class Chrono extends JPanel implements Runnable{ 
 	/* deux façons de créer un thread: 
 - Création d'un objet qui hérite de la classe Thread 
 - Execution de la primitive new Thread() sur un objet qui implémente l'interface Runnable 
 (et c'est ce k'on a fait dans ce programme) */ 
-
-
-	//- L'ecouteur de la fenêtre 
-	class EF extends WindowAdapter //qd on quitte la fenetre 
-	{ 
-		public void windowClosing(WindowEvent e) 
-		{} 
-	}
 
 	Thread h; //déclaration du thread h 
 	public void run() //la méthode vertuelle run() est obligatoire (voir cours "les threads" !!!) 
@@ -49,7 +41,8 @@ cet angle est égale à 6 degrés -- */
 
 
 	//- début de paint() : la méthode qui dessine tout 
-	public void paint(Graphics g){ 
+	public void paintComponent(Graphics g)
+	{ 
 		Graphics2D g1 = (Graphics2D) g;
 		BasicStroke line = new BasicStroke(4.0f);
 		g1.setStroke(line);
@@ -63,37 +56,23 @@ cet angle est égale à 6 degrés -- */
 		//A chaque fois l'angle de l'aiguille est changé -- 
 		//Et on calcule la nouvelle position -- 
 
-		//--- dessin des cercles de l'horloge 
-		g.setColor(Color.white); 
+		//--- dessin du cercle
+		g.setColor(Color.white);
 		g.drawOval(x0-rayon,y0-rayon,2*rayon,2*rayon); 
 		//g.drawOval(300,200,100,100);
-
-
 		//g.setColor(Color.white); 
 		//g.drawString(i+"s",490,100); //Affichage Numérique
-
 	} 
 	//------------fin de la fonction paint()------------------------------------- 
 
-
-	public void horloge(){ //constructeur 
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		/* 
-le but de cette instruction est : 
-lorsqu'on ferme la fenêtre graphique 
-le message suivant apparait sur la fenetre DOS : 
-"Press any key to continue ..." 
-permettant ainsi de quitter facilement la fenêtre DOS 
-		 */ 
-
-		addWindowListener(new EF());// 
+	public void horloge()
+	{ 
+		//constructeur 
 		setVisible(true); //pour que la fenêtre divienne visible ! 
 		setSize(800,600); //dimensions de la fenêtre 
 		setBackground(Color.black);//couleur du fond(noir) 
 
-		h=new Thread(this); //création 
+		h = new Thread(this); //création 
 		h.start(); //méthode de la classe Thread,pour lancer la méthode run() 
-
 	} 
 }

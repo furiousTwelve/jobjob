@@ -30,7 +30,6 @@ public class panelQuestion extends JPanel {
 	private JPanel panelValider;
 	
 	protected JLabel labelQuestion;
-	protected JLabel labelTimer;
 	protected JRadioButton reponse1;
 	protected JRadioButton reponse2;
 	protected JRadioButton reponse3;
@@ -42,7 +41,7 @@ public class panelQuestion extends JPanel {
 	private Font font2;
 
 
-//	Chrono c = new Chrono();
+	Chrono chronoGeneral = new Chrono();
 
 	
 	public panelQuestion() {
@@ -77,14 +76,9 @@ public class panelQuestion extends JPanel {
 		//labelTimer = new JLabel(c);//Si pas question stress, label vide. Sinon voir ce qu'il faut mettre.
 		//labelTimer.setFont(font);
 
+		panelTimer.add(chronoGeneral);
+		chronoGeneral.horloge();
 
-
-	//	panelTimer.add(c);
-	//	c.horloge();
-
-
-
-		
 		panelNord.add(panelTimer, BorderLayout.EAST);
 		
 		this.add(panelNord, BorderLayout.NORTH);

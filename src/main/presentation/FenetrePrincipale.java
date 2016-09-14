@@ -281,8 +281,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		}
 
-		if (arg0.getSource() == panAccueil.itemCandidatExistant) {
-
+		if (arg0.getSource() == panAccueil.itemCandidatExistant) 
+		{
 			panFormulaire.fieldNom.setEditable(false);
 			panFormulaire.fieldPrenom.setEditable(false);
 			panFormulaire.fieldMail.setEditable(false);
@@ -299,7 +299,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
-
 		}
 
 		/**
@@ -309,8 +308,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 *         si oui, execute le contenu
 		 */
 
-		if (arg0.getActionCommand().equals("Rechercher")) {
-			if (ed.rechercheCandidat(panFormulaire.fieldId.getText())) {
+		if (arg0.getActionCommand().equals("Rechercher")) 
+		{
+			if (ed.rechercheCandidat(panFormulaire.fieldId.getText())) 
+			{
 				panCandidat.buttonStart.addActionListener(this);
 
 				this.getContentPane().removeAll();
@@ -414,7 +415,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				e.printStackTrace();
 			}
 
-			tp = new TimerGeneral(10);
+			tp = new TimerGeneral(45);
 			tp.start();
 
 			this.getContentPane().removeAll();
@@ -455,7 +456,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				reponseChoisie = true;
 			}
 
-			if (reponseChoisie == true) {
+			if (reponseChoisie == true) 
+			{
 				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions);
 
 				compteurQuestions++;
@@ -465,34 +467,39 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);
 
-				panQuestion.labelQuestion
-						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleQuestion);
-				panQuestion.reponse1
-						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse1);
-				panQuestion.reponse2
-						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse2);
-				panQuestion.reponse3
-						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse3);
-				panQuestion.reponse4
-						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse4);
-
-			} else {
+				if(compteurQuestions < 15)
+				{
+					panQuestion.labelQuestion
+							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleQuestion);
+					panQuestion.reponse1
+							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse1);
+					panQuestion.reponse2
+							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse2);
+					panQuestion.reponse3
+							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse3);
+					panQuestion.reponse4
+							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse4);
+				}
+			} 
+			else 
+			{
 				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé",
 						JOptionPane.ERROR_MESSAGE);
 			}
-
-			panQuestion.labelTimer.setText("");
-			if (compteurQuestions == 11) {
-				panQuestion.labelTimer.setText("Timer");
-			}
-
 		}
-
+		
 		// Arrêt à la question 12
-		if (compteurQuestions == 12) {
-			TimerS = new TimerGeneral(120);
+		if (compteurQuestions == 12) 
+		{
+			System.out.println("Timer Stress Start");
+			TimerS = new TimerGeneral(30);
 			// Lancer le TimerStress
 			TimerS.start();
+		}
+		
+		if(compteurQuestions == 13)
+		{
+			System.out.println("Timer Stress Stop");
 			TimerS.tache.cancel();
 		}
 
