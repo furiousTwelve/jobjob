@@ -15,18 +15,20 @@
  * @version  1.0
  */
 package main.donnees;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
+
+import java.sql.*;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import main.metier.questionReponse;
+import main.presentation.FenetrePrincipale;
+import main.presentation.panelFormulaire;
 
 
 // TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
 // TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
-public class ConnectionDB 
+public class ConnectionDB
 {
 	static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
 	
@@ -97,52 +99,87 @@ public class ConnectionDB
 	}
 	
 	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
-	/*
+	/**
 	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
-	 * affiche dans la console les champs associés à l'élément id dans la table
-	 *    
+	 * Récupère les champs associés à l'élément id dans la table
+	 * @author Audric
+	 * @param id   
+	 * @throws ClassNotFoundException
 	 */
-	public static void recupererCandidatEnBase(int id) throws ClassNotFoundException
+	
+	static String nom;
+	static String prenom;
+	
+	public static boolean recupererCandidatEnBase(String id) throws ClassNotFoundException
 	{
-		ResultSet rs=null;
-		int id2=0;
-		String nom="";
-		String prenom="";
+		String url = "jdbc:mysql://sta6101855:3306/jobjob_2_0";
+		String login = "cdi";
+		String passwd = "cdi";
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		String id2="";
+	    nom="";
+		prenom="";
 		String telephone="";
 		String mail="";
+		Boolean existe = false;
 		
-		String sql2 = "SELECT * FROM candidat WHERE identifiant='"+id+"'; ";
-		try {
-			rs = (ResultSet) st.executeQuery(sql2);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			while (rs.next()) {
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, login, passwd);
+			st = cn.createStatement();
+			String sql = "SELECT * FROM personne INNER JOIN candidat ON personne.idPersonne=candidat.idPersonne WHERE idCandidat='"+id+"';";
+			rs = st.executeQuery(sql);
+			while(rs.next()){
 				try {
-					id2 = rs.getInt("identifiant");
+					id2 = rs.getString("idCandidat");
 					nom = rs.getString("nom");
 					prenom= rs.getString("prenom");
 					telephone= rs.getString("telephone");
 					mail= rs.getString("mail");
 					
-					
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				System.out.println(id2);
-				System.out.println(nom);
-				System.out.println(prenom);
-				System.out.println(telephone);
-				System.out.println(mail);
+				
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e){
 			e.printStackTrace();
 		}
+		catch(ClassNotFoundException e){
+			e.printStackTrace();
+		} finally {
+			try{
+				cn.close();
+				st.close();
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		if (!id2.equals("")){
+			existe=true;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Le candidat n'existe pas");
+		}
+		
+		return existe;
+		
 	}
+	
+	public static String getNom() {
+		return nom;
+	}
+
+	public static String getPrenom() {
+		return prenom;
+	}
+	
+	
 	
 	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
@@ -156,6 +193,7 @@ public class ConnectionDB
 	 * @author Mathieu
 	 * 
 	 */
+	
 
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
 

@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * 
+ * Permet l'ajout d'une nouvelle question
  * @author Audric
  * 
  */
@@ -70,6 +70,7 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			this.itemQuitter.addActionListener(this);	
 			this.itemAide.addActionListener(this);	
 			
+			//Constitution du panel central
 			font = new Font("Arial",Font.ITALIC,17);
 			
 			JPanel pan = new JPanel();
