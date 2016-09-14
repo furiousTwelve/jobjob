@@ -31,14 +31,12 @@ import main.metier.questionReponse;
 // TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
 public class ConnectionDB 
 {
-
 	private static String url;
 	private static String login;
 	private static String passwd;
 	private static Connection	 cn;
 	private static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
 	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/**
 	 * Méthode qui se connecte à la base
 	 * @param acces, paramètre qui autorise l'accés
@@ -47,7 +45,6 @@ public class ConnectionDB
 	 */
 	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
-
 		/*
 		 * Ici je stocke et initialise mes éléments de connection 
 		 */
@@ -87,16 +84,17 @@ public class ConnectionDB
 		return(acces);
 	}
 	
-	public void Connexion() throws SQLException, ClassNotFoundException{
-		
-		//			Class.forName("com.mysql.jdbc.Driver");
-					// recuperation de la connexion
-					cn = (Connection) DriverManager.getConnection(url, login, passwd);
-					// creation d'un statement pour pouvoir lancer des requêtes
-					st = (Statement) cn.createStatement();	
+	public void Connexion() throws SQLException, ClassNotFoundException
+	{
+		//Class.forName("com.mysql.jdbc.Driver");
+		// recuperation de la connexion
+		cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		// creation d'un statement pour pouvoir lancer des requêtes
+		st = (Statement) cn.createStatement();	
 	}
 	
-	public void Deconnexion() throws SQLException{
+	public void Deconnexion() throws SQLException
+	{
 		st.close();
 		cn.close();
 	}
