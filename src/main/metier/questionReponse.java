@@ -63,16 +63,14 @@ public class questionReponse
 	 */
 
 
-	public void chercherQuestionRéponse(questionReponse[] questionsCandidat) throws SQLException
+	public questionReponse[] chercherQuestionRéponse(questionReponse[] questionsCandidat) throws SQLException
 
-	{			
+	{		
 		ConnectionDB laConnection = new ConnectionDB();	
-		laConnection.chercherQuestionEnBase(questionsCandidat);		
+		questionsCandidat = laConnection.chercherQuestionEnBase(questionsCandidat);		
+		return questionsCandidat;
 	}
 	
-	
-
-
 	
 	//recupération de la réponse du candidat
 	public void recupereReponse(byte reponse,int compteur)

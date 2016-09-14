@@ -1,40 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-Identifiant :16_09_09_0010
-<<<<<<< HEAD
-Nom : dsq                                               
-Prenom : dsq                                               
-E-mail : dsq@dqs.fr
-Telephone : 0145963263     
-=======
-Nom : gfgfd                                             
-Prenom : fdgfdg                                            
-E-mail : fdgfgdfd@fdgfd.fr
-Telephone : 546546545646   
->>>>>>> origin/features/metier/602
-Date : 090916
-=======
-Identifiant :16_09_08_0010
-Nom : zaea                                              
-Prenom : eazea                                             
-E-mail : ezaea@az.fr
-Telephone : 000000000000000
-Date : 080916
->>>>>>> origin/features/presentation/573-3
-=======
-Identifiant :16_09_08_0010
-Nom : xzax                                              
-Prenom : zaxz                                              
-E-mail : xzaxzx@mmm.com
-Telephone : 846484964848752
-Date : 080916
->>>>>>> origin/features/metier/561-2
-=======
-Identifiant :16_09_09_0010
-Nom : a                                                 
-Prenom : a                                                 
-E-mail : aa@aa.com
-Telephone : 000000000000000
-Date : 090916
->>>>>>> origin/features/CDP7
+Identifiant :16_09_14_0003
+Nom : de                                                
+Prenom : de                                                
+E-mail : dde@de.fr
+Telephone : 0154879632     
+Date : 140916
