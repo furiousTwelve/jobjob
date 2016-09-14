@@ -53,20 +53,22 @@ public class panelQuestion extends JPanel {
 		// Appel de cette fonction  chercherQuestionRéponse(numQuestion) à chaque fois que le candidat valide un réponse.
 		
 		// TODO Auto-generated constructor stub
-		this.setLayout(new BorderLayout(200,200));
+		this.setLayout(new BorderLayout(200, 200));
+		
 		
 		font = new Font("Arial",Font.BOLD,28);
 		font2 = new Font("Arial",Font.BOLD,14);
 		
 		panelNord = new JPanel();
 		panelNord.setLayout(new BorderLayout());
-		
-		panelQuestions = new JPanel();
+		 
+		panelQuestions = new JPanel();	
 		
 		labelQuestion = new JLabel("Combien de pattes a un mouton à cinq pattes?");//à remplir en lisant fichier ou bdd contenant les questions.
 		
 		labelQuestion.setFont(font);
 		panelQuestions.add(labelQuestion);
+		
 		
 		panelNord.add(panelQuestions, BorderLayout.WEST);
 		
