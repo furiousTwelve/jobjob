@@ -38,43 +38,40 @@ public class ConnectionDB
 	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
 
-	/*
-	 * Ici je stocke et initialise mes éléments de connection 
-	 */
-	String		 url 		= "jdbc:mysql://localhost/jobjob_1_2";
-	String 	 	 login 		= recruteur;
-	String 		 passwd 	= MDP;
-	Connection	 cn 		= null;
-	st	= null;
-	
-	/*
-	 * Connection au drivers de base de donnée
-	 * ici pour le SQL
-	 */
-	try
-	{
-		// chargement du driver
-		Class.forName("com.mysql.jdbc.Driver");
+		/*
+		 * Ici je stocke et initialise mes éléments de connection 
+		 */
+		String		 url 		= "jdbc:mysql://STA6101855:3306/jobjob_2_0";
+		String 	 	 login 		= recruteur;
+		String 		 passwd 	= MDP;
+		Connection	 cn 		= null;
+		st	= null;
 		
-		// recuperation de la connexion	
-		cn = (Connection) DriverManager.getConnection(url, login, passwd);
-	
-		// creation d'un statement pour pouvoir lancer des requêtes
-		st = (Statement) cn.createStatement();
+		/*
+		 * Connection au drivers de base de donnée
+		 * ici pour le SQL
+		 */
+		try
+		{
+			// chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// recuperation de la connexion
 		
-		// affiche dans la console si la connecion est ok.
-		System.out.println("connection dataBase OK");
-	}
-	
-	catch ( SQLException e)
-	{
-		e.printStackTrace();
-		acces=false;
-	}finally{}
-	
-	return(acces);
-
-	
+			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		
+			// creation d'un statement pour pouvoir lancer des requêtes
+			st = (Statement) cn.createStatement();
+			// affiche dans la console si la connecion est ok.
+			System.out.println("connection dataBase OK");
+		}
+		
+		catch ( SQLException e)
+		{
+			e.printStackTrace();
+			acces=false;
+		}finally{}
+		
+		return(acces);
 	}
 	
 	/**
