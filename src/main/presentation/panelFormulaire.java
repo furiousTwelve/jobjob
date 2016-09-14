@@ -584,10 +584,11 @@ public class panelFormulaire extends JPanel  implements ActionListener
 			//on fait appraitre le numéro du nouveau candidat
 			try {
 				this.fieldId.setText(cd.definirNumeroCandidat());
-			} catch (SQLException e1) {
+
+			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

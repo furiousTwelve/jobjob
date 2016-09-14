@@ -32,11 +32,21 @@ import main.metier.questionReponse;
 public class ConnectionDB 
 {
 
+
 	private static String url;
 	private static String login;
 	private static String passwd;
 	private static Connection	 cn;
 	private static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
+
+	private String recruteur = "cdi";
+	private String MDP = "cdi";
+	
+	
+	public ConnectionDB () throws ClassNotFoundException, SQLException {
+		
+		connectionBase(recruteur, MDP);
+	}
 	
 	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/**
@@ -45,18 +55,19 @@ public class ConnectionDB
 	 * @param recruteur, paramètre qui enregistre le nom du recruteur
 	 * @param MDP , paramètre qui enregistre le MDP du recruteur
 	 */
-	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
+	public static boolean connectionBase(String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
 
 		/*
 		 * Ici je stocke et initialise mes éléments de connection 
 		 */
 
-		url 		= "jdbc:mysql://localhost/jobjob_1_2";
-		login 		= recruteur;
-		passwd 	= MDP;
-		cn 		= null;
+		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
+		String 	 	 login 		= recruteur;
+		String 		 passwd 	= MDP;
+		Connection	 cn 		= null;
 		st	= null;
+		boolean connected;
 		
 		/*
 		 * Connection au drivers de base de donnée
@@ -74,17 +85,24 @@ public class ConnectionDB
 //			st = (Statement) cn.createStatement();
 			// affiche dans la console si la connecion est ok.
 			System.out.println("connection dataBase OK");
+
 			cn.close();
+
+			connected = true;
+
 		}
 		
 		catch ( SQLException e)
 		{
 			e.printStackTrace();
-			acces=false;
+			connected = false;
 		}finally{}
+
 		
 		recupererStatistiques();
-		return(acces);
+
+		return connected;
+
 	}
 	
 	public void Connexion() throws SQLException, ClassNotFoundException{
@@ -103,6 +121,7 @@ public class ConnectionDB
 	
 	/**
 	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
+	 * Elle retourne un int, correspondant à l'idPersonne du nouveau candidat enregistré
 	 * @author florent
 	 * @param id
 	 * @param nom
@@ -111,36 +130,82 @@ public class ConnectionDB
 	 * @param mail
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NumberFormatException
+	 * @return int 
 	 */
-	
-	public void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, SQLException
+	public static int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, NumberFormatException, SQLException
 	{
-		Connexion();
-		String sql = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
+		/*
+		 * Ici je stocke et initialise mes éléments de connection 
+		 */
+		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
+		String 	 	 login 		= "cdi";
+		String 		 passwd 	= "cdi";
+		Connection	 cn 		= null;
+		st	= null;
 		
-		try 
+		/*
+		 * Connection au drivers de base de donnée
+		 * ici pour le SQL
+		 */
+		try
 		{
-			st.executeUpdate(sql);
-			
-			
-		} catch (SQLException e) 
-		{
-			e.printStackTrace();
+			// chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// recuperation de la connexion
+		
+			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		
+			// creation d'un statement pour pouvoir lancer des requêtes
+			st = (Statement) cn.createStatement();
+			// affiche dans la console si la connecion est ok.
+			System.out.println("connection dataBase OK");
 		}
 		
-		String sql2 = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_1) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
-		
-		try 
+		catch ( SQLException e)
 		{
-			st.executeUpdate(sql2);
+			e.printStackTrace();
+		}finally{}
 
-		} catch (SQLException e) 
+		
+		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
+		try 
+		{
+
+			st.executeUpdate(sql2);	
+		} 
+		catch (SQLException e) 
+
 		{
 			e.printStackTrace();
 		}
 		
-		Deconnexion();
+
+		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_Recruteur) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
 		
+		try 
+		{
+			st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+		} 
+		catch (SQLException e) 
+
+		{
+			e.printStackTrace();
+		}
+		
+
+		int answer = 0;
+		
+		
+		// Partie dévouée au test Unitaire, renvoyant l'idPersonne du candidat qui vient d'être créé dans la base
+		ResultSet generatedKeys = (ResultSet) st.getGeneratedKeys(); 
+		while(generatedKeys.next()) {
+			answer = Integer.parseInt(generatedKeys.getString(1));
+			System.out.println("sysoiut1" + answer);
+		}
+		System.out.println("sysout 2" + answer);
+		return answer;
+
 	}
 	
 	
