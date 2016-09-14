@@ -305,6 +305,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 		/**
 		 * @author Florent
+		 * @author Audric
 		 * @detail : Implementation du bouton rechercher
 		 * <br>ici on vérifie si le bouton s'apelle "Rechercher"
 		 * <br>si oui, execute le contenu 
