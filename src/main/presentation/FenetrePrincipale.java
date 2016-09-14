@@ -341,7 +341,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 					&& panFormulaire.checkNom(panFormulaire.fieldNom.getText())
 					&& panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) {
 				Candidat leCandidat = new Candidat(panFormulaire);
-				leCandidat.enregistrerNouveauCandidat();
+				try {
+					leCandidat.enregistrerNouveauCandidat();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				panCandidat.buttonStart.addActionListener(this);
 				this.getContentPane().removeAll();
 				this.setContentPane(panCandidat);

@@ -52,26 +52,28 @@ public class Candidat
 		chaine = new String[5];
 		int i = 0;
 		for(Component f : fields){
-			 if(f instanceof JTextField && i < chaine.length-1 )
+			 if(f instanceof JTextField && i < chaine.length )
 				{
 					chaine[i] = ((JTextField) f).getText();
 					System.out.println(chaine[i]);
 					i++;
 				}
 		}
-
-		chaine[chaine.length-1] = this.definirNumeroCandidat();
 	}
-	
-	
+
 	/**
 	 * METHODE QUI COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
+
+	 * @author 34011-82-06 Mathieu
+	 * @throws ClassNotFoundException
+	 * On envoie à la couche données un tableau de String contenant les informations d'un candidat que l'on souhaite enregistrer.
+	 * Cet enregistrement à lieu (cette méthode est appelée donc) lors du passage du panelFormulaiure au panelCandidat, dans la fenêtre Principale:ligne 342
 	 */
-	public void enregistrerNouveauCandidat()
-	{
-		//TODO : la méthode n'appelle pas (plus) la bonne méthode 
-		EnregistrementDonnee ed = new EnregistrementDonnee();
-		ed.enregistrerCandidat(chaine); 
+	public void enregistrerNouveauCandidat() throws ClassNotFoundException 
+	{ 
+
+		ConnectionDB cdb = new ConnectionDB();
+		cdb.enregistrerNouveauCandidatEnBase(chaine[4], chaine[0], chaine[1], chaine[3], chaine[2]);
 		
 	}
 	

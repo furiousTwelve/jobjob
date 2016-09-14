@@ -1,6 +1,0 @@
-Identifiant :16_09_14_0003
-Nom : a                                                 
-Prenom : a                                                 
-E-mail : a@a.fr
-Telephone : 0623568914     
-Date : 140916
