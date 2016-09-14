@@ -75,6 +75,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 */
 	public FenetrePrincipale() 
 	{
+		
+		
+	
+			
 		// test graphe khadidja
 	//	dg.DessinerBar();
 	//	dg.DessinerCam();
@@ -122,6 +126,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
+		
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
@@ -146,6 +151,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			if(acces==true)
 			{
+				
 				
 				panAccueil = new panelAccueil();
 			
@@ -407,8 +413,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			
 
-			tp = new TimerGeneral(10);
+			
+			tp = new TimerGeneral(10, this );
 			tp.start();
+			
 
 			this.getContentPane().removeAll();
 			
@@ -481,7 +489,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 			
 			
-			panQuestion.labelTimer.setText("");
+			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
 				panQuestion.labelTimer.setText("Timer");
@@ -494,7 +502,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
-			TimerS = new TimerGeneral(120);
+			TimerS = new TimerGeneral(120,this);
 			//Lancer le TimerStress
 			TimerS.start();
 			TimerS.tache.cancel();
@@ -644,6 +652,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 		}
+		
+		
 		
 	}
 
