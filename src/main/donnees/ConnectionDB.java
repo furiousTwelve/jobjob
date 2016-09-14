@@ -105,8 +105,7 @@ public class ConnectionDB
 		try 
 		{
 			st.executeUpdate(sql);
-//			
-//			st.close();
+
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();
@@ -189,21 +188,24 @@ public class ConnectionDB
 		ResultSet res = null;
 		
 		
-		// Boucles et requêtes permettant de remplir le tableau questionReponse[] fournit en paramètre
-		
+		// Boucles et requêtes permettant de remplir le tableau questionReponse[] fournit en paramètre		
 			// Première requête, insérée dans une boucle de 15 itérations
 			for (int i = 0; i < ordreCategorieQuestions.length; i++) {
 				
-				String request1 = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
+				String request1 = "SELECT textesQuestion, numero, idPropositions FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
 				res = (ResultSet) st.executeQuery(request1);
 				
-				while (res.next()) {
+				while (res.next()) 
+				{
 					questrep[i] = new questionReponse();
-					questrep[i].libelleQuestion = res.getString(1);
-	
-					numeroQuestion[i] = res.getInt("numero");
+					questrep[i].libelleQuestion = res.getString(1);					
+					
+					questrep[i].numQuestionBDD = res.getInt("numero");				
+								
+					numeroQuestion[i] = res.getInt("numero");					
 					numeroQuestionsInterdites += " AND numero  != " + res.getInt("numero");
-					//System.out.println(numeroQuestionsInterdites);
+					
+					questrep[i].bonneReponse = res.getInt("idPropositions");						
 				}
 				
 			}
@@ -222,8 +224,7 @@ public class ConnectionDB
 				res.next();
 				questrep[j].libelleReponse4 = res.getString("reponse");
 			}
-		
-			
+					
 		// Notre retour
 		return questrep;
 	}
@@ -274,7 +275,7 @@ public class ConnectionDB
 				
 		
 		for (int i = 0; i < questrep.length; i++) {
-			String sql = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+", (SELECT idQcm FROM qcm INNER JOIN candidat ON qcm.idPersonne = candidat.idPersonne WHERE idCandidat = '"+cd.chaine[4]+"'), "+questrep[i].numQuestion+");";
+			String sql = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+", (SELECT idQcm FROM qcm INNER JOIN candidat ON qcm.idPersonne = candidat.idPersonne WHERE idCandidat = '"+cd.chaine[4]+"'), "+questrep[i].numQuestionBDD+");";
 			try {
 				int a = st.executeUpdate(sql);
 			} catch (SQLException e) {
