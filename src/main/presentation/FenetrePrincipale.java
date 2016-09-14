@@ -223,38 +223,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			//on fait appraitre le numéro du nouveau candidat
 			panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
-			
 
 		}
-			
-			
-
-		if(arg0.getSource() == panFormulaire.itemNouveauCandidat)
-		{			
-			panFormulaire.fieldNom.setEditable(true);
-			panFormulaire.fieldPrenom.setEditable(true);
-			panFormulaire.fieldMail.setEditable(true);
-			panFormulaire.fieldTelephone.setEditable(true);
-			panFormulaire.fieldId.setEditable(false);
-
-			panFormulaire.itemSauvegarder.setEnabled(true);
-
-
-			panFormulaire.itemSauvegarder.addActionListener(this);	
-			panFormulaire.boutonSave.addActionListener(this);
-			
-			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
-			this.panFormulaire.itemModifierQuestion.addActionListener(this);
-			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
-
-			this.getContentPane().removeAll();
-			this.setContentPane(panFormulaire);
-			this.validate();
-			
-			
-			
-		}	
-
 			
 		
 			
@@ -280,30 +250,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 		}
 			
-		if(arg0.getSource() == panAccueil.itemCandidatExistant)
-		{
-			
-			panFormulaire.fieldNom.setEditable(false);
-			panFormulaire.fieldPrenom.setEditable(false);
-			panFormulaire.fieldMail.setEditable(false);
-			panFormulaire.fieldTelephone.setEditable(false);
-			panFormulaire.fieldId.setEditable(true);
-			
-			panFormulaire.itemAjoutQuestion.addActionListener(this);
-			panFormulaire.itemModifierQuestion.addActionListener(this);
-			panFormulaire.itemSupprimerQuestion.addActionListener(this);	
-			
-			panFormulaire.boutonSave.setText("Rechercher");
-			panFormulaire.boutonSave.addActionListener(this);
-			
-			this.getContentPane().removeAll();
-			this.setContentPane(panFormulaire);
-			this.validate();
-			
-			
-			
-			
-		}
 			
 		/**
 		 * @author Florent

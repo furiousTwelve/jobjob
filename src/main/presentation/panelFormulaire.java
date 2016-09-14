@@ -28,6 +28,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import main.metier.Candidat;
+
 /**
  * Le panelFormulaire est le panel qui sera chargé par la fenêtre Principale après appui sur le bouton "NouveauTest".
  * Il est destiné à être rempli par le recruteur
@@ -503,7 +505,7 @@ public class panelFormulaire extends JPanel  implements ActionListener
 	 * @author Florent
 	 * Detail : Implementation du passage d'ancien candidat à nouveau
 	 * <br> et vice versa.
-	 * <br> Implementation des modification des champs et boutons
+	 * <br> Implementation des modifications des champs et boutons
 	 */
 	
 	@Override
@@ -561,7 +563,7 @@ public class panelFormulaire extends JPanel  implements ActionListener
 			
 			if(option == JOptionPane.OK_OPTION)
 			{
-					
+			Candidat cd = new Candidat();
 			
 			this.fieldNom.setEditable(true);
 			this.fieldPrenom.setEditable(true);
@@ -577,6 +579,9 @@ public class panelFormulaire extends JPanel  implements ActionListener
 			this.fieldId.setText(null);
 			
 			this.boutonSave.setText("Sauvegarder");
+			
+			//on fait appraitre le numéro du nouveau candidat
+			this.fieldId.setText(cd.definirNumeroCandidat());
 			
 		
 			}
