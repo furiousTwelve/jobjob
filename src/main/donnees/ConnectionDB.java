@@ -43,7 +43,8 @@ public class ConnectionDB
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
-	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_1_2";
+	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_2_0";
+//	String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
 	String 	 	 login 		= recruteur;
 	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;
@@ -57,12 +58,13 @@ public class ConnectionDB
 	{
 		// chargement du driver
 		Class.forName("com.mysql.jdbc.Driver");
-		// recuperation de la connexion
-	
+		
+		// recuperation de la connexion	
 		cn = (Connection) DriverManager.getConnection(url, login, passwd);
 	
 		// creation d'un statement pour pouvoir lancer des requêtes
 		st = (Statement) cn.createStatement();
+		
 		// affiche dans la console si la connecion est ok.
 		System.out.println("connection dataBase OK");
 	}
@@ -147,55 +149,62 @@ public class ConnectionDB
 	
 
 	/*
-	 * Méthode pour récupérer les réponses liées à la question passée en paramètres
+	 * Méthode qui remplira un tableau de 15 objets de type questionReponse.
+	 * 		- Une première REQUETE SQL ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
+	 * 		  puis on remplira les objets questionReponse, ainsi qu'un tableau stockant les numero de nos questions, avec.
+	 * 		- Une seconde requête ira chercher l'ensemble des réponses/propositions correspondants à un numero de question donnée.
+	 * 
+	 * 		Des erreurs peuvent apparaître en l'état. Si la base de données n'a pas suffisamment de questions d'une certaine catégorie pour répondre à l'ensemble de la "demande".		
+	 * @author Mathieu
 	 * 
 	 */
-
-	public void chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
+	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
 	{
-		ResultSet	res				= null;
-		String		Rep1 			= "";
-		String		Rep2			= "";
-		String		Rep3			= "";
-		String		Rep4			= "";
-		String		question		= "";
-		byte		numq			=0;
-	
-		int numeroQuestion[] = new int[15];
+		int numeroQuestion[] = new int[15]; // Tableau qui stockera les numero de question déjà tirés
+		questrep = new questionReponse[15];
+		int ordreCategorieQuestions[] = {1,1,1,1,1,3,3,3,3,3,2,4,4,4,1}; // Le type de nos 15 questions dans notre QCM, par ordre d'apparition
+		String numeroQuestionsInterdites = "0"; // variable qui permettra d'exclure des numeros de question de notre requête de recherche aléatoire de questions
 		
-		// On récupère 5 Questions de catégorie CultureGénéral (1), ainsi que leur numéro associé.
-		String request = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 6";
-		res = (ResultSet) st.executeQuery(request);
-			//On remplit le libellé des 5 premières questions dans les objets questionReponse de notre tableau questrep, ainsi que notre tableau contenant l'ensemble des numéros de question
-			int i = 0;
-			while (res.next()) 
-			{
-				questrep[i].libelleQuestion = res.getString("textesQuestion");	
+		
+		// Mes requêtes ici :			
+		ResultSet res = null;
+		
+		for (int i = 0; i < ordreCategorieQuestions.length; i++) {
+			String request1 = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
+			res = (ResultSet) st.executeQuery(request1);
+			while (res.next()) {
+				questrep[i] = new questionReponse();
+				questrep[i].libelleQuestion = res.getString(1);
 				numeroQuestion[i] = res.getInt("numero");
-				i++;
-				if (i == 5) {
-					i = 14;
-
+				numeroQuestionsInterdites += " AND numero  != " + res.getInt("numero");
+				//System.out.println(numeroQuestionsInterdites);
 			}
-			
-		//Même chose pour les 5 questions suivantes :
-		String request2 = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 5";
-		res = (ResultSet) st.executeQuery(request);
-		//On remplit le libellé des 5 premières questions dans les objets questionReponse de notre tableau questrep, ainsi que notre tableau contenant l'ensemble des numéros de question
-		int j = 0;
-		while (res.next()) 
-		{
-			questrep[i].libelleQuestion = res.getString("textesQuestion");	
-			numeroQuestion[i] = res.getInt("numero");
-			i++;
 		}
-			
+		
+		for (int j = 0; j < numeroQuestion.length; j++) {
+			String request2 = "SELECT reponse FROM propositions INNER JOIN comporte ON propositions.idPropositions = comporte.idPropositions WHERE numero = " + numeroQuestion[j];
+			res = (ResultSet) st.executeQuery(request2);
+
+			res.first();
+			questrep[j].libelleReponse1 = res.getString("reponse");
+			res.next();
+			questrep[j].libelleReponse2 = res.getString("reponse");
+			res.next();
+			questrep[j].libelleReponse3 = res.getString("reponse");
+			res.next();
+			questrep[j].libelleReponse4 = res.getString("reponse");
+		}
+		
+		return questrep;
+		
+//		for (int i = 0; i < ordreCategorieQuestions.length; i++) {
+//			System.out.println(questrep[i].libelleQuestion);
+//		}
 	}
 			
-	
-	
 }
-}
+
+
 
 
 

@@ -59,9 +59,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private int compteurQuestions = 1;
 	
 	// Pour la couche métier
-	private questionReponse laQuestionReponse;
-
-	public questionReponse[] questionsCandidat;
+	public questionReponse laQuestionReponse = new questionReponse();
+	public questionReponse[] questionsCandidat = new questionReponse[15];  
+	
 	private TimerGeneral tp;
 	private TimerGeneral TimerS;
 
@@ -77,8 +77,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	//	dg.DessinerBar();
 	//	dg.DessinerCam();
 		
+		laQuestionReponse= new questionReponse(); // Couche METIER
 	    questionsCandidat = new questionReponse[15]; // Couche METIER
-	    laQuestionReponse= new questionReponse(); // Couche METIER
+	    
 		
 		this.setTitle("Job-Job"); 
 //		this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -102,7 +103,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panConnection.boutonConnection.addActionListener(this);
 	
-		this.setContentPane(panConnection); 
+//		panCandidat.buttonStart.addActionListener(this); // A effacer par la suite
+		this.setContentPane(panConnection); // Remettre le panConnection par la suite
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);	
@@ -343,7 +345,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui elle m^meme va appeler une fonction de la coche donnée pour remplir le tableau de questions
 			
 			try {
-				laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+				System.out.println("Passage panCandidat --> panQuestion");
+				laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
