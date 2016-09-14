@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class panelConnection extends JPanel {
@@ -60,7 +61,7 @@ public class panelConnection extends JPanel {
 		recruteur.setColumns(10);		
 		panelConnection.add(recruteur);
 		
-		mdp = new JTextField();		
+		mdp = new JPasswordField();		
 		mdp.setColumns(10);
 		panelConnection.add(mdp);		
 		

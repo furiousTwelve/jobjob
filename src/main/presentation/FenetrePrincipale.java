@@ -518,15 +518,26 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			//Message d'erreur uniquement si erreurs sur les identifiants
 			
-			//JOptionPane.showMessageDialog(panFin, "Connection impossible", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 			
 			panAccueil = new panelAccueil();
 			
 			this.panAccueil.itemCandidatExistant.addActionListener(this);
 			this.panAccueil.itemNouveauCandidat.addActionListener(this);
 			this.panAccueil.itemNouveauTest.addActionListener(this);
-//			this.panAccueil.itemQuitter.addActionListener(panAccueil);
-//			this.panAccueil.itemAide.addActionListener(panAccueil);
+            this.panAccueil.itemQuitter.addActionListener(this);
+            
+            
+            
+            this.panAccueil.itemRechercher.addActionListener(this);
+			this.panAccueil.itemSupprimer.addActionListener(this);
+			this.panAccueil.itemModifier.addActionListener(this);
+            this.panAccueil.itemStatistique.addActionListener(this);
+            
+            this.panAccueil.itemAjoutQuestion.addActionListener(this);
+			this.panAccueil.itemModifierQuestion.addActionListener(this);
+			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+            
+		    this.panAccueil.itemAide.addActionListener(this);
 			
 			this.getContentPane().removeAll();
 			this.setContentPane(panAccueil);
@@ -542,11 +553,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{
 			panAjouterQuestion = new panelAjouterQuestion();
 			
-			this.panAjouterQuestion.itemAjoutQuestion.addActionListener(this);
-			this.panAjouterQuestion.itemModifierQuestion.addActionListener(this);
-			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
-			this.panAjouterQuestion.itemNouveauCandidat.addActionListener(this);
-			this.panAjouterQuestion.itemCandidatExistant.addActionListener(this);
+			this.panAccueil.itemAjoutQuestion.addActionListener(this);
+			this.panAccueil.itemModifierQuestion.addActionListener(this);
+			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+			this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			this.panAccueil.itemCandidatExistant.addActionListener(this);
 			System.out.println("ici");
 			this.getContentPane().removeAll();
 			this.setContentPane(panAjouterQuestion);
@@ -570,7 +581,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		
 		//Passage du panAjouterQuestion aux autres panels
 		
-		if(arg0.getSource() == this.panAjouterQuestion.itemAjoutQuestion)
+		if(arg0.getSource() == this.panAccueil.itemAjoutQuestion)
 
 		{
 			panAjouterQuestion = new panelAjouterQuestion();
@@ -578,7 +589,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panAjouterQuestion);
 			this.validate();
 		}
-		if(arg0.getSource() == this.panAjouterQuestion.itemModifierQuestion)
+		if(arg0.getSource() == this.panAccueil.itemModifierQuestion)
 
 		{	
 			panModifierQuestion = new panelModifierQuestion();
@@ -586,14 +597,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panModifierQuestion);
 			this.validate();
 		}
-		if(arg0.getSource() == this.panAjouterQuestion.itemSupprimerQuestion)
+		if(arg0.getSource() == this.panAccueil.itemSupprimerQuestion)
 		{
 			panSupprimerQuestion = new panelSupprimerQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panSupprimerQuestion);
 			this.validate();
 		}
-		if(arg0.getSource() == this.panAjouterQuestion.itemNouveauCandidat)
+		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
 		{	
 			panFormulaire = new panelFormulaire();
 			
@@ -617,7 +628,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 		}
-		if(arg0.getSource() == this.panAjouterQuestion.itemCandidatExistant)
+		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
 		{	
 			panFormulaire = new panelFormulaire();
 			

@@ -27,19 +27,30 @@ import javax.swing.JTextField;
 public class panelAjouterQuestion extends JPanel implements ActionListener {
 	
 	//Déclaration des éléments de la barre de Menu
-		private JMenuBar menuBar = new JMenuBar();
-		private JMenu menuFichier = new JMenu("Fichier");
-		private JMenu menuQuiz = new JMenu("Quiz");
-		private JMenu menuAide = new JMenu("Aide");
-		protected JMenu itemNouveauTest= new JMenu("Nouveau Test");
-		protected JMenuItem itemCandidatExistant = new JMenuItem("Candidat Existant");
-		protected JMenuItem itemNouveauCandidat = new JMenuItem("Nouveau Candidat");
-		protected JMenuItem itemSauvegarder = new JMenuItem("Sauvegarder");
-		protected JMenuItem itemQuitter = new JMenuItem("Quitter");
-		protected JMenuItem itemAide = new JMenuItem("Aide");
-		protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
-		protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
-		protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menuTest = new JMenu("Nouveau test");
+	private JMenu menuCandidat = new JMenu("Candidats");
+	private JMenu menuQuiz = new JMenu("Quiz");
+	private JMenu menuAide = new JMenu("Aide");
+	
+
+	protected JMenu itemNouveauTest= new JMenu("Nouveau Test");
+	protected JMenuItem itemCandidatExistant = new JMenuItem("Candidat Existant");
+	protected JMenuItem itemNouveauCandidat = new JMenuItem("Nouveau Candidat");
+	protected JMenuItem itemSauvegarder = new JMenuItem("Sauvegarder");
+	protected JMenuItem itemQuitter = new JMenuItem("Quitter");
+	
+	protected JMenuItem itemRechercher = new JMenuItem("Recherche");
+	protected JMenuItem itemSupprimer = new JMenuItem("Suppression");
+	protected JMenuItem itemModifier = new JMenuItem("Modification");
+    protected JMenuItem itemStatistique = new JMenuItem("Statistique");
+	
+	protected JMenuItem itemAide = new JMenuItem("Aide");
+	
+	protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
+	protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
+	protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
+	
 		private Font font;
 		
 		/**
@@ -48,27 +59,51 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 		 */
 		public panelAjouterQuestion() {
 			
-			//Constitution de la barre de menu, qui ira au Nord
-			menuBar.add(menuFichier);
+			menuBar.add(menuTest);
+			menuBar.add(menuCandidat);
 			menuBar.add(menuQuiz);
 			menuBar.add(menuAide);
 			
-			menuFichier.add(itemNouveauTest);
+			menuTest.add(itemNouveauTest);
 			itemNouveauTest.add(itemCandidatExistant);
 			itemNouveauTest.add(itemNouveauCandidat);
-			menuFichier.add(itemSauvegarder);
+			menuTest.add(itemSauvegarder);
 			itemSauvegarder.setEnabled(false);
-			menuFichier.addSeparator();
-			menuFichier.add(itemQuitter);
+			menuTest.addSeparator();
+			menuTest.add(itemQuitter);
 			
+			
+			
+			
+			// ajouter les ActionListener
+			
+			itemCandidatExistant.addActionListener(this);
+			itemNouveauCandidat.addActionListener(this);
+			
+			menuCandidat.add(itemRechercher);
+			menuCandidat.add(itemSupprimer);
+			menuCandidat.add(itemModifier);
+			menuCandidat.add(itemStatistique);
+			
+			itemRechercher.addActionListener(this);
+			itemSupprimer.addActionListener(this);
+			itemModifier.addActionListener(this);
+			itemStatistique.addActionListener(this);
+			
+			itemSauvegarder.addActionListener(this);
+			itemQuitter.addActionListener(this);
+
+			
+		
 			menuQuiz.add(itemAjoutQuestion);
 			menuQuiz.add(itemModifierQuestion);
 			menuQuiz.add(itemSupprimerQuestion);
 			
-			menuAide.add(itemAide);
-					
-			this.itemQuitter.addActionListener(this);	
-			this.itemAide.addActionListener(this);	
+			itemAjoutQuestion.addActionListener(this);
+			itemModifierQuestion.addActionListener(this);
+			itemSupprimerQuestion.addActionListener(this);
+			
+			this.add(menuBar, BorderLayout.NORTH);
 			
 			font = new Font("Arial",Font.ITALIC,17);
 			
@@ -161,23 +196,15 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			
 			this.setLayout(new BorderLayout());
 			this.add(panel);
-			this.add(menuBar, BorderLayout.NORTH);
+			
 			
 		}
-			
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// Affichage de l'aide
-			if(arg0.getSource() == this.itemAide)
-			{	
-				JOptionPane.showMessageDialog(null, "Cette interface n'est pas développée - en attente de l'équipe Projet");
-			}
 
-			//Quitter l'appli
-			if(arg0.getSource() == this.itemQuitter)
-			{	
-				System.exit(0);
-			}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 			
+	
 }

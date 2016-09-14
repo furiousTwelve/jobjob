@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -25,6 +28,31 @@ import main.metier.Statistiques;
  *
  */
 public class PanelStatistique extends JPanel  {
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menuTest = new JMenu("Nouveau test");
+	private JMenu menuCandidat = new JMenu("Candidats");
+	private JMenu menuQuiz = new JMenu("Quiz");
+	private JMenu menuAide = new JMenu("Aide");
+	
+
+	protected JMenu itemNouveauTest= new JMenu("Nouveau Test");
+	protected JMenuItem itemCandidatExistant = new JMenuItem("Candidat Existant");
+	protected JMenuItem itemNouveauCandidat = new JMenuItem("Nouveau Candidat");
+	protected JMenuItem itemSauvegarder = new JMenuItem("Sauvegarder");
+	protected JMenuItem itemQuitter = new JMenuItem("Quitter");
+	
+	protected JMenuItem itemRechercher = new JMenuItem("Recherche");
+	protected JMenuItem itemSupprimer = new JMenuItem("Suppression");
+	protected JMenuItem itemModifier = new JMenuItem("Modification");
+    protected JMenuItem itemStatistique = new JMenuItem("Statistique");
+	
+	protected JMenuItem itemAide = new JMenuItem("Aide");
+	
+	protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
+	protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
+	protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
+	
+	
 	protected JButton graphe = new JButton(" Afficher graphe");
 	protected JRadioButton trie_score = new JRadioButton("Trie par score");
 	protected JPanel panel = new JPanel();
@@ -38,6 +66,20 @@ public class PanelStatistique extends JPanel  {
 	
 	
 	public PanelStatistique (){
+		menuBar.add(menuTest);
+		menuBar.add(menuCandidat);
+		menuBar.add(menuQuiz);
+		menuBar.add(menuAide);
+		
+		menuTest.add(itemNouveauTest);
+		itemNouveauTest.add(itemCandidatExistant);
+		itemNouveauTest.add(itemNouveauCandidat);
+		menuTest.add(itemSauvegarder);
+		itemSauvegarder.setEnabled(false);
+		menuTest.addSeparator();
+		menuTest.add(itemQuitter);
+		
+		
 		Statistiques st=new Statistiques();
 		ComparerCandidat cc= new ComparerCandidat();
 		
