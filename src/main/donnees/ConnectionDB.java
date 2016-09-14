@@ -17,6 +17,8 @@
 package main.donnees;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
@@ -30,7 +32,7 @@ import main.metier.questionReponse;
 public class ConnectionDB 
 {
 	static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
-	
+	static Connection	 cn 		= null;
 	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/*
 	 * Méthode qui se connecte à la base 	   
@@ -44,7 +46,7 @@ public class ConnectionDB
 		String		 url 		= "jdbc:mysql://STA6101855:3306/jobjob_2_0";
 		String 	 	 login 		= recruteur;
 		String 		 passwd 	= MDP;
-		Connection	 cn 		= null;
+		cn 		= null;
 		st	= null;
 		
 		/*
@@ -71,6 +73,7 @@ public class ConnectionDB
 			acces=false;
 		}finally{}
 		
+		recupererStatistiques();
 		return(acces);
 	}
 	
@@ -286,6 +289,41 @@ public class ConnectionDB
 		
 	}
 	
+	/**
+	 * @author cyril
+	 * appel de la procédure stockée resultatCandidat
+	 */
+	public static void recupererStatistiques() {
+		CallableStatement cs = null;
+		ResultSet resultat = null;
+
+		try {
+			cs = (CallableStatement) cn.prepareCall("{call resultatsCandidat()}");
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		try {
+			if (cs.execute()) 
+			{
+				resultat =  (ResultSet) cs.getResultSet();
+				while(resultat.next())
+				{
+					System.out.println("Nom du candidat:"+resultat.getString("nomCandidat"));
+					System.out.println("Date de l'evaluation:"+resultat.getString("dateEvaluation"));
+					System.out.println("Notes Technique: "+resultat.getString("Technique"));
+					System.out.println("Notes Adaptabilité: "+resultat.getString("Adaptabilite"));
+					System.out.println("Notes Culture: "+resultat.getString("Culture"));
+					System.out.println("Notes Stress: "+resultat.getString("Stress"));
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
 }
 
 
