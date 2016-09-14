@@ -38,7 +38,7 @@ public class Candidat
 	protected String numeroTelephone;
 	protected String identifiant;
 	
-	String[] chaine;
+	public String[] chaine;
 	/**
 	 * CONSTRUCTEUR
 	 */

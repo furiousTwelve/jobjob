@@ -45,9 +45,9 @@ import main.metier.Statistiques;
  */
 
 
-
-public class FenetrePrincipale extends JFrame implements ActionListener {
-
+public class FenetrePrincipale extends JFrame implements ActionListener
+{
+	private PanelStatistique paneStatistique;
 
 	private panelConnection panConnection;
 	private panelAccueil panAccueil;
@@ -95,7 +95,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 		panConnection = new panelConnection();
 
-        //paneStatistique = new PanelStatistique(); //A specifier pour plus tard voir avec Kadija
+        paneStatistique= new PanelStatistique();
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
@@ -343,9 +343,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 				Candidat leCandidat = new Candidat(panFormulaire);
 				try {
 					leCandidat.enregistrerNouveauCandidat();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
