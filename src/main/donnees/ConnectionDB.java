@@ -1,26 +1,19 @@
-/*
- * @auteur 	: Lionel Chialvo
- * @auteur  / Marc Naouache
- * @date	: 31/08/2016
- * @version : 1.0
+/**
  * 
- * 
- * Description : 
  * Cette classe permet la connection à une base de donnée de type SQL.
  * Cette base est sur la machine de Marc à l'ip : 10.111.61.52:3306
  * et la base s'appelle  "jobjobdb".
- * 
- * Dans cette classe il y a une methode qui permet la connection.
- * 
- * 
- * 
- * !!! RESTE A FAIRE !!!
+ *  !!! RESTE A FAIRE !!!
  * 
  * IL FAUT GERER LE PASSAGE DE LOGIN ET PASSWORD DU RECRUTEUR 
  * PAR UNE FENETRE DE LOGIN AU DEMARRAGE DE L APPLI
  * 
+ * Dans cette classe il y a une methode qui permet la connection.
+ * @author Lionel Chialvo
+ * @author Marc Naouache
+ * @date	 31/08/2016
+ * @version  1.0
  */
-
 package main.donnees;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,21 +23,24 @@ import com.mysql.jdbc.Statement;
 
 import main.metier.questionReponse;
 
-public class ConnectionDB 
 
+// TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
+// TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
+public class ConnectionDB 
 {
+	static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
 	
-	static Statement 	 st;
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/*
 	 * Méthode qui se connecte à la base 	   
 	 */
 	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
+
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
 	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_2_0";
-//	String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
 	String 	 	 login 		= recruteur;
 	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;
@@ -76,9 +72,11 @@ public class ConnectionDB
 	}finally{}
 	
 	return(acces);
+
 	
 	}
 	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/*
 	 * Méthode pour ajouter un nouveau candidat dans l abase de donnée.
 	 * 
@@ -89,16 +87,17 @@ public class ConnectionDB
 		
 		String sql = "INSERT INTO candidat  (identifiant,nom,prenom,telephone,mail) VALUES ('" + id+"','"+nom+"','"+prenom+"','"+telephone+"','"+mail+ "');";
 		
-		try {
+		try 
+		{
 			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 	}
 	
 	
-	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/*
 	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
 	 * affiche dans la console les champs associés à l'élément id dans la table
@@ -132,7 +131,6 @@ public class ConnectionDB
 					
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println(id2);
@@ -142,12 +140,12 @@ public class ConnectionDB
 				System.out.println(mail);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
+	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
 	/*
 	 * Méthode qui remplira un tableau de 15 objets de type questionReponse.
 	 * 		- Une première REQUETE SQL ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
@@ -158,13 +156,16 @@ public class ConnectionDB
 	 * @author Mathieu
 	 * 
 	 */
+
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
+
 	{
 		int numeroQuestion[] = new int[15]; // Tableau qui stockera les numero de question déjà tirés
 		questrep = new questionReponse[15];
 		int ordreCategorieQuestions[] = {1,1,1,1,1,3,3,3,3,3,2,4,4,4,1}; // Le type de nos 15 questions dans notre QCM, par ordre d'apparition
 		String numeroQuestionsInterdites = "0"; // variable qui permettra d'exclure des numeros de question de notre requête de recherche aléatoire de questions
 		
+
 
 		
 		// Mes requêtes ici :			
@@ -206,8 +207,11 @@ public class ConnectionDB
 
 	
 
-	public int nombreCandidat(){
-		
+
+	//TODO : javadoc inexistante 
+	public int nombreCandidat()
+	{
+
 		ResultSet res = null;
 		int nbCand=0;
 		String requete = "SELECT candidat.idPersonne FROM candidat";
@@ -232,11 +236,8 @@ public class ConnectionDB
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-				
+		}		
 		return nbCand+1;
-		
 	}
 
 }
