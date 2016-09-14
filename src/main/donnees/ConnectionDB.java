@@ -106,7 +106,7 @@ public class ConnectionDB
 		{
 			st.executeUpdate(sql);
 //			
-//			st.close();
+	st.close();
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();

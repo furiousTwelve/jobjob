@@ -23,7 +23,6 @@ import main.metier.Recruteur;
 import main.metier.ComparerCandidat;
 import main.metier.Statistiques;
 
-
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction
  * des différents panneaux </b>
@@ -44,9 +43,7 @@ import main.metier.Statistiques;
  * @version 1.02
  */
 
-
-public class FenetrePrincipale extends JFrame implements ActionListener
-{
+public class FenetrePrincipale extends JFrame implements ActionListener {
 	private PanelStatistique paneStatistique;
 
 	private panelConnection panConnection;
@@ -95,7 +92,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panConnection = new panelConnection();
 
-        paneStatistique= new PanelStatistique();
+		paneStatistique = new PanelStatistique();
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
@@ -399,7 +396,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if (arg0.getSource() == this.panCandidat.buttonStart) {
 			panQuestion = new panelQuestion();
-			this.setExtendedState(JFrame.MAXIMIZED_BOTH); // @AnaïsGueyte - Affiche en full screen tout le panel question et le panel fin
+			this.setExtendedState(JFrame.MAXIMIZED_BOTH); // @AnaïsGueyte -
+															// Affiche en full
+															// screen tout le
+															// panel question et
+															// le panel fin
 
 			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui
 			// elle même va appeler une fonction de la coche donnée pour
@@ -512,25 +513,75 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 		}
 
+		// PASSAGE DE PANEL FIN - CONNECTION RECRUTEUR A L ACCUEIL //
+
+		//On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
+			
+		// Passage du panConnection au panAccueil, si id et mdp valides 
+		
 		if (arg0.getSource() == this.panFin.boutonConnection) {
 
-			// Message d'erreur uniquement si erreurs sur les identifiants
+			// Couche METIER
+			boolean acces = false;
+			String recruteur = panelFin.recruteur.getText();
+			String motDePasse = panConnection.mdp.getText();
 
-			// JOptionPane.showMessageDialog(panFin, "Connection impossible",
-			// "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+			Recruteur leRecruteur = new Recruteur(recruteur, motDePasse);
+			try {
+				acces = leRecruteur.verifierAcces(recruteur, motDePasse);
+			} catch (ClassNotFoundException | SQLException e) {
 
-			panAccueil = new panelAccueil();
+				JOptionPane.showMessageDialog(panFormulaire,
+						"Erreur interne au programme -- Defaut de la connexion au serveur SQL", "Erreur programme",
+						JOptionPane.ERROR_MESSAGE);
+			}
 
-			this.panAccueil.itemCandidatExistant.addActionListener(this);
-			this.panAccueil.itemNouveauCandidat.addActionListener(this);
-			this.panAccueil.itemNouveauTest.addActionListener(this);
-			// this.panAccueil.itemQuitter.addActionListener(panAccueil);
-			// this.panAccueil.itemAide.addActionListener(panAccueil);
+			if (acces == true) {
 
-			this.getContentPane().removeAll();
-			this.setContentPane(panAccueil);
-			this.validate();
-		}
+				panAccueil = new panelAccueil();
+
+				this.panAccueil.itemCandidatExistant.addActionListener(this);
+				this.panAccueil.itemNouveauCandidat.addActionListener(this);
+				this.panAccueil.itemNouveauTest.addActionListener(this);
+
+				this.panAccueil.itemAjoutQuestion.addActionListener(this);
+				this.panAccueil.itemModifierQuestion.addActionListener(this);
+				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+
+				this.panAccueil.itemQuitter.addActionListener(panAccueil);
+				this.panAccueil.itemAide.addActionListener(panAccueil);
+
+				this.getContentPane().removeAll();
+				this.setContentPane(panAccueil);
+
+				this.validate();
+
+			} else {
+				JOptionPane.showMessageDialog(panConnection, "Votre identifiant et/ou mot de passe est incorrect",
+						"Accès non autorisé", JOptionPane.ERROR_MESSAGE);
+			}
+
+
+	/*	METHODE ORIGINAL
+	 * 
+	 * if (arg0.getSource() == this.panFin.boutonConnection) {
+
+			 * // Message d'erreur uniquement si erreurs sur les identifiants
+			 * 
+			 * // JOptionPane.showMessageDialog(panFin, "Connection impossible",
+			 * // "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+			 * 
+			 * panAccueil = new panelAccueil();
+			 * 
+			 * this.panAccueil.itemCandidatExistant.addActionListener(this);
+			 * this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			 * this.panAccueil.itemNouveauTest.addActionListener(this); //
+			 * this.panAccueil.itemQuitter.addActionListener(panAccueil); //
+			 * this.panAccueil.itemAide.addActionListener(panAccueil);
+			 * 
+			 * this.getContentPane().removeAll();
+			 * this.setContentPane(panAccueil); this.validate();
+		}*/
 
 		// Passage du panFormulaire ou panAccueil aux panels ajout modif et
 		// supprimer question
@@ -628,6 +679,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
+		}
 		}
 
 	}

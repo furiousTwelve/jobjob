@@ -56,6 +56,13 @@ public class panelQuestion extends JPanel {
 		this.setLayout(new BorderLayout(200, 200));
 		
 		
+		/**
+		 * @author AnaïsGueyte
+		 * @date 14/09/2016
+		 * @version jobjob_2_0 (en accord avec la BDD)
+		 * 
+		 */
+		
 		font = new Font("Arial",Font.BOLD,28);
 		font2 = new Font("Arial",Font.BOLD,14);
 		
