@@ -14,7 +14,6 @@
  * @date	 31/08/2016
  * @version  1.0
  */
-
 package main.donnees;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,51 +23,57 @@ import com.mysql.jdbc.Statement;
 
 import main.metier.questionReponse;
 
+
+// TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
+// TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
 public class ConnectionDB 
 {
-	static Statement 	 st;
+	static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
+	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/*
 	 * Méthode qui se connecte à la base 	   
 	 */
 	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
-	/*
-	 * Ici je stocke et initialise mes éléments de connection 
-	 */
-	String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_1_2";
-	String 	 	 login 		= recruteur;
-	String 		 passwd 	= MDP;
-	Connection	 cn 		= null;
-	st	= null;
+		/*
+		 * Ici je stocke et initialise mes éléments de connection 
+		 */
+		String		 url 		= "jdbc:mysql://sta6101855:3306/jobjob_1_2";
+		String 	 	 login 		= recruteur;
+		String 		 passwd 	= MDP;
+		Connection	 cn 		= null;
+		st	= null;
+		
+		/*
+		 * Connection au drivers de base de donnée
+		 * ici pour le SQL
+		 */
+		try
+		{
+			// chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// recuperation de la connexion
+		
+			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		
+			// creation d'un statement pour pouvoir lancer des requêtes
+			st = (Statement) cn.createStatement();
+			// affiche dans la console si la connecion est ok.
+			System.out.println("connection dataBase OK");
+		}
+		
+		catch ( SQLException e)
+		{
+			e.printStackTrace();
+			acces=false;
+		}finally{}
+		
+		return(acces);						
 	
-	/*
-	 * Connection au drivers de base de donnée
-	 * ici pour le SQL
-	 */
-	try
-	{
-		// chargement du driver
-		Class.forName("com.mysql.jdbc.Driver");
-		// recuperation de la connexion
-	
-		cn = (Connection) DriverManager.getConnection(url, login, passwd);
-	
-		// creation d'un statement pour pouvoir lancer des requêtes
-		st = (Statement) cn.createStatement();
-		// affiche dans la console si la connecion est ok.
-		System.out.println("connection dataBase OK");
 	}
 	
-	catch ( SQLException e)
-	{
-		e.printStackTrace();
-		acces=false;
-	}finally{}
-	
-	return(acces);
-	
-	}
-	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/*
 	 * Méthode pour ajouter un nouveau candidat dans l abase de donnée.
 	 * 
@@ -79,16 +84,17 @@ public class ConnectionDB
 		
 		String sql = "INSERT INTO candidat  (identifiant,nom,prenom,telephone,mail) VALUES ('" + id+"','"+nom+"','"+prenom+"','"+telephone+"','"+mail+ "');";
 		
-		try {
+		try 
+		{
 			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 	}
 	
 	
-	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/*
 	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
 	 * affiche dans la console les champs associés à l'élément id dans la table
@@ -122,7 +128,6 @@ public class ConnectionDB
 					
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println(id2);
@@ -132,17 +137,16 @@ public class ConnectionDB
 				System.out.println(mail);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
+	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
 	/*
 	 * Méthode pour récupérer les réponses liées à la question passée en paramètres
 	 * 
 	 */
-
 	public void chercherQuestionEnBase(questionReponse[] questrep) throws SQLException
 	{
 		ResultSet	res				= null;
@@ -155,7 +159,6 @@ public class ConnectionDB
 	
 		int numeroQuestion[] = new int[15];
 		
-
 		// On récupère 5 Questions de catégorie CultureGénéral (1), ainsi que leur numéro associé.
 		String request = "SELECT textesQuestion, numero FROM questions WHERE idCategorie = 1 ORDER by Rand() LIMIT 6";
 		res = (ResultSet) st.executeQuery(request);
@@ -184,12 +187,13 @@ public class ConnectionDB
 			i++;
 		}
 			
-	}
+		}
 			
 	}
 
-	public int nombreCandidat(){
-		
+	//TODO : javadoc inexistante 
+	public int nombreCandidat()
+	{
 		ResultSet res = null;
 		int nbCand=0;
 		String requete = "SELECT candidat.idPersonne FROM candidat";
@@ -214,14 +218,9 @@ public class ConnectionDB
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-				
+		}		
 		return nbCand+1;
-		
 	}
-
-	
 }
 
 

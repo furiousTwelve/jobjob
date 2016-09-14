@@ -69,13 +69,14 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat()
 	{
-
+		//TODO : la méthode n'appelle pas (plus) la bonne méthode 
 		EnregistrementDonnee ed = new EnregistrementDonnee();
 		ed.enregistrerCandidat(chaine); 
 		
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
+	//TODO : ceci n'est pas une javadoc
 	public String definirNumeroCandidat()
 	{
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
