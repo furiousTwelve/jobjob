@@ -59,11 +59,12 @@ public class questionReponse
 	 *  Elle a pour but d'envoyer un tableau de 15 instances de QuestionRéponse à la couche Données pour qu'il puisse la remplir les libéllés des questions et réponses associés
 	 * @param questionsCandidat est un tableau de 15 instances de QuestionRéponse
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * 
 	 */
 
 
-	public questionReponse[] chercherQuestionRéponse(questionReponse[] questionsCandidat) throws SQLException
+	public questionReponse[] chercherQuestionRéponse(questionReponse[] questionsCandidat) throws SQLException, ClassNotFoundException
 
 	{		
 		ConnectionDB laConnection = new ConnectionDB();	

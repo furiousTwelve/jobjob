@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -581,7 +582,15 @@ public class panelFormulaire extends JPanel  implements ActionListener
 			this.boutonSave.setText("Sauvegarder");
 			
 			//on fait appraitre le numéro du nouveau candidat
-			this.fieldId.setText(cd.definirNumeroCandidat());
+			try {
+				this.fieldId.setText(cd.definirNumeroCandidat());
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		
 			}

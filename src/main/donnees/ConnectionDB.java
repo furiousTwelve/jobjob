@@ -29,21 +29,83 @@ import main.metier.questionReponse;
 // TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
 public class ConnectionDB 
 {
-	static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
+	private String recruteur = "cdi";
+	private String MDP = "cdi";
+	
+	
+	public ConnectionDB () throws ClassNotFoundException, SQLException {
+		
+		connectionBase(recruteur, MDP);
+	}
+	static Statement st ;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
 	
 	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/*
 	 * Méthode qui se connecte à la base 	   
 	 */
-	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
+	public static boolean connectionBase(String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
 
 		/*
 		 * Ici je stocke et initialise mes éléments de connection 
 		 */
-		String		 url 		= "jdbc:mysql://STA6101855:3306/jobjob_2_0";
+		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
 		String 	 	 login 		= recruteur;
 		String 		 passwd 	= MDP;
+		Connection	 cn 		= null;
+		st	= null;
+		boolean connected;
+		
+		/*
+		 * Connection au drivers de base de donnée
+		 * ici pour le SQL
+		 */
+		try
+		{
+			// chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// recuperation de la connexion
+		
+			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		
+			// creation d'un statement pour pouvoir lancer des requêtes
+			st = (Statement) cn.createStatement();
+			// affiche dans la console si la connecion est ok.
+			System.out.println("connection dataBase OK");
+			connected = true;
+		}
+		
+		catch ( SQLException e)
+		{
+			e.printStackTrace();
+			connected = false;
+		}finally{}
+
+		return connected;
+	}
+	
+	/**
+	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
+	 * Elle retourne un int, correspondant à l'idPersonne du nouveau candidat enregistré
+	 * @author florent
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 * @param telephone
+	 * @param mail
+	 * @throws ClassNotFoundException
+	 * @throws SQLException 
+	 * @throws NumberFormatException
+	 * @return int 
+	 */
+	public static int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, NumberFormatException, SQLException
+	{
+		/*
+		 * Ici je stocke et initialise mes éléments de connection 
+		 */
+		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
+		String 	 	 login 		= "cdi";
+		String 		 passwd 	= "cdi";
 		Connection	 cn 		= null;
 		st	= null;
 		
@@ -68,50 +130,40 @@ public class ConnectionDB
 		catch ( SQLException e)
 		{
 			e.printStackTrace();
-			acces=false;
 		}finally{}
 		
-		return(acces);
-	}
-	
-	/**
-	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
-	 * @author florent
-	 * @param id
-	 * @param nom
-	 * @param prenom
-	 * @param telephone
-	 * @param mail
-	 * @throws ClassNotFoundException
-	 */
-	
-	public static void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException
-	{
-		
 		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
-		
 		try 
 		{
-			st.executeUpdate(sql2);
-			
-			
-		} catch (SQLException e) 
+			st.executeUpdate(sql2);	
+		} 
+		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
 		
-		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_1) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
+		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_Recruteur) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
 		
 		try 
 		{
-			st.executeUpdate(sql);
-//			
-//			st.close();
-		} catch (SQLException e) 
+			st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+		} 
+		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
 		
+		int answer = 0;
+		
+		
+		// Partie dévouée au test Unitaire, renvoyant l'idPersonne du candidat qui vient d'être créé dans la base
+		ResultSet generatedKeys = (ResultSet) st.getGeneratedKeys(); 
+		while(generatedKeys.next()) {
+			answer = Integer.parseInt(generatedKeys.getString(1));
+			System.out.println("sysoiut1" + answer);
+		}
+		System.out.println("sysout 2" + answer);
+		return answer;
 	}
 	
 	
