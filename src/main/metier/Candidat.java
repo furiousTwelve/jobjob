@@ -63,14 +63,15 @@ public class Candidat
 
 	/**
 	 * METHODE QUI COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
+
 	 * @author 34011-82-06 Mathieu
-	 * @throws ClassNotFoundException 
-	 * @throws NumberFormatException 
+	 * @throws ClassNotFoundException
 	 * On envoie à la couche données un tableau de String contenant les informations d'un candidat que l'on souhaite enregistrer.
 	 * Cet enregistrement à lieu (cette méthode est appelée donc) lors du passage du panelFormulaiure au panelCandidat, dans la fenêtre Principale:ligne 342
 	 */
-	public void enregistrerNouveauCandidat() throws NumberFormatException, ClassNotFoundException
-	{
+	public void enregistrerNouveauCandidat() throws ClassNotFoundException 
+	{ 
+
 		ConnectionDB cdb = new ConnectionDB();
 		cdb.enregistrerNouveauCandidatEnBase(chaine[4], chaine[0], chaine[1], chaine[3], chaine[2]);
 		

@@ -76,24 +76,44 @@ public class ConnectionDB
 	
 	}
 	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
-	/*
-	 * Méthode pour ajouter un nouveau candidat dans l abase de donnée.
-	 * 
-	 *    
+	/**
+	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
+	 * @author florent
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 * @param telephone
+	 * @param mail
+	 * @throws ClassNotFoundException
 	 */
+	
 	public static void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException
 	{
 		
-		String sql = "INSERT INTO candidat  (idCandidat,nom,prenom,telephone,mail) VALUES ('" + id+"','"+nom+"','"+prenom+"','"+telephone+"','"+mail+ "');";
+		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
 		
 		try 
 		{
-			st.executeUpdate(sql);
+			st.executeUpdate(sql2);
+			
+			
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
+		
+		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_1) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
+		
+		try 
+		{
+			st.executeUpdate(sql);
+			
+			st.close();
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
@@ -103,16 +123,16 @@ public class ConnectionDB
 	 * affiche dans la console les champs associés à l'élément id dans la table
 	 *    
 	 */
-	public static void recupererCandidatEnBase(int id) throws ClassNotFoundException
+	public static void recupererCandidatEnBase(String id) throws ClassNotFoundException
 	{
 		ResultSet rs=null;
-		int id2=0;
+		String id2="";
 		String nom="";
 		String prenom="";
 		String telephone="";
 		String mail="";
 		
-		String sql2 = "SELECT * FROM candidat WHERE identifiant='"+id+"'; ";
+		String sql2 = "SELECT * FROM candidat WHERE idCandidat='"+id+"'; ";
 		try {
 			rs = (ResultSet) st.executeQuery(sql2);
 		} catch (SQLException e) {
@@ -122,7 +142,7 @@ public class ConnectionDB
 		try {
 			while (rs.next()) {
 				try {
-					id2 = rs.getInt("identifiant");
+					id2 = rs.getString("identifiant");
 					nom = rs.getString("nom");
 					prenom= rs.getString("prenom");
 					telephone= rs.getString("telephone");
