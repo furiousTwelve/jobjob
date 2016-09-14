@@ -37,7 +37,7 @@ public class ConnectionDB
 	/*
 	 * Méthode qui se connecte à la base 	   
 	 */
-	public static boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
+	public boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
 	{
 
 		/*
@@ -88,7 +88,7 @@ public class ConnectionDB
 	 * @throws ClassNotFoundException
 	 */
 	
-	public static void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException
+	public void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException
 	{
 		
 		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
@@ -123,7 +123,7 @@ public class ConnectionDB
 	 * affiche dans la console les champs associés à l'élément id dans la table
 	 *    
 	 */
-	public static void recupererCandidatEnBase(String id) throws ClassNotFoundException
+	public void recupererCandidatEnBase(String id) throws ClassNotFoundException
 	{
 		ResultSet rs=null;
 		String id2="";
@@ -291,9 +291,9 @@ public class ConnectionDB
 	
 	/**
 	 * @author cyril
-	 * appel de la procédure stockée resultatCandidat
+	 * appel de la procédure stockée resultatCandidat qui a pour but de recolter les donnees des candidats pour établir des statistiques
 	 */
-	public static void recupererStatistiques() {
+	public void recupererStatistiques() {
 		CallableStatement cs = null;
 		ResultSet resultat = null;
 
