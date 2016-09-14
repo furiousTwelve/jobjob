@@ -21,6 +21,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
+import main.metier.Candidat;
 import main.metier.questionReponse;
 
 
@@ -40,7 +41,7 @@ public class ConnectionDB
 	/*
 	 * Ici je stocke et initialise mes éléments de connection 
 	 */
-	String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
+	String		 url 		= "jdbc:mysql://localhost/jobjob_1_2";
 	String 	 	 login 		= recruteur;
 	String 		 passwd 	= MDP;
 	Connection	 cn 		= null;
@@ -107,8 +108,8 @@ public class ConnectionDB
 		try 
 		{
 			st.executeUpdate(sql);
-			
-			st.close();
+//			
+//			st.close();
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();
@@ -264,7 +265,29 @@ public class ConnectionDB
 		}		
 		return nbCand+1;
 	}
-
+	
+	/**
+	 * @author florent
+	 * Remplissage de la table lienqcmquestions avec le numero de la question, le score associé et l'idQcm correspondant
+	 * @param score int[]
+	 * @param questrep questionReponse[]
+	 * @param cd Candidat
+	 */
+	public void enregistrerScoreCandidat(int[] score, questionReponse[] questrep, Candidat cd){
+				
+		
+		for (int i = 0; i < questrep.length; i++) {
+			String sql = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+", (SELECT idQcm FROM qcm INNER JOIN candidat ON qcm.idPersonne = candidat.idPersonne WHERE idCandidat = '"+cd.chaine[4]+"'), "+questrep[i].numQuestion+");";
+			try {
+				int a = st.executeUpdate(sql);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 }
 
 
