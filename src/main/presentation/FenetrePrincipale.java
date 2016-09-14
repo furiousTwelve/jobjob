@@ -233,7 +233,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 
 			// on fait appraitre le numéro du nouveau candidat
-			panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
+			try {
+				panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
+			} catch (SQLException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
@@ -343,7 +348,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				Candidat leCandidat = new Candidat(panFormulaire);
 				try {
 					leCandidat.enregistrerNouveauCandidat();
-				} catch (ClassNotFoundException e) {
+				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -405,14 +410,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// elle même va appeler une fonction de la coche donnée pour
 			// remplir le tableau de questions
 
-			try {
+			
 				System.out.println("Passage panCandidat --> panQuestion");
-				laQuestionReponse.questionsCandidat = laQuestionReponse
-						.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 
 			tp = new TimerGeneral(10);
 			tp.start();
