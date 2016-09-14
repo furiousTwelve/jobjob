@@ -34,13 +34,15 @@ import main.donnees.EnregistrementDonnee;
 public class questionReponse 
 {
 	public byte categorieQuestion;
-	public byte numQuestion;
-	public byte numQuestionBDD;
+//	public byte numQuestion;
+	public int  numQuestionBDD;
 	public String libelleQuestion;
 	public String libelleReponse1; 
 	public String libelleReponse2; 
 	public String libelleReponse3; 
 	public String libelleReponse4; 
+	public int bonneReponse;
+	public byte reponseCandidat;
 	
 	public questionReponse[] questionsCandidat;
 	
