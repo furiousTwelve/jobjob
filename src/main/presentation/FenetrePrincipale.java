@@ -381,11 +381,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 		 * 
 		 *          >> Ici on doit passer l'affichage en plein ecran
 		 * 
-		 *          >> On doit aussi afficher le timer
+		 *          >> On doit aussi afficher le timer !!
 		 */
 
 		if (arg0.getSource() == this.panCandidat.buttonStart) {
 			panQuestion = new panelQuestion();
+			this.setExtendedState(JFrame.MAXIMIZED_BOTH); // @AnaïsGueyte - Affiche en full screen tout le panel question et le panel fin
 
 			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui
 			// elle même va appeler une fonction de la coche donnée pour

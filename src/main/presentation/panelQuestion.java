@@ -53,23 +53,14 @@ public class panelQuestion extends JPanel {
 		// Appel de cette fonction  chercherQuestionRéponse(numQuestion) à chaque fois que le candidat valide un réponse.
 		
 		// TODO Auto-generated constructor stub
-		this.setLayout(new BorderLayout(200,200));
+		this.setLayout(new BorderLayout(200, 200));
+		
 		
 		font = new Font("Arial",Font.BOLD,28);
 		font2 = new Font("Arial",Font.BOLD,14);
 		
 		panelNord = new JPanel();
 		panelNord.setLayout(new BorderLayout());
-		
-		
-		/**
-		 * @author AnaïsGueyte
-		 * @date 14/09/2016
-		 * @version jobjob_2_0 (en accord avec la BDD)
-		 * 
-		 *          >> Ici on doit passer l'affichage en plein ecran
-		 * 
-		 */
 		 
 		panelQuestions = new JPanel();	
 		
@@ -77,6 +68,7 @@ public class panelQuestion extends JPanel {
 		
 		labelQuestion.setFont(font);
 		panelQuestions.add(labelQuestion);
+		
 		
 		panelNord.add(panelQuestions, BorderLayout.WEST);
 		
