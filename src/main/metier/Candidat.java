@@ -52,7 +52,7 @@ public class Candidat
 		chaine = new String[5];
 		int i = 0;
 		for(Component f : fields){
-			 if(f instanceof JTextField && i < chaine.length-1 )
+			 if(f instanceof JTextField && i < chaine.length )
 				{
 					chaine[i] = ((JTextField) f).getText();
 					System.out.println(chaine[i]);
@@ -60,7 +60,7 @@ public class Candidat
 				}
 		}
 
-		chaine[chaine.length-1] = this.definirNumeroCandidat();
+		
 	}
 	
 	
