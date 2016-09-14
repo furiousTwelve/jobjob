@@ -21,6 +21,9 @@ import main.metier.Candidat;
 import main.metier.TimerGeneral;
 import main.metier.questionReponse;
 import main.metier.Recruteur;
+import main.metier.ComparerCandidat;
+import main.metier.Statistiques;
+
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction des différents panneaux </b>
  * 
@@ -41,15 +44,14 @@ import main.metier.Recruteur;
 
 public class FenetrePrincipale extends JFrame implements ActionListener
 {
-	
-	
- 
+	private PanelStatistique paneStatistique;
 	private panelConnection panConnection;
 	private panelAccueil panAccueil;
 	private panelFormulaire panFormulaire;
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+
 	private panelAjouterQuestion panAjouterQuestion;
 	private panelModifierQuestion panModifierQuestion;
 	private panelSupprimerQuestion panSupprimerQuestion;
@@ -91,6 +93,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		panConnection = new panelConnection();
 
+        paneStatistique= new PanelStatistique();
 		panFormulaire = new panelFormulaire();
 		panCandidat = new panelCandidat();
 		panQuestion = new panelQuestion();
