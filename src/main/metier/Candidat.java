@@ -70,8 +70,10 @@ public class Candidat
 	 * On envoie à la couche données un tableau de String contenant les informations d'un candidat que l'on souhaite enregistrer.
 	 * Cet enregistrement à lieu (cette méthode est appelée donc) lors du passage du panelFormulaiure au panelCandidat, dans la fenêtre Principale:ligne 342
 	 * @throws SQLException 
+
+	 * @throws NumberFormatException 
 	 */
-	public void enregistrerNouveauCandidat() throws ClassNotFoundException, SQLException 
+	public void enregistrerNouveauCandidat() throws ClassNotFoundException, NumberFormatException, SQLException 
 	{ 
 
 		ConnectionDB cdb = new ConnectionDB();
@@ -81,7 +83,8 @@ public class Candidat
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
 	//TODO : ceci n'est pas une javadoc
-	public String definirNumeroCandidat() throws SQLException, ClassNotFoundException
+
+	public String definirNumeroCandidat() throws ClassNotFoundException, SQLException
 	{
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
 		String date = format.format(new Date());
@@ -99,5 +102,33 @@ public class Candidat
 		}
 		return date + "_"+numeroconcat;
 	}
+
+
+	
+	// Setters de la classe
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public void setNumeroTelephone(String numeroTelephone) {
+		this.numeroTelephone = numeroTelephone;
+	}
+
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
+	}
+
+	
+	
+	
 	
 }
