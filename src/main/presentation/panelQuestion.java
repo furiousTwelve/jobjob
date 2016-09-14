@@ -61,7 +61,17 @@ public class panelQuestion extends JPanel {
 		panelNord = new JPanel();
 		panelNord.setLayout(new BorderLayout());
 		
-		panelQuestions = new JPanel();
+		
+		/**
+		 * @author AnaïsGueyte
+		 * @date 14/09/2016
+		 * @version jobjob_2_0 (en accord avec la BDD)
+		 * 
+		 *          >> Ici on doit passer l'affichage en plein ecran
+		 * 
+		 */
+		 
+		panelQuestions = new JPanel();	
 		
 		labelQuestion = new JLabel("Combien de pattes a un mouton à cinq pattes?");//à remplir en lisant fichier ou bdd contenant les questions.
 		
