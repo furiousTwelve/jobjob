@@ -1,6 +1,7 @@
 package main.metier;
 
 import java.awt.Component;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -68,8 +69,9 @@ public class Candidat
 	 * @throws ClassNotFoundException
 	 * On envoie à la couche données un tableau de String contenant les informations d'un candidat que l'on souhaite enregistrer.
 	 * Cet enregistrement à lieu (cette méthode est appelée donc) lors du passage du panelFormulaiure au panelCandidat, dans la fenêtre Principale:ligne 342
+	 * @throws SQLException 
 	 */
-	public void enregistrerNouveauCandidat() throws ClassNotFoundException 
+	public void enregistrerNouveauCandidat() throws ClassNotFoundException, SQLException 
 	{ 
 
 		ConnectionDB cdb = new ConnectionDB();
@@ -79,7 +81,7 @@ public class Candidat
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
 	//TODO : ceci n'est pas une javadoc
-	public String definirNumeroCandidat()
+	public String definirNumeroCandidat() throws SQLException, ClassNotFoundException
 	{
 		DateFormat format = new SimpleDateFormat("yy_MM_dd");
 		String date = format.format(new Date());
