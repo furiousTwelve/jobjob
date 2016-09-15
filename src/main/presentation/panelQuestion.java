@@ -16,6 +16,7 @@ import javax.swing.JRadioButton;
 /**
  * Révision du panelQuestion dû au changement prévu par Khadidja
  * @author Florent
+ * @author Marc
  *
  */
 public class panelQuestion extends JPanel {
@@ -139,6 +140,31 @@ public class panelQuestion extends JPanel {
 		
 		this.add(panelValider, BorderLayout.SOUTH);
 		
+	}
+
+
+	public JRadioButton getReponse1() {
+		return reponse1;
+	}
+
+
+	public JRadioButton getReponse2() {
+		return reponse2;
+	}
+
+
+	public JRadioButton getReponse3() {
+		return reponse3;
+	}
+
+
+	public JRadioButton getReponse4() {
+		return reponse4;
+	}
+
+
+	public JLabel getLabelQuestion() {
+		return labelQuestion;
 	}
 
 	

@@ -7,6 +7,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -37,7 +38,9 @@ import main.metier.Statistiques;
  * @author Florent
  * @author Audric
  * @author Benjamin
- * @author Lionel
+ * @author Lionel 
+ * @author Marc
+
  * @version 1.02
  */
 
@@ -56,7 +59,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelModifierQuestion panModifierQuestion;
 	private panelSupprimerQuestion panSupprimerQuestion;
 	private EnregistrementDonnee ed;
-	private int compteurQuestions = 1;
+	public int compteurQuestions = 1;
+	
 	// Pour la couche métier
 	public questionReponse laQuestionReponse = new questionReponse();
 	public questionReponse[] questionsCandidat = new questionReponse[15];
@@ -494,8 +498,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 
 			
-			tp = new TimerGeneral(10, this );
 
+			tp = new TimerGeneral(45, this );
 			tp.start();
 			
 
@@ -561,12 +565,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé", JOptionPane.ERROR_MESSAGE);
 			}
 			
-			
+			//Lancement du timer stress
 			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
-				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé",
-						JOptionPane.ERROR_MESSAGE);
+
+				
+				if (tp.secondPassed<=30) {
+					TimerS = new TimerGeneral(tp.secondPassed,this,panQuestion,laQuestionReponse);
+				}else{
+				TimerS = new TimerGeneral(30,this,panQuestion,laQuestionReponse);
+				//Lancer le TimerStress
+				TimerS.start2();
+				
+				
+				//TimerS.tache2.cancel();
+				}
 			}
 		}
 		
@@ -574,9 +588,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
-			TimerS = new TimerGeneral(120,this);
-			//Lancer le TimerStress
-			TimerS.start();
+
+			Time temps = new Time(0,0, TimerS.secondPassed);
+			System.out.println("le temps stress =" +temps);
+			
 		}
 		
 		if(compteurQuestions == 13)
@@ -855,6 +870,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		super(gc);
 		// TODO Auto-generated constructor stub
 	}
+
+	
+
+	
 
 	/**
 	 * Constructeur non utilisé sous la version 1.00 à 1.xx

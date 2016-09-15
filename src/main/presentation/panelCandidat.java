@@ -90,10 +90,10 @@ public class panelCandidat extends JPanel  {
 		buttonStart.setPreferredSize(new Dimension(150,100));		
 	}
 
-	public void startTimer(){
-		TimerGeneral tp = new TimerGeneral(1800, fp);
-		tp.start();
-	}
+//	public void startTimer(){
+//		TimerGeneral tp = new TimerGeneral(1800, fp);
+//		tp.start();
+//	}
 		
 	public void randomQuestionsJava(){
 		
