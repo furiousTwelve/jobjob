@@ -415,7 +415,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 
 			
-			tp = new TimerGeneral(900, this,null,null );
+			tp = new TimerGeneral(45, this,null,null );
 			tp.start();
 			
 
@@ -493,11 +493,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
-				
-				TimerS = new TimerGeneral(10,this,panQuestion,laQuestionReponse);
+				if (tp.secondPassed<=30) {
+					TimerS = new TimerGeneral(tp.secondPassed,this,panQuestion,laQuestionReponse);
+				}else{
+				TimerS = new TimerGeneral(30,this,panQuestion,laQuestionReponse);
 				//Lancer le TimerStress
 				TimerS.start2();
-				TimerS.tache.cancel();
+				System.out.println(TimerS.secondPassed);
+				//TimerS.tache2.cancel();
+				}
 			}
 			
 			
