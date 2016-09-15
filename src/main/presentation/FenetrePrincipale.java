@@ -9,10 +9,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;

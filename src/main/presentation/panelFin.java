@@ -102,14 +102,22 @@ public class panelFin extends JPanel {
 		 */
 
 		boutonRetour = new JButton("RETOUR");
-
 		panelRecruteur.add(boutonRetour);// à repositionner
+		
+		JLabel logoConnection2 = new JLabel(new ImageIcon("logoAFPA.png"));
+		JPanel panelLogo = new JPanel();
+		panelLogo.setLayout(new FlowLayout());
+		panelLogo.add(logoConnection2, BorderLayout.WEST); //@AnaisGueyte - Ajout du logo
+		
 
 		// 3ème panel pour le recruteur prévue pour la v2
 		JPanel p3 = new JPanel(new GridLayout(0, 3));
 		p3.add(panelRecruteur);
 		p3.add(panelEntreprise);
 		this.add(p3, BorderLayout.SOUTH);
+		this.add(panelLogo, BorderLayout.NORTH);  //@AnaisGueyte - Ajout du logo
+		
+		
 
 	}
 }

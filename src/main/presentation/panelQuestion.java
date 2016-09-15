@@ -136,7 +136,7 @@ public class panelQuestion extends JPanel {
 		boutonValider = new JButton("Valider");
 		boutonValider.setFont(font2);
 		boutonValider.setPreferredSize(new Dimension(100, 40));
-		panelValider.add(boutonValider);
+		panelValider.add(boutonValider, BorderLayout.CENTER);
 		
 		this.add(panelValider, BorderLayout.SOUTH);
 		

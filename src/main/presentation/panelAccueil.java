@@ -135,14 +135,18 @@ public class panelAccueil extends JPanel implements ActionListener{
 			panelCentral.add(labelVide);
 			panelCentral.add(panelImg);
 		
-		
+			JLabel logoConnection2 = new JLabel(new ImageIcon("logoAFPA.png"));
+			JPanel panelLogo = new JPanel();
+			panelLogo.setLayout(new FlowLayout());
+			panelLogo.add(logoConnection2, BorderLayout.WEST); //@AnaisGueyte - Ajout du logo
+			
 
 		
 		//Constitution du panel général
 		this.setLayout(new BorderLayout());
 		this.add(panelCentral, BorderLayout.CENTER);
 		this.add(menuBar, BorderLayout.NORTH);
-		
+		this.add(panelLogo, BorderLayout.SOUTH);  //@AnaisGueyte - Ajout du logo
 	}
 
 	public void creerFichier() {
