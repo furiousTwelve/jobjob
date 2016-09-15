@@ -85,6 +85,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		// dg.DessinerCam();
 		laQuestionReponse = new questionReponse(); // Couche METIER
 		questionsCandidat = new questionReponse[15]; // Couche METIER
+		leCandidat = new Candidat();
+		
 		this.setTitle("Job-Job");
 		// this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setResizable(false);
@@ -201,7 +203,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if (arg0.getSource() == panAccueil.itemNouveauCandidat) {
 
-			Candidat cd = new Candidat();
+			//Candidat cd = new Candidat();
 			panFormulaire.fieldNom.setEditable(true);
 			panFormulaire.fieldPrenom.setEditable(true);
 			panFormulaire.fieldMail.setEditable(true);
@@ -219,7 +221,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// on fait appraitre le numéro du nouveau candidat
 
 			try {
-				panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
+				panFormulaire.fieldId.setText(leCandidat.definirNumeroCandidat());
 
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -377,7 +379,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 		}
 
-		// Passage du panFormulaire au panCandidat
+		/** Passage du panFormulaire au panCandidat
 		/*
 		 * Cette partie gère la partie sauvegarde dans le panel panFormulaire
 		 * <br>
@@ -393,29 +395,29 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		else if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
 		{	
-		
-			System.out.println(panFormulaire.fieldTelephone.getText());
+			
+			leCandidat.setNom(this.panFormulaire.fieldNom.getText());  
+			leCandidat.setPrenom(this.panFormulaire.fieldPrenom.getText());
+			leCandidat.setMail(this.panFormulaire.fieldMail.getText());
+			leCandidat.setNumeroTelephone(this.panFormulaire.fieldTelephone.getText());
+			leCandidat.setIdentifiant(this.panFormulaire.fieldId.getText());
+
+			
+			try {
+				leCandidat.enregistrerNouveauCandidat();
+			} catch (NumberFormatException | ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			
+			
 			if (panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())
 				&& panFormulaire.checkNom(panFormulaire.fieldNom.getText())
 				&& panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) 
 			{
-				Candidat leCandidat = new Candidat(panFormulaire);
-				try {
 
-					try {
-						leCandidat.enregistrerNouveauCandidat();
-					} catch (NumberFormatException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} catch (ClassNotFoundException e) {
-
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
 				/**
 				 * @author AnaïsGueyte
@@ -457,13 +459,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				if (!panFormulaire.checkNom(panFormulaire.fieldNom.getText())) 
 				{
 					panFormulaire.fieldNom.setForeground(Color.RED);
-//					panFormulaire.champNom.setForeground(Color.RED);
 					str = str + "\n - Nom ";
 				}
 				if (!panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) 
 				{
 					panFormulaire.fieldPrenom.setForeground(Color.RED);
-//					panFormulaire.champPrenom.setForeground(Color.RED);
 					str = str + "\n - Prenom ";
 				}
 				if (!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())) 
@@ -481,28 +481,19 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		if (arg0.getSource() == this.panCandidat.buttonStart) 
 		{
 			panQuestion = new panelQuestion();
-			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui
-			// elle même va appeler une fonction de la coche donnée pour
-			// remplir le tableau de questions
 
-
-			
 				System.out.println("Passage panCandidat --> panQuestion");
 				try {
 					laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
 
 				} catch (ClassNotFoundException | SQLException e) {
 
-
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
 			tp = new TimerGeneral(900, this );
 
 			tp.start();
-			
-
 
 			this.getContentPane().removeAll();
 			// Couche METIER ==> Affichage de la première question
@@ -517,8 +508,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 		}
 
-		// Passage d'une question à une autre
-		if (arg0.getSource() == this.panQuestion.boutonValider && compteurQuestions < 16) 
+/**
+ * @author cyril
+ * Fonction qui va permettre de faire l'affichage des différentes questions et réponses, lorsque le candidat valide
+ * 
+ * un compteur permet de gérer plusieurs états et/ou déclencheurs (comme le timmer génral et le timer Stress)
+ */
+		if (arg0.getSource() == this.panQuestion.boutonValider) 
 		{
 			// COUCHE METIER
 			byte tempReponse = 0;
@@ -551,17 +547,19 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions, texteReponseChoisie);
 
 				compteurQuestions++;
+				if(compteurQuestions<15)
+				{
+					panQuestion.reponse1.setSelected(false);
+					panQuestion.reponse2.setSelected(false);
+					panQuestion.reponse3.setSelected(false);
+					panQuestion.reponse4.setSelected(false);				
 
-				panQuestion.reponse1.setSelected(false);
-				panQuestion.reponse2.setSelected(false);
-				panQuestion.reponse3.setSelected(false);
-				panQuestion.reponse4.setSelected(false);				
-
-				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
-				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
-				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
-				panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
-				panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+					panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
+					panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
+					panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
+					panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
+					panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				}
 				
 				
 			}
@@ -587,7 +585,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				//TimerS.tache2.cancel();
 				}
 			}
-		}
+		
 		
 
 				
@@ -612,13 +610,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 * @date 15/09/2016
 		 * @version jobjob_2_0 (en accord avec la BDD)
 		 * 
-		 *          >> J'ai rajouté deux lignes de code pour remettre la fenetre
-		 *          en petit et au centre de l'ecran à la fin du test
-		 * 
-		 *          this.setSize(800, 600); this.setLocationRelativeTo(null);
-		 * 
-		 *          Cependant je note qu'il faut un long moment avant que la
-		 *          page n'apparaisse
+		 *          >> J'ai rajouté deux lignes de code pour remettre la fenetre en petit et au centre de l'ecran à la fin du test
 		 * 
 		 */
 
@@ -628,7 +620,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			laQuestionReponse.genererTableauScoreCandidat();
 			System.out.println("On lance 'enregistrer score candidat'");
 			try {
-				ConnectionDB conn = new ConnectionDB();
+				ConnectionDB conn = new ConnectionDB();				
 				conn.enregistrerScoreCandidat(laQuestionReponse.scoreParReponseCandidat, laQuestionReponse.questionsCandidat, leCandidat); // Petit doute sur le candidat
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -654,7 +646,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFin.boutonRetour.addActionListener(this);
 			this.validate();	
 		}
-		
+		}
 		
 		
 		

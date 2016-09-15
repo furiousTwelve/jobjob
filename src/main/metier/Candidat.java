@@ -33,11 +33,11 @@ public class Candidat
 	/**
 	 * ATTRIBUTS DE CANDIDAT
 	 */
-	protected String nom;
-	protected String prenom;
-	protected String mail;
-	protected String numeroTelephone;
-	protected String identifiant;
+	public String nom;
+	public String prenom;
+	public String mail;
+	public String numeroTelephone;
+	public String identifiant;
 	
 	public String[] chaine;
 	/**
@@ -50,7 +50,7 @@ public class Candidat
 		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
 		// CONSTRUCTION DU CANDIDAT AVEC LES DONNEES SAISIES
 		Component[] fields = p.getComponents();
-		chaine = new String[5];
+		
 		int i = 0;
 		for(Component f : fields){
 			 if(f instanceof JTextField && i < chaine.length )
@@ -75,9 +75,9 @@ public class Candidat
 	 */
 	public void enregistrerNouveauCandidat() throws ClassNotFoundException, NumberFormatException, SQLException 
 
-	{ 
+	{ 	
 		ConnectionDB cdb = new ConnectionDB();
-		cdb.enregistrerNouveauCandidatEnBase(chaine[4], chaine[0], chaine[1], chaine[3], chaine[2]);
+		cdb.enregistrerNouveauCandidatEnBase(this.identifiant, this.nom, this.prenom,this.numeroTelephone,  this.mail);
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
@@ -102,7 +102,15 @@ public class Candidat
 		}
 		return date + "_"+numeroconcat;
 	}
-
+	
+	
+	/**
+	 * @author cyril
+	 */
+	public void transfererScoreCandidat()
+	{
+		
+	}
 
 	
 	// Setters de la classe

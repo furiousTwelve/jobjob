@@ -376,18 +376,23 @@ public class ConnectionDB
 	 */
 	public void enregistrerScoreCandidat(int[] score, questionReponse[] questrep, Candidat cd) throws SQLException, ClassNotFoundException
 	{		
+		String id = cd.identifiant;
+		String sql = "INSERT INTO qcm (bareme, dateEvaluation, idPersonne) VALUES ('0%0%1', DATE(NOW()), (SELECT idPersonne FROM candidat WHERE idCandidat ='"+id+"'));";
+		int a = statement.executeUpdate(sql);
+		
+		String sqlladtid = "SELECT LAST_INSERT_ID();";
+		ResultSet res = statement.executeQuery(sqlladtid);
+		String lastidQcm = null;
+		while(res.next()){
+			lastidQcm = res.getString(1);
+		}
+		
 		for (int i = 0; i < questrep.length; i++) {
-			String sql = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+", (SELECT idQcm FROM qcm INNER JOIN candidat ON qcm.idPersonne = candidat.idPersonne WHERE idCandidat = '"+cd.chaine[4]+"'), "+questrep[i].numQuestionBDD+");";
-			try {
-				int a = statement.executeUpdate(sql);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String sql2 = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+","+lastidQcm+", "+questrep[i].numQuestionBDD+");";
+			int b = statement.executeUpdate(sql2);
 		}
 		Deconnexion();
 	}
-	
 	/**
 	 * @author cyril
 	 * appel de la procédure stockée resultatCandidat qui a pour but de recolter les donnees des candidats pour établir des statistiques
