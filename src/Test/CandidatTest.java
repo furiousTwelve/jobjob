@@ -52,9 +52,9 @@ public class CandidatTest {
 		lastIdCandidat = cdb.enregistrerNouveauCandidatEnBase("0001", "NOMTEST", "PrénomTest", "0123456789", "NOMTESTPrenomTest@yahoo.fr");
 		
 		// Connexion à ma BDD
-		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
-		String 	 	 login 		= "root";
-		String 		 passwd 	= "";
+		String		 url 		= "jdbc:mysql://sta6101855/jobjob_2_0";
+		String 	 	 login 		= "cdi";
+		String 		 passwd 	= "cdi";
 		Connection	 cn 		= null;
 		Statement st	= null;
 

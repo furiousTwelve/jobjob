@@ -27,56 +27,47 @@ import main.metier.Candidat;
 import main.metier.questionReponse;
 
 
-// TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
-// TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
 public class ConnectionDB 
 {
-	private static String url;
-	private static String login;
-	private static String passwd;
-	private static Connection	 cn;
-	private static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
+	//private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
+	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
+	private static String login = "cdi";
+	private static String passwd = "cdi";
+	private static Connection connection;
+	private static Statement statement;
 	private String recruteur = "cdi";
 	private String MDP = "cdi";
+	private  boolean connected = false;
 	
-	
-	public ConnectionDB () throws ClassNotFoundException, SQLException {
-		
-		connectionBase(recruteur, MDP);
+	/**
+	 * Constructeur de la classe
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public ConnectionDB () throws ClassNotFoundException, SQLException 
+	{
+		if (this.connectionBase()) System.out.println("connecté");
 	}
 	
 	/**
-	 * Méthode qui se connecte à la base
+	 * Méthode qui se connecte à la base et crèe un premier statement 
 	 * @param acces, paramètre qui autorise l'accés
 	 * @param recruteur, paramètre qui enregistre le nom du recruteur
 	 * @param MDP , paramètre qui enregistre le MDP du recruteur
 	 */
-	public static boolean connectionBase(String recruteur,String MDP) throws ClassNotFoundException, SQLException
+	public boolean connectionBase() throws ClassNotFoundException, SQLException
 	{
-		/*
-		 * Ici je stocke et initialise mes éléments de connection 
-		 */
-		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
-		String 	 	 login 		= recruteur;
-		String 		 passwd 	= MDP;
-		Connection	 cn 		= null;
-		st	= null;
-		boolean connected;
-		
-		/*
-		 * Connection au drivers de base de donnée
-		 * ici pour le SQL
-		 */
 		try
 		{
-			// chargement du driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver"); // chargement du driver
 			// recuperation de la connexion
-		
-			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+			System.out.println("login : " + login);
+			connection = (Connection) DriverManager.getConnection(url,
+																  login,
+																  passwd);
 		
 			// creation d'un statement pour pouvoir lancer des requêtes
-//			st = (Statement) cn.createStatement();
+			statement = (Statement) connection.createStatement();	
 			// affiche dans la console si la connecion est ok.
 			System.out.println("connection dataBase OK");
 			connected = true;
@@ -91,19 +82,14 @@ public class ConnectionDB
 		return connected;
 	}
 	
-	public void Connexion() throws SQLException, ClassNotFoundException
-	{
-		//Class.forName("com.mysql.jdbc.Driver");
-		// recuperation de la connexion
-		cn = (Connection) DriverManager.getConnection(url, login, passwd);
-		// creation d'un statement pour pouvoir lancer des requêtes
-		st = (Statement) cn.createStatement();	
-	}
-	
+	/**
+	 * Fonction de déconnexion de la base fermant le statement et la connexion en cours 
+	 * @throws SQLException
+	 */
 	public void Deconnexion() throws SQLException
 	{
-		st.close();
-		cn.close();
+		statement.close();
+		connection.close();
 	}
 	
 	/**
@@ -121,11 +107,10 @@ public class ConnectionDB
 	
 	public int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, SQLException
 	{
-		Connexion();
 		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";		
 		try 
 		{
-			st.executeUpdate(sql2);
+			statement.executeUpdate(sql2);
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();
@@ -136,25 +121,27 @@ public class ConnectionDB
 		
 		try 
 		{
-			st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
 		
-		Deconnexion();
+		
 		int answer = 0;
 		
 		
 		// Partie dévouée au test Unitaire, renvoyant l'idPersonne du candidat qui vient d'être créé dans la base
-		ResultSet generatedKeys = (ResultSet) st.getGeneratedKeys(); 
+		ResultSet generatedKeys = (ResultSet) statement.getGeneratedKeys(); 
 		while(generatedKeys.next()) {
 			answer = Integer.parseInt(generatedKeys.getString(1));
 			System.out.println("sysoiut1" + answer);
 		}
 		System.out.println("sysout 2" + answer);
+		Deconnexion();
 		return answer;
+		
 	}
 	
 	
@@ -168,7 +155,6 @@ public class ConnectionDB
 	 */
 	public void recupererCandidatEnBase(String id) throws ClassNotFoundException, SQLException
 	{
-		Connexion();
 		ResultSet rs=null;
 		String id2="";
 		String nom="";
@@ -178,7 +164,7 @@ public class ConnectionDB
 		
 		String sql2 = "SELECT * FROM candidat WHERE idCandidat='"+id+"'; ";
 		try {
-			rs = (ResultSet) st.executeQuery(sql2);
+			rs = (ResultSet) statement.executeQuery(sql2);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,11 +213,8 @@ public class ConnectionDB
 	 * @throws ClassNotFoundException 
 	 */
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException, ClassNotFoundException
-
 	{
-		Connexion();
 		// Déclaration de mes différentes variables :
-		
 		int numeroQuestion[] = new int[15]; // Tableau qui stockera les numero de question déjà tirés
 		questrep = new questionReponse[15];
 		int ordreCategorieQuestions[] = {1,1,1,1,1,3,3,3,3,3,2,4,4,4,1}; // Le type de nos 15 questions dans notre QCM, par ordre d'apparition
@@ -244,7 +227,7 @@ public class ConnectionDB
 			for (int i = 0; i < ordreCategorieQuestions.length; i++) {
 				
 				String request1 = "SELECT textesQuestion, numero, idPropositions FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
-				res = (ResultSet) st.executeQuery(request1);
+				res = (ResultSet) statement.executeQuery(request1);
 				
 				while (res.next()) 
 				{
@@ -264,7 +247,7 @@ public class ConnectionDB
 			// Seconde requête, insérée dans une boucle contenant autant d'itérations que l'on a eu de questions précédemment
 			for (int j = 0; j < numeroQuestion.length; j++) {
 				String request2 = "SELECT reponse FROM propositions INNER JOIN comporte ON propositions.idPropositions = comporte.idPropositions WHERE numero = " + numeroQuestion[j];
-				res = (ResultSet) st.executeQuery(request2);
+				res = (ResultSet) statement.executeQuery(request2);
 	
 				res.first();
 				questrep[j].libelleReponse1 = res.getString("reponse");
@@ -287,13 +270,11 @@ public class ConnectionDB
 	//TODO : javadoc inexistante 
 	public int nombreCandidat() throws SQLException, ClassNotFoundException
 	{
-
-		Connexion();
 		ResultSet res = null;
 		int nbCand=0;
 		String requete = "SELECT candidat.idPersonne FROM candidat";
 		try {
-			res = (ResultSet) st.executeQuery(requete);
+			res = (ResultSet) statement.executeQuery(requete);
 		} catch (SQLException e) {
 			System.out.println("impossible d effectuer la requete");
 			// TODO Auto-generated catch block
@@ -327,22 +308,18 @@ public class ConnectionDB
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public void enregistrerScoreCandidat(int[] score, questionReponse[] questrep, Candidat cd) throws SQLException, ClassNotFoundException{
-				
-		Connexion();
-		
+	public void enregistrerScoreCandidat(int[] score, questionReponse[] questrep, Candidat cd) throws SQLException, ClassNotFoundException
+	{		
 		for (int i = 0; i < questrep.length; i++) {
 			String sql = "INSERT INTO lienqcmquestions (score, idQcm, numero) VALUES ("+score[i]+", (SELECT idQcm FROM qcm INNER JOIN candidat ON qcm.idPersonne = candidat.idPersonne WHERE idCandidat = '"+cd.chaine[4]+"'), "+questrep[i].numQuestionBDD+");";
 			try {
-				int a = st.executeUpdate(sql);
+				int a = statement.executeUpdate(sql);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
 		Deconnexion();
-		
 	}
 	
 	/**
@@ -354,7 +331,7 @@ public class ConnectionDB
 		ResultSet resultat = null;
 
 		try {
-			cs = (CallableStatement) cn.prepareCall("{call resultatsCandidat()}");
+			cs = (CallableStatement) connection.prepareCall("{call resultatsCandidat()}");
 		} catch (SQLException e) {
 
 			e.printStackTrace();

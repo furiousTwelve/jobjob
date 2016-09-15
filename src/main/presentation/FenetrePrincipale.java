@@ -433,7 +433,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					e.printStackTrace();
 				}
 
-
 			tp = new TimerGeneral(45);
 			tp.start();
 
