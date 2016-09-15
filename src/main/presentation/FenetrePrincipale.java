@@ -15,6 +15,7 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
@@ -312,20 +313,53 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		/**
 		 * @author Florent
-		 * @detail : Implementation du bouton rechercher <br>
-		 *         ici on vérifie si le bouton s'apelle "Rechercher" <br>
-		 *         si oui, execute le contenu
+		 * @author Audric
+		 * @detail : Implementation du bouton rechercher
+		 * <br>ici on vérifie si le bouton s'apelle "Rechercher"
+		 * <br>si oui, execute le contenu 
 		 */
-
-		if (arg0.getActionCommand().equals("Rechercher")) 
-		{
-			if (ed.rechercheCandidat(panFormulaire.fieldId.getText())) 
-			{
-				panCandidat.buttonStart.addActionListener(this);
-
-				this.getContentPane().removeAll();
-				this.setContentPane(panCandidat);
-				this.validate();
+		
+		if(arg0.getActionCommand().equals("Rechercher")){
+		
+			try {
+				if(ConnectionDB.recupererCandidatEnBase(panFormulaire.fieldId.getText())){
+					
+					int option = JOptionPane.showConfirmDialog(null,"Le candidat est-il "+ConnectionDB.getPrenom()+" "+ConnectionDB.getNom()+"?","Confirmation !",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(option == JOptionPane.NO_OPTION)
+					{		
+						panFormulaire = new panelFormulaire();
+						
+						panFormulaire.fieldNom.setEditable(false);
+						panFormulaire.fieldPrenom.setEditable(false);
+						panFormulaire.fieldMail.setEditable(false);
+						panFormulaire.fieldTelephone.setEditable(false);
+						panFormulaire.fieldId.setEditable(true);
+			
+						panFormulaire.fieldNom.setText(null);
+						panFormulaire.fieldPrenom.setText(null);
+						panFormulaire.fieldMail.setText(null);
+						panFormulaire.fieldTelephone.setText(null);
+						panFormulaire.fieldId.setText(null);
+						
+						panFormulaire.boutonSave.setText("Rechercher");
+						
+						panFormulaire.boutonSave.addActionListener(this);
+						
+						this.getContentPane().removeAll();
+						this.setContentPane(panFormulaire);
+						this.validate();
+						
+					}
+					else{
+					panCandidat.buttonStart.addActionListener(this);
+					
+					this.getContentPane().removeAll();
+					this.setContentPane(panCandidat);
+					this.validate();
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
 
 		}
@@ -341,9 +375,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 * L'utilisateur est averti des erreurs ( champs écrits en rouge). <br>
 		 * Si les deux sont valides, on passe au panel panCandidat
 		 */
-		if (arg0.getSource() == this.panFormulaire.boutonSave
-				|| arg0.getSource() == this.panFormulaire.itemSauvegarder) {
 
+
+		else if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
+		{	
+			
 			System.out.println(panFormulaire.fieldTelephone.getText());
 
 			if (panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())
@@ -375,9 +411,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
 
-				panFormulaire.champNom.setForeground(Color.BLACK);
+//				panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-				panFormulaire.champPrenom.setForeground(Color.BLACK);
+//				panFormulaire.champPrenom.setForeground(Color.BLACK);
 
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
@@ -386,12 +422,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 				if (!panFormulaire.checkNom(panFormulaire.fieldNom.getText())) {
 					panFormulaire.fieldNom.setForeground(Color.RED);
-					panFormulaire.champNom.setForeground(Color.RED);
+//					panFormulaire.champNom.setForeground(Color.RED);
 					str = str + "\n - Nom ";
 				}
 				if (!panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) {
 					panFormulaire.fieldPrenom.setForeground(Color.RED);
-					panFormulaire.champPrenom.setForeground(Color.RED);
+//					panFormulaire.champPrenom.setForeground(Color.RED);
 					str = str + "\n - Prenom ";
 				}
 				if (!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())) {

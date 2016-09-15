@@ -15,21 +15,25 @@
  * @version  1.0
  */
 package main.donnees;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.CallableStatement;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
+
+import java.sql.*;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import main.metier.Candidat;
 import main.metier.questionReponse;
 
 
+
 // TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
 // TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
-public class ConnectionDB 
+public class ConnectionDB
 {
 
 
@@ -208,62 +212,96 @@ public class ConnectionDB
 
 	}
 	
-	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/**
 	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
-	 * affiche dans la console les champs associés à l'élément id dans la table
-	 * @param id
-	 * @throws SQLException 
-	 *    
+	 * Récupère les champs associés à l'élément id dans la table
+	 * @author Audric
+	 * @param id   
+	 * @throws ClassNotFoundException
 	 */
-	public void recupererCandidatEnBase(String id) throws ClassNotFoundException, SQLException
+	
+	static String nom;
+	static String prenom;
+	
+	public static boolean recupererCandidatEnBase(String id) throws ClassNotFoundException
 	{
-		Connexion();
-		ResultSet rs=null;
+		String url = "jdbc:mysql://sta6101855:3306/jobjob_2_0";
+		String login = "cdi";
+		String passwd = "cdi";
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
 		String id2="";
-		String nom="";
-		String prenom="";
+	    nom="";
+		prenom="";
 		String telephone="";
 		String mail="";
+		Boolean existe = false;
 		
-		String sql2 = "SELECT * FROM candidat WHERE idCandidat='"+id+"'; ";
-		try {
-			rs = (ResultSet) st.executeQuery(sql2);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			while (rs.next()) {
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, login, passwd);
+			st = cn.createStatement();
+			String sql = "SELECT * FROM personne INNER JOIN candidat ON personne.idPersonne=candidat.idPersonne WHERE idCandidat='"+id+"';";
+			rs = st.executeQuery(sql);
+			while(rs.next()){
 				try {
-					id2 = rs.getString("identifiant");
+					id2 = rs.getString("idCandidat");
+
 					nom = rs.getString("nom");
 					prenom= rs.getString("prenom");
 					telephone= rs.getString("telephone");
 					mail= rs.getString("mail");
 					
-					
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}
-				System.out.println(id2);
-				System.out.println(nom);
-				System.out.println(prenom);
-				System.out.println(telephone);
-				System.out.println(mail);
+				}	
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e){
 			e.printStackTrace();
 		}
+
+		catch(ClassNotFoundException e){
+			e.printStackTrace();
+		} finally {
+			try{
+				cn.close();
+				st.close();
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 		
-		Deconnexion();
+		if (!id2.equals("")){
+			existe=true;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Le candidat n'existe pas");
+		}
+		
+		return existe;
+		
 	}
 	
+	public static String getNom() {
+		return nom;
+	}
 
-	/** Méthode renvoyant un tableau d'objets de type questionReponse
-	 * Pour chaque objet seront complétés le libelleQuestion, ainsi que les libellesReponses. Les questions sont choisies de manière aléatoire dans la BDD
+	public static String getPrenom() {
+		return prenom;
+	}
+	
+	
+	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
+	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
+	/**
+	 * Méthode qui remplira un tableau de 15 objets de type questionReponse.
+	 * 		- Une première REQUETE SQL ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
+	 * 		  puis on remplira les objets questionReponse, ainsi qu'un tableau stockant les numero de nos questions, avec.
+	 * 		- Une seconde requête ira chercher l'ensemble des réponses/propositions correspondants à un numero de question donnée.
 	 * 
 	 * Deux requêtes SQL vont être utilisées :
 	 * 		-	Une première (request1) ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
@@ -277,6 +315,7 @@ public class ConnectionDB
 	 * @return questionReponse[15]
 	 * @throws ClassNotFoundException 
 	 */
+
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException, ClassNotFoundException
 
 	{
