@@ -1,6 +1,12 @@
 package main.metier;
+import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import main.presentation.panelFin;
  
 /**
  *  CLASSE TIMER : COMPTEURS UTILISES SUR LES FORMULAIRES
@@ -14,12 +20,14 @@ public class TimerGeneral
 	public int minuteAff = 0;
 	public int secondeAff = 0;
 	String secondeAffS = "";
-	
+	public  JFrame fp;
+	panelFin panFin = new panelFin();
 	
 	//Constructeur pour mon héritage Stress
-	public TimerGeneral(int secondPassed)
+	public TimerGeneral(int secondPassed, JFrame fp)
 	{
 		this.secondPassed = secondPassed;
+		this.fp = fp;
 	}
 	
 	
@@ -31,8 +39,14 @@ public class TimerGeneral
         {
         	if(secondPassed <= 0)
         	{
+        		fp.getContentPane().removeAll();
+        		fp.setContentPane(panFin);
+        		fp.validate();
         		tache.cancel();
+        		
         	}
+        	
+        	
         	else
         	{
         		secondPassed--;

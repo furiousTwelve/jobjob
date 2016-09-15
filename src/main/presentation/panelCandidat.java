@@ -10,6 +10,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -44,6 +45,7 @@ public class panelCandidat extends JPanel  {
 	protected JButton buttonStart;
 	protected JButton test;
 	protected JLabel info;
+	private JFrame fp;
 	
 	
 	/**
@@ -89,7 +91,7 @@ public class panelCandidat extends JPanel  {
 	}
 
 	public void startTimer(){
-		TimerGeneral tp = new TimerGeneral(1800);
+		TimerGeneral tp = new TimerGeneral(1800, fp);
 		tp.start();
 	}
 		

@@ -3,6 +3,8 @@
  */
 package main.metier;
 
+import javax.swing.JFrame;
+
 import main.metier.TimerGeneral;
 
 /**
@@ -13,11 +15,11 @@ import main.metier.TimerGeneral;
 //Héritage de la class timer general
 public class TimerStress extends TimerGeneral {
 		
-	public TimerStress(int secondPassed){
-		super(secondPassed);
+	public TimerStress(int secondPassed, JFrame fp){
+		super(secondPassed, fp);
 		
 		//Timer stress 2min
-		TimerGeneral TimerS = new TimerGeneral(120);
+		TimerGeneral TimerS = new TimerGeneral(120,fp);
 		System.out.println(TimerS);
 		
 	}

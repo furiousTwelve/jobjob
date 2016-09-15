@@ -79,7 +79,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * @throws ParseException
 	 * @author Damien
 	 */
-	public FenetrePrincipale() {
+
+	public FenetrePrincipale() 
+	{
+
 		// test graphe khadidja
 		// dg.DessinerBar();
 		// dg.DessinerCam();
@@ -138,7 +141,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		
+
 
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents
@@ -164,6 +171,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 
 			if (acces == true) {
+
 
 				panAccueil = new panelAccueil();
 
@@ -471,12 +479,17 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 				} catch (ClassNotFoundException | SQLException e) {
 
+
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-			tp = new TimerGeneral(45);
+
+			
+			tp = new TimerGeneral(10, this );
+
 			tp.start();
+			
 
 			this.getContentPane().removeAll();
 
@@ -525,35 +538,36 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse1.setSelected(false);
 				panQuestion.reponse2.setSelected(false);
 				panQuestion.reponse3.setSelected(false);
-				panQuestion.reponse4.setSelected(false);
+				panQuestion.reponse4.setSelected(false);				
 
-				if(compteurQuestions < 15)
-				{
-					panQuestion.labelQuestion
-							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleQuestion);
-					panQuestion.reponse1
-							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse1);
-					panQuestion.reponse2
-							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse2);
-					panQuestion.reponse3
-							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse3);
-					panQuestion.reponse4
-							.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse4);
-				}
-			} 
-			else 
+				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
+				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
+				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
+				panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
+				panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				
+				
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
+			//panQuestion.labelTimer.setText("");
+			if(compteurQuestions == 11)
 			{
 				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
-		// Arrêt à la question 12
-		if (compteurQuestions == 12) 
-		{
-			System.out.println("Timer Stress Start");
-			TimerS = new TimerGeneral(30);
-			// Lancer le TimerStress
+
+				
+		//Arrêt à la question 12
+		if(compteurQuestions == 12){
+			TimerS = new TimerGeneral(120,this);
+			//Lancer le TimerStress
 			TimerS.start();
 		}
 		
@@ -696,6 +710,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 		}
+		
+
 
 	}
 

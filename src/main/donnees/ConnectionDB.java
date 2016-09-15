@@ -152,9 +152,11 @@ public class ConnectionDB
 		
 		try 
 		{
+
 			statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 		} 
 		catch (SQLException e) 
+
 
 		{
 			e.printStackTrace();
