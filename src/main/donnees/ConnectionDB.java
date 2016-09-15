@@ -33,8 +33,8 @@ import main.metier.questionReponse;
 
 public class ConnectionDB 
 {
-	//private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
-	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
+	private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
+//	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
 	private static String login = "cdi";
 	private static String passwd = "cdi";
 	private static Connection connection;
@@ -99,7 +99,7 @@ public class ConnectionDB
 		}finally{}
 
 		// pour test
-		recupererStatistiques();
+//		recupererStatistiques();
 
 		return connected;
 
@@ -131,10 +131,6 @@ public class ConnectionDB
 	 * @throws NumberFormatException
 	 * @return int 
 	 */
-
-
-
-	
 	public int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, SQLException
 	{
 		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";		
@@ -171,9 +167,7 @@ public class ConnectionDB
 		ResultSet generatedKeys = (ResultSet) statement.getGeneratedKeys(); 
 		while(generatedKeys.next()) {
 			answer = Integer.parseInt(generatedKeys.getString(1));
-			System.out.println("sysoiut1" + answer);
 		}
-		System.out.println("sysout 2" + answer);
 		Deconnexion();
 		return answer;
 	}
@@ -245,8 +239,6 @@ public class ConnectionDB
 	}
 	
 	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
-	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
 	/**
 	 * Méthode qui remplira un tableau de 15 objets de type questionReponse.
 	 * 		- Une première REQUETE SQL ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
@@ -265,7 +257,6 @@ public class ConnectionDB
 	 * @return questionReponse[15]
 	 * @throws ClassNotFoundException 
 	 */
-
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException, ClassNotFoundException
 	{
 		// Déclaration de mes différentes variables :
@@ -276,7 +267,8 @@ public class ConnectionDB
 		ResultSet res = null;
 		
 		
-		// Boucles et requêtes permettant de remplir le tableau questionReponse[] fournit en paramètre		
+		// Boucles et requêtes permettant de remplir le tableau questionReponse[] fournit en paramètre	
+		
 			// Première requête, insérée dans une boucle de 15 itérations
 			for (int i = 0; i < ordreCategorieQuestions.length; i++) {
 				
@@ -291,9 +283,7 @@ public class ConnectionDB
 					questrep[i].numQuestionBDD = res.getInt("numero");				
 								
 					numeroQuestion[i] = res.getInt("numero");					
-					numeroQuestionsInterdites += " AND numero  != " + res.getInt("numero");
-					
-					questrep[i].bonneReponse = res.getInt("idPropositions");						
+					numeroQuestionsInterdites += " AND numero  != " + res.getInt("numero");					
 				}
 				
 			}
@@ -312,6 +302,20 @@ public class ConnectionDB
 				res.next();
 				questrep[j].libelleReponse4 = res.getString("reponse");
 			}
+			
+			// Troisième requête, récupération du texte de la bonne réponse :
+			for (int i = 0; i < ordreCategorieQuestions.length; i++) {
+				
+				String request3 = "SELECT reponse FROM questions INNER JOIN propositions ON questions.idPropositions = propositions.idPropositions WHERE questions.numero = " + questrep[i].numQuestionBDD;
+				res = (ResultSet) statement.executeQuery(request3);
+				
+				while (res.next()) 
+				{			
+					questrep[i].bonneReponse = res.getString(1);						
+				}
+				
+			}
+			
 					
 		Deconnexion();
 		// Notre retour

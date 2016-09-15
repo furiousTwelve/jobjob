@@ -76,10 +76,8 @@ public class Candidat
 	public void enregistrerNouveauCandidat() throws ClassNotFoundException, NumberFormatException, SQLException 
 
 	{ 
-
 		ConnectionDB cdb = new ConnectionDB();
 		cdb.enregistrerNouveauCandidatEnBase(chaine[4], chaine[0], chaine[1], chaine[3], chaine[2]);
-		
 	}
 	
 	//Concaténation de la date et d'un numéro à 4 chiffres pour l'identifiant candidat
