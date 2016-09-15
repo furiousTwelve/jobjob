@@ -66,6 +66,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	public questionReponse[] questionsCandidat = new questionReponse[15];
 	private TimerGeneral tp;
 	private TimerGeneral TimerS;
+	private Candidat leCandidat;
 
 	/**
 	 * 
@@ -496,10 +497,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					e.printStackTrace();
 				}
 
+			tp = new TimerGeneral(900, this );
 
-			
-
-			tp = new TimerGeneral(45, this );
 			tp.start();
 			
 
@@ -522,28 +521,33 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{
 			// COUCHE METIER
 			byte tempReponse = 0;
+			String texteReponseChoisie = "";
 			boolean reponseChoisie = false;
 
 			if (panQuestion.reponse1.isSelected()) {
 				tempReponse = 1;
 				reponseChoisie = true;
+				texteReponseChoisie = panQuestion.reponse1.getText();
 			}
 			if (panQuestion.reponse2.isSelected()) {
 				tempReponse = 2;
 				reponseChoisie = true;
+				texteReponseChoisie = panQuestion.reponse2.getText();
 			}
 			if (panQuestion.reponse3.isSelected()) {
 				tempReponse = 3;
 				reponseChoisie = true;
+				texteReponseChoisie = panQuestion.reponse3.getText();
 			}
 			if (panQuestion.reponse4.isSelected()) {
 				tempReponse = 4;
 				reponseChoisie = true;
+				texteReponseChoisie = panQuestion.reponse4.getText();
 			}
 
 			if (reponseChoisie == true) 
 			{
-				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions);
+				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions, texteReponseChoisie);
 
 				compteurQuestions++;
 
@@ -619,6 +623,19 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if (compteurQuestions == 16) 
 		{
+			System.out.println("On génère le tableau de score");
+			laQuestionReponse.genererTableauScoreCandidat();
+			System.out.println("On lance 'enregistrer score candidat'");
+			try {
+				ConnectionDB conn = new ConnectionDB();
+				conn.enregistrerScoreCandidat(laQuestionReponse.scoreParReponseCandidat, laQuestionReponse.questionsCandidat, leCandidat); // Petit doute sur le candidat
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			panFin = new panelFin();
 			// Couche metier Timer
 			// arrêter le timer après la 15ème question
