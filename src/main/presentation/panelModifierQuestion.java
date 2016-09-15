@@ -7,6 +7,9 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -16,6 +19,7 @@ import javax.swing.JTextField;
  */
 public class panelModifierQuestion extends JPanel {
 	
+	
 	private JPanel panelgeneral,top, middle, bottom;
 	private JComboBox combo, combo2, combo3;
 	private JLabel categorie = new JLabel("La Catégorie");
@@ -24,7 +28,9 @@ public class panelModifierQuestion extends JPanel {
 	private JButton validerModif, supprimer ;
 	
 	public panelModifierQuestion()
-	{			
+	{	
+		
+		
 		//On définit le layout à utiliser pour avoir 9 parties
 		panelgeneral = new JPanel();
 		this.setLayout(new GridLayout(3,3));

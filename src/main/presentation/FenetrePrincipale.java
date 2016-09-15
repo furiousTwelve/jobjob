@@ -51,6 +51,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	private panelCandidat panCandidat;
 	private panelQuestion panQuestion;
 	private panelFin panFin;
+
 	private panelAjouterQuestion panAjouterQuestion;
 	private panelModifierQuestion panModifierQuestion;
 	private panelSupprimerQuestion panSupprimerQuestion;
@@ -99,6 +100,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		panConnection.boutonConnection.addActionListener(this);
 		panConnection.boutonQuitter.addActionListener(this);
 		this.setContentPane(panConnection);
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
@@ -161,6 +163,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				this.panAccueil.itemAjoutQuestion.addActionListener(this);
 				this.panAccueil.itemModifierQuestion.addActionListener(this);
 				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+				this.panAccueil.itemStatistique.addActionListener(this);
+
 				this.panAccueil.itemQuitter.addActionListener(panAccueil);
 				this.panAccueil.itemAide.addActionListener(panAccueil);
 				this.getContentPane().removeAll();
@@ -222,6 +226,35 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			}
 
 		}
+
+		
+		if(arg0.getSource() == panAccueil.itemAjoutQuestion )
+		{	
+
+			this.panAjouterQuestion.itemCandidatExistant.addActionListener(this);
+			this.panAjouterQuestion.itemNouveauCandidat.addActionListener(this);
+			this.panAjouterQuestion.itemNouveauTest.addActionListener(this);
+
+			this.panAjouterQuestion.itemAjoutQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemModifierQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemStatistique.addActionListener(this);
+			
+
+			this.panAjouterQuestion.itemQuitter.addActionListener(panAccueil);
+			this.panAjouterQuestion.itemAide.addActionListener(panAccueil);
+			this.panAjouterQuestion.itemAjoutQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemModifierQuestion.addActionListener(this);
+			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+
+			this.setContentPane(paneStatistique);
+			this.validate();
+
+
+		}
+
 
 		if (arg0.getSource() == panFormulaire.itemNouveauCandidat) 
 		{
@@ -285,6 +318,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 * <br>si oui, execute le contenu 
 		 */
 		
+		
+	
 		if(arg0.getActionCommand().equals("Rechercher")){
 			ConnectionDB laConnection = null;
 			try {
@@ -582,6 +617,43 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setLocationRelativeTo(null); // La ligne qui remet la fenetre
 												// au centre de l'ecran
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+			panFin.boutonRetour.addActionListener(this);
+			this.validate();	
+		}
+		
+		
+		
+		
+
+		if(arg0.getSource() == this.panFin.boutonRetour )
+		{
+			
+			//Message d'erreur uniquement si erreurs sur les identifiants
+			
+			
+			panAccueil = new panelAccueil();
+			
+			this.panAccueil.itemCandidatExistant.addActionListener(this);
+			this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			this.panAccueil.itemNouveauTest.addActionListener(this);
+            this.panAccueil.itemQuitter.addActionListener(this);
+            
+            
+            
+            this.panAccueil.itemRechercher.addActionListener(this);
+			this.panAccueil.itemSupprimer.addActionListener(this);
+			this.panAccueil.itemModifier.addActionListener(this);
+            this.panAccueil.itemStatistique.addActionListener(this);
+            
+            this.panAccueil.itemAjoutQuestion.addActionListener(this);
+			this.panAccueil.itemModifierQuestion.addActionListener(this);
+			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+            
+		    this.panAccueil.itemAide.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panAccueil);
 			this.validate();
 			
 			/*
@@ -624,11 +696,20 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		{
 			panAjouterQuestion = new panelAjouterQuestion();
 
+
 			this.panAjouterQuestion.itemAjoutQuestion.addActionListener(this);
 			this.panAjouterQuestion.itemModifierQuestion.addActionListener(this);
 			this.panAjouterQuestion.itemSupprimerQuestion.addActionListener(this);
 			this.panAjouterQuestion.itemNouveauCandidat.addActionListener(this);
 			this.panAjouterQuestion.itemCandidatExistant.addActionListener(this);
+
+			//A verifier
+			this.panAccueil.itemAjoutQuestion.addActionListener(this);
+			this.panAccueil.itemModifierQuestion.addActionListener(this);
+			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+			this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			this.panAccueil.itemCandidatExistant.addActionListener(this);
+
 			System.out.println("ici");
 			this.getContentPane().removeAll();
 			this.setContentPane(panAjouterQuestion);
@@ -649,31 +730,53 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();
 		}
 
-		// Passage du panAjouterQuestion aux autres panels
+		
+		
+		//Passage du panAjouterQuestion aux autres panels
+		if(arg0.getSource() == this.panAccueil.itemRechercher)
 
-		if (arg0.getSource() == this.panAjouterQuestion.itemAjoutQuestion)
-
+		{
+			RechercherCandidat rechercher = new RechercherCandidat();
+			this.getContentPane().removeAll();
+			this.setContentPane(rechercher);
+			this.validate();
+		}
+		
+		if(arg0.getSource() == this.panAccueil.itemAjoutQuestion)
 		{
 			panAjouterQuestion = new panelAjouterQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panAjouterQuestion);
 			this.validate();
 		}
-		if (arg0.getSource() == this.panAjouterQuestion.itemModifierQuestion)
 
+		if(arg0.getSource() == this.panAccueil.itemModifierQuestion)
 		{
 			panModifierQuestion = new panelModifierQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panModifierQuestion);
 			this.validate();
 		}
-		if (arg0.getSource() == this.panAjouterQuestion.itemSupprimerQuestion) {
+
+		
+		if(arg0.getSource() == this.panAccueil.itemStatistique)
+
+		{	
+			paneStatistique = new PanelStatistique();
+			this.getContentPane().removeAll();
+			this.setContentPane(paneStatistique);
+			this.validate();
+		}
+		if(arg0.getSource() == this.panAccueil.itemSupprimerQuestion)
+		{
 			panSupprimerQuestion = new panelSupprimerQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panSupprimerQuestion);
 			this.validate();
 		}
-		if (arg0.getSource() == this.panAjouterQuestion.itemNouveauCandidat) {
+
+		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
+		{	
 			panFormulaire = new panelFormulaire();
 
 			panFormulaire.fieldNom.setEditable(true);
@@ -695,7 +798,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panFormulaire);
 			this.validate();
 		}
-		if (arg0.getSource() == this.panAjouterQuestion.itemCandidatExistant) {
+
+		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
+		{	
 			panFormulaire = new panelFormulaire();
 
 			panFormulaire.fieldNom.setEditable(false);
