@@ -108,71 +108,50 @@ public class panelFormulaire extends JPanel  implements ActionListener
 	 * 
 	 * @throws ParseException
 	 */
-	public panelFormulaire() {
-		
-		
+	public panelFormulaire() 
+	{
 		//Ajout de Listener sur tous les boutons nécessaires
 		//itemNouveauTest.addActionListener(this);			
-		
-		
-		
-		
-
 		//Constitution de la barre de menu, qui ira au Nord
-				menuBar.add(menuTest);
-				menuBar.add(menuCandidat);
-				menuBar.add(menuQuiz);
-				menuBar.add(menuAide);
-				
-				menuTest.add(itemNouveauTest);
-				itemNouveauTest.add(itemCandidatExistant);
-				itemNouveauTest.add(itemNouveauCandidat);
-				menuTest.add(itemSauvegarder);
-				itemSauvegarder.setEnabled(false);
-				menuTest.addSeparator();
-				menuTest.add(itemQuitter);
-				
-				
-				
-				
-				// ajouter les ActionListener
-				
-				itemCandidatExistant.addActionListener(this);
-				itemNouveauCandidat.addActionListener(this);
-				
-				menuCandidat.add(itemRechercher);
-				menuCandidat.add(itemSupprimer);
-				menuCandidat.add(itemModifier);
-				menuCandidat.add(itemStatistique);
-				
-				itemRechercher.addActionListener(this);
-				itemSupprimer.addActionListener(this);
-				itemModifier.addActionListener(this);
-				itemStatistique.addActionListener(this);
-				
-				itemSauvegarder.addActionListener(this);
-				itemQuitter.addActionListener(this);
-
-				
-			
-				menuQuiz.add(itemAjoutQuestion);
-				menuQuiz.add(itemModifierQuestion);
-				menuQuiz.add(itemSupprimerQuestion);
-				
-				itemAjoutQuestion.addActionListener(this);
-				itemModifierQuestion.addActionListener(this);
-				itemSupprimerQuestion.addActionListener(this);
-		
-//		//Création du panel de gauche, contenant le logo : panelLogo
-//		JPanel panelLogo = new JPanel();
-//		panelLogo.setLayout(new GridLayout(0, 3));
-//		
-			//Création du logo
-			ImageIcon logo = new ImageIcon("Logo_Afpa.png");
-			Image img = logo.getImage();
-			Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-			logo = new ImageIcon(newImg);
-			JLabel logoFinal = new JLabel(logo);
+		menuBar.add(menuTest);
+		menuBar.add(menuCandidat);
+		menuBar.add(menuQuiz);
+		menuBar.add(menuAide);
+		menuTest.add(itemNouveauTest);
+		itemNouveauTest.add(itemCandidatExistant);
+		itemNouveauTest.add(itemNouveauCandidat);
+		menuTest.add(itemSauvegarder);
+		itemSauvegarder.setEnabled(false);
+		menuTest.addSeparator();
+		menuTest.add(itemQuitter);
+		// ajouter les ActionListener
+		itemCandidatExistant.addActionListener(this);
+		itemNouveauCandidat.addActionListener(this);
+		menuCandidat.add(itemRechercher);
+		menuCandidat.add(itemSupprimer);
+		menuCandidat.add(itemModifier);
+		menuCandidat.add(itemStatistique);
+		itemRechercher.addActionListener(this);
+		itemSupprimer.addActionListener(this);
+		itemModifier.addActionListener(this);
+		itemStatistique.addActionListener(this);
+		itemSauvegarder.addActionListener(this);
+		itemQuitter.addActionListener(this);
+		menuQuiz.add(itemAjoutQuestion);
+		menuQuiz.add(itemModifierQuestion);
+		menuQuiz.add(itemSupprimerQuestion);
+		itemAjoutQuestion.addActionListener(this);
+		itemModifierQuestion.addActionListener(this);
+		itemSupprimerQuestion.addActionListener(this);
+		//		//Création du panel de gauche, contenant le logo : panelLogo
+		//		JPanel panelLogo = new JPanel();
+		//		panelLogo.setLayout(new GridLayout(0, 3));
+		//Création du logo
+		ImageIcon logo = new ImageIcon("Logo_Afpa.png");
+		Image img = logo.getImage();
+		Image newImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+		logo = new ImageIcon(newImg);
+		JLabel logoFinal = new JLabel(logo);
 //			
 //			//TODO : faire une jolie boucle pour renplacer cette déclaration longue et brutale
 //			//Création des "cases vides"
@@ -184,7 +163,6 @@ public class panelFormulaire extends JPanel  implements ActionListener
 //			JLabel labelvide6 = new JLabel(" ");
 //			JLabel labelvide7 = new JLabel(" ");
 //			JLabel labelvide8 = new JLabel(" ");
-//	
 //			//TODO : faire une boucle ( à voir avec celle d'au dessus)
 //			//Assemblage du panelLogo
 //			panelLogo.add(labelvide);
@@ -196,69 +174,52 @@ public class panelFormulaire extends JPanel  implements ActionListener
 //			panelLogo.add(labelvide6);
 //			panelLogo.add(labelvide7);
 //			panelLogo.add(labelvide8);
-//		
-//
-//			
 //		//Création du panel qui ira au centre du panel principal : panelCentre
 //			JPanel panelCentre = new JPanel();
 //			panelCentre.setLayout(new GridLayout(0, 1));
-//			
 //				//Il contiendra lui-même 2 panels : le panel des champs de saisie, le panel en-dessous
-//									
 //					// Création du panel Central supérieur, qui contiendra le panelSaisie
 //						JPanel panelCentreHaut = new JPanel();
 //						panelCentreHaut.setLayout(new BoxLayout(panelCentreHaut, BoxLayout.PAGE_AXIS));
-//						
 //							//création du panel qui contiendra les champs de saisie :
 //							panelSaisie = new JPanel(new GridLayout(0, 2, 0, 20));
-//			
 //								//Création du contenu
-								Font fontChampSaisie = new Font("Courier", Font.BOLD, 20);
+		Font fontChampSaisie = new Font("Courier", Font.BOLD, 20);
+		JLabel champNom = new JLabel("Nom");
+		champNom.setFont(fontChampSaisie);
+		JLabel champPrenom = new JLabel("Prénom");
+		champPrenom.setFont(fontChampSaisie);
+		champ3 = new JLabel("E-mail");
+		champ3.setFont(fontChampSaisie);
+		champ4 = new JLabel("Téléphone");
+		champ4.setFont(fontChampSaisie);
+		JLabel champid = new JLabel("N° identifiant");
+		champid.setFont(fontChampSaisie);
+		//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
 
-
-								JLabel champNom = new JLabel("Nom");
-								champNom.setFont(fontChampSaisie);
-								JLabel champPrenom = new JLabel("Prénom");
-								champPrenom.setFont(fontChampSaisie);
-
-								champ3 = new JLabel("E-mail");
-								champ3.setFont(fontChampSaisie);
-								champ4 = new JLabel("Téléphone");
-								champ4.setFont(fontChampSaisie);
-								JLabel champid = new JLabel("N° identifiant");
-								champid.setFont(fontChampSaisie);
-//								
-//
-								//Un FormattedTextField permet de mettre une contrainte à ce qui est entré dans le TextField, à l'aide d'un Mask dont on définit la structure
-
-								MaskFormatter maskNomPrenom;
-								try {
-									maskNomPrenom = new MaskFormatter("**************************************************");
-									maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
-									fieldNom = new JFormattedTextField(maskNomPrenom);
-									fieldPrenom = new JFormattedTextField(maskNomPrenom);
-									fieldNom.setPreferredSize(new Dimension(200,20));
-									fieldPrenom.setPreferredSize(new Dimension(200,20));
-								} catch (ParseException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-
+		MaskFormatter maskNomPrenom;
+		try {
+			maskNomPrenom = new MaskFormatter("**************************************************");
+			maskNomPrenom.setValidCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ éèêëùûüçïî-öôâäà");
+			fieldNom = new JFormattedTextField(maskNomPrenom);
+			fieldPrenom = new JFormattedTextField(maskNomPrenom);
+			fieldNom.setPreferredSize(new Dimension(200,20));
+			fieldPrenom.setPreferredSize(new Dimension(200,20));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 								
-								
-								
-								MaskFormatter maskTelephone;
-								try {
-									maskTelephone = new MaskFormatter("***************");
-									maskTelephone.setValidCharacters("+()0123456789 ");
-									fieldTelephone = new JFormattedTextField(maskTelephone);
-									fieldId = new JFormattedTextField();
-								} catch (ParseException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								
-
+		MaskFormatter maskTelephone;
+		try {
+			maskTelephone = new MaskFormatter("***************");
+			maskTelephone.setValidCharacters("+()0123456789 ");
+			fieldTelephone = new JFormattedTextField(maskTelephone);
+			fieldId = new JFormattedTextField();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //						
 //								//Assemblage du panelSaisie
 //								panelSaisie.add(champ1);
@@ -313,7 +274,6 @@ public class panelFormulaire extends JPanel  implements ActionListener
 //		this.add(panelLogo, BorderLayout.WEST);
 //		this.add(panelCentre, BorderLayout.CENTER);
 //		this.add(panelDroite, BorderLayout.EAST);
-	
 		
 		//tentative de mettre en place le panel formulaire grâce à un gridbaglayout
 		GridBagLayout gb = new GridBagLayout();
@@ -322,9 +282,6 @@ public class panelFormulaire extends JPanel  implements ActionListener
 		fieldMail.setPreferredSize(fieldNom.getPreferredSize());
 		fieldTelephone.setPreferredSize(fieldNom.getPreferredSize());
 		fieldId.setPreferredSize(fieldNom.getPreferredSize());
-		
-		
-		
 		//Placement de la barre de menu en haut à gauche
 		gbc.weightx=0;
 		gbc.weighty=0;
@@ -332,11 +289,8 @@ public class panelFormulaire extends JPanel  implements ActionListener
 		gbc.gridy=0;
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.NORTH;
-		
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(menuBar, gbc);
-	
-		
 		//Placement du label nom, ainsi que son champ de texte
 		gbc.gridx = 1;
 		gbc.gridy = 2;
@@ -361,10 +315,7 @@ public class panelFormulaire extends JPanel  implements ActionListener
 
 	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
 	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
-
 		this.add(fieldNom,gbc);
-		
-		
 		//placement du Label prénom ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 3;
@@ -373,13 +324,10 @@ public class panelFormulaire extends JPanel  implements ActionListener
 		gbc.weightx=0;
 		gbc.weighty=0;
 		gbc.fill = GridBagConstraints.NONE;
-
 	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
-
 	//	gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
 		gbc.insets = new Insets(10, 15, 0, 0);
 		this.add(champPrenom,gbc);
-		
 		gbc.gridx =2;
 		gbc.gridy =3;
 		gbc.gridwidth =GridBagConstraints.REMAINDER;
@@ -390,7 +338,6 @@ public class panelFormulaire extends JPanel  implements ActionListener
 
 	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		this.add(fieldPrenom,gbc);
-		
 		//placement du Label Mail ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 4;
@@ -416,8 +363,6 @@ public class panelFormulaire extends JPanel  implements ActionListener
 
 	//	gbc.anchor = GridBagConstraints.BASELINE_LEADING;	
 		this.add(fieldMail,gbc);
-		
-		
 		//placement du Label Télephone ainsi que son champ de texte 
 		gbc.gridx = 1;
 		gbc.gridy = 5;
@@ -493,9 +438,7 @@ public class panelFormulaire extends JPanel  implements ActionListener
 	//  ============================================> La ligne suivante fait planter le programme - voir Cyril
 		//gbc.anchor=GridBagConstraints.ABOVE_BASELINE;
 		this.add(logoFinal,gbc);
-		
-
-	}
+	} // fin du constructeur (OUF...)
 
 	
 	/**
