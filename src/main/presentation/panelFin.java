@@ -104,7 +104,7 @@ public class panelFin extends JPanel {
 		boutonRetour = new JButton("RETOUR");
 		panelRecruteur.add(boutonRetour);// à repositionner
 		
-		JLabel logoConnection2 = new JLabel(new ImageIcon("logoAFPA.png"));
+		JLabel logoConnection2 = new JLabel(new ImageIcon("Logo_Afpa.png"));
 		JPanel panelLogo = new JPanel();
 		panelLogo.setLayout(new FlowLayout());
 		panelLogo.add(logoConnection2, BorderLayout.WEST); //@AnaisGueyte - Ajout du logo

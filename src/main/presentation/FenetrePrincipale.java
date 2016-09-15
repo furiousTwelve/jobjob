@@ -514,6 +514,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 				compteurQuestions++;
 
+				if (compteurQuestions <15){
 				panQuestion.reponse1.setSelected(false);
 				panQuestion.reponse2.setSelected(false);
 				panQuestion.reponse3.setSelected(false);
@@ -529,6 +530,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse3);
 				panQuestion.reponse4
 						.setText(laQuestionReponse.questionsCandidat[compteurQuestions - 1].libelleReponse4);
+				}
 
 			} else {
 				JOptionPane.showMessageDialog(panQuestion, "Vous n'avez pas choisi de réponse", "Choix non validé",
@@ -557,15 +559,16 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 		
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
-
+ 
 			Time temps = new Time(0,0, TimerS.secondPassed);
 			System.out.println("le temps stress =" +temps);
+			TimerS.tache2.cancel();
 			
 		}
 
 		if (compteurQuestions == 13) {
 			System.out.println("Timer Stress Stop");
-			TimerS.tache.cancel();
+			
 		}
 
 		// Passage du panQuestion au panFin
@@ -643,6 +646,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 				}
 			});
 		}
+		
+		
 
 		// Passage du panFormulaire ou panAccueil aux panels ajout modif et
 		// supprimer question

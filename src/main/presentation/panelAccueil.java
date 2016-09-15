@@ -135,7 +135,7 @@ public class panelAccueil extends JPanel implements ActionListener{
 			panelCentral.add(labelVide);
 			panelCentral.add(panelImg);
 		
-			JLabel logoConnection2 = new JLabel(new ImageIcon("logoAFPA.png"));
+			JLabel logoConnection2 = new JLabel(new ImageIcon("Logo_Afpa.png"));
 			JPanel panelLogo = new JPanel();
 			panelLogo.setLayout(new FlowLayout());
 			panelLogo.add(logoConnection2, BorderLayout.WEST); //@AnaisGueyte - Ajout du logo

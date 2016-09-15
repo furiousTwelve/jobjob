@@ -76,7 +76,7 @@ public class panelConnection extends JPanel {
 		JPanel panelboutonQuitter = new JPanel();
 		panelboutonQuitter.add(boutonQuitter);
 		
-		logoConnection = new JLabel(new ImageIcon("logoAFPA.png"));
+		logoConnection = new JLabel(new ImageIcon("Logo_Afpa.png"));
 		JPanel panelLogo = new JPanel();
 		panelLogo.setLayout(new FlowLayout());
 		panelLogo.add(logoConnection);
