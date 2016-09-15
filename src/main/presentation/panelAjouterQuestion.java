@@ -103,7 +103,7 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			itemModifierQuestion.addActionListener(this);
 			itemSupprimerQuestion.addActionListener(this);
 			
-			this.add(menuBar, BorderLayout.NORTH);
+//			this.add(menuBar, BorderLayout.NORTH);
 			
 			font = new Font("Arial",Font.ITALIC,17);
 			
@@ -143,7 +143,6 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			panelLabel.add(jl5);
 			panelLabel.add(jl6);
 			panelLabel.add(jl7);
-			
 			pan.add(panelLabel);
 			
 			JPanel panelText = new JPanel();
@@ -194,8 +193,10 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			JPanel panel = new JPanel();
 			panel.add(panelCentral);
 			
+			
 			this.setLayout(new BorderLayout());
 			this.add(panel);
+			this.add(menuBar,BorderLayout.NORTH);
 			
 			
 		}

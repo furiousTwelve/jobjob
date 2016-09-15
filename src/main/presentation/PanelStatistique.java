@@ -79,6 +79,16 @@ public class PanelStatistique extends JPanel  {
 		menuTest.addSeparator();
 		menuTest.add(itemQuitter);
 		
+		menuCandidat.add(itemRechercher);
+		menuCandidat.add(itemSupprimer);
+		menuCandidat.add(itemModifier);
+		menuCandidat.add(itemStatistique);
+	   
+		menuQuiz.add(itemAjoutQuestion);
+		menuQuiz.add(itemModifierQuestion);
+		menuQuiz.add(itemSupprimerQuestion);
+		
+		menuAide.add(itemAide);
 		
 		Statistiques st=new Statistiques();
 		ComparerCandidat cc= new ComparerCandidat();
@@ -91,12 +101,12 @@ public class PanelStatistique extends JPanel  {
 		panel.add(titre);
 		panel.add(trie_score);
 		panel.add(trie_date);
-		
+		panelG.add(menuBar, BorderLayout.NORTH);
 		panelG.add(panel, BorderLayout.NORTH);
 		
 		//Jtable qui va récupérer le résultat de la requete  SELECT * FROM candiat.....
 		
-               Object []colonne={" Nom du candidat","Prénom du candidat","Date de test","Score/15"};
+               Object []colonne={" Nom du candidat","Prénom du candidat","Date de test"," Score adaptabilité", "Score culture générale", "Score Stress", "Score Technique" };
 		   
 			
 				DefaultTableModel model = new DefaultTableModel();
@@ -109,7 +119,7 @@ public class PanelStatistique extends JPanel  {
 				table.setRowHeight(30);
 				
 				JScrollPane pane=new JScrollPane(table);
-				pane.setBounds(0, 0, 880, 200);
+				pane.setBounds(0, 0, 900, 400);
 				//pane.setBackground(Color.WHITE);
 				panel_centre.add(pane);	
 				
@@ -117,14 +127,17 @@ public class PanelStatistique extends JPanel  {
 				
 				JPanel panel_bas = new JPanel();
 				JButton graphe = new JButton("Afficher Graphe");
-				Object[]row =new Object[4];
+				Object[]row =new Object[7];
 				graphe.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							row [0]=" Nom candidat";
 							row [1]=" prenom du candidat";
 							row [2]=" date de test";
-							row [3]=" 12";
+							row [3]=" 4";
+							row [4]=" 3";
+							row [5]=" 1 ";
+							row [6]=" 7";
 							
 							model.addRow(row);
 							//st.DessinerBar();
