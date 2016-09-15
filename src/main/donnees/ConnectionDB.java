@@ -33,8 +33,8 @@ import main.metier.questionReponse;
 
 public class ConnectionDB 
 {
-	private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
-//	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
+	//private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
+	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
 	private static String login = "cdi";
 	private static String passwd = "cdi";
 	private static Connection connection;
@@ -167,7 +167,7 @@ public class ConnectionDB
 			e.printStackTrace();
 		}
 
-<<<<<<< HEAD
+
 		int answer = 0;
 		
 		
@@ -176,8 +176,7 @@ public class ConnectionDB
 		while(generatedKeys.next()) {
 			answer = Integer.parseInt(generatedKeys.getString(1));
 		}
-=======
->>>>>>> 1226fc2ca4bf133a4c70605519d58d690a8cb45f
+		
 		Deconnexion();
 		return lastID;
 	}
