@@ -10,17 +10,16 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
+import main.metier.Recruteur;
 import main.metier.TimerGeneral;
 import main.metier.questionReponse;
-import main.metier.Recruteur;
-import main.metier.ComparerCandidat;
-import main.metier.Statistiques;
 
 /**
  * <b>Définit la fenêtre principale de l'application qui va gérer l'interaction
@@ -308,7 +307,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panFormulaire.itemAjoutQuestion.addActionListener(this);
 			panFormulaire.itemModifierQuestion.addActionListener(this);
 			panFormulaire.itemSupprimerQuestion.addActionListener(this);
+			
 			panFormulaire.boutonSave.setText("Rechercher");
+			
 			panFormulaire.boutonSave.addActionListener(this);
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
@@ -416,7 +417,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					e.printStackTrace();
 				}
 
-				/*
+				/**
 				 * @author AnaïsGueyte
 				 * @date 14/09/2016
 				 * @version jobjob_2_0 (en accord avec la BDD)
@@ -688,7 +689,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.setContentPane(panAccueil);
 			this.validate();
 			
-			/*
+			/**
 			 * @author AnaïsGueyte
 			 * @date 15/09/2016
 			 * @version jobjob_2_0 (en accord avec la BDD)
@@ -804,49 +805,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			panSupprimerQuestion = new panelSupprimerQuestion();
 			this.getContentPane().removeAll();
 			this.setContentPane(panSupprimerQuestion);
-			this.validate();
-		}
-
-		if(arg0.getSource() == this.panAccueil.itemNouveauCandidat)
-		{	
-			panFormulaire = new panelFormulaire();
-
-			panFormulaire.fieldNom.setEditable(true);
-			panFormulaire.fieldPrenom.setEditable(true);
-			panFormulaire.fieldMail.setEditable(true);
-			panFormulaire.fieldTelephone.setEditable(true);
-			panFormulaire.fieldId.setEditable(false);
-
-			panFormulaire.itemSauvegarder.setEnabled(true);
-
-			panFormulaire.itemSauvegarder.addActionListener(this);
-			panFormulaire.boutonSave.addActionListener(this);
-
-			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
-			this.panFormulaire.itemModifierQuestion.addActionListener(this);
-			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
-
-			this.getContentPane().removeAll();
-			this.setContentPane(panFormulaire);
-			this.validate();
-		}
-
-		if(arg0.getSource() == this.panAccueil.itemCandidatExistant)
-		{	
-			panFormulaire = new panelFormulaire();
-
-			panFormulaire.fieldNom.setEditable(false);
-			panFormulaire.fieldPrenom.setEditable(false);
-			panFormulaire.fieldMail.setEditable(false);
-			panFormulaire.fieldTelephone.setEditable(false);
-			panFormulaire.fieldId.setEditable(true);
-
-			this.panFormulaire.itemAjoutQuestion.addActionListener(this);
-			this.panFormulaire.itemModifierQuestion.addActionListener(this);
-			this.panFormulaire.itemSupprimerQuestion.addActionListener(this);
-
-			this.getContentPane().removeAll();
-			this.setContentPane(panFormulaire);
 			this.validate();
 		}
 
