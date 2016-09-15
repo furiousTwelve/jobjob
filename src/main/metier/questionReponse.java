@@ -41,18 +41,23 @@ public class questionReponse
 	public String libelleReponse2; 
 	public String libelleReponse3; 
 	public String libelleReponse4; 
-	public int bonneReponse;
+	public String bonneReponse;
 	public byte reponseCandidat;
 	
 	public questionReponse[] questionsCandidat;
 	
-
+	public String[] tableauReponsesChoisiesParCandidat = new String[15];
+	public int[] scoreParReponseCandidat = new int[15];
+	
 	
 	public questionReponse()
 	{
-		
+		//Remplissage d'un tableauReponsesChoisiesParCandidat par défaut:
+		//@Author Mathieu
+		for (int i = 0; i < 15; i++) {
+			tableauReponsesChoisiesParCandidat[i] = "";
+		}
 	}
-
 
 
 	/**
@@ -76,19 +81,52 @@ public class questionReponse
 	
 	
 	//recupération de la réponse du candidat
-	public void recupereReponse(byte reponse,int compteur)
+	/**
+	 * Méthode remplissant dans notre objet QuestionReponse le tableauReponsesChoisiesParCandidat.
+	 * Elle est appelée à chaque validation d'une réponse par le candidat
+	 * @Mathieu
+	 * @param byte reponse
+	 * @param int compteur
+	 * @param String reponseChoisie
+	 */
+	public void recupereReponse(byte reponse,int compteur, String reponseChoisie)
 	{
 		System.out.println("Question : "+compteur);
 		System.out.println("Reponse : "+reponse);
+		System.out.println("Texte Reponse : " + reponseChoisie);
 		
-		
-//		EnregistrementDonnee ed = new EnregistrementDonnee();
-//		ed.enregistrerReponse(reponse,compteur); // enregistrement de la reponse donneepar l'utilisateur correspondant à la question n° compteur
-		
-		// comparer réponse avec réponse correcte
-		
-		// envoyer résultat à la DONNEE avec comme paramétre: index_table de la question,numero question, et réponse correcte ou pas.
+		tableauReponsesChoisiesParCandidat[compteur-1] = reponseChoisie;
+	}
+	
+	/**
+	 * Méthode qui va remplir le tableau scoreParReponseCandidat. 
+	 * C'est un tableau de 15 int qui, pour chaque réponse affectera 0 ou 1 point au candidat.
+	 * 0 point si mauvaise réponse, 1 point si bonne réponse.
+	 * 
+	 * On peut facilement faire entrer en jeu le barème de notre Qcm, inséré dans la BDD, en utilisant les fonctions .obtenirScore* (une fois qu'elles seront implémentées
+	 * 
+	 * @author 34011-82-06 Mathieu
+	 * @return void
+	 */
+	public void genererTableauScoreCandidat() {
 
+//		GestionDonnees gestion = new GestionDonnees();
+		
+		for (int i = 0; i < 15; i++) {
+			if(tableauReponsesChoisiesParCandidat[i].equals(questionsCandidat[i].bonneReponse)) {
+//				scoreParReponseCandidat[i] = gestion.obtenirScoreBonneReponse();
+				scoreParReponseCandidat[i] = 1;
+			}
+			if(tableauReponsesChoisiesParCandidat[i].equals(questionsCandidat[i].bonneReponse) == false) {
+//				scoreParReponseCandidat[i] = gestion.obtenirScoreMauvaiseReponse();
+				scoreParReponseCandidat[i] = 0;
+			}
+		}
+		
+		System.out.println("Tableau des scores du candidat :");
+		for (int i = 0; i < 15; i++) {
+			System.out.print(scoreParReponseCandidat[i] + ", ");
+		}
 	}
 	
 	
