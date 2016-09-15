@@ -36,12 +36,9 @@ import main.metier.Candidat;
  * Il est destiné à être rempli par le recruteur
  * @author Mathieu
  * @author Florent
-<<<<<<< HEAD
  * @author Audric
-=======
  * @author Lionel
  * @author Marc
->>>>>>> features/presentation/573
  */
 public class panelFormulaire extends JPanel  implements ActionListener
 {

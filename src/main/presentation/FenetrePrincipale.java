@@ -318,7 +318,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 */
 		
 		if(arg0.getActionCommand().equals("Rechercher")){
-			ConnectionDB laConnection = new ConnectionDB();	
+			ConnectionDB laConnection = null;
+			try {
+				laConnection = new ConnectionDB();
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 			try {
 				if(laConnection.recupererCandidatEnBase(panFormulaire.fieldId.getText())){
 					
@@ -356,7 +362,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					this.validate();
 					}
 				}
-			} catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException | HeadlessException | SQLException e) {
 				e.printStackTrace();
 			}
 
@@ -463,11 +469,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				try {
 					laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
 
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (ClassNotFoundException | SQLException e) {
 
-				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
