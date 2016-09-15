@@ -416,7 +416,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 
 			
-			tp = new TimerGeneral(45, this );
+			tp = new TimerGeneral(900, this );
 			tp.start();
 			
 
