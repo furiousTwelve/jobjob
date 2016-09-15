@@ -93,8 +93,6 @@ public class CandidatTest {
 		System.out.println("Résultat souhaité au testCandidat #1 : " + telephone + " " + mail + " " + idCandidat);
 		System.out.println("Résultat obtenu au testCandidat #1 : " + telephoneTest + " " + mailTest + " " + idCandidatTest);
 		assertTrue(telephone.equals(telephoneTest) && mail.equals(mailTest) && idCandidat.equals(idCandidatTest));
-		
-		
 	}
 
 	public void testDefinirNumeroCandidat()
