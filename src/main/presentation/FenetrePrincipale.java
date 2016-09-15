@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.presentation;
 
 import java.awt.Color;
@@ -524,13 +521,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					@Override
 					public void actionPerformed(ActionEvent e) 
 					{
-
-						/*jop1 = new JOptionPane();
-						jop1.showMessageDialog(null, "ce boutton  nous emmene au panneau d'acceuil, MAIS IL FAUT FERMER LE FENETRE ACTUELLE!", "Attention", JOptionPane.WARNING_MESSAGE);*/
 						FenetrePrincipale f= new FenetrePrincipale();  
-					
-						 f.show();
-						
+						 f.show();	
 					}
 			});	
 		}
