@@ -121,6 +121,7 @@ public class ConnectionDB
 	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
 	 * Elle retourne un int, correspondant à l'idPersonne du nouveau candidat enregistré
 	 * @author florent
+	 * @author David
 	 * @param id
 	 * @param nom
 	 * @param prenom
@@ -129,10 +130,14 @@ public class ConnectionDB
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 * @throws NumberFormatException
-	 * @return int 
+	 * @return int  id insertion du dernier candidat
 	 */
 	public int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, SQLException
 	{
+		int numero = -1; // permettra de voir si une insertion s'est bien passé pour candidat
+		int lastID = -1; // récupérera le dernier id de l'insertion candidat 
+		
+		//1ère requête pour l'ajout d'une personne (table mère de candidat)
 		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";		
 		try 
 		{
@@ -143,23 +148,26 @@ public class ConnectionDB
 			e.printStackTrace();
 		}
 		
-
+		//2ème requête (table fille) pour l'insertion d'un candidat
 		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_Recruteur) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
-		
 		try 
 		{
-
-
-			statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			numero = statement.executeUpdate(sql);
+			if (numero == 1)
+			{
+				System.out.println("numero vaut 1");
+				// requête pour récupérer l'id de la dernière insertion de candidat
+				ResultSet rs = (ResultSet) statement.executeQuery("SELECT LAST_INSERT_ID()");
+				if (rs.next()) lastID = rs.getInt(1);
+				rs.close();
+			}
 		} 
 		catch (SQLException e) 
-
-
-
 		{
 			e.printStackTrace();
 		}
 
+<<<<<<< HEAD
 		int answer = 0;
 		
 		
@@ -168,8 +176,10 @@ public class ConnectionDB
 		while(generatedKeys.next()) {
 			answer = Integer.parseInt(generatedKeys.getString(1));
 		}
+=======
+>>>>>>> 1226fc2ca4bf133a4c70605519d58d690a8cb45f
 		Deconnexion();
-		return answer;
+		return lastID;
 	}
 	
 	/**

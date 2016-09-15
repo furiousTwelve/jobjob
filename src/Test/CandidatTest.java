@@ -27,6 +27,8 @@ public class CandidatTest {
 
 	@Test
 	/**
+	 * @author david
+	 * @author mathieu
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
 	 */
@@ -63,7 +65,6 @@ public class CandidatTest {
 			Class.forName("com.mysql.jdbc.Driver");
 			cn = (Connection) DriverManager.getConnection(url, login, passwd);
 			st = (Statement) cn.createStatement();
-			System.out.println("connection dataBase OK");
 		}
 		catch ( SQLException e)
 		{
@@ -80,6 +81,15 @@ public class CandidatTest {
 			idCandidatTest = rs.getString("idCandidat");
 		}
 		
+		//requête de suppression du candidat testé
+		String suppressionLastCandidat = "DELETE FROM candidat WHERE idPersonne = " + lastIdCandidat;
+		st.executeUpdate(suppressionLastCandidat);
+		
+		//fermeture finale de notre connexion 
+		st.close();
+		cn.close();
+
+		//vérification finale 
 		System.out.println("Résultat souhaité au testCandidat #1 : " + telephone + " " + mail + " " + idCandidat);
 		System.out.println("Résultat obtenu au testCandidat #1 : " + telephoneTest + " " + mailTest + " " + idCandidatTest);
 		assertTrue(telephone.equals(telephoneTest) && mail.equals(mailTest) && idCandidat.equals(idCandidatTest));
