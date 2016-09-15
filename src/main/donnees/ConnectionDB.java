@@ -15,28 +15,45 @@
  * @version  1.0
  */
 package main.donnees;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.CallableStatement;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
+
+import java.sql.*;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import main.metier.Candidat;
 import main.metier.questionReponse;
 
 
+
 // TODO class à revoir complètement. Il n'y a aucune fermeture de base de données qu'il devrait y avoir après CHAQUE requête
 // TODO piste à étudier mettre un destructeur (avec un log pour voir quand ça passe) ou mettre à null l'appel à l'instanciation
-public class ConnectionDB 
+public class ConnectionDB
 {
+
 
 	private static String url;
 	private static String login;
 	private static String passwd;
 	private static Connection	 cn;
 	private static Statement 	 st;           // TODO : ok enchanté st, sinon tu fais quoi dans la vie? 
+
+	private String recruteur = "cdi";
+	private String MDP = "cdi";
+	
+	public String nom;
+	public String prenom;
+	
+	
+//	public ConnectionDB () throws ClassNotFoundException, SQLException {
+//		
+//		connectionBase(recruteur, MDP);
+//	}
 	
 	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque les champs @param
 	/**
@@ -45,18 +62,21 @@ public class ConnectionDB
 	 * @param recruteur, paramètre qui enregistre le nom du recruteur
 	 * @param MDP , paramètre qui enregistre le MDP du recruteur
 	 */
+
 	public boolean connectionBase(boolean acces,String recruteur,String MDP) throws ClassNotFoundException, SQLException
+
 	{
 
 		/*
 		 * Ici je stocke et initialise mes éléments de connection 
 		 */
 
-		url 		= "jdbc:mysql://localhost/jobjob_1_2";
-		login 		= recruteur;
-		passwd 	= MDP;
-		cn 		= null;
+		String		 url 		= "jdbc:mysql://STA6101855:3306/jobjob_2_0";
+		String 	 	 login 		= recruteur;
+		String 		 passwd 	= MDP;
+		Connection	 cn 		= null;
 		st	= null;
+		boolean connected;
 		
 		/*
 		 * Connection au drivers de base de donnée
@@ -74,17 +94,24 @@ public class ConnectionDB
 //			st = (Statement) cn.createStatement();
 			// affiche dans la console si la connecion est ok.
 			System.out.println("connection dataBase OK");
+
 			cn.close();
+
+			connected = true;
+
 		}
 		
 		catch ( SQLException e)
 		{
 			e.printStackTrace();
-			acces=false;
+			connected = false;
 		}finally{}
+
 		
 		recupererStatistiques();
-		return(acces);
+
+		return connected;
+
 	}
 	
 	public void Connexion() throws SQLException, ClassNotFoundException{
@@ -103,6 +130,7 @@ public class ConnectionDB
 	
 	/**
 	 * Méthode permettant l'enregistrement du candidat dans la base de donnees
+	 * Elle retourne un int, correspondant à l'idPersonne du nouveau candidat enregistré
 	 * @author florent
 	 * @param id
 	 * @param nom
@@ -111,98 +139,180 @@ public class ConnectionDB
 	 * @param mail
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws NumberFormatException
+	 * @return int 
 	 */
+
 	
 
-	public void enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, SQLException
+
+	public int enregistrerNouveauCandidatEnBase(String id,String nom,String prenom, String telephone, String mail) throws ClassNotFoundException, NumberFormatException, SQLException
 
 	{
-		Connexion();
-		String sql = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
+		/*
+		 * Ici je stocke et initialise mes éléments de connection 
+		 */
+		String		 url 		= "jdbc:mysql://localhost/jobjob_2_0";
+		String 	 	 login 		= "cdi";
+		String 		 passwd 	= "cdi";
+		Connection	 cn 		= null;
+		st	= null;
 		
-		try 
+		/*
+		 * Connection au drivers de base de donnée
+		 * ici pour le SQL
+		 */
+		try
 		{
-			st.executeUpdate(sql);
-			
-			
-		} catch (SQLException e) 
-		{
-			e.printStackTrace();
+			// chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// recuperation de la connexion
+		
+			cn = (Connection) DriverManager.getConnection(url, login, passwd);
+		
+			// creation d'un statement pour pouvoir lancer des requêtes
+			st = (Statement) cn.createStatement();
+			// affiche dans la console si la connecion est ok.
+			System.out.println("connection dataBase OK");
 		}
 		
-		String sql2 = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_1) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
-		
-		try 
+		catch ( SQLException e)
 		{
-			st.executeUpdate(sql2);
+			e.printStackTrace();
+		}finally{}
 
-		} catch (SQLException e) 
+		
+		String sql2 = "INSERT INTO personne (nom, prenom) VALUES ('"+nom+"','"+prenom+"');";
+		try 
+		{
+
+			st.executeUpdate(sql2);	
+		} 
+		catch (SQLException e) 
+
 		{
 			e.printStackTrace();
 		}
 		
-		Deconnexion();
+
+		String sql = "INSERT INTO candidat  (idPersonne,idCandidat,telephone,mail, idPersonne_Recruteur) VALUES (LAST_INSERT_ID(),'" + id+"','"+telephone+"','"+mail+ "',3);";
 		
+		try 
+		{
+			st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+		} 
+		catch (SQLException e) 
+
+		{
+			e.printStackTrace();
+		}
+		
+
+		int answer = 0;
+		
+		
+		// Partie dévouée au test Unitaire, renvoyant l'idPersonne du candidat qui vient d'être créé dans la base
+		ResultSet generatedKeys = (ResultSet) st.getGeneratedKeys(); 
+		while(generatedKeys.next()) {
+			answer = Integer.parseInt(generatedKeys.getString(1));
+			System.out.println("sysoiut1" + answer);
+		}
+		System.out.println("sysout 2" + answer);
+		return answer;
+
 	}
 	
-	
-	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
 	/**
 	 * Méthode pour récupérer un candidat dans la base de donnée à partir de son identifiant.
-	 * affiche dans la console les champs associés à l'élément id dans la table
-	 * @param id
-	 * @throws SQLException 
-	 *    
+	 * Récupère les champs associés à l'élément id dans la table
+	 * @author Audric
+	 * @param id   
+	 * @throws ClassNotFoundException
 	 */
 
+	
+	
+	
+	public boolean recupererCandidatEnBase(String id) throws ClassNotFoundException
 
-	public void recupererCandidatEnBase(String id) throws ClassNotFoundException, SQLException
 	{
-		Connexion();
-		ResultSet rs=null;
+		String url = "jdbc:mysql://sta6101855:3306/jobjob_2_0";
+		String login = "cdi";
+		String passwd = "cdi";
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
 		String id2="";
-		String nom="";
-		String prenom="";
+	    nom="";
+		prenom="";
 		String telephone="";
 		String mail="";
+		Boolean existe = false;
 		
-		String sql2 = "SELECT * FROM candidat WHERE idCandidat='"+id+"'; ";
-		try {
-			rs = (ResultSet) st.executeQuery(sql2);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			while (rs.next()) {
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, login, passwd);
+			st = cn.createStatement();
+			String sql = "SELECT * FROM personne INNER JOIN candidat ON personne.idPersonne=candidat.idPersonne WHERE idCandidat='"+id+"';";
+			rs = st.executeQuery(sql);
+			while(rs.next()){
 				try {
-					id2 = rs.getString("identifiant");
+					id2 = rs.getString("idCandidat");
+
 					nom = rs.getString("nom");
 					prenom= rs.getString("prenom");
 					telephone= rs.getString("telephone");
 					mail= rs.getString("mail");
 					
-					
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}
-				System.out.println(id2);
-				System.out.println(nom);
-				System.out.println(prenom);
-				System.out.println(telephone);
-				System.out.println(mail);
+				}	
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e){
 			e.printStackTrace();
 		}
+
+		catch(ClassNotFoundException e){
+			e.printStackTrace();
+		} finally {
+			try{
+				cn.close();
+				st.close();
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 		
-		Deconnexion();
+		if (!id2.equals("")){
+			existe=true;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Le candidat n'existe pas");
+		}
+		
+		return existe;
+		
 	}
 	
-
-	/** Méthode renvoyant un tableau d'objets de type questionReponse
-	 * Pour chaque objet seront complétés le libelleQuestion, ainsi que les libellesReponses. Les questions sont choisies de manière aléatoire dans la BDD
+//	public static String getNom() {
+//		return nom;
+//	}
+//
+//	public static String getPrenom() {
+//		return prenom;
+//	}
+	
+	
+	
+	//TODO : javadoc à revoir CECI N EST PAS UNE JAVADOC + Il manque le champ @param
+	//TODO : indentation catastropique = paragraphe illisible : A réindenter correctement
+	/**
+	 * Méthode qui remplira un tableau de 15 objets de type questionReponse.
+	 * 		- Une première REQUETE SQL ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
+	 * 		  puis on remplira les objets questionReponse, ainsi qu'un tableau stockant les numero de nos questions, avec.
+	 * 		- Une seconde requête ira chercher l'ensemble des réponses/propositions correspondants à un numero de question donnée.
 	 * 
 	 * Deux requêtes SQL vont être utilisées :
 	 * 		-	Une première (request1) ira chercher de manière aléatoire le texte d'une question, ainsi que son numero.
@@ -216,6 +326,7 @@ public class ConnectionDB
 	 * @return questionReponse[15]
 	 * @throws ClassNotFoundException 
 	 */
+
 	public questionReponse[] chercherQuestionEnBase(questionReponse[] questrep) throws SQLException, ClassNotFoundException
 
 	{
@@ -338,8 +449,11 @@ public class ConnectionDB
 	/**
 	 * @author cyril
 	 * appel de la procédure stockée resultatCandidat qui a pour but de recolter les donnees des candidats pour établir des statistiques
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void recupererStatistiques() {
+	public void recupererStatistiques() throws ClassNotFoundException, SQLException {
+		Connexion();
 		CallableStatement cs = null;
 		ResultSet resultat = null;
 

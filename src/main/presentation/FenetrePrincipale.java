@@ -15,6 +15,7 @@ import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
 import main.metier.TimerGeneral;
@@ -206,8 +207,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		// Première possibilité, c'est un nouveau candidat, le champ N°
 		// identifiant sera grisé
 
-		// if(arg0.getSource() == panAccueil.itemNouveauCandidat ||
-		// arg0.getSource() == panFormulaire.itemNouveauCandidat)
 		if (arg0.getSource() == panAccueil.itemNouveauCandidat) {
 
 			Candidat cd = new Candidat();
@@ -235,7 +234,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// on fait appraitre le numéro du nouveau candidat
 			try {
 				panFormulaire.fieldId.setText(cd.definirNumeroCandidat());
-			} catch (SQLException | ClassNotFoundException e) {
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -308,20 +311,53 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		/**
 		 * @author Florent
-		 * @detail : Implementation du bouton rechercher <br>
-		 *         ici on vérifie si le bouton s'apelle "Rechercher" <br>
-		 *         si oui, execute le contenu
+		 * @author Audric
+		 * @detail : Implementation du bouton rechercher
+		 * <br>ici on vérifie si le bouton s'apelle "Rechercher"
+		 * <br>si oui, execute le contenu 
 		 */
-
-		if (arg0.getActionCommand().equals("Rechercher")) 
-		{
-			if (ed.rechercheCandidat(panFormulaire.fieldId.getText())) 
-			{
-				panCandidat.buttonStart.addActionListener(this);
-
-				this.getContentPane().removeAll();
-				this.setContentPane(panCandidat);
-				this.validate();
+		
+		if(arg0.getActionCommand().equals("Rechercher")){
+			ConnectionDB laConnection = new ConnectionDB();	
+			try {
+				if(laConnection.recupererCandidatEnBase(panFormulaire.fieldId.getText())){
+					
+					int option = JOptionPane.showConfirmDialog(null,"Le candidat est-il "+laConnection.prenom+" "+laConnection.nom+"?","Confirmation !",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(option == JOptionPane.NO_OPTION)
+					{		
+						panFormulaire = new panelFormulaire();
+						
+						panFormulaire.fieldNom.setEditable(false);
+						panFormulaire.fieldPrenom.setEditable(false);
+						panFormulaire.fieldMail.setEditable(false);
+						panFormulaire.fieldTelephone.setEditable(false);
+						panFormulaire.fieldId.setEditable(true);
+			
+						panFormulaire.fieldNom.setText(null);
+						panFormulaire.fieldPrenom.setText(null);
+						panFormulaire.fieldMail.setText(null);
+						panFormulaire.fieldTelephone.setText(null);
+						panFormulaire.fieldId.setText(null);
+						
+						panFormulaire.boutonSave.setText("Rechercher");
+						
+						panFormulaire.boutonSave.addActionListener(this);
+						
+						this.getContentPane().removeAll();
+						this.setContentPane(panFormulaire);
+						this.validate();
+						
+					}
+					else{
+					panCandidat.buttonStart.addActionListener(this);
+					
+					this.getContentPane().removeAll();
+					this.setContentPane(panCandidat);
+					this.validate();
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
 
 		}
@@ -337,9 +373,11 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 		 * L'utilisateur est averti des erreurs ( champs écrits en rouge). <br>
 		 * Si les deux sont valides, on passe au panel panCandidat
 		 */
-		if (arg0.getSource() == this.panFormulaire.boutonSave
-				|| arg0.getSource() == this.panFormulaire.itemSauvegarder) {
 
+
+		else if(arg0.getSource() == this.panFormulaire.boutonSave || arg0.getSource() == this.panFormulaire.itemSauvegarder)
+		{	
+			
 			System.out.println(panFormulaire.fieldTelephone.getText());
 
 			if (panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())
@@ -348,8 +386,17 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 					&& panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) {
 				Candidat leCandidat = new Candidat(panFormulaire);
 				try {
-					leCandidat.enregistrerNouveauCandidat();
-				} catch (ClassNotFoundException | SQLException e) {
+
+					try {
+						leCandidat.enregistrerNouveauCandidat();
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -362,9 +409,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				String str = "Erreur(s) sur le(s) champ(s) : ";
 				panFormulaire.fieldNom.setForeground(Color.BLACK);
 
-				panFormulaire.champNom.setForeground(Color.BLACK);
+//				panFormulaire.champNom.setForeground(Color.BLACK);
 				panFormulaire.fieldPrenom.setForeground(Color.BLACK);
-				panFormulaire.champPrenom.setForeground(Color.BLACK);
+//				panFormulaire.champPrenom.setForeground(Color.BLACK);
 
 				panFormulaire.fieldMail.setForeground(Color.BLACK);
 				panFormulaire.champ3.setForeground(Color.BLACK);
@@ -373,12 +420,12 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 				if (!panFormulaire.checkNom(panFormulaire.fieldNom.getText())) {
 					panFormulaire.fieldNom.setForeground(Color.RED);
-					panFormulaire.champNom.setForeground(Color.RED);
+//					panFormulaire.champNom.setForeground(Color.RED);
 					str = str + "\n - Nom ";
 				}
 				if (!panFormulaire.checkPrenom(panFormulaire.fieldPrenom.getText())) {
 					panFormulaire.fieldPrenom.setForeground(Color.RED);
-					panFormulaire.champPrenom.setForeground(Color.RED);
+//					panFormulaire.champPrenom.setForeground(Color.RED);
 					str = str + "\n - Prenom ";
 				}
 				if (!panFormulaire.checkFormatMail(panFormulaire.fieldMail.getText())) {
@@ -415,14 +462,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				System.out.println("Passage panCandidat --> panQuestion");
 				try {
 					laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
 
 			tp = new TimerGeneral(45);
 			tp.start();

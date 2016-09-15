@@ -62,14 +62,14 @@ public class panelFormulaire extends JPanel  implements ActionListener
 	protected JMenuItem itemAide = new JMenuItem("Aide");
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
-	protected JButton boutonSave = new JButton("Sauvegarder");
+	public JButton boutonSave = new JButton("Sauvegarder");
 	
 	
-	protected JFormattedTextField fieldNom = new JFormattedTextField();
-	protected JFormattedTextField fieldPrenom = new JFormattedTextField();
-	protected JFormattedTextField fieldMail = new JFormattedTextField();
-	protected JFormattedTextField fieldTelephone = new JFormattedTextField();
-	protected JFormattedTextField fieldId = new JFormattedTextField();
+	public JFormattedTextField fieldNom = new JFormattedTextField();
+	public JFormattedTextField fieldPrenom = new JFormattedTextField();
+	public JFormattedTextField fieldMail = new JFormattedTextField();
+	public JFormattedTextField fieldTelephone = new JFormattedTextField();
+	public JFormattedTextField fieldId = new JFormattedTextField();
 
 	protected JPanel panelSaisie;
 	protected JPanel panelElementBasCentre;
@@ -584,10 +584,11 @@ public class panelFormulaire extends JPanel  implements ActionListener
 			//on fait appraitre le numéro du nouveau candidat
 			try {
 				this.fieldId.setText(cd.definirNumeroCandidat());
-			} catch (SQLException e1) {
+
+			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
