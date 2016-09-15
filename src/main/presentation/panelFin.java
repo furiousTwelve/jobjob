@@ -14,7 +14,7 @@ import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -43,6 +43,7 @@ public class panelFin extends JPanel
 		font = new Font("Arial",Font.BOLD,32);
 		textFin.setFont(font);		
 		this.add(textFin, BorderLayout.CENTER);
+		
 
 	
 //2ème panel pour le logo
@@ -63,10 +64,27 @@ public class panelFin extends JPanel
 		nomEntreprise.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 		
+		// PANEL POUR LA CONNECTION DU RECRUTEUR //
+		
+		/**
+		 * @author AnaïsGueyte
+		 * @date 15/09/2016
+		 * @version jobjob_2_0 (en accord avec la BDD)
+		 * 
+		 *          >> J'ai rajouté deux lignes de code pour remettre la fenetre
+		 *          en petit et au centre de l'ecran à la fin du test
+		 * 
+		 *          this.setSize(800, 600); this.setLocationRelativeTo(null);
+		 * 
+		 *          Cependant je note une long moment avant que la page
+		 *          n'apparaisse
+		 * 
+		 */
+		
 		JPanel panelRecruteur = new JPanel();
 		panelRecruteur.setLayout(new FlowLayout());
 		
-		JPanel panelLabel = new JPanel();
+		/*JPanel panelLabel = new JPanel();
 		panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.Y_AXIS));
 		
 		id = new JLabel("Identifiant :");
@@ -88,7 +106,7 @@ public class panelFin extends JPanel
 		mdp.setColumns(10);
 		panelConnection.add(mdp);		
 		
-		panelRecruteur.add(panelConnection);
+		panelRecruteur.add(panelConnection);*/
 		
 		boutonConnection = new JButton("Se connecter");
 		

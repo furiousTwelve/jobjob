@@ -344,9 +344,29 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				/**
+				 * @author AnaïsGueyte
+				 * @date 14/09/2016
+				 * @version jobjob_2_0 (en accord avec la BDD)
+				 * 
+				 *          >> Ici on doit passer l'affichage en plein ecran
+				 * 
+				 *          this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				 *
+				 */
+
 				panCandidat.buttonStart.addActionListener(this);
 				this.getContentPane().removeAll();
 				this.setContentPane(panCandidat);
+				this.setExtendedState(JFrame.MAXIMIZED_BOTH); // @AnaïsGueyte -
+																// Affiche la
+																// fenetre en
+																// FULL SCREEN
+																// pendant
+																// toutes les
+																// questions
+
 				this.validate();
 
 			} else {
@@ -384,23 +404,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 		}
 
 		// Passage du panCandidat au panQuestion
-		/**
-		 * @author AnaïsGueyte
-		 * @date 14/09/2016
-		 * @version jobjob_2_0 (en accord avec la BDD)
-		 * 
-		 *          >> Ici on doit passer l'affichage en plein ecran
-		 * 
-		 *          >> On doit aussi afficher le timer !!
-		 */
 
 		if (arg0.getSource() == this.panCandidat.buttonStart) {
 			panQuestion = new panelQuestion();
-			this.setExtendedState(JFrame.MAXIMIZED_BOTH); // @AnaïsGueyte -
-															// Affiche en full
-															// screen tout le
-															// panel question et
-															// le panel fin
 
 			// Couche méier: appel de la fonction ChercherQuestionRéponse, qui
 			// elle même va appeler une fonction de la coche donnée pour
@@ -499,6 +505,21 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 		// Passage du panQuestion au panFin
 
+		/**
+		 * @author AnaïsGueyte
+		 * @date 15/09/2016
+		 * @version jobjob_2_0 (en accord avec la BDD)
+		 * 
+		 *          >> J'ai rajouté deux lignes de code pour remettre la fenetre
+		 *          en petit et au centre de l'ecran à la fin du test
+		 * 
+		 *          this.setSize(800, 600); this.setLocationRelativeTo(null);
+		 * 
+		 *          Cependant je note qu'il faut un long moment avant que la page
+		 *          n'apparaisse
+		 * 
+		 */
+
 		if (compteurQuestions == 16) {
 			panFin = new panelFin();
 			// Couche metier Timer
@@ -508,6 +529,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
+			this.setSize(800, 600); // La ligne de code qui remet la fenetre en
+									// petit.
+			this.setLocationRelativeTo(null); // La ligne qui remet la fenetre
+												// au centre de l'ecran
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			panFin.boutonConnection.addActionListener(this);
 			this.validate();
@@ -515,73 +540,30 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 		// PASSAGE DE PANEL FIN - CONNECTION RECRUTEUR A L ACCUEIL //
 
-		//On va avoir par la suite tout les enchaînements entre les différents panel à charger dans notre fenêtre
-			
-		// Passage du panConnection au panAccueil, si id et mdp valides 
-		
+		// On va avoir par la suite tout les enchaînements entre les différents
+		// panel à charger dans notre fenêtre
+
+		// Passage du panConnection au panAccueil, si id et mdp valides
+
 		if (arg0.getSource() == this.panFin.boutonConnection) {
 
-			// Couche METIER
-			boolean acces = false;
-			String recruteur = panelFin.recruteur.getText();
-			String motDePasse = panConnection.mdp.getText();
+			// Message d'erreur uniquement si erreurs sur les identifiants
 
-			Recruteur leRecruteur = new Recruteur(recruteur, motDePasse);
-			try {
-				acces = leRecruteur.verifierAcces(recruteur, motDePasse);
-			} catch (ClassNotFoundException | SQLException e) {
+			// JOptionPane.showMessageDialog(panFin, "Connection impossible",
+			// "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 
-				JOptionPane.showMessageDialog(panFormulaire,
-						"Erreur interne au programme -- Defaut de la connexion au serveur SQL", "Erreur programme",
-						JOptionPane.ERROR_MESSAGE);
-			}
+			panAccueil = new panelAccueil();
 
-			if (acces == true) {
+			this.panAccueil.itemCandidatExistant.addActionListener(this);
+			this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			this.panAccueil.itemNouveauTest.addActionListener(this); //
+			this.panAccueil.itemQuitter.addActionListener(panAccueil); //
+			this.panAccueil.itemAide.addActionListener(panAccueil);
 
-				panAccueil = new panelAccueil();
-
-				this.panAccueil.itemCandidatExistant.addActionListener(this);
-				this.panAccueil.itemNouveauCandidat.addActionListener(this);
-				this.panAccueil.itemNouveauTest.addActionListener(this);
-
-				this.panAccueil.itemAjoutQuestion.addActionListener(this);
-				this.panAccueil.itemModifierQuestion.addActionListener(this);
-				this.panAccueil.itemSupprimerQuestion.addActionListener(this);
-
-				this.panAccueil.itemQuitter.addActionListener(panAccueil);
-				this.panAccueil.itemAide.addActionListener(panAccueil);
-
-				this.getContentPane().removeAll();
-				this.setContentPane(panAccueil);
-
-				this.validate();
-
-			} else {
-				JOptionPane.showMessageDialog(panConnection, "Votre identifiant et/ou mot de passe est incorrect",
-						"Accès non autorisé", JOptionPane.ERROR_MESSAGE);
-			}
-
-
-	/*	METHODE ORIGINAL
-	 * 
-	 * if (arg0.getSource() == this.panFin.boutonConnection) {
-
-			 * // Message d'erreur uniquement si erreurs sur les identifiants
-			 * 
-			 * // JOptionPane.showMessageDialog(panFin, "Connection impossible",
-			 * // "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-			 * 
-			 * panAccueil = new panelAccueil();
-			 * 
-			 * this.panAccueil.itemCandidatExistant.addActionListener(this);
-			 * this.panAccueil.itemNouveauCandidat.addActionListener(this);
-			 * this.panAccueil.itemNouveauTest.addActionListener(this); //
-			 * this.panAccueil.itemQuitter.addActionListener(panAccueil); //
-			 * this.panAccueil.itemAide.addActionListener(panAccueil);
-			 * 
-			 * this.getContentPane().removeAll();
-			 * this.setContentPane(panAccueil); this.validate();
-		}*/
+			this.getContentPane().removeAll();
+			this.setContentPane(panAccueil);
+			this.validate();
+		}
 
 		// Passage du panFormulaire ou panAccueil aux panels ajout modif et
 		// supprimer question
@@ -679,7 +661,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			this.getContentPane().removeAll();
 			this.setContentPane(panFormulaire);
 			this.validate();
-		}
 		}
 
 	}
