@@ -36,6 +36,13 @@ public class TimerGeneral
 		this.panQuestion=pan;
 		this.qr=qr;
 	}
+	public TimerGeneral(int secondPassed, FenetrePrincipale fp)
+	{
+		this.secondPassed = secondPassed;
+		this.fp = fp;
+		
+		
+	}
 	
 	
     Timer timer = new Timer();

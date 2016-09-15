@@ -11,6 +11,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -415,7 +416,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 
 			
-			tp = new TimerGeneral(45, this,null,null );
+			tp = new TimerGeneral(45, this );
 			tp.start();
 			
 
@@ -493,13 +494,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
+				
 				if (tp.secondPassed<=30) {
 					TimerS = new TimerGeneral(tp.secondPassed,this,panQuestion,laQuestionReponse);
 				}else{
 				TimerS = new TimerGeneral(30,this,panQuestion,laQuestionReponse);
 				//Lancer le TimerStress
 				TimerS.start2();
-				System.out.println(TimerS.secondPassed);
+				
+				
 				//TimerS.tache2.cancel();
 				}
 			}
@@ -511,6 +514,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				
 		//Arrêt à la question 12
 		if(compteurQuestions == 12){
+			Time temps = new Time(0,0, TimerS.secondPassed);
+			System.out.println("le temps stress =" +temps);
 			
 		}
 		
