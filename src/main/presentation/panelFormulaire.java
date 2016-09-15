@@ -67,16 +67,12 @@ public class panelFormulaire extends JPanel  implements ActionListener
 	protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
 	protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
 	protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
-<<<<<<< HEAD
-	protected JMenuItem itemAide = new JMenuItem("Aide");
+
+
 	private JLabel statusBar = new JLabel();
 	private JMenuBar menuBar2 = new JMenuBar();
 	public JButton boutonSave = new JButton("Sauvegarder");
-=======
-	
-	
-	protected JButton boutonSave = new JButton("Sauvegarder");
->>>>>>> origin/features/presentation/khadidja
+
 	
 	
 	public JFormattedTextField fieldNom = new JFormattedTextField();
