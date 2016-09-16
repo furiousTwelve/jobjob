@@ -45,22 +45,7 @@ public class Candidat
 	 */
 	public Candidat(){}
 	
-	public Candidat(JPanel p)
-	{
-		// RECUPERATION DES CONTROLES DU PANEL DE SAISIE
-		// CONSTRUCTION DU CANDIDAT AVEC LES DONNEES SAISIES
-		Component[] fields = p.getComponents();
-		
-		int i = 0;
-		for(Component f : fields){
-			 if(f instanceof JTextField && i < chaine.length )
-				{
-					chaine[i] = ((JTextField) f).getText();
-					System.out.println(chaine[i]);
-					i++;
-				}
-		}
-	}
+
 
 	/**
 	 * METHODE QUI COMMUNIQUE LES DONNEES FORMATEES A LA COUCHE DONNEE.
