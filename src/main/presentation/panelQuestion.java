@@ -24,12 +24,12 @@ import javax.swing.JRadioButton;
 public class panelQuestion extends JPanel {
 	
 	private JPanel panelNord;
-	private JPanel panelCentre;
+	public JPanel panelCentre;
 	
 	private JPanel panelQuestions;
 	private JPanel panelTimer;
 	private JPanel panelReponse;
-	private JPanel panelImage;
+	public JPanel panelImage;
 	private JPanel panelValider;
 	
 	protected JLabel labelQuestion;

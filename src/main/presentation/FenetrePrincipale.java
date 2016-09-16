@@ -6,11 +6,15 @@ import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
@@ -480,6 +484,21 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[0].libelleReponse2);
 			panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[0].libelleReponse3);
 			panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[0].libelleReponse4);
+//			ImageIcon icone = new laQuestionReponse.imageQuestion(laQuestionReponse.blob));
+			JLabel labelimage;
+			try {
+//				labelimage = new JLabel(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[0].blob));
+				panQuestion.iconeEntreprise.setIcon(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[0].blob));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			panQuestion.remove(panQuestion.iconeEntreprise);
+ catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			this.setContentPane(panQuestion);
 			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			panQuestion.boutonValider.addActionListener(this);
@@ -541,6 +560,18 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 					panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
 					panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
 					panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				}
+				
+				JLabel labelimage;
+				try {
+//					labelimage = new JLabel(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
+					panQuestion.iconeEntreprise.setIcon(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 				

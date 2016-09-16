@@ -16,12 +16,16 @@
  */
 package main.donnees;
 
+
 import com.mysql.jdbc.CallableStatement;
 
 import java.sql.*;
 
 import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.CallableStatement;
 
 import main.metier.Candidat;
 import main.metier.questionReponse;
@@ -32,7 +36,9 @@ public class ConnectionDB
 {
 
 
+
 	private static String url= "jdbc:mysql://sta6101855:3306/jobjob_3_0"; 
+
 	private static String login = "cdi";
 	private static String passwd = "cdi";
 	private static Connection connection;
@@ -273,7 +279,7 @@ public class ConnectionDB
 			// Première requête, insérée dans une boucle de 15 itérations
 			for (int i = 0; i < ordreCategorieQuestions.length; i++) {
 				
-				String request1 = "SELECT textesQuestion, numero, idPropositions FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
+				String request1 = "SELECT textesQuestion, numero, idPropositions, imagesQuestion FROM questions WHERE idCategorie = " + ordreCategorieQuestions[i] + " AND numero != " + numeroQuestionsInterdites + " ORDER by Rand() LIMIT 1";
 				res = (ResultSet) statement.executeQuery(request1);
 				
 				while (res.next()) 
@@ -281,7 +287,8 @@ public class ConnectionDB
 					questrep[i] = new questionReponse();
 					questrep[i].libelleQuestion = res.getString(1);					
 					
-					questrep[i].numQuestionBDD = res.getInt("numero");				
+					questrep[i].numQuestionBDD = res.getInt("numero");
+					questrep[i].blob = (com.mysql.jdbc.Blob) res.getBlob("imagesQuestion");
 								
 					numeroQuestion[i] = res.getInt("numero");					
 					numeroQuestionsInterdites += " AND numero  != " + res.getInt("numero");					
@@ -424,6 +431,7 @@ public class ConnectionDB
 		}
 
 	}
+
 }
 
 

@@ -1,10 +1,19 @@
 package main.metier;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Random;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+import com.mysql.jdbc.Blob;
 
 import main.donnees.ConnectionDB;
-import main.donnees.EnregistrementDonnee;
 
 /**
  * Structure utilisée pour générer le tableau contenant les questions auquelles le candidat devra répondre
@@ -43,7 +52,8 @@ public class questionReponse
 	public String libelleReponse4; 
 	public String bonneReponse;
 	public byte reponseCandidat;
-	
+	public Blob blob;
+	public static byte[] imgData = null ;
 	public questionReponse[] questionsCandidat;
 	
 	public String[] tableauReponsesChoisiesParCandidat = new String[15];
@@ -137,5 +147,51 @@ public class questionReponse
 		
 	}
 	
+
+	/**
+	 * Methode pour transformer une image de la base de donnee en format Blob
+	 * en format *.JPG exploitable pour la partie presentation
+	 * @param imageDb
+	 * @return
+	 * @author Lionel
+	 * @throws SQLException 
+	 * @throws IOException 
+	 */
+	public ImageIcon imageQuestion(Blob imageDb) throws SQLException, IOException
+	{
+		System.out.println(imageDb);
+		ImageIcon iconeImage = null;
+		File fichierTemp = new File("c:/imgtemp.jpg");
+//		File fichierTemp2 = new File();
+		String str = "imgtemp" + numQuestionBDD;
+		File fichierTemp2 = fichierTemp.createTempFile(str, "jpg", new File("c:/"));
+		byte[] imgData = null ;
+		BufferedImage bImageFromConvert = null; 
+		if(imageDb != null){
+			System.out.println("salut 2");
+			imgData = imageDb.getBytes(1,(int)imageDb.length());
+			InputStream in = new ByteArrayInputStream(imgData);
+			try {
+				System.out.println("salut 3");
+				bImageFromConvert = ImageIO.read(in);
+				ImageIO.write(bImageFromConvert, "jpg", fichierTemp2);
+				iconeImage= new ImageIcon(fichierTemp2.getPath());
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			System.out.println("salut 4");
+			iconeImage =  new ImageIcon("JobJob.png");
+		}
+		
+		boolean effacer = fichierTemp2.delete();
+		System.out.println(effacer);
+		return iconeImage;
+		
+	}
+
 	
 }
