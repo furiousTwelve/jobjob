@@ -312,7 +312,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			try {
 				laConnection = new ConnectionDB();
 			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {

@@ -5,6 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -50,6 +55,9 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 	protected JMenuItem itemAjoutQuestion = new JMenuItem("Ajouter une question/réponses");
 	protected JMenuItem itemModifierQuestion = new JMenuItem("Modifier une question/réponses");
 	protected JMenuItem itemSupprimerQuestion = new JMenuItem("Supprimer une question/réponses");
+	
+	Connection cn;
+	Statement st;
 	
 		private Font font;
 		
@@ -103,7 +111,6 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			itemModifierQuestion.addActionListener(this);
 			itemSupprimerQuestion.addActionListener(this);
 			
-//			this.add(menuBar, BorderLayout.NORTH);
 			
 			//Constitution du panel central
 			font = new Font("Arial",Font.ITALIC,17);
@@ -152,7 +159,25 @@ public class panelAjouterQuestion extends JPanel implements ActionListener {
 			JTextField jtf = new JTextField ();
 			jtf.setColumns(50);
 			JComboBox jcb = new JComboBox();
-			jcb.addItem("Catégorie");
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				cn = DriverManager.getConnection("jdbc:mysql://sta6101855:3306/jobjob_3_0","cdi","cdi");
+				st = cn.createStatement();
+				String sql = "SELECT * FROM Categorie";
+				ResultSet rs = st.executeQuery(sql);
+				while(rs.next()){
+					jcb.addItem(rs.getInt(1)+" - "+rs.getString(2));
+				}
+			}catch(SQLException | ClassNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				try{
+					st.close();
+					cn.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
 			JTextField jtf2 = new JTextField ();
 			jtf2.setColumns(50);
 			JTextField jtf3 = new JTextField ();

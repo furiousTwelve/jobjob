@@ -16,9 +16,6 @@
  */
 package main.donnees;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import com.mysql.jdbc.CallableStatement;
 
 import java.sql.*;
@@ -33,7 +30,9 @@ import main.metier.questionReponse;
 
 public class ConnectionDB 
 {
-	private static String url= "jdbc:mysql://sta6101855/jobjob_3_0"; // POUR TEST LOCAL UNIQUEMENT 
+
+
+	private static String url= "jdbc:mysql://sta6101855:3306/jobjob_3_0"; 
 	private static String login = "cdi";
 	private static String passwd = "cdi";
 	private static Connection connection;
@@ -194,7 +193,6 @@ public class ConnectionDB
 	public boolean recupererCandidatEnBase(String id) throws ClassNotFoundException, SQLException
 
 	{
-
 		ResultSet rs=null;
 
 		String id2="";
@@ -208,7 +206,6 @@ public class ConnectionDB
 		try {
 			rs = (ResultSet) statement.executeQuery(sql2);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -216,7 +213,6 @@ public class ConnectionDB
 
 				try {
 					id2 = rs.getString("idCandidat");
-
 					nom = rs.getString("nom");
 					prenom= rs.getString("prenom");
 					telephone= rs.getString("telephone");
@@ -229,8 +225,6 @@ public class ConnectionDB
 		}
 		catch(SQLException e){
 			e.printStackTrace();
-		} finally {
-			
 		}
 		
 		if (!id2.equals("")){
