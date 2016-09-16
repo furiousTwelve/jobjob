@@ -41,9 +41,6 @@ public class panelQuestion extends JPanel {
 	protected JLabel iconeEntreprise;
 	private Font font2;
 
-
-	Chrono chronoGeneral = new Chrono();
-
 	
 	public panelQuestion() {
 
@@ -79,15 +76,8 @@ public class panelQuestion extends JPanel {
 		
 		panelNord.add(panelQuestions, BorderLayout.WEST);
 		
-		panelTimer = new JPanel();
-		
 		//labelTimer = new JLabel(c);//Si pas question stress, label vide. Sinon voir ce qu'il faut mettre.
 		//labelTimer.setFont(font);
-
-		panelTimer.add(chronoGeneral);
-		chronoGeneral.horloge();
-
-		panelNord.add(panelTimer, BorderLayout.EAST);
 		
 		this.add(panelNord, BorderLayout.NORTH);
 		

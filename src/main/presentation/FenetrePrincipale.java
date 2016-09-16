@@ -12,6 +12,7 @@ import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
@@ -64,9 +65,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	// Pour la couche métier
 	public questionReponse laQuestionReponse = new questionReponse();
 	public questionReponse[] questionsCandidat = new questionReponse[15];
-	private TimerGeneral tp;
+	//private TimerGeneral tp;
 	private TimerGeneral TimerS;
-
+	private Chrono fenChronoGeneral;
+	private Chrono fenChronoStress; 
+	
+	
+	
 	/**
 	 * 
 	 * @throws HeadlessException
@@ -76,15 +81,73 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	 * @author Damien
 	 */
 
-
+	// TEST
+	private Timer timerGeneral;
+	private Timer timerStress;
+	private int counterGeneral = 45;
+	private int counterStress = 30;
+	private int delay = 1000;
+	// FIN TEST
+	
 	public FenetrePrincipale() 
 	{
+		// TEST
+		ActionListener actionGeneral = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				if(counterGeneral == 0)
+				{
+					System.out.println("Timer down");
+					fenChronoGeneral.dispose();
+	        		getContentPane().removeAll();
+	        		setContentPane(panFin);
+	        		validate();
+					timerGeneral.stop();
+				}
+				else
+				{
+					System.out.println("counter g : " + counterGeneral);
+					counterGeneral--;
+				}
+			}
+		};
+		
+		timerGeneral = new Timer(delay, actionGeneral);
+		timerGeneral.setInitialDelay(0);
 
+		ActionListener actionStress = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				if(counterStress == 0)
+				{
+					System.out.println("Timer down");
+					fenChronoStress.dispose();
+					fenChronoGeneral.setVisible(true);							
+		       		timerStress.stop();
+				}
+				else
+				{
+					System.out.println("counter s : " + counterStress);
+					counterStress--;
+				}
+			}
+		};
+		timerStress = new Timer(delay, actionStress);
+		timerStress.setInitialDelay(0);
+		// FIN TEST
+		
+		
 		// test graphe khadidja
 		// dg.DessinerBar();
 		// dg.DessinerCam();
 		laQuestionReponse = new questionReponse(); // Couche METIER
 		questionsCandidat = new questionReponse[15]; // Couche METIER
+		//tp = new TimerGeneral(45, this);
+		
 		this.setTitle("Job-Job");
 		// this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setResizable(false);
@@ -132,9 +195,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		
-
-
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents
 		 * panel à charger dans notre fenêtre
@@ -483,26 +543,23 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			// elle même va appeler une fonction de la coche donnée pour
 			// remplir le tableau de questions
 
+			System.out.println("Passage panCandidat --> panQuestion");
+			try 
+			{
+				laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
+			} 
+			catch (ClassNotFoundException | SQLException e) 
+			{
+				e.printStackTrace();
+			}
 
+			// Démarrage du timer général
+			//tp.start();
+			timerGeneral.start();
 			
-				System.out.println("Passage panCandidat --> panQuestion");
-				try {
-					laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
-
-				} catch (ClassNotFoundException | SQLException e) {
-
-
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-
-			
-
-			tp = new TimerGeneral(45, this );
-			tp.start();
-			
-
+			// LANCEMENT DU VISUEL CHRONO
+			fenChronoGeneral = new Chrono(0);
+			//fenChronoGeneral.horloge();
 
 			this.getContentPane().removeAll();
 			// Couche METIER ==> Affichage de la première question
@@ -541,7 +598,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				reponseChoisie = true;
 			}
 
-			if (reponseChoisie == true) 
+			if (reponseChoisie == true)
 			{
 				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions);
 
@@ -552,13 +609,14 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);				
 
-				panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
-				panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
-				panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
-				panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
-				panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
-				
-				
+				if(compteurQuestions < 15)
+				{
+					panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
+					panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
+					panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
+					panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
+					panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+				}
 			}
 			else
 			{
@@ -569,35 +627,38 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
-
+				if (counterGeneral <= 30)
+				{
+					counterStress = counterGeneral;
+					TimerS = new TimerGeneral(counterStress,this,panQuestion,laQuestionReponse, fenChronoGeneral, fenChronoStress);
+				}
+				else
+				{
+					counterStress = 30;
+					TimerS = new TimerGeneral(counterStress,this,panQuestion,laQuestionReponse, fenChronoGeneral, fenChronoStress);
+				}
 				
-				if (tp.secondPassed<=30) {
-					TimerS = new TimerGeneral(tp.secondPassed,this,panQuestion,laQuestionReponse);
-				}else{
-				TimerS = new TimerGeneral(30,this,panQuestion,laQuestionReponse);
 				//Lancer le TimerStress
 				TimerS.start2();
-				
-				
-				//TimerS.tache2.cancel();
-				}
+				timerStress.start();
+				// Gestion de l'affichage du chrono
+				fenChronoGeneral.setVisible(false);			
+				fenChronoStress = new Chrono(1);
+				//fenChronoStress.horloge();
 			}
 		}
-		
-
 				
 		//Arrêt à la question 12
-		if(compteurQuestions == 12){
-
-			Time temps = new Time(0,0, TimerS.secondPassed);
-			System.out.println("le temps stress =" +temps);
-			
-		}
-		
-		if(compteurQuestions == 13)
+		if(compteurQuestions == 12)
 		{
-			System.out.println("Timer Stress Stop");
-			TimerS.tache.cancel();
+			int temps = counterStress - TimerS.secondPassed;
+			System.out.println("le temps stress = " + temps);
+			
+			// Gestion de l'affichage du chrono
+			fenChronoStress.setVisible(false);
+			fenChronoGeneral.setVisible(true);
+			timerStress.stop();
+			TimerS.tache2.cancel();
 		}
 
 		// Passage du panQuestion au panFin
@@ -619,11 +680,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 
 		if (compteurQuestions == 16) 
 		{
+			fenChronoGeneral.dispose();
+			timerGeneral.stop();
 			panFin = new panelFin();
 			// Couche metier Timer
 			// arrêter le timer après la 15ème question
-			tp.tache.cancel();
-			System.out.println(tp.secondPassed);
+			//tp.tache.cancel();
+			//System.out.println(tp.secondPassed);
 
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
@@ -637,16 +700,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			this.validate();	
 		}
 		
-		
-		
-		
-
-		if(arg0.getSource() == this.panFin.boutonRetour )
-		{
-			
+		if(arg0.getSource() == this.panFin.boutonRetour)
+		{		
 			//Message d'erreur uniquement si erreurs sur les identifiants
-			
-			
+
 			panAccueil = new panelAccueil();
 			
 			this.panAccueil.itemCandidatExistant.addActionListener(this);
@@ -691,7 +748,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener
 			
 			panFin.boutonRetour.addActionListener(new ActionListener()
 			{
-
 					@Override
 					public void actionPerformed(ActionEvent e) 
 					{

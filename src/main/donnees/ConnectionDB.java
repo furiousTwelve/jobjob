@@ -34,7 +34,7 @@ import main.metier.questionReponse;
 public class ConnectionDB 
 {
 	//private static String url= "jdbc:mysql://localhost/jobjob_2_0"; // POUR TEST LOCAL UNIQUEMENT 
-	private static String url= "jdbc:mysql://sta6101855/jobjob_2_0"; 
+	private static String url= "jdbc:mysql://sta6101855/jobjob_3_0"; 
 	private static String login = "cdi";
 	private static String passwd = "cdi";
 	private static Connection connection;
