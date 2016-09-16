@@ -99,8 +99,6 @@ public class panelAccueil extends JPanel implements ActionListener{
 		
 		itemSauvegarder.addActionListener(this);
 		itemQuitter.addActionListener(this);
-
-		
 	
 		menuQuiz.add(itemAjoutQuestion);
 		menuQuiz.add(itemModifierQuestion);
@@ -109,6 +107,9 @@ public class panelAccueil extends JPanel implements ActionListener{
 		itemAjoutQuestion.addActionListener(this);
 		itemModifierQuestion.addActionListener(this);
 		itemSupprimerQuestion.addActionListener(this);
+		
+		menuQuiz.setEnabled(false);
+		menuCandidat.setEnabled(false);
 		
 		//Création du panelCentral
 		JPanel panelCentral = new JPanel();

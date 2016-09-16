@@ -86,7 +86,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 	// TEST
 	private Timer timerGeneral;
 	private Timer timerStress;
-	private int counterGeneral = 45;
+	private int counterGeneral = 1800;
 	private int counterStress = 30;
 	private int delay = 1000;
 	// FIN TEST
@@ -224,7 +224,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 	 */
 	@Override
 
-	public void actionPerformed(ActionEvent arg0) 
+	public void actionPerformed(ActionEvent arg0)
 	{
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents
@@ -650,29 +650,26 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 				panQuestion.reponse3.setSelected(false);
 				panQuestion.reponse4.setSelected(false);				
 
-				if(compteurQuestions < 15)
+				if(compteurQuestions < 16)
 				{
 					panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 					panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
 					panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
 					panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
 					panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
+					
+					JLabel labelimage;
+					try {
+//						labelimage = new JLabel(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
+						panQuestion.iconeEntreprise.setIcon(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-
-				
-				JLabel labelimage;
-				try {
-//					labelimage = new JLabel(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
-					panQuestion.iconeEntreprise.setIcon(laQuestionReponse.imageQuestion(laQuestionReponse.questionsCandidat[compteurQuestions-1].blob));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-
 			}
 			else
 			{
@@ -737,6 +734,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			System.out.println("On génère le tableau de score");
 			laQuestionReponse.genererTableauScoreCandidat();
 			System.out.println("On lance 'enregistrer score candidat'");
+			
 			try {
 				ConnectionDB conn = new ConnectionDB();				
 				conn.enregistrerScoreCandidat(laQuestionReponse.scoreParReponseCandidat, laQuestionReponse.questionsCandidat, leCandidat); // Petit doute sur le candidat
@@ -765,60 +763,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			this.setLocationRelativeTo(null); // La ligne qui remet la fenetre
 												// au centre de l'ecran
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-			
-			this.validate();	
-		}
-		
-
-		if(arg0.getSource() == this.panFin.boutonRetour)
-		{		
-			//Message d'erreur uniquement si erreurs sur les identifiants
-
-			panAccueil = new panelAccueil();
-			
-			this.panAccueil.itemCandidatExistant.addActionListener(this);
-			this.panAccueil.itemNouveauCandidat.addActionListener(this);
-			this.panAccueil.itemNouveauTest.addActionListener(this);
-            this.panAccueil.itemQuitter.addActionListener(this);
-            
-            
-            
-            this.panAccueil.itemRechercher.addActionListener(this);
-			this.panAccueil.itemSupprimer.addActionListener(this);
-			this.panAccueil.itemModifier.addActionListener(this);
-            this.panAccueil.itemStatistique.addActionListener(this);
-            
-            this.panAccueil.itemAjoutQuestion.addActionListener(this);
-			this.panAccueil.itemModifierQuestion.addActionListener(this);
-			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
-            
-		    this.panAccueil.itemAide.addActionListener(this);
-			
-			this.getContentPane().removeAll();
-			this.setContentPane(panAccueil);
 			this.validate();
 			
-
-			/*
-			 * @author AnaïsGueyte
-			 * 
-			 * @date 15/09/2016
-			 * 
-			 * @version jobjob_2_0 (en accord avec la BDD)
-			 * 
-			 * Le panel de fin a changé, on decide finalement d'un bouton retour
-			 * plutôt que de demander au recruteur de se connecter de nouveau.
-			 * On renvoit le recruteur vers sa page de connection.
-			 * 
-			 * boutonConnection du panelFin devient boutonRetour
-			 * 
-			 * On creer une methode interne qui ouvre une nouvelle fenetre puis
-			 * la referme.
-			 * 
-			 */
-
 			// PASSAGE DE PANEL FIN - CONNECTION RECRUTEUR A L ACCUEIL /
 			panFin.boutonRetour.addActionListener(new ActionListener() {
 				@Override

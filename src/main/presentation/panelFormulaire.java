@@ -143,6 +143,10 @@ public class panelFormulaire extends JPanel  implements ActionListener
 		itemAjoutQuestion.addActionListener(this);
 		itemModifierQuestion.addActionListener(this);
 		itemSupprimerQuestion.addActionListener(this);
+		
+		menuQuiz.setEnabled(false);
+		menuCandidat.setEnabled(false);
+		
 		//		//Création du panel de gauche, contenant le logo : panelLogo
 		//		JPanel panelLogo = new JPanel();
 		//		panelLogo.setLayout(new GridLayout(0, 3));
