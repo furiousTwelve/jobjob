@@ -34,7 +34,7 @@ public class panelConnection extends JPanel {
 	private JLabel labelVide4;
 
 	public panelConnection(){
-		this.setLayout(new GridLayout(3,3));
+		this.setLayout(new GridLayout(4,4));
 		
 		font = new Font("Arial",Font.BOLD,15);
 		
@@ -76,7 +76,11 @@ public class panelConnection extends JPanel {
 		JPanel panelboutonQuitter = new JPanel();
 		panelboutonQuitter.add(boutonQuitter);
 		
-		logoConnection = new JLabel(new ImageIcon("logo-connection.jpg"));
+		logoConnection = new JLabel(new ImageIcon("Logo_Afpa.png"));
+		JPanel panelLogo = new JPanel();
+		panelLogo.setLayout(new FlowLayout());
+		panelLogo.add(logoConnection);
+		
 		
 		labelVide1 = new JLabel(" ");
 		labelVide2 = new JLabel(" ");
@@ -87,7 +91,7 @@ public class panelConnection extends JPanel {
 		labelVide7 = new JLabel(" ");
 		labelVide8 = new JLabel(" ");
 		
-		
+	
 		this.add(labelVide1);
 		this.add(labelVide2);
 		this.add(labelVide3);
@@ -97,6 +101,8 @@ public class panelConnection extends JPanel {
 		this.add(labelVide6);
 		this.add(panelboutonConnection);
 		this.add(panelboutonQuitter);
+		this.add(panelLogo, BorderLayout.CENTER);  //@AnaisGueyte - Ajout du logo 
+		
 		
 		
 	}

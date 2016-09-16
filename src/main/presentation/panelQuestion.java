@@ -1,9 +1,11 @@
 package main.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -113,10 +115,20 @@ public class panelQuestion extends JPanel {
 		bg.add(reponse3);
 		bg.add(reponse4);
 		
+		
+		panelValider = new JPanel();
+		panelValider.setLayout(null);
+		boutonValider = new JButton("Valider");
+		boutonValider.setFont(font2);
+		boutonValider.setPreferredSize(new Dimension(100, 40));
+		boutonValider.setBounds(200,250,100,40);
+		panelCentre.add(boutonValider);
+		
 		panelReponse.add(reponse1);
 		panelReponse.add(reponse2);
 		panelReponse.add(reponse3);
 		panelReponse.add(reponse4);
+		panelReponse.add(panelValider);
 		
 		panelCentre.add(panelReponse, BorderLayout.WEST);
 		
@@ -128,17 +140,18 @@ public class panelQuestion extends JPanel {
 		iconeEntreprise.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		panelCentre.add(panelImage);
+
+		this.add(panelCentre);
 		
-		this.add(panelCentre, BorderLayout.CENTER);
+//		panelValider = new JPanel();
+//		panelValider.setLayout(null);
+//		panelValider.add(boutonValider);
+//		boutonValider.setBounds(200,200,200,200);
+//		
+//		this.add(panelValider);
 		
-		panelValider = new JPanel();
 		
-		boutonValider = new JButton("Valider");
-		boutonValider.setFont(font2);
-		boutonValider.setPreferredSize(new Dimension(100, 40));
-		panelValider.add(boutonValider);
 		
-		this.add(panelValider, BorderLayout.SOUTH);
 		
 	}
 
