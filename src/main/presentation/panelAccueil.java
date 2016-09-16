@@ -16,6 +16,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.mysql.jdbc.Blob;
+import com.mysql.jdbc.ResultSet;
+import com.mysql.jdbc.Statement;
 /**
  * le panelAccueil sera le panel chargé par la fenêtre Principal par défaut
  * @author Mathieu
@@ -124,7 +128,9 @@ public class panelAccueil extends JPanel implements ActionListener{
 			JPanel panelImg = new JPanel(new BorderLayout(50,50));
 			
 				//Importe l'image principale de l'écran d'accueil, sous forme de JLabel
-				JLabel img = new JLabel(new ImageIcon("jobjob.png"));
+						
+			
+			JLabel img = new JLabel(new ImageIcon("jobjob.png"));
 				
 			panelImg.add(img, BorderLayout.NORTH);
 			
