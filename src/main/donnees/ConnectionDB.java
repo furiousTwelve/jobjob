@@ -34,10 +34,8 @@ import main.metier.questionReponse;
 
 public class ConnectionDB 
 {
-
-
-
 	private static String url= "jdbc:mysql://sta6101855:3306/jobjob_3_0"; 
+
 
 	private static String login = "cdi";
 	private static String passwd = "cdi";
@@ -376,6 +374,8 @@ public class ConnectionDB
 	 */
 	public void enregistrerScoreCandidat(int[] score, questionReponse[] questrep, Candidat cd) throws SQLException, ClassNotFoundException
 	{		
+		
+		
 		String id = cd.identifiant;
 		String sql = "INSERT INTO qcm (bareme, dateEvaluation, idPersonne) VALUES ('0%0%1', DATE(NOW()), (SELECT idPersonne FROM candidat WHERE idCandidat ='"+id+"'));";
 		int a = statement.executeUpdate(sql);

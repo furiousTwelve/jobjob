@@ -86,6 +86,11 @@ public class questionReponse
 	{		
 		ConnectionDB laConnection = new ConnectionDB();	
 		questionsCandidat = laConnection.chercherQuestionEnBase(questionsCandidat);		
+		
+		for(int i=0;i<15;i++)
+		{			
+			questionsCandidat[i].reponseCandidat=0;		
+		}
 		return questionsCandidat;
 	}
 	

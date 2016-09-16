@@ -35,7 +35,8 @@ public class panelFin extends JPanel {
 	protected JButton boutonRetour;
 
 	// panel Principal
-	public panelFin() {
+	public panelFin() 
+	{
 		this.setLayout(new BorderLayout());
 		// Label du text
 		textFin = new JLabel("<html>Fin du test <br> <pre> Merci</pre></html>", JLabel.CENTER);

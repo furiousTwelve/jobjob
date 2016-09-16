@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import main.donnees.ConnectionDB;
 import main.donnees.EnregistrementDonnee;
 import main.metier.Candidat;
@@ -64,9 +65,13 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 	// Pour la couche métier
 	public questionReponse laQuestionReponse = new questionReponse();
 	public questionReponse[] questionsCandidat = new questionReponse[15];
-	private TimerGeneral tp;
+	//private TimerGeneral tp;
 	private TimerGeneral TimerS;
+
 	private Candidat leCandidat;
+
+	private Chrono fenChronoGeneral;
+	private Chrono fenChronoStress;
 
 	/**
 	 * 
@@ -77,14 +82,101 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 	 * @author Damien
 	 */
 
-	public FenetrePrincipale() {
 
+	// TEST
+	private Timer timerGeneral;
+	private Timer timerStress;
+	private int counterGeneral = 45;
+	private int counterStress = 30;
+	private int delay = 1000;
+	// FIN TEST
+	
+	public FenetrePrincipale() 
+	{
+		// TEST
+		ActionListener actionGeneral = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				if(counterGeneral == 0)
+				{
+					System.out.println("Timer down");
+					fenChronoGeneral.dispose();
+					
+					System.out.println("On génère le tableau de score");
+					laQuestionReponse.genererTableauScoreCandidat();
+					System.out.println("On lance 'enregistrer score candidat'");
+					try {
+						ConnectionDB conn = new ConnectionDB();				
+						conn.enregistrerScoreCandidat(laQuestionReponse.scoreParReponseCandidat, laQuestionReponse.questionsCandidat, leCandidat); // Petit doute sur le candidat
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+	        		getContentPane().removeAll();
+	        		setContentPane(panFin);
+	        		
+	    			panFin.boutonRetour.addActionListener(new ActionListener() {
+	    				@Override
+	    				public void actionPerformed(ActionEvent e) {
+	    					dispose();
+	    					FenetrePrincipale f = new FenetrePrincipale();
+	    					f.show();
+	    				}
+	    			});
+	        		
+	        		validate();
+					timerGeneral.stop();
+				}
+				else
+				{
+					System.out.println("counter g : " + counterGeneral);
+					counterGeneral--;
+				}
+			}
+		};
+		
+		timerGeneral = new Timer(delay, actionGeneral);
+		timerGeneral.setInitialDelay(0);
+
+
+		ActionListener actionStress = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				if(counterStress == 0)
+				{
+					System.out.println("Timer down");
+					fenChronoStress.dispose();
+					fenChronoGeneral.setVisible(true);							
+		       		timerStress.stop();
+				}
+				else
+				{
+					System.out.println("counter s : " + counterStress);
+					counterStress--;
+				}
+			}
+		};
+		timerStress = new Timer(delay, actionStress);
+		timerStress.setInitialDelay(0);
+		// FIN TEST
+		
+		
 		// test graphe khadidja
 		// dg.DessinerBar();
 		// dg.DessinerCam();
 		laQuestionReponse = new questionReponse(); // Couche METIER
 		questionsCandidat = new questionReponse[15]; // Couche METIER
+
 		leCandidat = new Candidat();
+
 		
 		this.setTitle("Job-Job");
 		// this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -131,8 +223,9 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
 
+	public void actionPerformed(ActionEvent arg0) 
+	{
 		/**
 		 * On va avoir par la suite tout les enchaînements entre les différents
 		 * panel à charger dans notre fenêtre
@@ -464,18 +557,22 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			// remplir le tableau de questions
 
 			System.out.println("Passage panCandidat --> panQuestion");
-			try {
+
+			try 
+			{
 				laQuestionReponse.questionsCandidat = laQuestionReponse.chercherQuestionRéponse(laQuestionReponse.questionsCandidat);
-
-			} catch (ClassNotFoundException | SQLException e) {
-
-				// TODO Auto-generated catch block
+			} 
+			catch (ClassNotFoundException | SQLException e) 
+			{
 				e.printStackTrace();
 			}
 
-
-			tp = new TimerGeneral(900, this );
-			tp.start();
+			// Démarrage du timer général
+			//tp.start();
+			timerGeneral.start();
+			
+			// LANCEMENT DU VISUEL CHRONO
+			fenChronoGeneral = new Chrono(0);
 
 			this.getContentPane().removeAll();
 			// Couche METIER ==> Affichage de la première question
@@ -541,26 +638,27 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 				texteReponseChoisie = panQuestion.reponse4.getText();
 			}
 
-
-			if (reponseChoisie == true) 
+			
+			if (reponseChoisie == true)
 			{
 				laQuestionReponse.recupereReponse(tempReponse, compteurQuestions, texteReponseChoisie);
 
 				compteurQuestions++;
 
-				if(compteurQuestions<15)
-				{
-					panQuestion.reponse1.setSelected(false);
-					panQuestion.reponse2.setSelected(false);
-					panQuestion.reponse3.setSelected(false);
-					panQuestion.reponse4.setSelected(false);				
+				panQuestion.reponse1.setSelected(false);
+				panQuestion.reponse2.setSelected(false);
+				panQuestion.reponse3.setSelected(false);
+				panQuestion.reponse4.setSelected(false);				
 
+				if(compteurQuestions < 15)
+				{
 					panQuestion.labelQuestion.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleQuestion);
 					panQuestion.reponse1.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse1);
 					panQuestion.reponse2.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse2);
 					panQuestion.reponse3.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse3);
 					panQuestion.reponse4.setText(laQuestionReponse.questionsCandidat[compteurQuestions-1].libelleReponse4);
 				}
+
 				
 				JLabel labelimage;
 				try {
@@ -574,7 +672,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 					e.printStackTrace();
 				}
 				
-				
+
 			}
 			else
 			{
@@ -586,35 +684,40 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			//panQuestion.labelTimer.setText("");
 			if(compteurQuestions == 11)
 			{
-
+				if (counterGeneral <= 30)
+				{
+					counterStress = counterGeneral;
+					TimerS = new TimerGeneral(counterStress,this,panQuestion,laQuestionReponse, fenChronoGeneral, fenChronoStress);
+				}
+				else
+				{
+					counterStress = 30;
+					TimerS = new TimerGeneral(counterStress,this,panQuestion,laQuestionReponse, fenChronoGeneral, fenChronoStress);
+				}
 				
-				if (tp.secondPassed<=30) {
-					TimerS = new TimerGeneral(tp.secondPassed,this,panQuestion,laQuestionReponse);
-				}else{
-				TimerS = new TimerGeneral(30,this,panQuestion,laQuestionReponse);
 				//Lancer le TimerStress
 				TimerS.start2();
-				
-				
-				//TimerS.tache2.cancel();
-				}
+				timerStress.start();
+				// Gestion de l'affichage du chrono
+				fenChronoGeneral.setVisible(false);			
+				fenChronoStress = new Chrono(1);
+				//fenChronoStress.horloge();
 			}
 		}
 
-
-		
+				
 		//Arrêt à la question 12
-		if(compteurQuestions == 12){
- 
-			Time temps = new Time(0,0, TimerS.secondPassed);
-			System.out.println("le temps stress =" +temps);
+		if(compteurQuestions == 12)
+		{
+			int temps = counterStress - TimerS.secondPassed;
+			System.out.println("le temps stress = " + temps);
+			
+			// Gestion de l'affichage du chrono
+			fenChronoStress.setVisible(false);
+			fenChronoGeneral.setVisible(true);
+			timerStress.stop();
 			TimerS.tache2.cancel();
-			
-		}
 
-		if (compteurQuestions == 13) {
-			System.out.println("Timer Stress Stop");
-			
 		}
 
 		// Passage du panQuestion au panFin
@@ -630,6 +733,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 		if (compteurQuestions == 16) 
 		{
+
 			System.out.println("On génère le tableau de score");
 			laQuestionReponse.genererTableauScoreCandidat();
 			System.out.println("On lance 'enregistrer score candidat'");
@@ -644,11 +748,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 				e.printStackTrace();
 			}
 
+
+			fenChronoGeneral.dispose();
+			timerGeneral.stop();
+
 			panFin = new panelFin();
 			// Couche metier Timer
 			// arrêter le timer après la 15ème question
-			tp.tache.cancel();
-			System.out.println(tp.secondPassed);
+			//tp.tache.cancel();
+			//System.out.println(tp.secondPassed);
 
 			this.getContentPane().removeAll();
 			this.setContentPane(panFin);
@@ -661,14 +769,39 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 
 			
 			this.validate();	
-		
-		
-		
-		
+		}
 		
 
+		if(arg0.getSource() == this.panFin.boutonRetour)
+		{		
+			//Message d'erreur uniquement si erreurs sur les identifiants
+
+			panAccueil = new panelAccueil();
+			
+			this.panAccueil.itemCandidatExistant.addActionListener(this);
+			this.panAccueil.itemNouveauCandidat.addActionListener(this);
+			this.panAccueil.itemNouveauTest.addActionListener(this);
+            this.panAccueil.itemQuitter.addActionListener(this);
+            
+            
+            
+            this.panAccueil.itemRechercher.addActionListener(this);
+			this.panAccueil.itemSupprimer.addActionListener(this);
+			this.panAccueil.itemModifier.addActionListener(this);
+            this.panAccueil.itemStatistique.addActionListener(this);
+            
+            this.panAccueil.itemAjoutQuestion.addActionListener(this);
+			this.panAccueil.itemModifierQuestion.addActionListener(this);
+			this.panAccueil.itemSupprimerQuestion.addActionListener(this);
+            
+		    this.panAccueil.itemAide.addActionListener(this);
+			
+			this.getContentPane().removeAll();
+			this.setContentPane(panAccueil);
+			this.validate();
+			
+
 			/*
->>>>>>> origin/features/presentation/anais-4
 			 * @author AnaïsGueyte
 			 * 
 			 * @date 15/09/2016
@@ -687,17 +820,15 @@ public class FenetrePrincipale extends JFrame implements ActionListener {
 			 */
 
 			// PASSAGE DE PANEL FIN - CONNECTION RECRUTEUR A L ACCUEIL /
-
 			panFin.boutonRetour.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					dispose();
 					FenetrePrincipale f = new FenetrePrincipale();
 					f.show();
 				}
 			});
 		}
-		
-		
 
 		// Passage du panFormulaire ou panAccueil aux panels ajout modif et
 		// supprimer question
