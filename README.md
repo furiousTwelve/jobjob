@@ -1,6 +1,6 @@
 
 ## What is JobJob? 
-TOTO is a recruitment test application of a candidate for a developer position. 
+JOBJOB is a recruitment test application of a candidate for a JAVA developer position. 
 
 This software is developed as a study of the training project "IT developer designer" at AFPA center of Montpellier in 2016 by its 12 students and their teacher.
 
